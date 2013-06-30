@@ -36,7 +36,8 @@ function prompt {
 	LABEL=$(echo $PWD | sed s-^$HOME/-- | sed s-^$HOME-$USER- | grep -oE '[^\/]*\/?[^\/]+$')
 
 	# tmux title, padded
-	echo -ne "\\033k $LABEL \\033\\\\"
+	# only run this if tmux is also running
+	test -z "$TMUX" || echo -ne "\\033k $LABEL \\033\\\\"
 }
 PROMPT_COMMAND=prompt
 

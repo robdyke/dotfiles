@@ -68,8 +68,9 @@ end
 
 function fish_set_tmux_title --description "Sets tmux pane title to output of fish_tmux_title, with padding" --on-variable PWD
 	# title of tmux pane, must be separate to fish_title
-	# FIXME fish-shell: if this line is in fish_prompt, fish segfaults when not in tmux
-	printf "\\033k%s\\033\\\\" ' '(fish_tmux_title)' '
+	# only run this if tmux is also running
+	test -z $TMUX
+		or printf "\\033k%s\\033\\\\" ' '(fish_tmux_title)' '
 end
 
 function fish_prompt --description 'Write out the prompt'
