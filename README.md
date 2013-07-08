@@ -49,8 +49,7 @@ Why fish?
 
   * Amazing suggestion engine (parses man files for options)
   * Great completion engine (looks at history for commands)
-  * All variables are arrays of strings, and can only ever be that (this really helps!)
-  * variables are _not_ further split after substitution (no more "$@" and impending confusion)
+  * _All_ variables are arrays of strings, and variables are _not_ further split after substitution (no more "${string[@]}" cryptic nonsense)
   * It's event based
   * It's fast!
   * Real-time syntax highlighting!
