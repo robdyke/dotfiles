@@ -75,7 +75,7 @@ function deferred {
 	complete -o default -o nospace -F _git g
 
 	# hardcoded ssh completions (known_hosts is encrypted mostly)
-	complete -o default -W 'nodehost.darksky.io squirtle.darksky.io hailstorm.darksky.io blackmesa.darksky.io aperture.darksky.io chell.darksky.io snowstorm.darksky.io navcom.darksky.io deadknightsociety.org nova.darksky.io' ssh scp ping
+	complete -o default -W 'nodehost.darksky.io squirtle.darksky.io hailstorm.darksky.io blackmesa.darksky.io aperture.darksky.io chell.darksky.io snowstorm.darksky.io navcom.darksky.io nova.darksky.io' ssh scp ping
 }
 
 PLATFORM=`uname`
