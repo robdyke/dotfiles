@@ -3,6 +3,25 @@
 
 export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 
+# fix annoying accidental commits and amends
+# and other dangerous commands
+export HISTIGNORE='git*--amend*:ls:cd:git*-m*:git*-am*:git*-f*:rm -rf*'
+export HISTCONTROL=ignoredups:ignorespace
+export EDITOR=vim
+
+# Bad idea, according to most people. However, all of the terminals I use
+# support 256color and it can be annoying if it's not explicitly set. Also see
+# http://snk.tuxfamily.org/log/vim-256color-bce.html
+# decide then set for fish, too (xterm or screen, -bce?)
+#export TERM=screen-256color
+
+# if you call a different shell, this does not happen automatically. WTF?
+export SHELL=$(which bash)
+
+# this bashrc takes a sec or so thanks to all the completions, so print this first
+# Now this doesn't matter thanks to the deferred() system
+echo -ne "\n\033[37m> Welcome to $(hostname -s), $USER.\033[0m "
+
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
 # must be installed/single session/no clients
@@ -14,12 +33,6 @@ test -z "$TMUX" \
 	&& test $(tput cols) -gt 120 \
 	&& tmux attach
 
-# this bashrc takes a sec or so thanks to all the completions, so print this first
-# Now this doesn't matter thanks to the deferred() system
-echo -ne "\n\033[37m> Welcome to $(hostname -s), $USER.\033[0m "
-
-# if you call a different shell, this does not happen automatically. WTF?
-export SHELL=$(which bash)
 
 # update the values of LINES and COLUMNS. Automatically
 shopt -s checkwinsize
@@ -40,7 +53,6 @@ function prompt {
 	test -z "$TMUX" || echo -ne "\\033k $LABEL \\033\\\\"
 }
 PROMPT_COMMAND=prompt
-
 
 # MOAR PROMPT
 # with git branch
@@ -104,13 +116,6 @@ function man {
 	LESS_TERMCAP_us=$(printf "\e[1;32m") \
 	man "$@"
 }
-
-# fix annoying accidental commits and amends
-# and other dangerous commands
-export HISTIGNORE='git*--amend*:ls:cd:git*-m*:git*-am*:git*-f*:rm -rf*'
-export HISTCONTROL=ignoredups:ignorespace
-
-export EDITOR=vim
 
 # fix backspace on some terminals
 stty erase ^?
