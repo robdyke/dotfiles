@@ -24,3 +24,6 @@ DEL: delete-char
 
 # pagedown (ok)
 "\e[6~": history-search-forward
+
+# do not make noise
+set bell-style none
