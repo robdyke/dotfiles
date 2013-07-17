@@ -44,6 +44,8 @@ set -x HOSTNAME (hostname)
 # if you call a different shell, this does not happen automatically. WTF?
 set -x SHELL (which fish)
 
+# available since 4.8.0
+set -x GCC_COLORS 1
 
 # alias is just a wrapper for creating a function
 # aliases shared between fish and bash
