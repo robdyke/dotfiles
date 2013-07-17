@@ -14,3 +14,13 @@ set completion-ignore-case on
 "\eOF": end-of-line
 "\e[H": beginning-of-line
 "\e[F": end-of-line
+
+# fix delete key
+# http://superuser.com/questions/93153/inputrc-settings-delete-char-and-keybindings-not-working
+DEL: delete-char
+
+# pageup (ok)
+"\e[5~": history-search-backward
+
+# pagedown (ok)
+"\e[6~": history-search-forward
