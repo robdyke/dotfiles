@@ -1,0 +1,4 @@
+! http://www.pixelbeat.org/settings/.Xmodmap
+! Disable silly caps lock key
+! Fedora 8 at least, explicitly prompts you whether you want to load ~/.Xmodmap
+clear Lock
