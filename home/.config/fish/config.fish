@@ -2,6 +2,18 @@ status --is-interactive; or exit 0
 
 set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH
 
+# SET TERM TYPE
+# Bad idea, according to most people. However, all of the terminals I use
+# support 256color and most terminals don't set the appropriate term type. Also
+# see http://snk.tuxfamily.org/log/vim-256color-bce.html bce = background color
+# erase = more efficient background. Not all combinations of terminal emulators
+# and tmux support it, so don't use it.
+#
+# Interestingly, xterm-256color results in a working vim background outside
+# tmux but not within. screen-256color works inside and outside of tmux.
+set -x TERM screen-256color
+
+
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
 test -z $TMUX

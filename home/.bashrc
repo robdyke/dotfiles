@@ -9,11 +9,16 @@ export HISTIGNORE='git*--amend*:ls:cd:git*-m*:git*-am*:git*-f*:rm -rf*'
 export HISTCONTROL=ignoredups:ignorespace
 export EDITOR=vim
 
+# SET TERM TYPE
 # Bad idea, according to most people. However, all of the terminals I use
-# support 256color and it can be annoying if it's not explicitly set. Also see
-# http://snk.tuxfamily.org/log/vim-256color-bce.html
-# decide then set for fish, too (xterm or screen, -bce?)
-#export TERM=screen-256color
+# support 256color and most terminals don't set the appropriate term type. Also
+# see http://snk.tuxfamily.org/log/vim-256color-bce.html bce = background color
+# erase = more efficient background. Not all combinations of terminal emulators
+# and tmux support it, so don't use it.
+#
+# Interestingly, xterm-256color results in a working vim background outside
+# tmux but not within. screen-256color works inside and outside of tmux.
+export TERM=screen-256color
 
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
