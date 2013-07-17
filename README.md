@@ -65,3 +65,7 @@ it won't work properly. You need to explicitly call `#!/bin/bash`.
 
 [1]: https://github.com/fish-shell/fish-shell/
 
+
+----
+See http://hivelogic.com/articles/top-10-programming-fonts for the best terminal font.
+
