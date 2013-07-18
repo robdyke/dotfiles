@@ -19,6 +19,8 @@ Make sure you have at least:
   * tmux 1.8+
   * fish 2.0+ (don't forget to chsh -s to it)
   * vim 7.3++
+  * Dark 256color terminal with mouse support
+  * Menlo or Consolas font
 
 Bash if you really must.
 
