@@ -16,3 +16,6 @@ alias v=vim
 alias cim=vim
 alias nom=npm
 alias webserver='python -m SimpleHTTPServer'
+
+# stop vim taking ages, so it doesn't look for X server
+alias vim='vim -X'

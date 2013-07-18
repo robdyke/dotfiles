@@ -7,7 +7,8 @@ export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 # and other dangerous commands
 export HISTIGNORE='git*--amend*:ls:cd:git*-m*:git*-am*:git*-f*:rm -rf*'
 export HISTCONTROL=ignoredups:ignorespace
-export EDITOR=vim
+# vim -X = don't look for X server, which can be slow
+export EDITOR='vim -X'
 
 # SET TERM TYPE
 # Bad idea, according to most people. However, all of the terminals I use

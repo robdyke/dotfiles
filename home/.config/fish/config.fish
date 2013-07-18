@@ -36,7 +36,8 @@ if not test -d ~/.config/fish/generated_completions/
 end
 
 
-set -x EDITOR vim
+# vim -X = don't look for X server, which can be slow
+set -x EDITOR 'vim -X'
 
 set -x HOSTNAME (hostname)
 

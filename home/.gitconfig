@@ -9,7 +9,8 @@
 	excludesfile = ~/.gitignore_global
 	# editor problems with fish shell:
 	# http://tooky.co.uk/2010/04/08/there-was-a-problem-with-the-editor-vi-git-on-mac-os-x.html
-	editor       = /usr/bin/vim
+	# vim -X = don't look for X server, which can be slow
+	editor       = /usr/bin/vim -X
 [help]
 	autocorrect = 1
 [include]

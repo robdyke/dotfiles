@@ -67,5 +67,6 @@ it won't work properly. You need to explicitly call `#!/bin/bash`.
 
 
 ----
-See http://hivelogic.com/articles/top-10-programming-fonts for the best terminal font.
+See http://hivelogic.com/articles/top-10-programming-fonts for the best
+terminal font. I prefer Consolas and Menlo on OS X.
 
