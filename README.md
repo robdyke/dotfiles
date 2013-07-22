@@ -13,7 +13,7 @@ For:
   * SSH
   * git (obviously)
   * keychain
-  * Dark xterm-256color compatible terminal, mouse enabled
+  * Dark xterm-256color compatible UTF-8 terminal, mouse enabled
   * mcabber 0.10.1+
   * mpc/ncmpcpp
 
