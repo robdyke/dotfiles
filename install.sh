@@ -13,6 +13,9 @@
 # this is good for log files
 date
 
+# quit on error
+set -e
+
 cat <<EOF
 Make sure you have at least:
 
