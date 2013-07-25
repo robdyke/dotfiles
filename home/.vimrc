@@ -94,3 +94,6 @@ if has("gui_running")
 endif
 
 set tabpagemax=20
+
+" disable useless viminfo files
+set viminfo=
