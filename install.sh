@@ -54,6 +54,10 @@ cp -r home/* ~
 cp -r home/.??* ~
 chmod +x ~/bin/*
 
+# reload TMUX config if running inside tmux
+test -z "$TMUX" || tmux source-file ~/.tmux.conf
+
+
 # in case someone forgot...
 chmod +x presets/*
 # oops, not README.md
