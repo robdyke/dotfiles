@@ -11,7 +11,14 @@ set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH
 #
 # Interestingly, xterm-256color results in a working vim background outside
 # tmux but not within. screen-256color works inside and outside of tmux.
-set -x TERM screen-256color
+#
+# tmux is configured to set screen-256color. If not in tmux, xterm-256color
+# should be used. However, best to set it here just in case.
+if test -z $TMUX
+	 set -x TERM xterm-256color
+else
+	 set -x TERM screen-256color
+end
 
 
 # AUTOMATIC TMUX

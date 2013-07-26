@@ -19,7 +19,14 @@ export EDITOR='vim -X'
 #
 # Interestingly, xterm-256color results in a working vim background outside
 # tmux but not within. screen-256color works inside and outside of tmux.
-export TERM=screen-256color
+#
+# tmux is configured to set screen-256color. If not in tmux, xterm-256color
+# should be used. However, best to set it here just in case.
+if [ -z $TMUX]; then
+	 export TERM=xterm-256color
+else
+	 export TERM=screen-256color
+fi
 
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
