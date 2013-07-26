@@ -14,6 +14,7 @@ set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH
 #
 # tmux is configured to set screen-256color. If not in tmux, xterm-256color
 # should be used. However, best to set it here just in case.
+# tmux does not support -bce (background color erase)
 if test -z $TMUX
 	 set -x TERM xterm-256color
 else
