@@ -1,3 +1,6 @@
+# To see a code a key makes, try CTRL+V <key> to get a code. Then replace ^[ with \e:
+# ^[[3~ becomes "\e[3~": delete-char, for example. CTRL+V does not always work.
+
 # from the guys at lifehacker
 # http://lifehacker.com/supercharge-your-command-lines-history-search-with-fou-478683529
 "\e[A":history-search-backward
@@ -18,6 +21,7 @@ set completion-ignore-case on
 # fix delete key
 # http://superuser.com/questions/93153/inputrc-settings-delete-char-and-keybindings-not-working
 DEL: delete-char
+"\e[3~": delete-char
 
 # pageup (ok)
 "\e[5~": history-search-backward
@@ -27,3 +31,4 @@ DEL: delete-char
 
 # do not make noise
 set bell-style none
+
