@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
+export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:~/local/bin
 
 # fix annoying accidental commits and amends
 # and other dangerous commands

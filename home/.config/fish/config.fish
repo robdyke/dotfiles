@@ -1,6 +1,6 @@
 status --is-interactive; or exit 0
 
-set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH
+set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH ~/local/bin
 
 # SET TERM TYPE
 # Bad idea, according to most people. However, all of the terminals I use
