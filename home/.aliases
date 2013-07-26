@@ -20,4 +20,5 @@ alias webserver='python -m SimpleHTTPServer'
 # stop vim taking ages, so it doesn't look for X server
 alias vim='vim -X'
 
-alias xterm='xterm -fg white -bg black -fa "DejaVu Sans Mono:size=12:antialias=true"'
+#alias xterm='xterm -fg white -bg black -fa "DejaVu Sans Mono:size=12:antialias=true"'
+alias xterm='xterm -fg white -bg black'
