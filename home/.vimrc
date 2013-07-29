@@ -91,6 +91,9 @@ ca Q q
 " Ex mode? WTF VIM?
 map Q <Nop>
 
+" re-flow entire paragraph
+nmap Q gqap
+
 set mouse=a
 
 " abbreviations
