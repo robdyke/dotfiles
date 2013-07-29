@@ -19,3 +19,6 @@
 [submodule "home/.vim/bundle/vim-css-color"]
 	path = home/.vim/bundle/vim-css-color
 	url = git://github.com/ap/vim-css-color.git
+[submodule "home/.vim/bundle/nerdtree"]
+	path = home/.vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
