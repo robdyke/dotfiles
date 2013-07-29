@@ -2,6 +2,11 @@ status --is-interactive; or exit 0
 
 set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH ~/local/bin
 
+# sometimes TMUX can get confused about whether unicode is supported to draw
+# lines or not. tmux may draw x and q instead, or default to - and | which is
+# ascii.
+set -x LANG=en_GB.utf8
+
 # SET TERM TYPE
 # Bad idea, according to most people. However, all of the terminals I use
 # support 256color and most terminals don't set the appropriate term type. Also
