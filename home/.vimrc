@@ -94,6 +94,12 @@ map Q <Nop>
 " re-flow entire paragraph
 nmap Q gqap
 
+" http://nvie.com/posts/how-i-boosted-my-vim/
+" Finally, a trick by Steve Losh "for when you forgot to sudo before editing a
+" file that requires root privileges (typically /etc/hosts). This lets you use
+" w!! to do that after you opened the "file already:
+cmap w!! w !sudo tee % >/dev/null
+
 set mouse=a
 
 " abbreviations
