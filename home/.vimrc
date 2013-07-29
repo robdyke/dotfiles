@@ -34,7 +34,9 @@ au BufNewFile,BufRead *.pde  set filetype=c
 au BufNewFile,BufRead *.md   set filetype=markdown
 au BufNewFile,BufRead *.fish set filetype=sh
 
+" It's not the 70's anymore. Use git or something.
 set noswapfile
+set nobackup
 
 " get rid of the engulfing behavior of highlighting matching brackets
 " when inside parenthesis. It makes the cursor hard to distinguish.
@@ -50,6 +52,14 @@ let loaded_matchparen = 1
 vnoremap < <gv
 vnoremap > >gv
 
+" no point in pressing/releasing the shift key!
+nnoremap ; :
+
+" if you want to force yourself to use hjkl, uncomment this:
+"map <up> <nop>
+"map <down> <nop>
+"map <left> <nop>
+"map <right> <nop>
 
 " Nice command. Probably better as a keybinding
 " :autocmd BufWritePost * !forever restartall
