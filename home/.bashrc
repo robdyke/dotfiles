@@ -12,7 +12,8 @@ export EDITOR='vim -X'
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is
-# ascii.
+# ascii. This also allows other programs to use nice UTF-8 symbols, such as
+# NERDtree in vim. So very awesome.
 export LANG=en_GB.utf8
 
 # SET TERM TYPE
