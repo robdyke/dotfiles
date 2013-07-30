@@ -57,6 +57,8 @@ chmod +x ~/bin/*
 # reload TMUX config if running inside tmux
 test -z "$TMUX" || tmux source-file ~/.tmux.conf
 
+# generate help files (well, tags) for the vim plugins
+vim -c 'call pathogen#helptags()|q'
 
 # in case someone forgot...
 chmod +x presets/*
