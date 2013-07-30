@@ -69,7 +69,7 @@ printf "\033]0;%s\007" $HOSTNAME
 # Update TMUX title with path
 function prompt {
 	# to a clever shorthand representation of the current dir
-	LABEL=$(echo $PWD | sed s-^$HOME/-- | sed s-^$HOME-$USER- | grep -oE '[^\/]*\/?[^\/]+$')
+	LABEL=$(echo $PWD | grep -oE '[^\/]+$')
 
 	# tmux title, padded
 	# only run this if tmux is also running
