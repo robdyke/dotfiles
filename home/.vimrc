@@ -89,6 +89,12 @@ ca qw wq
 ca W w
 ca Q q
 
+" why type 123213 characters?
+ca nt NERDTreeTabsToggle
+nnoremap t :NERDTreeTabsToggle<CR>
+let NERDTreeMapOpenInTab=''
+let NERDTreeMapQuit='t'
+
 " Ex mode? WTF VIM?
 map Q <Nop>
 
