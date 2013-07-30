@@ -116,3 +116,6 @@ set tabpagemax=20
 
 " disable useless viminfo files
 set viminfo=
+
+" open help in new tab
+cabbrev help tab help
