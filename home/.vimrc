@@ -120,3 +120,6 @@ set viminfo=
 
 " open help in new tab
 cabbrev help tab help
+
+" abbreviate messages to avoid hit-enter prompt
+set shortmess=a
