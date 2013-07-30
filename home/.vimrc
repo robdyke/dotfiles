@@ -85,6 +85,7 @@ colorscheme solarized
 ca WQ wq
 ca Wq wq
 ca wQ wq
+ca qw wq
 ca W w
 ca Q q
 
