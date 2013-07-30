@@ -152,6 +152,11 @@ echo
 # neat ls with fixed width
 COLUMNS=80 ls
 
+# Disable stupid flow control. Ctrl+S can disable the terminal, requiring
+# Ctrl+Q to restore. It can result in an apparent hung terminal, if
+# accidentally pressed.
+stty -ixon -ixoff
+
 # run the deferred function in the background in this context after bashrc
 # http://superuser.com/questions/267771/bash-completion-makes-bash-start-slowly
 trap 'deferred; trap USR1' USR1
