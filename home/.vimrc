@@ -93,6 +93,9 @@ ca Q q
 nnoremap <tab> :NERDTreeTabsToggle<CR>
 let NERDTreeMapQuit='\t'
 
+" gF open file under cursor in new tab, not new pane
+nnoremap gF <C-w>gf
+
 " Ex mode? WTF VIM?
 map Q <Nop>
 
