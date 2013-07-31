@@ -89,8 +89,10 @@ ca qw wq
 ca W w
 ca Q q
 
-" <tab> to toggle nerdtree, persistent across all tabs!
+" <tab> to toggle nerdtree, persistent across all tabs with vim-nerdtree-tabs!
+" or, choose standard NERDtree
 nnoremap <tab> :NERDTreeTabsToggle<CR>
+"nnoremap <tab> :NERDTreeToggle<CR>
 let NERDTreeMapQuit='\t'
 
 " gF open file under cursor in new tab, not new pane
