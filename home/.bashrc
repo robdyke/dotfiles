@@ -73,7 +73,7 @@ function prompt {
 
 	# tmux title, padded
 	# only run this if tmux is also running
-	test -z "$TMUX" || echo -ne "\\033k $LABEL \\033\\\\"
+	test -z "$TMUX" || echo -ne "\\033k$LABEL\\033\\\\"
 }
 PROMPT_COMMAND=prompt
 

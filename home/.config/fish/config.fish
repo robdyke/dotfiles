@@ -99,7 +99,7 @@ function fish_set_tmux_title --description "Sets tmux pane title to output of fi
 	# title of tmux pane, must be separate to fish_title
 	# only run this if tmux is also running
 	test -z $TMUX
-		or printf "\\033k%s\\033\\\\" ' '(fish_tmux_title)' '
+		or printf "\\033k%s\\033\\\\" (fish_tmux_title)
 end
 
 function fish_prompt --description 'Write out the prompt'

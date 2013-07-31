@@ -60,9 +60,6 @@ Read http://fishshell.com/tutorial.html for more information. Recently,
 development was picked up on github by [ridiculous\_fish][1].
 
 
-Warning: if you specify `#!/bin/sh` in a `bash` script and call it with fish,
-it won't work properly. You need to explicitly call `#!/bin/bash`.
-
 [1]: https://github.com/fish-shell/fish-shell/
 
 
@@ -70,3 +67,8 @@ it won't work properly. You need to explicitly call `#!/bin/bash`.
 See http://hivelogic.com/articles/top-10-programming-fonts for the best
 terminal font. I prefer Consolas and Menlo on OS X.
 
+
+Documentation
+-------------
+
+Discussion and documentation is heavily commented within each configuration file.
