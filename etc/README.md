@@ -1,7 +1,7 @@
 
 # com.googlecode.iterm2.plist
 
-Decent iTerm 2 settings (Black, Menlo)
+Decent iTerm 2 settings (Black, Menlo) installed with OS X preset.
 
 # putty.reg
 
@@ -15,3 +15,9 @@ so the terminal is set to the maximum size for mouse usage.
 # disable-caps-lock.reg
 
 Suddenly, the caps lock is disabled on windows after reboot. Yay!
+
+----
+
+For windows 7, [dual monitor taskbar][1] is recommended.
+
+[1]: http://sourceforge.net/projects/dualmonitortb/
