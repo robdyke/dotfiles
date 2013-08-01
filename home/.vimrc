@@ -88,6 +88,7 @@ ca wQ wq
 ca qw wq
 ca W w
 ca Q q
+ca q1 q!
 
 " <tab> to toggle nerdtree, persistent across all tabs with vim-nerdtree-tabs!
 " or, choose standard NERDtree
