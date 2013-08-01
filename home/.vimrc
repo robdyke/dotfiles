@@ -94,6 +94,8 @@ ca Q q
 nnoremap <tab> :NERDTreeTabsToggle<CR>
 "nnoremap <tab> :NERDTreeToggle<CR>
 let NERDTreeMapQuit='\t'
+" when changing to a tab, file should be focused
+let g:nerdtree_tabs_focus_on_files=1
 
 " gF open file under cursor in new tab, not new pane
 nnoremap gF <C-w>gf
