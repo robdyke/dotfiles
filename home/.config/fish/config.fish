@@ -71,7 +71,7 @@ alias tm 'test -z $TMUX; and tmux a ; or tmux'
 
 function cd
 	builtin cd $argv
-	ls
+		and ls
 end
 
 test -x /usr/bin/keychain
