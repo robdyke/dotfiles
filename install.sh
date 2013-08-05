@@ -61,6 +61,10 @@ if [ -n "$TMUX" ]; then
 	tmux source-file ~/.tmux.conf
 fi
 
+if which fish &>/dev/null && [ ! -d ~/.config/fish/generated_completions/ ]; then
+	fish -c fish_update_completions
+fi
+
 # generate help files (well, tags) for the vim plugins
 echo 'Generating helptags for vim submodules...'
 vim -c 'call pathogen#helptags()|q'
