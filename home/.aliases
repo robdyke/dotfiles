@@ -20,5 +20,6 @@ alias webserver='python -m SimpleHTTPServer'
 # stop vim taking ages, so it doesn't look for X server
 alias vim='vim -X'
 
+# xterm in UTF8 mode. Get >=v277 for better mouse support
 #alias xterm='xterm -geometry 160x40 -fg white -bg black -fa "DejaVu Sans Mono:size=12:antialias=true"'
-alias xterm='xterm -geometry 160x40 -fg white -bg black'
+alias xterm='xterm -geometry 160x40 -fg white -bg black -u8'
