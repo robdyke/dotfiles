@@ -20,14 +20,11 @@ cat <<EOF
 Make sure you have at least:
 
   * tmux 1.8+
-  * fish 2.0+ (don't forget to chsh -s to it)
-  * vim 7.3++
-  * Dark 256color terminal with mouse and UTF-8 support
-  * Menlo or Consolas font
+  * fish 2.0+ (recommended) or bash 3+
+  * vim 7.3+
+  * Dark 256color terminal with mousei support and UTF-8 character encoding
+  * Menlo or Consolas font, or something equally as nice
 
-Bash if you really must.
-
-Installing dotfiles...
 EOF
 
 # sneaky hack to install to skel if run as root
@@ -41,23 +38,31 @@ cd $(dirname $0)
 PRESETS=$@
 
 # make sure the submodules are fetched
+echo 'Synchronising submodules...'
 git submodule --quiet init || exit 1
 git submodule --quiet update || exit 2
 
+
+echo 'Clobbering...'
 # clobber vim and fish config (because there are dirs)
 test -d ~/.vim/ && rm -rf ~/.vim/
 # not for fish as it removes generated completions which have to rebuilt which is a pain
 #test -d ~/.config/fish/ && rm -rf ~/.config/fish/
 
+echo 'Copying dotfiles...'
 cp -r home/* ~
 # copy dotfiles separately , normal glob does not match
 cp -r home/.??* ~
 chmod +x ~/bin/*
 
 # reload TMUX config if running inside tmux
-test -z "$TMUX" || tmux source-file ~/.tmux.conf
+if [ -n "$TMUX" ]; then
+	echo 'Reloading tmux configuration...'
+	tmux source-file ~/.tmux.conf
+fi
 
 # generate help files (well, tags) for the vim plugins
+echo 'Generating helptags for vim submodules...'
 vim -c 'call pathogen#helptags()|q'
 
 # in case someone forgot...
