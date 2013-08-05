@@ -61,16 +61,10 @@ nnoremap ; :
 "map <left> <nop>
 "map <right> <nop>
 
-" Nice command. Probably better as a keybinding
-" :autocmd BufWritePost * !forever restartall
-" map <silent> <f5> :!forever restartall <cr>
-" map <f5> :autocmd BufWritePost * !forever restartall
-
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
 
-
 " 16-color terminal with solarised theme is preferable.
-" failing this, the following option can be set to use a degraded 256 color pallette
+" failing this, the following option can be set to use a degraded 256 color palette
 let g:solarized_termcolors=256
 
 " good on crap laptop monitors
@@ -98,11 +92,16 @@ let NERDTreeMapQuit='\t'
 " when changing to a tab, file should be focused
 let g:nerdtree_tabs_focus_on_files=1
 
-" gF open file under cursor in new tab, not new pane
+" gf opens the file under cursor, which is great for navigating a hierarchy of files.
+" Change gF to open file under cursor in new tab, not new pane, like CTRL+W gF
 nnoremap gF <C-w>gf
 
 " Ex mode? WTF VIM?
 map Q <Nop>
+
+" I never use macros. My plugins are a better replacement. q just serves to
+" annoy me, otherwise.
+map q <Nop>
 
 " re-flow entire paragraph
 nmap Q gqap
@@ -113,6 +112,7 @@ nmap Q gqap
 " w!! to do that after you opened the "file already:
 cmap w!! w !sudo tee % >/dev/null
 
+" Enable mouse mode. Use xterm >= 277 for mouse mode for large terms.
 set mouse=a
 
 " abbreviations
@@ -125,6 +125,7 @@ if has("gui_running")
 	set guioptions=egmrt
 endif
 
+" max. number of tabs open at once. I use a large term.
 set tabpagemax=20
 
 " disable useless viminfo files
@@ -133,5 +134,5 @@ set viminfo=
 " open help in new tab
 cabbrev help tab help
 
-" abbreviate messages to avoid hit-enter prompt
+" abbreviate messages in every way to avoid hit-enter prompt
 set shortmess=a
