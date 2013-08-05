@@ -1,6 +1,6 @@
 xterm*utf8:               true
-xterm*VT100.geometry:     80x25
-xterm*faceName:           Terminus:style=Regular:size=10
+xterm*VT100.geometry:     160x40
+!xterm*faceName:           Terminus:style=Regular:size=10
 !xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
 xterm*dynamicColors:      true
 xterm*utf8:               2
@@ -13,3 +13,6 @@ xterm*rightScrollBar:     true
 xterm*jumpScroll:         true
 xterm*multiScroll:        true
 xterm*toolBar:            false
+xterm*termName:           xterm-256color
+xterm*background:         white
+xterm*foreground:         black
