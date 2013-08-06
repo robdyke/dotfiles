@@ -69,11 +69,11 @@ else
 	warning 'Not inside tmux'
 fi
 
-if which fish &>/dev/null; then
+if which fish &>/dev/null && fish -v 2>&1 | grep -q 'version 2'; then
 	test ! -d ~/.config/fish/generated_completions/ \
 		&& fish -c fish_update_completions
 else
-	warning 'Fish shell not found'
+	warning 'Fish shell version 2 not found'
 fi
 
 if which xrdb &>/dev/null; then
