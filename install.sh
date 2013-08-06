@@ -30,7 +30,7 @@ EOF
 
 function warning {
 	# TODO: check PS1, no escape code if not interactive....?
-	echo -e "\e[00;31m$*\e[00m"
+	echo -e "\e[00;31m> $*\e[00m"
 }
 
 # sneaky hack to install to skel if run as root
@@ -62,7 +62,7 @@ cp -r home/.??* ~
 chmod +x ~/bin/*
 
 if [ ! $(tput colors) -eq 256 ]; then
-	warning 'TERM Type is not set to a 256 colour type! Overriding to xterm-256color. Please set.'
+	warning '> TERM is not set to a 256 colour type! Overriding to xterm-256color. Please set.'
 fi
 
 # reload TMUX config if running inside tmux

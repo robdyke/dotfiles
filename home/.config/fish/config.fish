@@ -16,7 +16,7 @@ set -x LANG=en_GB.utf8
 # support 256 colors, so it's safe to force it as a last resort, but warn.
 if test -z $TMUX ; and test (tput colors) -ne 256
 	set_color red
-	echo 'Type is not set to a 256 colour type! Overriding to xterm-256color. Please set.'
+	echo '> TERM is not set to a 256 colour type! Overriding to xterm-256color. Please set.'
 	set_color normal
 	set -x TERM xterm-256color
 end
