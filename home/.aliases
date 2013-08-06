@@ -10,6 +10,7 @@ alias sl=ls
 alias l=ls
 alias s='git status'
 alias d='git diff'
+alias o='git log'
 alias gi=git
 alias g=git
 alias v=vim
