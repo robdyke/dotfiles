@@ -61,6 +61,10 @@ cp -r home/* ~
 cp -r home/.??* ~
 chmod +x ~/bin/*
 
+if [ ! $(tput colors) -eq 256 ]; then
+	warning 'Terminal does not support 256 colors, set TERM in settings!'
+fi
+
 # reload TMUX config if running inside tmux
 if [ -n "$TMUX" ]; then
 	echo 'Reloading tmux configuration...'
