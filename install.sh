@@ -90,7 +90,7 @@ fi
 # generate help files (well, tags) for the vim plugins
 if which vim &>/dev/null; then
 	echo 'Generating helptags for vim submodules...'
-	vim -n -T dumb -c 'call pathogen#helptags()|q'
+	echo 'call pathogen#helptags()|q' | vim -es -n -T dumb
 else
 	warning 'Vim not found!'
 fi
