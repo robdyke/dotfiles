@@ -6,3 +6,6 @@ elseif has('mac')
 elseif has('unix')
 	set gfn=DejaVu\ Sans\ Mono 12
 endif
+
+" Hide toolbar by default
+set guioptions=egmrt

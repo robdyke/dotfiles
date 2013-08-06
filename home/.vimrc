@@ -63,17 +63,18 @@ nnoremap ; :
 
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
 
-" 16-color terminal with solarised theme is preferable.
+" 16-color terminal with solarised theme is most accurate
 " failing this, the following option can be set to use a degraded 256 color palette
 let g:solarized_termcolors=256
 
 " good on crap laptop monitors
 let g:solarized_contrast="high"
 
-
-" Configure solarised per machine.
 set background=dark
-colorscheme solarized
+
+if (&t_Co == 256)
+	colorscheme solarized
+endif
 
 " anti typo
 ca WQ wq
@@ -119,11 +120,6 @@ set mouse=a
 ab teh the
 ab THe The
 ab eb be
-
-" Hide toolbar by default
-if has("gui_running")
-	set guioptions=egmrt
-endif
 
 " max. number of tabs open at once. I use a large term.
 set tabpagemax=20
