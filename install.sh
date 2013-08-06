@@ -65,6 +65,11 @@ if which fish &>/dev/null && [ ! -d ~/.config/fish/generated_completions/ ]; the
 	fish -c fish_update_completions
 fi
 
+if which xrdb &>/dev/null; then
+	echo 'Merging Xresources...'
+	xrdb -merge ~/.Xresources
+fi
+
 # generate help files (well, tags) for the vim plugins
 echo 'Generating helptags for vim submodules...'
 vim -c 'call pathogen#helptags()|q'

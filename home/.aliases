@@ -21,5 +21,6 @@ alias webserver='python -m SimpleHTTPServer'
 alias vim='vim -X'
 
 # xterm in UTF8 mode. Get >=v277 for better mouse support
+# these settings are now defined in .Xresources : run xrdb -merge ~/.Xresources
 #alias xterm='xterm -geometry 160x40 -fg white -bg black -fa "DejaVu Sans Mono:size=12:antialias=true"'
-alias xterm='xterm -geometry 160x40 -fg white -bg black -u8'
+#alias xterm='xterm -geometry 160x40 -fg white -bg black -u8'
