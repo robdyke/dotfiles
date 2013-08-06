@@ -62,7 +62,7 @@ cp -r home/.??* ~
 chmod +x ~/bin/*
 
 if [ ! $(tput colors) -eq 256 ]; then
-	warning 'Terminal does not support 256 colors, set TERM in settings!'
+	warning 'TERM Type is not set to a 256 colour type! Overriding to xterm-256color. Please set.'
 fi
 
 # reload TMUX config if running inside tmux

@@ -16,23 +16,15 @@ export EDITOR='vim -X'
 # NERDtree in vim. So very awesome.
 export LANG=en_GB.utf8
 
-# SET TERM TYPE
-# Bad idea, according to most people. However, all of the terminals I use
-# support 256color and most terminals don't set the appropriate term type. Also
-# see http://snk.tuxfamily.org/log/vim-256color-bce.html bce = background color
-# erase = more efficient background. Not all combinations of terminal emulators
-# and tmux support it, so don't use it.
-#
-# Interestingly, xterm-256color results in a working vim background outside
-# tmux but not within. screen-256color works inside and outside of tmux.
-#
-# tmux is configured to set screen-256color. If not in tmux, xterm-256color
-# should be used. However, best to set it here just in case.
-# tmux does not support -bce (background color erase)
-if [ -z $TMUX ]; then
-	 export TERM=xterm-256color
-else
-	 export TERM=screen-256color
+# TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
+# configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
+# is configured to provide the correct, 256 color terminal type. For putty,
+# it's putty-256color (which fixes a lot of things) and otherwise it's probably
+# something ilike xterm-256color. Most, if not all off the terminals I use
+# support 256 colors, so it's safe to force it as a last resort, but warn.
+if [ -z $TMUX ] && test $(tput colors) -ne 256; then
+	echo -e "\e[00;31mTERM Type is not set to a 256 colour type! Overriding to xterm-256color. Please set.\e[00m"
+	export TERM=xterm-256color
 fi
 
 # if you call a different shell, this does not happen automatically. WTF?
