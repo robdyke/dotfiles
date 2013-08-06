@@ -62,6 +62,17 @@ development was picked up on github by [ridiculous\_fish][1].
 
 [1]: https://github.com/fish-shell/fish-shell/
 
+Xterm
+-----
+
+Xterm is the reference terminal emulator, and is supported. Get version 277 or
+later to support the mouse with universal co-ordinates. Compile it, after
+installing the x11 and xav dev libraries with:
+
+	xmkmf
+	./configure --enable-256-color --enable-luit --disable-tek4014
+	make
+	sudo make install
 
 ----
 See http://hivelogic.com/articles/top-10-programming-fonts for the best
