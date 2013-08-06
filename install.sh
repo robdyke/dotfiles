@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./install.sh <preset>
+# Usage: ./install.sh <preset> <preset> <...>
 #
 # Where preset is nothing (default) or a script in preset/
 
@@ -22,10 +22,16 @@ Make sure you have at least:
   * tmux 1.8+
   * fish 2.0+ (recommended) or bash 3+
   * vim 7.3+
-  * Dark 256color terminal with mousei support and UTF-8 character encoding
+  * Dark 256color terminal with mouse support and UTF-8 character encoding
   * Menlo or Consolas font, or something equally as nice
 
 EOF
+
+
+function warning {
+	# TODO: check PS1, no escape code if not interactive....?
+	echo -e "\e[00;31m$*\e[00m"
+}
 
 # sneaky hack to install to skel if run as root
 if [ `whoami` == root ]; then
@@ -59,20 +65,31 @@ chmod +x ~/bin/*
 if [ -n "$TMUX" ]; then
 	echo 'Reloading tmux configuration...'
 	tmux source-file ~/.tmux.conf
+else
+	warning 'Not inside tmux'
 fi
 
-if which fish &>/dev/null && [ ! -d ~/.config/fish/generated_completions/ ]; then
-	fish -c fish_update_completions
+if which fish &>/dev/null; then
+	test ! -d ~/.config/fish/generated_completions/ \
+		&& fish -c fish_update_completions
+else
+	warning 'Fish shell not found'
 fi
 
 if which xrdb &>/dev/null; then
 	echo 'Merging Xresources...'
 	xrdb -merge ~/.Xresources
+else
+	warning 'X not installed'
 fi
 
 # generate help files (well, tags) for the vim plugins
-echo 'Generating helptags for vim submodules...'
-vim -c 'call pathogen#helptags()|q'
+if which vim &>/dev/null; then
+	echo 'Generating helptags for vim submodules...'
+	vim -c 'call pathogen#helptags()|q'
+else
+	warning 'Vim not found!'
+fi
 
 # in case someone forgot...
 chmod +x presets/*
@@ -88,12 +105,12 @@ if [ "$PRESETS" ]; then
 			echo "Installing preset: $PRESET"
 			source "$PRESET"
 		else
-			echo Invalid preset: $PRESET
+			warning Invalid preset: $PRESET
 		fi
 	done
 	cd ..
 else
-	echo No preset specfified, default installed.
+	warning 'No preset specified, default installed.'
 	echo 'Run with ./install.sh <preset> <preset> ...'
 	echo To load a prefix from presets/
 fi
