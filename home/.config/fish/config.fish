@@ -14,7 +14,7 @@ set -x LANG=en_GB.utf8
 # it's putty-256color (which fixes a lot of things) and otherwise it's probably
 # something ilike xterm-256color. Most, if not all off the terminals I use
 # support 256 colors, so it's safe to force it as a last resort, but warn.
-if test -z $TMUX ; and test (tput colors) -ne 256
+if begin; test -z $TMUX ; and test (tput colors) -ne 256; end
 	set_color red
 	echo '> TERM is not set to a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color.'
 	set_color normal
