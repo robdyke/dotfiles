@@ -4,7 +4,7 @@ if has('win32')
 elseif has('mac')
 	set gfn=Menlo:h12:cANSI
 elseif has('unix')
-	set gfn=DejaVu\ Sans\ Mono 12
+	set gfn=DejaVu\ Sans\ Mono:h12:cANSI
 endif
 
 " Hide toolbar by default
