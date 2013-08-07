@@ -14,7 +14,7 @@
 date
 
 # quit on error
-set -e
+#set -e
 
 cat <<EOF
 Make sure you have at least:
@@ -62,7 +62,7 @@ cp -r home/.??* ~
 chmod +x ~/bin/*
 
 if [ ! $(tput colors) -eq 256 ]; then
-	warning '> TERM is not set to a 256 colour type! Overriding to xterm-256color. Please set.'
+	warning 'TERM is not set to a 256 colour type! Please set in terminal emulator.'
 fi
 
 # reload TMUX config if running inside tmux
