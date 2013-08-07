@@ -62,7 +62,7 @@ cp -r home/.??* ~
 chmod +x ~/bin/*
 
 if [ ! $(tput colors) -eq 256 ]; then
-	warning 'TERM is not set to a 256 colour type! Please set in terminal emulator.'
+	warning 'TERM is not set to a 256 colour type! Please set in terminal emulator. EG: Putty should have putty-256color, xterm should have xterm-256color.'
 fi
 
 # reload TMUX config if running inside tmux
