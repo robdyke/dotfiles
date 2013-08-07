@@ -83,3 +83,15 @@ Documentation
 -------------
 
 Discussion and documentation is heavily commented within each configuration file.
+
+Shortcomings
+------------
+
+  * [Mouse support in large terminals][4] is broken with most terminal emulators, except iTerm2 and recent xterms.
+  * [Flow control][2] causes unexpected terminal freezing. Switched off in bashrc, [switch pending in fish][3]
+
+
+
+[2]: http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
+[3]: https://github.com/fish-shell/fish-shell/issues/814
+[4]: http://superuser.com/questions/413351/weird-insertion-from-vim-on-mouse-click
