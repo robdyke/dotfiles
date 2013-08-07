@@ -24,3 +24,7 @@ URxvt*geometry:        160x40
 ! regular blue on black is terrible, change
 *color4:               #5555FF
 *color12:              #5555FF
+
+! bold fonts look terrible
+XTerm*boldMode:        false
+URxvt*boldFont:
