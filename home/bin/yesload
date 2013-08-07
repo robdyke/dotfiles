@@ -34,6 +34,6 @@ yes > /dev/null&
 yes > /dev/null&
 yes > /dev/null&
 
-trap 'kill $(jobs -p)' SIGINT
-#trap 'killall yes' SIGINT
+#trap 'kill $(jobs -p)' SIGINT
+trap 'killall yes' SIGINT
 wait
