@@ -14,9 +14,13 @@ xterm*multiScroll:     true
 xterm*toolBar:         false
 xterm*termName:        xterm-256color
 
-URxvt.scrollBar:       false
+URxvt*scrollBar:       false
 URxvt*geometry:        160x40
 
 ! URxvt and xterm
-*foreground: #bcbcbc
-*background: #000000
+*foreground:           #bcbcbc
+*background:           #000000
+
+! regular blue on black is terrible, change
+*color4:               #5555FF
+*color12:              #5555FF

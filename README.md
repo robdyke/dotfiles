@@ -74,6 +74,9 @@ installing the x11 and xav dev libraries with:
 	make
 	sudo make install
 
+
+Urxvt seems faster than xterm, and is now also supported. This is preferred.
+
 ----
 See http://hivelogic.com/articles/top-10-programming-fonts for the best
 terminal font. I prefer Consolas and Menlo on OS X.
