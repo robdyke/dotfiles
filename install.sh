@@ -80,11 +80,11 @@ else
 	warning 'Fish shell version 2 not found'
 fi
 
-if which xrdb &>/dev/null; then
+if [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
 	echo 'Merging Xresources...'
 	xrdb -merge ~/.Xresources
 else
-	warning 'X not installed'
+	warning 'X not configured'
 fi
 
 # generate help files (well, tags) for the vim plugins
