@@ -77,7 +77,7 @@ function __git_ps1 {
 	exit
 }
 
-PS1="\n\[\e[0;32m\]\u@\h \[\e[1;34m\]\w\[\e[0;33m\]\$(__git_ps1)\[\e[m\]\n\$ "
+PS1="\n\[\e[0;32m\]\u@\h \[\e[1;34m\]\$PWD\[\e[0;33m\]\$(__git_ps1)\[\e[m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases
