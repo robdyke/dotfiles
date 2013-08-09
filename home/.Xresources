@@ -17,9 +17,11 @@ xterm*termName:        xterm-256color
 URxvt*scrollBar:       false
 URxvt*geometry:        160x40
 
-! URxvt and xterm
-*foreground:           #bcbcbc
-*background:           #000000
+! do not set general, as this impacts all x apps
+URxvt*foreground:      #bcbcbc
+URxvt*background:      #000000
+xterm*foreground:      #bcbcbc
+xterm*background:      #000000
 
 ! regular blue on black is terrible, change
 *color4:               #5555FF
