@@ -23,7 +23,7 @@ export LANG=en_GB.utf8
 # something ilike xterm-256color. Most, if not all off the terminals I use
 # support 256 colors, so it's safe to force it as a last resort, but warn.
 if [ -z $TMUX ] && test $(tput colors) -ne 256; then
-	echo -e "\e[00;31m> TERM is not set to a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color.\e[00m"
+	echo -e "\e[00;31m> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color.\e[00m"
 	export TERM=xterm-256color
 fi
 
