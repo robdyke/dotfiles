@@ -59,15 +59,18 @@ set +o histexpand
 printf "\033]0;%s\007" $HOSTNAME
 
 # Update TMUX title with path
-function prompt {
-	# to a clever shorthand representation of the current dir
-	LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\/]/-/g | grep -oE '[^\/]+$')
+function onprompt {
+	# only if TMUX is running
+	if [ -n "$TMUX" ]; then
 
-	# tmux title, padded
-	# only run this if tmux is also running
-	test -z "$TMUX" || echo -ne "\\033k$LABEL\\033\\\\"
+		# to a clever shorthand representation of the current dir
+		LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\/]/-/g | grep -oE '[^\/]+$')
+
+		# do the correct escape codes. BTW terminal title is always set to hostname
+		echo -ne "\\033k$LABEL\\033\\\\"
+	fi
 }
-PROMPT_COMMAND=prompt
+PROMPT_COMMAND=onprompt
 
 # MOAR PROMPT
 # with git branch
