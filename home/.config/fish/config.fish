@@ -15,10 +15,10 @@ set -x LANG=en_GB.utf8
 # something ilike xterm-256color. Most, if not all off the terminals I use
 # support 256 colors, so it's safe to force it as a last resort, but warn.
 if begin; test -z $TMUX ; and test (tput colors) -ne 256; end
+	set -x TERM xterm-256color
 	set_color red
 	echo "> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color."
 	set_color normal
-	set -x TERM xterm-256color
 end
 
 
@@ -76,6 +76,7 @@ test -x /usr/bin/keychain
 function fish_greeting
 	echo \n\> Welcome to $HOSTNAME, $USER. Files in $PWD are:\n
 	ls
+	echo -e "\n> Shell is $SHELL"
 end
 
 
@@ -101,12 +102,6 @@ function fish_prompt --description 'Write out the prompt'
 	' ' (set_color --bold blue) (pwd) (set_color normal)\
 	(set_color yellow) (__fish_git_prompt) (set_color normal)\
 	\n\$ ' '
-end
-
-function fish_right_prompt --description 'Reminds user of fish'
-	set_color 111
-	echo FISH
-	set_color normal
 end
 
 # initially set title
