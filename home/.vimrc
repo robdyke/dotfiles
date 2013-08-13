@@ -3,12 +3,16 @@ set nocompatible
 call pathogen#infect()
 set laststatus=2
 
+" http://tooky.co.uk/2010/04/08/there-was-a-problem-with-the-editor-vi-git-on-mac-os-x.html
+" If this causes vim to exit with non-zero and breaks git on OS X, investigate.
+syntax on
+filetype plugin indent on
+
 "let g:Powerline_symbols = 'fancy'
 
 set backspace=indent,eol,start
 " make arrow keys wrap lines and whitespace properly
 set whichwrap=b,s,<,>,[,]
-syntax on
 set number
 set ic
 set smartcase
@@ -26,7 +30,6 @@ set spell
 set cursorline " Highlight current line
 set autoread " Reload files that have changed
 
-filetype on
 au BufNewFile,BufRead *.json set filetype=javascript
 au BufNewFile,BufRead *.less set filetype=css
 au BufNewFile,BufRead *.ino  set filetype=c
