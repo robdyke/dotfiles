@@ -1,6 +1,6 @@
 # mcabber 0.10.1+
 set event_log_files = 1
-set events_command = ~/bin/mcabber-msg-tmux
+#set events_command = ~/bin/mcabber-msg-tmux
 set autoaway = 600
 
 set ssl_ignore_checks = 1
