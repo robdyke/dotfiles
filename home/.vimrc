@@ -27,8 +27,10 @@ nnoremap <silent> <CR> :noh<CR>
 " Spell checking. Does not offer suggestions :-)
 set spell
 
-set cursorline " Highlight current line
-set autoread " Reload files that have changed
+" Highlight current line
+set cursorline
+" ...and column. Good for lining up and feeling like a pro hacker.
+set cursorcolumn
 
 au BufNewFile,BufRead *.json set filetype=javascript
 au BufNewFile,BufRead *.less set filetype=css
@@ -125,7 +127,7 @@ ab THe The
 ab eb be
 
 " max. number of tabs open at once. I use a large term.
-set tabpagemax=20
+set tabpagemax=50
 
 " disable useless viminfo files
 set viminfo=
