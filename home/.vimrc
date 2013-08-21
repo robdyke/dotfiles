@@ -97,6 +97,7 @@ nnoremap <tab> :NERDTreeTabsToggle<CR>
 let NERDTreeMapQuit='\t'
 " when changing to a tab, file should be focused
 let g:nerdtree_tabs_focus_on_files=1
+let g:NERDTreeWinSize = 40
 
 " gf opens the file under cursor, which is great for navigating a hierarchy of files.
 " Change gF to open file under cursor in new tab, not new pane, like CTRL+W gF
