@@ -72,6 +72,28 @@ function onprompt {
 }
 PROMPT_COMMAND=onprompt
 
+# SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
+function ssh {
+		if test -n $TMUX; then
+		# find host from array (in a dumb way) by getting last argument
+		# It uses the fact that for implicitly loops over the arguments
+		# if you don't tell it what to loop over, and the fact that for
+		# loop variables aren't scoped: they keep the last value they
+		# were set to
+		# http://stackoverflow.com/questions/1853946/getting-the-last-argument-passed-to-a-shell-script
+		for host; do true; done
+
+		printf "\\033k%s\\033\\\\" $host
+		tmux set -g set-titles off >/dev/null
+		command ssh "$@"
+		tmux set -g set-titles off >/dev/null
+	else
+		command ssh "$@"
+	fi
+}
+
+
+
 # MOAR PROMPT
 # with git branch
 # make sure the function exists, even if it wasn't included
