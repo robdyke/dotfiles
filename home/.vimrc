@@ -138,3 +138,7 @@ cabbrev help tab help
 
 " abbreviate messages in every way to avoid hit-enter prompt
 set shortmess=a
+
+" keep window split size emal on resize AWESOME
+" http://stackoverflow.com/questions/14649698/how-to-resize-split-windows-in-vim-proportionally
+autocmd VimResized * :wincmd =
