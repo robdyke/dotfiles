@@ -8,6 +8,7 @@ elseif has('unix')
 endif
 
 " Hide toolbar by default
-set guioptions=egmrt
+set guioptions-=egmrt
 
-let g:nerdtree_tabs_open_on_gui_startup=1
+" Why does it open with GUI by default...?
+let g:nerdtree_tabs_open_on_gui_startup=0
