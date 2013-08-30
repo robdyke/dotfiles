@@ -55,6 +55,9 @@ shopt -s checkwinsize
 # stop -bash: !": event not found
 set +o histexpand
 
+# Append commands to the history file, rather than overwrite it.
+shopt -s histappend
+
 # Useful title for ssh
 printf "\033]0;%s\007" $HOSTNAME
 
@@ -69,6 +72,9 @@ function onprompt {
 		# do the correct escape codes. BTW terminal title is always set to hostname
 		echo -ne "\\033k$LABEL\\033\\\\"
 	fi
+
+	# write that command to history for other sessions
+	history -a
 }
 PROMPT_COMMAND=onprompt
 
