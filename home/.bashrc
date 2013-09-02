@@ -92,7 +92,7 @@ function ssh {
 		printf "\\033k%s\\033\\\\" $host
 		tmux set set-titles off >/dev/null
 		command ssh "$@"
-		tmux set set-titles off >/dev/null
+		tmux set set-titles on >/dev/null
 	else
 		command ssh "$@"
 	fi
