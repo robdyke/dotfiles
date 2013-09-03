@@ -8,7 +8,11 @@ elseif has('unix')
 endif
 
 " Hide toolbar by default
-set guioptions-=egmrt
+set guioptions-=m
+set guioptions-=T
 
 " Why does it open with GUI by default...?
 let g:nerdtree_tabs_open_on_gui_startup=0
+
+" I like the degraded color scheme
+let g:solarized_degrade=1
