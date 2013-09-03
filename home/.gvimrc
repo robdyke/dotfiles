@@ -1,6 +1,6 @@
 
 if has('win32')
-	set gfn=Consolas:h12:cANSI
+	set gfn=Consolas:h10:cANSI
 elseif has('mac')
 	set gfn=Menlo:h12:cANSI
 elseif has('unix')
