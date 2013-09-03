@@ -15,4 +15,4 @@ set guioptions-=T
 let g:nerdtree_tabs_open_on_gui_startup=0
 
 " I like the degraded color scheme
-let g:solarized_degrade=1
+" let g:solarized_degrade=1
