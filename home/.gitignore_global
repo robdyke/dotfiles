@@ -96,3 +96,6 @@ xcuserdata
 *.uvopt
 *.uvproj
 *.__i
+
+# node stuff
+node_modules/
