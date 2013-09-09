@@ -38,6 +38,7 @@ au BufNewFile,BufRead *.ino  set filetype=c
 au BufNewFile,BufRead *.pde  set filetype=c
 au BufNewFile,BufRead *.md   set filetype=markdown
 au BufNewFile,BufRead *.fish set filetype=sh
+au BufNewFile,BufRead *.fdc  set filetype=sdc
 
 " It's not the 70's anymore. Use git or something.
 set noswapfile
