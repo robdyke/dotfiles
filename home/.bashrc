@@ -96,7 +96,10 @@ function ssh {
 		for host; do true; done
 
 		printf "\\033k%s\\033\\\\" $host
+
+		tmux set -q allow-rename off
 		command ssh "$@"
+		tmux set -q allow-rename on
 	else
 		command ssh "$@"
 	fi
