@@ -90,10 +90,16 @@ function fish_tmux_title --description "Set the tmux window title"
 	echo $PWD | sed s/[^a-zA-Z0-9\/]/-/g | grep -oE '[^\/]+$'
 end
 
+# only auto set title based on initial pane
+# this detects if the pane is not the first in a new window (probably)
+test $PWD = ~
+	and set -x TMUX_AUTO_TITLE set
+
 function fish_set_tmux_title --description "Sets tmux pane title to output of fish_tmux_title, with padding" --on-variable PWD
 	# title of tmux pane, must be separate to fish_title
 	# only run this if tmux is also running
 	test -z $TMUX
+		and test $TMUX_AUTO_TITLE
 		or printf "\\033k%s\\033\\\\" (fish_tmux_title)
 end
 
