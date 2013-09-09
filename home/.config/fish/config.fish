@@ -93,13 +93,13 @@ end
 # only auto set title based on initial pane
 # this detects if the pane is not the first in a new window (probably)
 test $PWD = ~
-	and set -x TMUX_AUTO_TITLE set
+	and set -x TMUX_PRIMARY_PANE set
 
 function fish_set_tmux_title --description "Sets tmux pane title to output of fish_tmux_title, with padding" --on-variable PWD
 	# title of tmux pane, must be separate to fish_title
 	# only run this if tmux is also running
 	test -z $TMUX
-		and test $TMUX_AUTO_TITLE
+		and test $TMUX_PRIMARY_PANE
 		or printf "\\033k%s\\033\\\\" (fish_tmux_title)
 end
 
@@ -116,9 +116,7 @@ function ssh --description 'SSH wrapper to magically LOCK tmux title to hostname
 		set host $argv[-1]
 
 		printf "\\033k%s\\033\\\\" $host
-		tmux set set-titles off >/dev/null
 		command ssh $argv
-		tmux set set-titles on >/dev/null
 		fish_set_tmux_title
 	else
 		command ssh $argv

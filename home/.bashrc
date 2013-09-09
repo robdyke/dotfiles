@@ -63,12 +63,12 @@ printf "\033]0;%s\007" $HOSTNAME
 
 # only auto set title based on initial pane
 # this detects if the pane is not the first in a new window (probably)
-[ $PWD = ~ ] && TMUX__AUTO_TITLE=set
+[ $PWD = ~ ] && TMUX_PRIMARY_PANE=set
 
 # Update TMUX title with path
 function onprompt {
 	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
-	if [ -n "$TMUX" ] && [ $TMUX_AUTO_TITLE ]; then
+	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
 
 		# to a clever shorthand representation of the current dir
 		LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\/]/-/g | grep -oE '[^\/]+$')
@@ -94,9 +94,7 @@ function ssh {
 		for host; do true; done
 
 		printf "\\033k%s\\033\\\\" $host
-		tmux set set-titles off >/dev/null
 		command ssh "$@"
-		tmux set set-titles on >/dev/null
 	else
 		command ssh "$@"
 	fi
