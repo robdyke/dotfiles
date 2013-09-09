@@ -32,3 +32,10 @@ DEL: delete-char
 # do not make noise
 set bell-style none
 
+# ALT+right/left for emacs-style word skipping
+"\e[1;3C": forward-word
+"\e[1;3D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
