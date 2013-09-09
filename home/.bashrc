@@ -152,6 +152,7 @@ function cd {
 }
 
 # cheap coloured man pages. Yay!
+export PAGER=less
 function man {
 	env \
 	LESS_TERMCAP_mb=$(printf "\e[1;31m") \
