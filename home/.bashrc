@@ -62,8 +62,10 @@ shopt -s histappend
 printf "\033]0;%s\007" $HOSTNAME
 
 # only auto set title based on initial pane
-# this detects if the pane is not the first in a new window (probably)
-[ $PWD = ~ ] && TMUX_PRIMARY_PANE=set
+# this detects if the pane is the first in a new window
+test -n $TMUX \
+	&& test $(tmux list-panes | wc -l) -eq 1 \
+	&& TMUX_PRIMARY_PANE=set
 
 # Update TMUX title with path
 function onprompt {

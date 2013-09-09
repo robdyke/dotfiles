@@ -94,16 +94,17 @@ function fish_tmux_title --description "Set the tmux window title"
 end
 
 # only auto set title based on initial pane
-# this detects if the pane is not the first in a new window (probably)
-test $PWD = ~
+# this detects if the pane is the first in a new window (probably)
+test -n $TMUX
+	and test (tmux list-panes | wc -l) -eq 1
 	and set -x TMUX_PRIMARY_PANE set
 
 function fish_set_tmux_title --description "Sets tmux pane title to output of fish_tmux_title, with padding" --on-variable PWD
 	# title of tmux pane, must be separate to fish_title
 	# only run this if tmux is also running
-	test -z $TMUX
+	test $TMUX
 		and test $TMUX_PRIMARY_PANE
-		or printf "\\033k%s\\033\\\\" (fish_tmux_title)
+		and printf "\\033k%s\\033\\\\" (fish_tmux_title)
 end
 
 function fish_prompt --description 'Write out the prompt'
