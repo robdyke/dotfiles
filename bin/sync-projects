@@ -46,13 +46,14 @@ def sync(urls):
 	for url in urls:
 		dir = re.search(r"([\.\-0-9a-zA-Z]+)\.git$",url).group(1)
 		if os.path.exists('%s/.git' % dir):
-			step('PULL %s' % dir)
+			step('FETCH %s' % dir)
 			os.chdir(dir)
-			call(['git','pull','origin','master'])
+			call(['git','fetch','--quiet','origin','master'])
+			call(['git','merge','--ff-only','FETCH_HEAD'])
 			call(['git','submodule','update'])
 			os.chdir(origin)
 		else:
-			step('INIT %s' % dir)
+			step('CLONE %s' % dir)
 			call(['git','clone','--recursive','--quiet',url,dir])
 
 sync(active)
@@ -67,4 +68,6 @@ os.chdir('..')
 step('INST dotfiles')
 os.chdir('dotfiles')
 call(['git','checkout','naggie'])
+call(['git','fetch','origin','naggie'])
+call(['git','merge','--ff-only','FETCH_HEAD'])
 call(['./install.sh'])
