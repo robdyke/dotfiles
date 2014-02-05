@@ -48,6 +48,11 @@ def sync(urls):
 		if os.path.exists('%s/.git' % dir):
 			step('FETCH %s' % dir)
 			os.chdir(dir)
+			# replace origin, in case that changed
+			call(['git','fetch','--quiet','origin'])
+			call(['git','remote','rm','origin'])
+			call(['git','remote','add','origin',url])
+
 			call(['git','fetch','--quiet','origin'])
 			call(['git','merge','--ff-only','FETCH_HEAD'])
 			call(['git','submodule','update'])
