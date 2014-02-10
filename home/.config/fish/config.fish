@@ -68,10 +68,10 @@ alias tm 'test -z $TMUX; and tmux a ; or tmux'
 # patches for Mac OS X
 set PLATFORM (uname)
 if test "$PLATFORM" = 'Darwin'
-	#alias ls='ls -G'
+	alias ls='ls -G'
 	#unalias ls
 	# unalias is broken...
-	alias ls=ls
+	#alias ls=ls
 	set -x CLICOLOR 1
 	set -x LSCOLORS gxBxhxDxfxhxhxhxhxcxcx
 	# slightly different utf8 locale format...
