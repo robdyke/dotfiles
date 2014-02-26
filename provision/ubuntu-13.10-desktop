@@ -26,6 +26,10 @@ yes | apt-get install picocom vim vim-gtk git ssh tmux figlet build-essential \
 yes | apt-get install chromium-browser vlc
 yes | apt-get remove --purge firefox whoopsie
 
+# removed advert apps
+rm /usr/share/applications/*amazon*
+rm /usr/share/applications/*ubuntuone*
+
 yes | add-apt-repository ppa:team-xbmc/ppa
 apt-get update
 yes | apt-get install xbmc
