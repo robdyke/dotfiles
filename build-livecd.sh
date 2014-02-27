@@ -12,7 +12,7 @@
 # Based on https://help.ubuntu.com/community/LiveCDCustomization
 
 # Install pre-requisities
-#sudo apt-get install squashfs-tools genisoimage
+#sudo apt-get install squashfs-tools genisoimage # aufs-tools
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 NAME="darkbuntu-$BRANCH"
@@ -56,7 +56,7 @@ echo
 
 # check dependencies
 if ! which mkisofs mksquashfs &> /dev/null; then
-	WARNING 'Error! required genisoimage and/or squashfs-tools package(s) are not installed'
+	WARNING 'Error! required genisoimage and/or squashfs-tools and/or aufs-tools package(s) are not installed'
 	exit
 fi
 
@@ -66,10 +66,12 @@ if [ $(uname -m) != x86_64 ]; then
 fi
 
 # less typing, with environment variables set
+# HACK home dir = /etc/skel? so dbus-launch gsettings works.
+# This will be copied to home dir of new user.
 function INSIDE {
 	chroot build/root \
 		/usr/bin/env \
-		HOME=/root \
+		HOME=/etc/skel \
 		LC_ALL=C \
 		USER=root \
 		"$@"
@@ -161,9 +163,9 @@ yes | INSIDE apt-get install git
 # git...
 #rsync -r --exclude=build --exclude='*iso' "$DOTFILES_DIR" build/root/root/dotfiles
 # TODO try this instead
-INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /root/dotfiles
-INSIDE /root/dotfiles/provision/ubuntu-13.10-desktop
-INSIDE /root/dotfiles/install.sh
+INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles
+INSIDE /etc/skel/dotfiles/provision/ubuntu-13.10-desktop
+INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
 
@@ -197,7 +199,7 @@ cp build/root/boot/initrd.img* build/extract/casper/initrd.lz
 # session.
 sed -i -re "s/'en': *'us',/'en': 'gb',/g" \
 	build/root/usr/lib/ubiquity/ubiquity/misc.py
-
+BREAKPOINT
 rm -rf build/root/tmp/*
 rm     build/root/.bash_history
 
@@ -236,7 +238,8 @@ sed -i '/casper/d'   build/extract/casper/filesystem.manifest-desktop
 #mksquashfs build/root/ build/extract/casper/filesystem.squashfs
 mksquashfs \
 	build/root build/extract/casper/filesystem.squashfs \
-	-comp xz -e build/root/boot -no-progress
+	-comp xz -e build/root/boot -no-progress \
+	>/dev/null # buffering progress indicator might be a bottleneck... flag does not work
 
 # Update the filesystem.size file, which is needed by the installer:
 printf $(du -sx --block-size=1 build/root | cut -f1) > build/extract/casper/filesystem.size
@@ -278,6 +281,9 @@ rm -rf build/*
 
 # TODO? EFI support for grub2+flash drive, so can boot on mac.
 
+# TODO? Use aufs to mount a writable branch rather than extracting the
+# ISO/squashfs. This will possibly improve build times and reduce disk I/O.
+
 # Example: burn the image to CD with:
 #cdrecord dev=/dev/cdrom ubuntu-9.04-desktop-i386-custom.iso
 
@@ -288,7 +294,7 @@ rm -rf build/*
 
 #sudo apt-get install qemu kvm
 #sudo adduser naggie kvm
-#qemu-system-x86_64 -m 1024 -usbdevice tablet -k en-gb -vnc :0,lossy -cdrom darkbuntu-naggie.iso
+#qemu-system-x86_64 -m 1024 -usbdevice tablet -k en-gb -vnc :0,lossy -vga std -cdrom darkbuntu-naggie.iso
 #
 # After this, on an intermediate host
 #

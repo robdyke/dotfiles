@@ -24,11 +24,20 @@ yes | apt-get install picocom vim vim-gtk git ssh tmux figlet build-essential \
 
 # gui
 yes | apt-get install chromium-browser vlc
-yes | apt-get remove --purge firefox whoopsie
+yes | apt-get remove --purge firefox 'libreoffice*' 'ubuntuone-*'
 
 # removed advert apps
 rm /usr/share/applications/*amazon*
 rm /usr/share/applications/*ubuntuone*
+
+# remove amazon searching...
+#dbus-launch gsettings set com.canonical.Unity.Lenses disabled-scopes "[
+#	'more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope',
+#	'more_suggestions-populartracks.scope', 'music-musicstore.scope',
+#	'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope',
+#	'more_suggestions-skimlinks.scope']"
+# still works in chroot for livecd if HOME is /etc/skel
+dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
 
 yes | add-apt-repository ppa:team-xbmc/ppa
 apt-get update
@@ -47,7 +56,6 @@ yes | apt-get --reinstall install bcmwl-kernel-source
 # fish default shell
 useradd -D -s /usr/bin/fish
 
-yes | apt-get remove --purge 'libreoffice*'
 yes | apt-get upgrade
 
 # orphaned packages
