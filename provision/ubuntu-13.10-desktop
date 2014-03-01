@@ -20,7 +20,8 @@ sudo update-locale LANG=en_GB.utf8 LANGUAGE=en_GB.utf8 LC_ALL=en_GB.utf8
 
 # textmode
 yes | apt-get install picocom vim vim-gtk git ssh tmux figlet build-essential \
-	bash-completion keychain htop fish curl tree
+	bash-completion keychain mcabber htop curl tree genisoimage \
+	squashfs-tools aufs-tools fish
 
 # gui
 yes | apt-get install chromium-browser vlc

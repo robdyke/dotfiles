@@ -12,7 +12,8 @@ yes | apt-get upgrade
 
 # textmode
 yes | apt-get install picocom vim git ssh figlet build-essential \
-	bash-completion keychain mcabber htop curl tree
+	bash-completion keychain mcabber htop curl tree genisoimage \
+	squashfs-tools aufs-tools
 
 # apt-add-repository
 yes | apt-get install python-software-properties
@@ -29,8 +30,8 @@ yes | apt-get install tmux fish nodejs
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
-apt-get install libcap2-bin
+yes | apt-get install libcap2-bin
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/node
 
-# default, chsh -s /usr/bin/fish for current user
+# default shell (chsh -s /usr/bin/fish for current user)
 useradd -D -s /usr/bin/fish

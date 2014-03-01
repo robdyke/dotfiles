@@ -1,18 +1,25 @@
-#!/bin/bash
 
+#!/bin/bash
 if [ `whoami` != root ]; then
 	echo Run as root
 	exit
 fi
 
+
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 # debian/ubuntu
-apt-get update || exit 2
+yes | apt-get update || exit 2
+yes | apt-get upgrade
 
+# textmode
+yes | apt-get install picocom vim git ssh figlet build-essential \
+	bash-completion keychain mcabber htop curl tree genisoimage \
+	squashfs-tools aufs-tools tmux fish nodejs
 
+# Make node processes able to listen on port 80
+# http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
+yes | apt-get install libcap2-bin
+setcap 'cap_net_bind_service=+ep' /usr/local/bin/node
 
-yes | apt-get install picocom vim git ssh tmux figlet build-essential \
-	bash-completion keychain mcabber htop autossh bc git-svn most \
-	exuberant-ctags fish curl tree
-
-
+# default shell (chsh -s /usr/bin/fish for current user)
+useradd -D -s /usr/bin/fish
