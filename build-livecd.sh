@@ -12,7 +12,10 @@
 # Based on https://help.ubuntu.com/community/LiveCDCustomization
 
 # Install pre-requisities
-#sudo apt-get install squashfs-tools genisoimage # aufs-tools
+#sudo apt-get install squashfs-tools genisoimage aufs-tools
+
+
+# TODO: rename all mount points
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 NAME="darkbuntu-$BRANCH"
@@ -25,7 +28,7 @@ TARGET="$NAME.iso"
 
 # Modes of operation:
 #
-# 1. Source and Target non-existant: New source is downloaded, target is compiled
+# 1. Source and Target non-existent: New source is downloaded, target is compiled
 # 2. Target exists: Target is used as source
 # 3. Just source exists: New target is created
 
@@ -53,9 +56,8 @@ echo TARGET: $TARGET
 echo
 echo
 
-
 # check dependencies
-if ! which mkisofs mksquashfs &> /dev/null; then
+if ! which mkisofs mksquashfs mount.aufs &> /dev/null; then
 	WARNING 'Error! required genisoimage and/or squashfs-tools and/or aufs-tools package(s) are not installed'
 	exit
 fi
@@ -69,7 +71,7 @@ fi
 # HACK home dir = /etc/skel? so dbus-launch gsettings works.
 # This will be copied to home dir of new user.
 function INSIDE {
-	chroot build/root \
+	chroot build/filesystem_rw \
 		/usr/bin/env \
 		HOME=/etc/skel \
 		LC_ALL=C \
@@ -78,52 +80,73 @@ function INSIDE {
 }
 
 function BREAKPOINT {
-	INSIDE /bin/bash
+	INSIDE /usr/bin/fish || INSIDE /bin/bash
 }
 
 # remove all trace of building in a safe way on termination
 # might fail if things are not there yet, but that's fine.
-function EMERGENCY_CLEANUP {
-	echo Emergency cleanup...
-	umount -l build/root/proc
-	umount    build/root/sys
-	umount -l build/root/dev
-	umount    build/root/dev/pts
-	umount    build/mnt
+function CLEANUP_EXIT {
+	echo '> Cleanup...'
+	set +e # the following commands can fail, that's OK.
+	set +x # No more verbosity required
+	umount -lf build/filesystem_rw/proc
+	umount -lf build/filesystem_rw/sys
+	umount -lf build/filesystem_rw/dev
+	umount -lf build/filesystem_rw/dev/pts
+	umount -lf build/iso_ro
+	umount -lf build/iso_rw
+	umount -lf build/filesystem_ro
+	umount -lf build/filesystem_rw
+	sync
+	rm -rf build
 	exit
 }
 
-# always clean up on CTRL+C
-trap EMERGENCY_CLEANUP SIGINT
+# always clean up on CTRL+C (and anything, now)
+#trap CLEANUP_EXIT SIGINT
+trap CLEANUP_EXIT EXIT
 
 # DEBUG
 #set -x
 
-[ -d build ] || mkdir build/
+if [ -d build ]; then
+	WARNING 'Stale build directory found. Refusing to build.'
+	exit
+else
+	mkdir build
+fi
 
 # echo commands to aid debugging
 set -x
 
-# clean
-rm -rf build/*
+# exit on error? NEEDS TRAP TO CLEANUP_EXIT
+set -e
 
-mkdir build/mnt
-mount -o loop,ro "$SOURCE" build/mnt
+
+mkdir build/iso_ro
+mount -o loop,ro "$SOURCE" build/iso_ro
 
 # extract ISO so files are writable
-mkdir build/extract
-rsync --exclude=/casper/filesystem.squashfs -a build/mnt/ build/extract
+mkdir build/iso_rw
+#rsync --exclude=/casper/filesystem.squashfs -a build/iso_ro/ build/iso_rw
+# faster: unionfs/aufs: writable branch
+mount -t aufs -o br:build/iso_rw:build/iso_ro none build/iso_rw
 
 # Extract the Desktop system
 # Extract the SquashFS filesystem
-unsquashfs -no-progress -d build/root build/mnt/casper/filesystem.squashfs
+#unsquashfs -no-progress -d build/filesystem_rw build/iso_ro/casper/filesystem.squashfs
+# mount + aufs instead, faster.
+mkdir build/filesystem_rw
+mkdir build/filesystem_ro
+mount -t squashfs build/iso_ro/casper/filesystem.squashfs -o ro,loop build/filesystem_ro
+mount -t aufs -o br:build/filesystem_rw:build/filesystem_ro none build/filesystem_rw
 
 # Prepare and chroot
 # network connection within chroot
 # Don't replace resolv.conf, overwrite it so that permissions don't change.
 # This way, network manager can still work.
-cat /etc/resolv.conf > build/root/etc/
-cat /etc/hosts       > build/root/etc/
+cat /etc/resolv.conf > build/filesystem_rw/etc/resolv.conf
+cat /etc/hosts       > build/filesystem_rw/etc/hosts
 
 # other filesystems, inside chroot
 # these mount important directories of your host system - if you later decide to
@@ -131,10 +154,10 @@ cat /etc/hosts       > build/root/etc/
 # otherwise your host system will become unusable at least temporarily until
 # reboot)
 # Also rm -rf'ing over binded dev really isn't a good thing...
-mount -t proc   none build/root/proc
-mount -t sysfs  none build/root/sys
-mount -t devpts none build/root/dev/pts
-mount --bind /dev/   build/root/dev
+mount -t proc   none build/filesystem_rw/proc
+mount -t sysfs  none build/filesystem_rw/sys
+mount -t devpts none build/filesystem_rw/dev/pts
+mount --bind /dev/   build/filesystem_rw/dev
 
 # In 9.10, (+?) before installing or upgrading packages you need to run
 # also may as well update/upgrade and add repositories
@@ -156,12 +179,12 @@ yes | INSIDE apt-get install git
 # and dotfiles
 # naggie/dotfiles does this all
 # installs dotfiles to /etc/skel/ so that live (ubuntu) user will get a
-#cp -a ../dotfiles build/root/root/
-#git clone . build/root/root/dotfiles
+#cp -a ../dotfiles build/filesystem_rw/root/
+#git clone . build/filesystem_rw/root/dotfiles
 # rsync preserves original origin and submodules, but git submodules have
 # absolute references which break if you move the git folder on old versions of
 # git...
-#rsync -r --exclude=build --exclude='*iso' "$DOTFILES_DIR" build/root/root/dotfiles
+#rsync -r --exclude=build --exclude='*iso' "$DOTFILES_DIR" build/filesystem_rw/root/dotfiles
 # TODO try this instead
 INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles
 INSIDE /etc/skel/dotfiles/provision/ubuntu-13.10-desktop
@@ -180,14 +203,15 @@ yes | INSIDE apt-get clean
 yes | INSIDE apt-get autoremove
 
 # New kernel or initrd?
-#cp build/root/boot/vmlinuz-2.6.15-26-k7    build/extract/casper/vmlinuz
+#cp build/filesystem_rw/boot/vmlinuz-2.6.15-26-k7    build/iso_rw/casper/vmlinuz
 # new initrd generated when Broadcom sta drivers were installed.
-cp build/root/boot/initrd.img* build/extract/casper/initrd.lz
+cp build/filesystem_rw/boot/initrd.img* build/iso_rw/casper/initrd.lz
 # After you've modified the kernel, init scripts or added new kernel
 # modules, you need to rebuild the initrd.gz file and substitute it into
 # the casper directory.
 #INSIDE mkinitramfs -o /initrd.gz 2.6.15-26-k7
-#mv edit/initrd.gz extract-cd/casper/
+#mv edit/initrd.gz iso_rw-cd/casper/
+# may need to convert to LZ gzip -dc initrd.gz | sudo lzma -7 > initrd.lz
 
 
 #BREAKPOINT
@@ -198,61 +222,61 @@ cp build/root/boot/initrd.img* build/extract/casper/initrd.lz
 # X/console keyboard main config file. `setxkbmap gb` would also work in
 # session.
 sed -i -re "s/'en': *'us',/'en': 'gb',/g" \
-	build/root/usr/lib/ubiquity/ubiquity/misc.py
-BREAKPOINT
-rm -rf build/root/tmp/*
-rm     build/root/.bash_history
+	build/filesystem_rw/usr/lib/ubiquity/ubiquity/misc.py
 
-rm build/root/etc/hosts
+rm -rf build/filesystem_rw/tmp/*
+rm     build/filesystem_rw/etc/skel/.bash_history
+
+# RM/UMOUNT STUFF THAT SHOULDN'T BE IN FILESYSTEM IMAGE
+rm build/filesystem_rw/etc/hosts
 # overwrite, preserve permissions, see above.
-echo > build/root/etc/resolv.conf
+echo > build/filesystem_rw/etc/resolv.conf
 
 # Clean after installing software
-rm build/root/var/lib/dbus/machine-id
-rm build/root/sbin/initctl
+rm build/filesystem_rw/var/lib/dbus/machine-id
+rm build/filesystem_rw/sbin/initctl
 INSIDE dpkg-divert --rename --remove /sbin/initctl
 
-# now umount (unmount) special filesystems before creation of iso
-umount -l build/root/proc
-umount    build/root/sys
-umount -l build/root/dev
-umount    build/root/dev/pts
-umount    build/mnt
+umount -lf build/filesystem_rw/proc
+umount -lf build/filesystem_rw/sys
+umount -lf build/filesystem_rw/dev
+umount -lf build/filesystem_rw/dev/pts
 
 # ASSEMBLE ISO
-chmod +w build/extract/casper/filesystem.manifest
+chmod +w build/iso_rw/casper/filesystem.manifest
 
-INSIDE dpkg-query -W --showformat='${Package} ${Version}\n' > build/extract/casper/filesystem.manifest
+INSIDE dpkg-query -W --showformat='${Package} ${Version}\n' > build/iso_rw/casper/filesystem.manifest
 
-cp build/extract/casper/filesystem.manifest build/extract/casper/filesystem.manifest-desktop
+cp build/iso_rw/casper/filesystem.manifest build/iso_rw/casper/filesystem.manifest-desktop
 
-sed -i '/ubiquity/d' build/extract/casper/filesystem.manifest-desktop
-sed -i '/casper/d'   build/extract/casper/filesystem.manifest-desktop
+sed -i '/ubiquity/d' build/iso_rw/casper/filesystem.manifest-desktop
+sed -i '/casper/d'   build/iso_rw/casper/filesystem.manifest-desktop
 
 # COMPRESS FILESYSTEM
-# already excluded by rsync
-#rm build/extract/casper/filesystem.squashfs
+# already excluded by rsync (not any more now that aufs is used)
+rm build/iso_rw/casper/filesystem.squashfs
 
 # For a highest possible compression at the cost of compression time, you may
 # use the xz method and is better exclude the edit/boot directory altogether:
-#mksquashfs build/root/ build/extract/casper/filesystem.squashfs
+#mksquashfs build/filesystem_rw/ build/iso_rw/casper/filesystem.squashfs
+BREAKPOINT
 mksquashfs \
-	build/root build/extract/casper/filesystem.squashfs \
-	-comp xz -e build/root/boot -no-progress \
+	build/filesystem_rw build/iso_rw/casper/filesystem.squashfs \
+	-comp xz -e build/filesystem_rw/boot -no-progress \
 	>/dev/null # buffering progress indicator might be a bottleneck... flag does not work
 
 # Update the filesystem.size file, which is needed by the installer:
-printf $(du -sx --block-size=1 build/root | cut -f1) > build/extract/casper/filesystem.size
+printf $(du -sx --block-size=1 build/filesystem_rw | cut -f1) > build/iso_rw/casper/filesystem.size
 
-# Set an image name in extract-cd/README.diskdefines
-#vim extract-cd/README.diskdefines
+# Set an image name in iso_rw-cd/README.diskdefines
+#vim iso_rw-cd/README.diskdefines
 
 # recalc hashes
-rm build/extract/md5sum.txt
+rm build/iso_rw/md5sum.txt
 # subshell, no chdir persistence
 echo 'Calculating hashes...'
 (
-	cd build/extract
+	cd build/iso_rw
 	find -type f -print0 \
 		| xargs -0 md5sum \
 		| grep -v isolinux/boot.cat \
@@ -265,11 +289,12 @@ mkisofs -D -r -V "$NAME" -cache-inodes -J -l \
 	-c isolinux/boot.cat \
 	-no-emul-boot -boot-load-size 4 \
 	-boot-info-table \
-	-o "$TARGET" build/extract/
+	-o "$TARGET" build/iso_rw/
 
 # clean, MUST MAKE SURE EVERYTHING IS UNMOUNTED FIRST, PARTICULARLY dev
 # OR PREPARE FOR CORE MELTDOWN
-rm -rf build/*
+# now umount (unmount) special filesystems before creation of iso
+CLEANUP_EXIT
 
 # TODO? postprocess to allow simple dd to flash drive to work?
 # isohybrid
@@ -281,8 +306,6 @@ rm -rf build/*
 
 # TODO? EFI support for grub2+flash drive, so can boot on mac.
 
-# TODO? Use aufs to mount a writable branch rather than extracting the
-# ISO/squashfs. This will possibly improve build times and reduce disk I/O.
 
 # Example: burn the image to CD with:
 #cdrecord dev=/dev/cdrom ubuntu-9.04-desktop-i386-custom.iso
@@ -305,4 +328,4 @@ rm -rf build/*
 # Then connect using a vncviewer. Performance is pretty much as if it was
 # local due to kvm and vnc. The letdown is really the fancy effects making
 # it slow.
-
+# TODO: exit on error (with appropriate trap)
