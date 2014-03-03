@@ -80,34 +80,31 @@ function INSIDE {
 }
 
 function BREAKPOINT {
-	INSIDE /usr/bin/fish || INSIDE /bin/bash
+	INSIDE /bin/bash
 }
 
 # remove all trace of building in a safe way on termination
 # might fail if things are not there yet, but that's fine.
 function CLEANUP_EXIT {
+	STATUS=$?
+	# No more verbosity required
+	set +x
+	# the following commands can fail, that is OK.
+	set +e
 	echo '> Cleanup...'
-	set +e # the following commands can fail, that's OK.
-	set +x # No more verbosity required
-	umount -lf build/filesystem_rw/proc
-	umount -lf build/filesystem_rw/sys
-	umount -lf build/filesystem_rw/dev
-	umount -lf build/filesystem_rw/dev/pts
-	umount -lf build/iso_ro
-	umount -lf build/iso_rw
-	umount -lf build/filesystem_ro
-	umount -lf build/filesystem_rw
+	# -d always free loop device, prevent leaking them
+	umount -l  build/filesystem_rw/proc
+	umount -l  build/filesystem_rw/sys
+	umount -l  build/filesystem_rw/dev
+	umount -l  build/filesystem_rw/dev/pts
+	umount -l  build/iso_rw
+	umount -ld build/iso_ro
+	umount -l  build/filesystem_rw
+	umount -ld build/filesystem_ro
 	sync
 	rm -rf build
-	exit
+	exit $STATUS
 }
-
-# always clean up on CTRL+C (and anything, now)
-#trap CLEANUP_EXIT SIGINT
-trap CLEANUP_EXIT EXIT
-
-# DEBUG
-#set -x
 
 if [ -d build ]; then
 	WARNING 'Stale build directory found. Refusing to build.'
@@ -116,10 +113,16 @@ else
 	mkdir build
 fi
 
+# always clean up on CTRL+C (and anything, now)
+#trap CLEANUP_EXIT SIGINT
+trap CLEANUP_EXIT EXIT
+
 # echo commands to aid debugging
 set -x
 
 # exit on error? NEEDS TRAP TO CLEANUP_EXIT
+# use || true to skip exit-on-fail for single commands if inconsequential
+# This is useful on an incremental build
 set -e
 
 
@@ -163,11 +166,11 @@ mount --bind /dev/   build/filesystem_rw/dev
 # also may as well update/upgrade and add repositories
 dbus-uuidgen | INSIDE tee /var/lib/dbus/machine-id
 INSIDE dpkg-divert --local --rename --add /sbin/initctl
-INSIDE ln -s /bin/true /sbin/initctl
+INSIDE ln -s /bin/true /sbin/initctl || true
 INSIDE add-apt-repository universe
 INSIDE add-apt-repository multiverse
 
-INSIDE ln -s /lib/init/upstart-job /etc/init.d/whoopsie # required, otherwise apt breaks
+INSIDE ln -s /lib/init/upstart-job /etc/init.d/whoopsie || true # required, otherwise apt breaks
 
 yes | INSIDE apt-get update
 yes | INSIDE apt-get install git
@@ -186,7 +189,7 @@ yes | INSIDE apt-get install git
 # git...
 #rsync -r --exclude=build --exclude='*iso' "$DOTFILES_DIR" build/filesystem_rw/root/dotfiles
 # TODO try this instead
-INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles
+INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
 INSIDE /etc/skel/dotfiles/provision/ubuntu-13.10-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
@@ -225,7 +228,7 @@ sed -i -re "s/'en': *'us',/'en': 'gb',/g" \
 	build/filesystem_rw/usr/lib/ubiquity/ubiquity/misc.py
 
 rm -rf build/filesystem_rw/tmp/*
-rm     build/filesystem_rw/etc/skel/.bash_history
+rm     build/filesystem_rw/etc/skel/.bash_history || true # don't 'fail'
 
 # RM/UMOUNT STUFF THAT SHOULDN'T BE IN FILESYSTEM IMAGE
 rm build/filesystem_rw/etc/hosts
@@ -259,7 +262,7 @@ rm build/iso_rw/casper/filesystem.squashfs
 # For a highest possible compression at the cost of compression time, you may
 # use the xz method and is better exclude the edit/boot directory altogether:
 #mksquashfs build/filesystem_rw/ build/iso_rw/casper/filesystem.squashfs
-BREAKPOINT
+
 mksquashfs \
 	build/filesystem_rw build/iso_rw/casper/filesystem.squashfs \
 	-comp xz -e build/filesystem_rw/boot -no-progress \
@@ -294,7 +297,7 @@ mkisofs -D -r -V "$NAME" -cache-inodes -J -l \
 # clean, MUST MAKE SURE EVERYTHING IS UNMOUNTED FIRST, PARTICULARLY dev
 # OR PREPARE FOR CORE MELTDOWN
 # now umount (unmount) special filesystems before creation of iso
-CLEANUP_EXIT
+# This is handled by TRAP
 
 # TODO? postprocess to allow simple dd to flash drive to work?
 # isohybrid
