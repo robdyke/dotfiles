@@ -57,8 +57,8 @@ echo
 echo
 
 # check dependencies
-if ! which mkisofs mksquashfs mount.aufs &> /dev/null; then
-	WARNING 'Error! required genisoimage and/or squashfs-tools and/or aufs-tools package(s) are not installed'
+if ! which mkisofs mksquashfs &> /dev/null; then
+	WARNING 'Error! required genisoimage and/or squashfs-tools package(s) are not installed'
 	exit
 fi
 
@@ -87,22 +87,20 @@ function BREAKPOINT {
 # might fail if things are not there yet, but that's fine.
 function CLEANUP_EXIT {
 	STATUS=$?
-	# No more verbosity required
-	set +x
-	# the following commands can fail, that is OK.
+	# the following commands can fail, they must proceed
 	set +e
-	echo '> Cleanup...'
 	# -d always free loop device, prevent leaking them
-	umount -l  build/filesystem_rw/proc
-	umount -l  build/filesystem_rw/sys
-	umount -l  build/filesystem_rw/dev
-	umount -l  build/filesystem_rw/dev/pts
-	umount -l  build/iso_rw
-	umount -ld build/iso_ro
-	umount -l  build/filesystem_rw
-	umount -ld build/filesystem_ro
+	# TODO FIXME WARNING -l may leave a loop dev used
 	sync
-	rm -rf build
+	# order is important: there are dependencies
+	umount -l build/filesystem_rw/proc
+	umount    build/filesystem_rw/sys
+	umount -l build/filesystem_rw/dev
+	umount    build/filesystem_rw/dev/pts
+	umount -d build/iso_ro
+	sync
+	###rm -rf build
+	# TODO: check to see if dev is there before rm -rfing
 	exit $STATUS
 }
 
@@ -131,18 +129,11 @@ mount -o loop,ro "$SOURCE" build/iso_ro
 
 # extract ISO so files are writable
 mkdir build/iso_rw
-#rsync --exclude=/casper/filesystem.squashfs -a build/iso_ro/ build/iso_rw
-# faster: unionfs/aufs: writable branch
-mount -t aufs -o br:build/iso_rw:build/iso_ro none build/iso_rw
+rsync --exclude=/casper/filesystem.squashfs -a build/iso_ro/ build/iso_rw
 
 # Extract the Desktop system
 # Extract the SquashFS filesystem
-#unsquashfs -no-progress -d build/filesystem_rw build/iso_ro/casper/filesystem.squashfs
-# mount + aufs instead, faster.
-mkdir build/filesystem_rw
-mkdir build/filesystem_ro
-mount -t squashfs build/iso_ro/casper/filesystem.squashfs -o ro,loop build/filesystem_ro
-mount -t aufs -o br:build/filesystem_rw:build/filesystem_ro none build/filesystem_rw
+unsquashfs -no-progress -d build/filesystem_rw build/iso_ro/casper/filesystem.squashfs
 
 # Prepare and chroot
 # network connection within chroot
@@ -199,8 +190,6 @@ INSIDE /etc/skel/dotfiles/install.sh
 # Be sure to remove any temporary files which are no longer needed, as space on a
 # CD is limited. A classic example is downloaded package files, which can be
 # cleaned out using:
-#INSIDE aptitude clean
-
 yes | INSIDE apt-get upgrade # just in case it's not already done
 yes | INSIDE apt-get clean
 yes | INSIDE apt-get autoremove
@@ -240,10 +229,11 @@ rm build/filesystem_rw/var/lib/dbus/machine-id
 rm build/filesystem_rw/sbin/initctl
 INSIDE dpkg-divert --rename --remove /sbin/initctl
 
-umount -lf build/filesystem_rw/proc
-umount -lf build/filesystem_rw/sys
-umount -lf build/filesystem_rw/dev
-umount -lf build/filesystem_rw/dev/pts
+umount -l build/filesystem_rw/proc
+umount    build/filesystem_rw/sys
+umount -l build/filesystem_rw/dev
+umount    build/filesystem_rw/dev/pts
+umount    build/iso_ro
 
 # ASSEMBLE ISO
 chmod +w build/iso_rw/casper/filesystem.manifest
@@ -257,12 +247,10 @@ sed -i '/casper/d'   build/iso_rw/casper/filesystem.manifest-desktop
 
 # COMPRESS FILESYSTEM
 # already excluded by rsync (not any more now that aufs is used)
-rm build/iso_rw/casper/filesystem.squashfs
+#rm build/iso_rw/casper/filesystem.squashfs
 
 # For a highest possible compression at the cost of compression time, you may
 # use the xz method and is better exclude the edit/boot directory altogether:
-#mksquashfs build/filesystem_rw/ build/iso_rw/casper/filesystem.squashfs
-
 mksquashfs \
 	build/filesystem_rw build/iso_rw/casper/filesystem.squashfs \
 	-comp xz -e build/filesystem_rw/boot -no-progress \
@@ -271,8 +259,8 @@ mksquashfs \
 # Update the filesystem.size file, which is needed by the installer:
 printf $(du -sx --block-size=1 build/filesystem_rw | cut -f1) > build/iso_rw/casper/filesystem.size
 
-# Set an image name in iso_rw-cd/README.diskdefines
-#vim iso_rw-cd/README.diskdefines
+# Set an image name in extract-cd/README.diskdefines
+#vim extract-cd/README.diskdefines
 
 # recalc hashes
 rm build/iso_rw/md5sum.txt
