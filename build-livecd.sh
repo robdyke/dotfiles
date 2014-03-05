@@ -99,7 +99,7 @@ function CLEANUP_EXIT {
 	umount    build/filesystem_rw/dev/pts
 	umount -d build/iso_ro
 	sync
-	###rm -rf build
+	rm -rf build
 	# TODO: check to see if dev is there before rm -rfing
 	exit $STATUS
 }
