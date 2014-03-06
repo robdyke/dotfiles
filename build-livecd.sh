@@ -11,26 +11,33 @@
 #
 # Based on https://help.ubuntu.com/community/LiveCDCustomization
 
+# Modes of operation:
+#
+# 1. Source and Target non-existent: New source is downloaded, target is compiled
+# 2. Target exists: Target is used as source
+# 3. Just source exists: New target is created
+
+
 # Install pre-requisities
 #sudo apt-get install squashfs-tools genisoimage aufs-tools
 
 
 # TODO: rename all mount points
 
+cd $(dirname $0)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CHANGE=$(git rev-list HEAD --count)
 NAME="darkbuntu-$BRANCH"
 
 UBUNTU_ISO_URL='http://www.ubuntu.com/start-download?distro=desktop&bits=64&release=latest'
 SOURCE='ubuntu-13.10-desktop-amd64.iso'
 TARGET="$NAME.iso"
 
-# TODO: sort out what happens when not run in this dir
-
-# Modes of operation:
-#
-# 1. Source and Target non-existent: New source is downloaded, target is compiled
-# 2. Target exists: Target is used as source
-# 3. Just source exists: New target is created
+if [ $SUDO_USER ]; then
+	LIVECD_USER=$SUDO_USER
+else
+	LIVECD_USER=$BRANCH
+fi
 
 function WARNING {
 	# TODO: check PS1, no escape code if not interactive....?
@@ -153,6 +160,17 @@ mount -t sysfs  none build/filesystem_rw/sys
 mount -t devpts none build/filesystem_rw/dev/pts
 mount --bind /dev/   build/filesystem_rw/dev
 
+# hostname, username:
+# <<- : no leading whitespace
+# EOF in single quotes for no variable substitution
+cat <<- EOF > build/filesystem_rw/etc/casper.conf
+	export USERNAME=$LIVECD_USER
+	export USERFULLNAME="Live session user"
+	export HOST=darkbuntu-$CHANGE
+	export BUILD_SYSTEM="Ubuntu"
+	export FLAVOUR=Ubuntu # required to make above apply
+EOF
+
 # In 9.10, (+?) before installing or upgrading packages you need to run
 # also may as well update/upgrade and add repositories
 dbus-uuidgen | INSIDE tee /var/lib/dbus/machine-id
@@ -205,8 +223,6 @@ cp build/filesystem_rw/boot/initrd.img* build/iso_rw/casper/initrd.lz
 #mv edit/initrd.gz iso_rw-cd/casper/
 # may need to convert to LZ gzip -dc initrd.gz | sudo lzma -7 > initrd.lz
 
-
-#BREAKPOINT
 
 # Utterly stupid hack required to fix keyboard map for installer on livecd.
 # must be done last, otherwise clobbered by ubiquity update.
