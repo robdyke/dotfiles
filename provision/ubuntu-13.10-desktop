@@ -43,6 +43,13 @@ dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
 
 dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Mountains_by_JamesPickles.jpg'
 
+# keyboard map
+cat <<- EOF > build/filesystem_rw/etc/default/keyboard
+	XKBMODEL="pc105"
+	XKBLAYOUT="gb"
+	XKBVARIANT=""
+	XKBOPTIONS=""
+EOF
 
 yes | add-apt-repository ppa:team-xbmc/ppa
 apt-get update
