@@ -40,6 +40,10 @@ rm /usr/share/applications/*ubuntuone*
 # still works in chroot for livecd if HOME is /etc/skel
 dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
 
+
+dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Mountains_by_JamesPickles.jpg'
+
+
 yes | add-apt-repository ppa:team-xbmc/ppa
 apt-get update
 yes | apt-get install xbmc
