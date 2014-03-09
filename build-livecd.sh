@@ -21,9 +21,6 @@
 # Install pre-requisities
 #sudo apt-get install squashfs-tools genisoimage aufs-tools
 
-
-# TODO: rename all mount points
-
 cd $(dirname $0)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CHANGE=$(git rev-list HEAD --count)
@@ -38,6 +35,8 @@ if [ $SUDO_USER ]; then
 else
 	LIVECD_USER=$BRANCH
 fi
+
+WORKDIR=$(mktemp -d --tmpdir=/tmp $NAME.XXXXXXX)
 
 function WARNING {
 	# TODO: check PS1, no escape code if not interactive....?
@@ -78,7 +77,7 @@ fi
 # HACK home dir = /etc/skel? so dbus-launch gsettings works.
 # This will be copied to home dir of new user.
 function INSIDE {
-	chroot build/filesystem_rw \
+	chroot $WORKDIR/filesystem_rw \
 		/usr/bin/env \
 		HOME=/etc/skel \
 		LC_ALL=C \
@@ -100,11 +99,11 @@ function CLEANUP_EXIT {
 	# TODO FIXME WARNING -l may leave a loop dev used
 	sync
 	# order is important: there are dependencies
-	umount -l build/filesystem_rw/proc
-	umount    build/filesystem_rw/sys
-	umount -l build/filesystem_rw/dev
-	umount    build/filesystem_rw/dev/pts
-	umount -d build/iso_ro
+	umount -l $WORKDIR/filesystem_rw/proc
+	umount    $WORKDIR/filesystem_rw/sys
+	umount -l $WORKDIR/filesystem_rw/dev
+	umount    $WORKDIR/filesystem_rw/dev/pts
+	umount -d $WORKDIR/iso_ro
 	sync
 	rm -rf build
 	# TODO: check to see if dev is there before rm -rfing
@@ -131,23 +130,23 @@ set -x
 set -e
 
 
-mkdir build/iso_ro
-mount -o loop,ro "$SOURCE" build/iso_ro
+mkdir $WORKDIR/iso_ro
+mount -o loop,ro "$SOURCE" $WORKDIR/iso_ro
 
 # extract ISO so files are writable
-mkdir build/iso_rw
-rsync --exclude=/casper/filesystem.squashfs -a build/iso_ro/ build/iso_rw
+mkdir $WORKDIR/iso_rw
+rsync --exclude=/casper/filesystem.squashfs -a $WORKDIR/iso_ro/ $WORKDIR/iso_rw
 
 # Extract the Desktop system
 # Extract the SquashFS filesystem
-unsquashfs -no-progress -d build/filesystem_rw build/iso_ro/casper/filesystem.squashfs
+unsquashfs -no-progress -d $WORKDIR/filesystem_rw $WORKDIR/iso_ro/casper/filesystem.squashfs
 
 # Prepare and chroot
 # network connection within chroot
 # Don't replace resolv.conf, overwrite it so that permissions don't change.
 # This way, network manager can still work.
-cat /etc/resolv.conf > build/filesystem_rw/etc/resolv.conf
-cat /etc/hosts       > build/filesystem_rw/etc/hosts
+cat /etc/resolv.conf > $WORKDIR/filesystem_rw/etc/resolv.conf
+cat /etc/hosts       > $WORKDIR/filesystem_rw/etc/hosts
 
 # other filesystems, inside chroot
 # these mount important directories of your host system - if you later decide to
@@ -155,15 +154,15 @@ cat /etc/hosts       > build/filesystem_rw/etc/hosts
 # otherwise your host system will become unusable at least temporarily until
 # reboot)
 # Also rm -rf'ing over binded dev really isn't a good thing...
-mount -t proc   none build/filesystem_rw/proc
-mount -t sysfs  none build/filesystem_rw/sys
-mount -t devpts none build/filesystem_rw/dev/pts
-mount --bind /dev/   build/filesystem_rw/dev
+mount -t proc   none $WORKDIR/filesystem_rw/proc
+mount -t sysfs  none $WORKDIR/filesystem_rw/sys
+mount -t devpts none $WORKDIR/filesystem_rw/dev/pts
+mount --bind /dev/   $WORKDIR/filesystem_rw/dev
 
 # hostname, username:
 # <<- : no leading whitespace
 # EOF in single quotes for no variable substitution
-cat <<- EOF > build/filesystem_rw/etc/casper.conf
+cat <<- EOF > $WORKDIR/filesystem_rw/etc/casper.conf
 	export USERNAME=$LIVECD_USER
 	export USERFULLNAME="Live session user"
 	export HOST=darkbuntu-$CHANGE
@@ -191,12 +190,12 @@ yes | INSIDE apt-get install git
 # and dotfiles
 # naggie/dotfiles does this all
 # installs dotfiles to /etc/skel/ so that live (ubuntu) user will get a
-#cp -a ../dotfiles build/filesystem_rw/root/
-#git clone . build/filesystem_rw/root/dotfiles
+#cp -a ../dotfiles $WORKDIR/filesystem_rw/root/
+#git clone . $WORKDIR/filesystem_rw/root/dotfiles
 # rsync preserves original origin and submodules, but git submodules have
 # absolute references which break if you move the git folder on old versions of
 # git...
-#rsync -r --exclude=build --exclude='*iso' "$DOTFILES_DIR" build/filesystem_rw/root/dotfiles
+#rsync -r --exclude=build --exclude='*iso' "$DOTFILES_DIR" $WORKDIR/filesystem_rw/root/dotfiles
 # TODO try this instead
 INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
 INSIDE /etc/skel/dotfiles/provision/ubuntu-13.10-desktop
@@ -213,9 +212,9 @@ yes | INSIDE apt-get clean
 yes | INSIDE apt-get autoremove
 
 # New kernel or initrd?
-#cp build/filesystem_rw/boot/vmlinuz-2.6.15-26-k7    build/iso_rw/casper/vmlinuz
+#cp $WORKDIR/filesystem_rw/boot/vmlinuz-2.6.15-26-k7    $WORKDIR/iso_rw/casper/vmlinuz
 # new initrd generated when Broadcom sta drivers were installed.
-cp build/filesystem_rw/boot/initrd.img* build/iso_rw/casper/initrd.lz
+cp $WORKDIR/filesystem_rw/boot/initrd.img* $WORKDIR/iso_rw/casper/initrd.lz
 # After you've modified the kernel, init scripts or added new kernel
 # modules, you need to rebuild the initrd.gz file and substitute it into
 # the casper directory.
@@ -230,60 +229,60 @@ cp build/filesystem_rw/boot/initrd.img* build/iso_rw/casper/initrd.lz
 # X/console keyboard main config file. `setxkbmap gb` would also work in
 # session.
 sed -i -re "s/'en': *'us',/'en': 'gb',/g" \
-	build/filesystem_rw/usr/lib/ubiquity/ubiquity/misc.py
+	$WORKDIR/filesystem_rw/usr/lib/ubiquity/ubiquity/misc.py
 
-rm -rf build/filesystem_rw/tmp/*
-rm     build/filesystem_rw/etc/skel/.bash_history || true # don't 'fail'
+rm -rf $WORKDIR/filesystem_rw/tmp/*
+rm     $WORKDIR/filesystem_rw/etc/skel/.bash_history || true # don't 'fail'
 
 # RM/UMOUNT STUFF THAT SHOULDN'T BE IN FILESYSTEM IMAGE
-rm build/filesystem_rw/etc/hosts
+rm $WORKDIR/filesystem_rw/etc/hosts
 # overwrite, preserve permissions, see above.
-echo > build/filesystem_rw/etc/resolv.conf
+echo > $WORKDIR/filesystem_rw/etc/resolv.conf
 
 # Clean after installing software
-rm build/filesystem_rw/var/lib/dbus/machine-id
-rm build/filesystem_rw/sbin/initctl
+rm $WORKDIR/filesystem_rw/var/lib/dbus/machine-id
+rm $WORKDIR/filesystem_rw/sbin/initctl
 INSIDE dpkg-divert --rename --remove /sbin/initctl
 
-umount -l build/filesystem_rw/proc
-umount    build/filesystem_rw/sys
-umount -l build/filesystem_rw/dev
-umount    build/filesystem_rw/dev/pts
-umount    build/iso_ro
+umount -l $WORKDIR/filesystem_rw/proc
+umount    $WORKDIR/filesystem_rw/sys
+umount -l $WORKDIR/filesystem_rw/dev
+umount    $WORKDIR/filesystem_rw/dev/pts
+umount    $WORKDIR/iso_ro
 
 # ASSEMBLE ISO
-chmod +w build/iso_rw/casper/filesystem.manifest
+chmod +w $WORKDIR/iso_rw/casper/filesystem.manifest
 
-INSIDE dpkg-query -W --showformat='${Package} ${Version}\n' > build/iso_rw/casper/filesystem.manifest
+INSIDE dpkg-query -W --showformat='${Package} ${Version}\n' > $WORKDIR/iso_rw/casper/filesystem.manifest
 
-cp build/iso_rw/casper/filesystem.manifest build/iso_rw/casper/filesystem.manifest-desktop
+cp $WORKDIR/iso_rw/casper/filesystem.manifest $WORKDIR/iso_rw/casper/filesystem.manifest-desktop
 
-sed -i '/ubiquity/d' build/iso_rw/casper/filesystem.manifest-desktop
-sed -i '/casper/d'   build/iso_rw/casper/filesystem.manifest-desktop
+sed -i '/ubiquity/d' $WORKDIR/iso_rw/casper/filesystem.manifest-desktop
+sed -i '/casper/d'   $WORKDIR/iso_rw/casper/filesystem.manifest-desktop
 
 # COMPRESS FILESYSTEM
 # already excluded by rsync (not any more now that aufs is used)
-#rm build/iso_rw/casper/filesystem.squashfs
+#rm $WORKDIR/iso_rw/casper/filesystem.squashfs
 
 # For a highest possible compression at the cost of compression time, you may
 # use the xz method and is better exclude the edit/boot directory altogether:
 mksquashfs \
-	build/filesystem_rw build/iso_rw/casper/filesystem.squashfs \
-	-comp xz -e build/filesystem_rw/boot -no-progress \
+	$WORKDIR/filesystem_rw $WORKDIR/iso_rw/casper/filesystem.squashfs \
+	-comp xz -e $WORKDIR/filesystem_rw/boot -no-progress \
 	>/dev/null # buffering progress indicator might be a bottleneck... flag does not work
 
 # Update the filesystem.size file, which is needed by the installer:
-printf $(du -sx --block-size=1 build/filesystem_rw | cut -f1) > build/iso_rw/casper/filesystem.size
+printf $(du -sx --block-size=1 $WORKDIR/filesystem_rw | cut -f1) > $WORKDIR/iso_rw/casper/filesystem.size
 
 # Set an image name in extract-cd/README.diskdefines
 #vim extract-cd/README.diskdefines
 
 # recalc hashes
-rm build/iso_rw/md5sum.txt
+rm $WORKDIR/iso_rw/md5sum.txt
 # subshell, no chdir persistence
 echo 'Calculating hashes...'
 (
-	cd build/iso_rw
+	cd $WORKDIR/iso_rw
 	find -type f -print0 \
 		| xargs -0 md5sum \
 		| grep -v isolinux/boot.cat \
@@ -296,7 +295,7 @@ mkisofs -D -r -V "$NAME" -cache-inodes -J -l \
 	-c isolinux/boot.cat \
 	-no-emul-boot -boot-load-size 4 \
 	-boot-info-table \
-	-o "$TARGET" build/iso_rw/
+	-o "$TARGET" $WORKDIR/iso_rw/
 
 # clean, MUST MAKE SURE EVERYTHING IS UNMOUNTED FIRST, PARTICULARLY dev
 # OR PREPARE FOR CORE MELTDOWN
@@ -335,4 +334,3 @@ mkisofs -D -r -V "$NAME" -cache-inodes -J -l \
 # Then connect using a vncviewer. Performance is pretty much as if it was
 # local due to kvm and vnc. The letdown is really the fancy effects making
 # it slow.
-# TODO: exit on error (with appropriate trap)
