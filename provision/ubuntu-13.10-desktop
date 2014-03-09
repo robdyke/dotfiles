@@ -44,7 +44,7 @@ dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
 dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Mountains_by_JamesPickles.jpg'
 
 # keyboard map
-cat <<- EOF > build/filesystem_rw/etc/default/keyboard
+cat <<- EOF > /etc/default/keyboard
 	XKBMODEL="pc105"
 	XKBLAYOUT="gb"
 	XKBVARIANT=""
