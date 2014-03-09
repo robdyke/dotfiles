@@ -30,6 +30,7 @@ yes | apt-get remove --purge firefox 'libreoffice*' 'ubuntuone-*'
 # removed advert apps
 rm /usr/share/applications/*amazon*
 rm /usr/share/applications/*ubuntuone*
+rm /usr/share/applications/UbuntuOneMusiconeubuntucom.desktop
 
 # remove amazon searching...
 #dbus-launch gsettings set com.canonical.Unity.Lenses disabled-scopes "[
