@@ -14,7 +14,8 @@ yes | apt-get upgrade
 # textmode
 yes | apt-get install picocom vim git ssh figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
-	squashfs-tools aufs-tools tmux fish nodejs
+	squashfs-tools aufs-tools tmux fish nodejs sox socat netcat \
+	nmap p7zip-full npm
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l

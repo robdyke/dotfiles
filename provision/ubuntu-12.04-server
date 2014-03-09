@@ -13,7 +13,7 @@ yes | apt-get upgrade
 # textmode
 yes | apt-get install picocom vim git ssh figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
-	squashfs-tools aufs-tools
+	squashfs-tools aufs-tools sox socat netcat nmap p7zip-full
 
 # apt-add-repository
 yes | apt-get install python-software-properties
