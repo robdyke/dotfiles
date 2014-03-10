@@ -105,17 +105,10 @@ function CLEANUP_EXIT {
 	umount    $WORKDIR/filesystem_rw/dev/pts
 	umount -d $WORKDIR/iso_ro
 	sync
-	rm -rf build
+	rm -rf $WORKDIR
 	# TODO: check to see if dev is there before rm -rfing
 	exit $STATUS
 }
-
-if [ -d build ]; then
-	WARNING 'Stale build directory found. Refusing to build.'
-	exit
-else
-	mkdir build
-fi
 
 # always clean up on CTRL+C (and anything, now)
 #trap CLEANUP_EXIT SIGINT
@@ -183,21 +176,29 @@ INSIDE ln -s /lib/init/upstart-job /etc/init.d/whoopsie || true # required, othe
 yes | INSIDE apt-get update
 yes | INSIDE apt-get install git
 
+# DOTFILES AND PROVISION
+# make sure submodules are here
+git submodule --quiet init
+git submodule --quiet update
 
-#BREAKPOINT
+if ! grep -q ../../../../ home/.vim/bundle/supertab/.git; then
+	WARNING 'Install a recent git version and re-clone this repository.'
+	WARNING 'Submodule references are absolute, so the repository cannot be'
+	WARNING 'moved into the chroot. See'
+	WARNING 'http://stackoverflow.com/questions/17568543/git-add-doesnt-work/17747571'
+	exit
+fi
 
-# install packages
-# and dotfiles
-# naggie/dotfiles does this all
 # installs dotfiles to /etc/skel/ so that live (ubuntu) user will get a
 #cp -a ../dotfiles $WORKDIR/filesystem_rw/root/
 #git clone . $WORKDIR/filesystem_rw/root/dotfiles
 # rsync preserves original origin and submodules, but git submodules have
 # absolute references which break if you move the git folder on old versions of
 # git...
-#rsync -r --exclude=build --exclude='*iso' "$DOTFILES_DIR" $WORKDIR/filesystem_rw/root/dotfiles
+rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/skel/dotfiles/
+
 # TODO try this instead
-INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
+#INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
 INSIDE /etc/skel/dotfiles/provision/ubuntu-13.10-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
