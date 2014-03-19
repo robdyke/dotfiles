@@ -22,6 +22,7 @@ active = [
 	'git@github.com:naggie/dscrates.git',
 	'git@github.com:naggie/megafilter.git',
 	'git@github.com:naggie/speakers.git',
+	'git@github.com:naggie/DSPA.git',
 	'naggie@chell.darksky.io:rcdos.git',
 ]
 
@@ -30,7 +31,6 @@ inactive = [
 	'git@github.com:naggie/nnplus.git',
 	'git@github.com:naggie/ninja-motor-controller.git',
 	'git@github.com:naggie/dschat.git',
-	'git@github.com:naggie/DSPA.git',
 	'git@github.com:naggie/averclock.git',
 	'git@github.com:naggie/vosbox.git',
 	'git@github.com:naggie/MLDASH.git',
