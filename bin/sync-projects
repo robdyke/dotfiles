@@ -4,10 +4,11 @@
 #
 #     curl https://github.com/naggie/dotfiles/raw/master/bin/sync-projects | python
 
-
+# specify project name on command line to sync only one project
 from subprocess import call
 import os
 import re
+import sys
 
 # clone/pull all my repositories.
 # TODO: automatically enumerate github
@@ -44,7 +45,12 @@ def step(text):
 def sync(urls):
 	origin = os.getcwd()
 	for url in urls:
-		dir = re.search(r"([\.\-0-9a-zA-Z]+)\.git$",url).group(1)
+		dir = re.search(r"([\.\-0-9a-zA-Z]+)\.git$",url).group(1).lower()
+
+                # one project only
+                if len(sys.argv) == 2 and sys.argv[1].lower().find(dir) == -1:
+                    continue
+
 		if os.path.exists('%s/.git' % dir):
 			step('FETCH %s' % dir)
 			os.chdir(dir)
@@ -68,6 +74,10 @@ if not os.path.exists('INACTIVE'):
 os.chdir('INACTIVE')
 sync(inactive)
 os.chdir('..')
+
+# specific project was specified
+if len(sys.argv) == 2:
+    sys.exit(0)
 
 # install latest dotfiles
 step('INST dotfiles')
