@@ -125,6 +125,9 @@ function fish_set_tmux_title --description "Sets tmux pane title to output of fi
 end
 
 function fish_prompt --description 'Write out the prompt'
+	# test status of last command without affecting it by using 'or' which tests and forwards
+	or printf "\n\33[31mExited with status %s\33[m" $status
+
 	printf "\n\33[32m%s@%s \33[1;34m%s\33[0;33m%s\33[m\n\$ " \
 		$USER $HOSTNAME $PWD (__fish_git_prompt)
 end

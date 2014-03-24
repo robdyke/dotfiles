@@ -129,7 +129,13 @@ function __git_ps1 {
 	exit
 }
 
-PS1="\n\[\e[0;32m\]\u@\H \[\e[1;34m\]\$PWD\[\e[0;33m\]\$(__git_ps1)\[\e[m\]\n\$ "
+function __exit_warn {
+	# test status of last command without affecting it, by running it in subshell
+	( test $? -eq 0 ) || \
+		printf "\n\33[31mExited with status %s\33[m" $?
+}
+
+PS1="\$(__exit_warn)\n\[\e[0;32m\]\u@\H \[\e[1;34m\]\$PWD\[\e[0;33m\]\$(__git_ps1)\[\e[m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases
