@@ -21,11 +21,25 @@ sudo update-locale LANG=en_GB.utf8 LANGUAGE=en_GB.utf8 LC_ALL=en_GB.utf8
 # textmode
 yes | apt-get install picocom vim vim-gtk git ssh tmux figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
-	squashfs-tools aufs-tools fish sox socat netcat nmap p7zip-full npm
+	squashfs-tools aufs-tools fish sox socat netcat nmap p7zip-full npm \
+	nodejs
 
 # gui
 yes | apt-get install chromium-browser vlc
 yes | apt-get remove --purge firefox 'libreoffice*' 'ubuntuone-*'
+
+# https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
+# There is a naming conflict with the node package (Amateur Packet Radio Node
+# Program), and the nodejs binary has been renamed from node to nodejs. You'll
+# need to symlink /usr/bin/node to /usr/bin/nodejs or you could uninstall the
+# Amateur Packet Radio Node Program to avoid that conflict.
+yes | apt-get remove node
+ln -s /usr/bin/nodejs /usr/bin/node
+
+# Make node processes able to listen on port 80
+# http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
+yes | apt-get install libcap2-bin
+setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
 
 # removed advert apps
 rm /usr/share/applications/*amazon*
