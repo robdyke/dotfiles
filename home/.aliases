@@ -1,9 +1,8 @@
-alias la='ls -al'
-alias cd..='cd ..'
+# lazy chdir
 alias ..='cd ..'
 alias ...='cd ../..'
 
-# package managers
+# package manager commands
 alias sagi='yes | sudo apt-get install'
 alias bi='brew install'
 alias snig='sudo npm install -g'
@@ -16,18 +15,21 @@ alias v=vim
 alias cim=vim
 alias nom=npm
 alias gi=git
+alias cd..='cd ..'
 
 # colours and ANSI lines
 alias tree="tree -CA"
 
-# stop vim taking ages, so it doesn't look for X server
+# stop vim taking ages looking for X server
 # Also, tabs by default. -O and -o will override, don't worry.
 alias vim='vim -X -p'
 
 # list by creation date (I think)
 alias lr='ls -latr'
+# list all
+alias la='ls -al'
 
-# Git
+# Common git commands
 alias g=git
 alias s='git status'
 alias d='git diff'
