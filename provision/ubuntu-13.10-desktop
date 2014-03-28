@@ -26,7 +26,7 @@ yes | apt-get install picocom vim vim-gtk git ssh tmux figlet build-essential \
 
 # gui
 yes | apt-get install chromium-browser vlc
-yes | apt-get remove --purge firefox 'libreoffice*' 'ubuntuone-*'
+yes | apt-get remove --purge firefox 'libreoffice*' 'ubuntuone-*' ssh-askpass-gnome
 
 # https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 # There is a naming conflict with the node package (Amateur Packet Radio Node
