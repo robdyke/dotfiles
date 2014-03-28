@@ -34,7 +34,8 @@ yes | apt-get install tmux fish nodejs git
 # need to symlink /usr/bin/node to /usr/bin/nodejs or you could uninstall the
 # Amateur Packet Radio Node Program to avoid that conflict.
 yes | apt-get remove node
-ln -s /usr/bin/nodejs /usr/bin/node
+#ln -s /usr/bin/nodejs /usr/bin/node
+dpkg-divert --local --divert /usr/bin/node --rename --add /usr/bin/nodejs
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
