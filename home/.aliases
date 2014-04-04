@@ -48,3 +48,10 @@ alias wget='wget --content-disposition'
 
 # Agent forwarding -- only this seems to work
 alias ssh='ssh -A'
+
+# A few more useful commands that don't need aliases. This file is a good
+# place.
+#du -sh # find recursive, human size of given files/directories
+#file   # identify a filetype using fingerprinting
+#ack    # a good , faster, alternative to find | xargs grep -l
+
