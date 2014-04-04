@@ -8,11 +8,11 @@ alias bi='brew install'
 alias snig='sudo npm install -g'
 
 # typo fixes
-alias c=cd
 alias sl=ls
-alias l=ls
-alias v=vim
+alias c=cd
+alias xs=cd
 alias cim=vim
+alias bim=vim
 alias nom=npm
 alias gi=git
 alias cd..='cd ..'
@@ -29,12 +29,14 @@ alias lr='ls -latr'
 # list all
 alias la='ls -al'
 
-# Common git commands
+# Common shortcuts
 alias g=git
 alias s='git status'
 alias d='git diff'
 alias o='git log'
 alias b='git branch -a'
+alias l=ls
+alias v=vim
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
