@@ -7,16 +7,6 @@ alias sagi='yes | sudo apt-get install'
 alias bi='brew install'
 alias snig='sudo npm install -g'
 
-# typo fixes
-alias c=cd
-alias sl=ls
-alias l=ls
-alias v=vim
-alias cim=vim
-alias nom=npm
-alias gi=git
-alias cd..='cd ..'
-
 # colours and ANSI lines
 alias tree="tree -CA"
 
@@ -29,12 +19,15 @@ alias lr='ls -latr'
 # list all
 alias la='ls -al'
 
-# Common git commands
+# Common shortcuts
 alias g=git
 alias s='git status'
 alias d='git diff'
 alias o='git log'
 alias b='git branch -a'
+alias l=ls
+alias v=vim
+alias vo='vim -O'
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
@@ -55,3 +48,17 @@ alias ssh='ssh -A'
 #file   # identify a filetype using fingerprinting
 #ack    # a good , faster, alternative to find | xargs grep -l
 
+# typo fixes
+alias sl=ls
+alias c=cd
+alias xs=cd
+alias cim=vim
+alias bim=vim
+alias nom=npm
+alias gi=git
+alias cd..='cd ..'
+alias lsd=ls
+
+# typo fixes (typofix.sh guesses)
+alias rfind=find
+alias lack=ack
