@@ -182,3 +182,5 @@ noremap! <C-e> <End>
 
 " Press F2 to magically fold everything
 map <F2> :set foldmethod=indent<CR><CR>
+
+command Retab normal! gg=G

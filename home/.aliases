@@ -1,8 +1,11 @@
-alias sagi='yes | sudo apt-get install'
-alias la='ls -al'
-alias cd..='cd ..'
+# lazy chdir
 alias ..='cd ..'
 alias ...='cd ../..'
+
+# package manager commands
+alias sagi='yes | sudo apt-get install'
+alias bi='brew install'
+alias snig='sudo npm install -g'
 
 # typo fixes
 alias c=cd
@@ -12,18 +15,21 @@ alias v=vim
 alias cim=vim
 alias nom=npm
 alias gi=git
+alias cd..='cd ..'
 
 # colours and ANSI lines
 alias tree="tree -CA"
 
-# stop vim taking ages, so it doesn't look for X server
+# stop vim taking ages looking for X server
 # Also, tabs by default. -O and -o will override, don't worry.
 alias vim='vim -X -p'
 
 # list by creation date (I think)
 alias lr='ls -latr'
+# list all
+alias la='ls -al'
 
-# Git
+# Common git commands
 alias g=git
 alias s='git status'
 alias d='git diff'
@@ -39,3 +45,6 @@ alias ls='ls --color=auto'
 # don't use URL to create filename (do I really want a file called
 # unetbootin-source-494.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Funetbootin%2Ffiles%2FUNetbootin%2F494%2F&ts=1391695063&use_mirror=heanet?)
 alias wget='wget --content-disposition'
+
+# Agent forwarding -- only this seems to work
+alias ssh='ssh -A'

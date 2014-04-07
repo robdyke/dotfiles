@@ -12,7 +12,8 @@ yes | apt-get upgrade
 
 # textmode
 yes | apt-get install picocom vim git ssh figlet build-essential \
-	bash-completion keychain mcabber htop curl tree
+	bash-completion keychain mcabber htop curl tree genisoimage \
+	squashfs-tools aufs-tools sox socat netcat nmap p7zip-full
 
 # apt-add-repository
 yes | apt-get install python-software-properties
@@ -23,14 +24,24 @@ yes | apt-get install python-software-properties
 apt-add-repository --yes ppa:pi-rho/dev
 apt-add-repository --yes ppa:fish-shell/release-2
 add-apt-repository --yes ppa:chris-lea/node.js
+add-apt-repository --yes ppa:git-core/ppa
 apt-get update
-yes | apt-get install tmux fish nodejs
+yes | apt-get install tmux fish nodejs git
 
+# https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
+# There is a naming conflict with the node package (Amateur Packet Radio Node
+# Program), and the nodejs binary has been renamed from node to nodejs. You'll
+# need to symlink /usr/bin/node to /usr/bin/nodejs or you could uninstall the
+# Amateur Packet Radio Node Program to avoid that conflict.
+yes | apt-get remove node
+dpkg-divert --local --divert /usr/bin/node --rename --add /usr/bin/nodejs
+# fix npm
+ln -s /usr/bin/node /usr/bin/nodejs
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
-apt-get install libcap2-bin
-setcap 'cap_net_bind_service=+ep' /usr/local/bin/node
+yes | apt-get install libcap2-bin
+setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
 
-# default, chsh -s /usr/bin/fish for current user
+# default shell (chsh -s /usr/bin/fish for current user)
 useradd -D -s /usr/bin/fish

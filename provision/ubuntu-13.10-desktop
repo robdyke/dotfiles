@@ -20,11 +20,53 @@ sudo update-locale LANG=en_GB.utf8 LANGUAGE=en_GB.utf8 LC_ALL=en_GB.utf8
 
 # textmode
 yes | apt-get install picocom vim vim-gtk git ssh tmux figlet build-essential \
-	bash-completion keychain htop fish curl tree
+	bash-completion keychain mcabber htop curl tree genisoimage \
+	squashfs-tools aufs-tools fish sox socat netcat nmap p7zip-full npm \
+	nodejs
 
 # gui
 yes | apt-get install chromium-browser vlc
-yes | apt-get remove --purge firefox whoopsie
+yes | apt-get remove --purge firefox 'libreoffice*' 'ubuntuone-*' ssh-askpass-gnome
+
+# https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
+# There is a naming conflict with the node package (Amateur Packet Radio Node
+# Program), and the nodejs binary has been renamed from node to nodejs. You'll
+# need to symlink /usr/bin/node to /usr/bin/nodejs or you could uninstall the
+# Amateur Packet Radio Node Program to avoid that conflict.
+yes | apt-get remove node
+dpkg-divert --local --divert /usr/bin/node --rename --add /usr/bin/nodejs
+# fix npm
+ln -s /usr/bin/node /usr/bin/nodejs
+
+# Make node processes able to listen on port 80
+# http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
+yes | apt-get install libcap2-bin
+setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
+
+# removed advert apps
+rm /usr/share/applications/*amazon*
+rm /usr/share/applications/*ubuntuone*
+rm /usr/share/applications/UbuntuOneMusiconeubuntucom.desktop
+
+# remove amazon searching...
+#dbus-launch gsettings set com.canonical.Unity.Lenses disabled-scopes "[
+#	'more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope',
+#	'more_suggestions-populartracks.scope', 'music-musicstore.scope',
+#	'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope',
+#	'more_suggestions-skimlinks.scope']"
+# still works in chroot for livecd if HOME is /etc/skel
+dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
+
+
+dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Mountains_by_JamesPickles.jpg'
+
+# keyboard map
+cat <<- EOF > /etc/default/keyboard
+	XKBMODEL="pc105"
+	XKBLAYOUT="gb"
+	XKBVARIANT=""
+	XKBOPTIONS=""
+EOF
 
 yes | add-apt-repository ppa:team-xbmc/ppa
 apt-get update
@@ -43,7 +85,6 @@ yes | apt-get --reinstall install bcmwl-kernel-source
 # fish default shell
 useradd -D -s /usr/bin/fish
 
-yes | apt-get remove --purge 'libreoffice*'
 yes | apt-get upgrade
 
 # orphaned packages
