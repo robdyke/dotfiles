@@ -7,16 +7,6 @@ alias sagi='yes | sudo apt-get install'
 alias bi='brew install'
 alias snig='sudo npm install -g'
 
-# typo fixes
-alias sl=ls
-alias c=cd
-alias xs=cd
-alias cim=vim
-alias bim=vim
-alias nom=npm
-alias gi=git
-alias cd..='cd ..'
-
 # colours and ANSI lines
 alias tree="tree -CA"
 
@@ -57,3 +47,17 @@ alias ssh='ssh -A'
 #file   # identify a filetype using fingerprinting
 #ack    # a good , faster, alternative to find | xargs grep -l
 
+# typo fixes
+alias sl=ls
+alias c=cd
+alias xs=cd
+alias cim=vim
+alias bim=vim
+alias nom=npm
+alias gi=git
+alias cd..='cd ..'
+alias lsd=ls
+
+# typo fixes (typofix.sh guesses)
+alias rfind=find
+alias lack=ack

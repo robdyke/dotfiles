@@ -91,6 +91,7 @@ if (&t_Co == 256)
 endif
 
 " anti typo (command aliases)
+" source: .viminfo
 ca WQ wq
 ca Wq wq
 ca wQ wq
@@ -99,6 +100,11 @@ ca Wqa wqa
 ca W w
 ca Q q
 ca q1 q!
+ca 'q   q
+ca q;   q
+ca Wqaz wqa
+ca Wqqa wqa
+ca qq   q
 
 " <tab> to toggle nerdtree, persistent across all tabs with vim-nerdtree-tabs!
 " or, choose standard NERDtree
