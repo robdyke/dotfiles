@@ -101,4 +101,4 @@ yes | apt-get autoremove
 useradd -D -s /usr/bin/fish
 
 # current sudo user shell
-chsh -s /usr/bin/fish $SUDO_USER
+chsh -s /usr/bin/fish $SUDO_USER || true
