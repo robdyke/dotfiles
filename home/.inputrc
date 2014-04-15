@@ -40,9 +40,16 @@ set bell-style none
 "\e\e[C": forward-word
 "\e\e[D": backward-word
 
+# no control characters on screen
+set echo-control-characters off
+
+# F12: fg
 # job control: pause/break is to background a job, make F12 restore it to the
 # foreground.
-"\e[24~: "fg\n"
-
-# no control characterd on scree
-set echo-control-characters off
+"\e[24~":"\C-k \C-u fg\n"
+# \C-k \C-u = clear line
+# Find escape code in bash with CTRL+V <key>
+# Then replace ^[ with \e
+# You can also create a key binding that will execute something without
+# disturbing the current command line.  bind -x '"\eW":"who"'
+# http://stackoverflow.com/questions/4200800/in-bash-how-do-i-bind-a-function-key-to-a-command
