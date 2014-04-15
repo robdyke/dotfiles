@@ -102,7 +102,7 @@ echo $VERSION > ~/.naggie-dotfiles-version
 
 # in case someone forgot...
 if [ $BRANCH == 'master' ]; then
-	warning "Generic version installed from master branch. Make your own branch for user-specific things."
-elif [ $BRANCH != $USER ]; then
-	warning "Branch does not match user. Sure about this? The convention is to have a custom branch matching your username."
+	warning "Generic version installed from master branch. Make your own branch for user/host-specific things."
+elif [[ $BRANCH =~ "*$USER*" ]]; then
+	warning "Branch does not contain user. Sure about this? The convention is to have a custom branch name containing your username."
 fi

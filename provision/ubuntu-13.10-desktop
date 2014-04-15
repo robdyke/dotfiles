@@ -49,16 +49,23 @@ rm /usr/share/applications/*ubuntuone*
 rm /usr/share/applications/UbuntuOneMusiconeubuntucom.desktop
 
 # remove amazon searching...
-#dbus-launch gsettings set com.canonical.Unity.Lenses disabled-scopes "[
-#	'more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope',
-#	'more_suggestions-populartracks.scope', 'music-musicstore.scope',
-#	'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope',
-#	'more_suggestions-skimlinks.scope']"
 # still works in chroot for livecd if HOME is /etc/skel
 dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
-
-
+# background
 dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Mountains_by_JamesPickles.jpg'
+
+# run  gsettings list-recursively > gsettings.txt before and after making changes with gui, then diff. Results:
+dbus-launch gsettings set org.gnome.desktop.screensaver lock-enabled false
+dbus-launch gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
+dbus-launch gsettings set org.gnome.desktop.privacy remember-recent-files false
+# sticky mouse between monitors
+dbus-launch gsettings set org.gnome.desktop.session idle-delay uint32 0
+com.canonical.Unity.Launcher favorites "['application://nautilus.desktop',
+	'application://gnome-control-center.desktop', 'unity://running-apps',
+	'application://gnome-system-monitor.desktop', 'application://chromium-browser.desktop',
+	'application://debian-xterm.desktop', 'unity://expo-icon', 'unity://devices',
+	'application://xbmc.desktop']"
+
 
 # keyboard map
 cat <<- EOF > /etc/default/keyboard
@@ -89,3 +96,9 @@ yes | apt-get upgrade
 
 # orphaned packages
 yes | apt-get autoremove
+
+# default shell (chsh -s /usr/bin/fish for current user)
+useradd -D -s /usr/bin/fish
+
+# current sudo user shell
+chsh -s /usr/bin/fish $SUDO_USER
