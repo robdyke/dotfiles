@@ -96,3 +96,9 @@ yes | apt-get upgrade
 
 # orphaned packages
 yes | apt-get autoremove
+
+# default shell (chsh -s /usr/bin/fish for current user)
+useradd -D -s /usr/bin/fish
+
+# current sudo user shell
+chsh -s /usr/bin/fish $SUDO_USER
