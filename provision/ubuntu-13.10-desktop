@@ -60,7 +60,7 @@ dbus-launch gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend f
 dbus-launch gsettings set org.gnome.desktop.privacy remember-recent-files false
 # sticky mouse between monitors
 dbus-launch gsettings set org.gnome.desktop.session idle-delay uint32 0
-com.canonical.Unity.Launcher favorites "['application://nautilus.desktop',
+dbus-launch gsettings set com.canonical.Unity.Launcher favorites "['application://nautilus.desktop',
 	'application://gnome-control-center.desktop', 'unity://running-apps',
 	'application://gnome-system-monitor.desktop', 'application://chromium-browser.desktop',
 	'application://debian-xterm.desktop', 'unity://expo-icon', 'unity://devices',
