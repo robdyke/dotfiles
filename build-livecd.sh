@@ -266,10 +266,10 @@ sed -i '/casper/d'   $WORKDIR/iso_rw/casper/filesystem.manifest-desktop
 #rm $WORKDIR/iso_rw/casper/filesystem.squashfs
 
 # For a highest possible compression at the cost of compression time, you may
-# use the xz method and is better exclude the edit/boot directory altogether:
+# use the xz method. DO NOT REMOVE /boot/ as that is needed by the installer, Ubiquity.
 mksquashfs \
 	$WORKDIR/filesystem_rw $WORKDIR/iso_rw/casper/filesystem.squashfs \
-	-comp xz -e $WORKDIR/filesystem_rw/boot -no-progress \
+	-comp xz -no-progress \
 	>/dev/null # buffering progress indicator might be a bottleneck... flag does not work
 
 # Update the filesystem.size file, which is needed by the installer:
