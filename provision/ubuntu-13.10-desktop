@@ -66,6 +66,8 @@ dbus-launch gsettings set com.canonical.Unity.Launcher favorites "['application:
 	'application://debian-xterm.desktop', 'unity://expo-icon', 'unity://devices',
 	'application://xbmc.desktop']"
 
+# xterm maximized always
+sed -ir 's/Exec=xterm$/Exec=xterm -maximized/g' /usr/share/applications/debian-xterm.desktop
 
 # keyboard map
 cat <<- EOF > /etc/default/keyboard
