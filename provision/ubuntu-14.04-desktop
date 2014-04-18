@@ -52,7 +52,7 @@ rm /usr/share/applications/UbuntuOneMusiconeubuntucom.desktop
 # still works in chroot for livecd if HOME is /etc/skel
 dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
 # background
-dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Mountains_by_JamesPickles.jpg'
+dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Forever_by_Shady_S.jpg'
 
 # run  gsettings list-recursively > gsettings.txt before and after making changes with gui, then diff. Results:
 dbus-launch gsettings set org.gnome.desktop.screensaver lock-enabled false
