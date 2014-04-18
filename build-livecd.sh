@@ -27,7 +27,8 @@ CHANGE=$(git rev-list HEAD --count)
 NAME="darkbuntu-$BRANCH"
 
 UBUNTU_ISO_URL='http://www.ubuntu.com/start-download?distro=desktop&bits=64&release=latest'
-SOURCE='ubuntu-13.10-desktop-amd64.iso'
+UBUNTU_ISO_URL='http://releases.ubuntu.com/14.04/ubuntu-14.04-desktop-amd64.iso'
+SOURCE='ubuntu-14.04-desktop-amd64.iso'
 TARGET="$NAME.iso"
 
 if [ $SUDO_USER ]; then
@@ -199,7 +200,7 @@ rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/
 
 # TODO try this instead
 #INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
-INSIDE /etc/skel/dotfiles/provision/ubuntu-13.10-desktop
+INSIDE /etc/skel/dotfiles/provision/ubuntu-14.04-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
