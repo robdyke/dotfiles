@@ -8,8 +8,6 @@ set laststatus=2
 syntax on
 filetype plugin indent on
 
-"let g:Powerline_symbols = 'fancy'
-
 set backspace=indent,eol,start
 " make arrow keys wrap lines and whitespace properly
 set whichwrap=b,s,<,>,[,]
@@ -190,3 +188,10 @@ noremap! <C-e> <End>
 map <F2> :set foldmethod=indent<CR><CR>
 
 command Retab normal! gg=G
+
+" airline is lighter than powerline.
+" Old powerline colours are nice.
+let g:airline_theme='powerlineish'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
