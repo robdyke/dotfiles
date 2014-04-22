@@ -48,6 +48,8 @@ echo 'Synchronising submodules...'
 git submodule --quiet init || exit 1
 git submodule --quiet update || exit 2
 
+# remove remains of old submodules
+rm -rf home/.vim/bundle/powerline 2>/dev/null
 
 echo 'Clobbering...'
 # clobber vim and fish config (because there are dirs)
