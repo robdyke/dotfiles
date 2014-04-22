@@ -1,6 +1,3 @@
-[submodule "home/.vim/bundle/powerline"]
-	path = home/.vim/bundle/powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
 [submodule "home/.vim/bundle/solarized"]
 	path = home/.vim/bundle/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
@@ -28,3 +25,6 @@
 [submodule "home/.vim/bundle/javascript-syntax"]
 	path = home/.vim/bundle/javascript-syntax
 	url = git://github.com/jelera/vim-javascript-syntax.git
+[submodule "home/.vim/bundle/airline"]
+	path = home/.vim/bundle/airline
+	url = git://github.com/bling/vim-airline.git
