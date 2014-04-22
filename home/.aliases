@@ -58,6 +58,7 @@ alias nom=npm
 alias gi=git
 alias cd..='cd ..'
 alias lsd=ls
+alias grepo=grep
 
 # typo fixes (typofix.sh guesses)
 alias rfind=find
