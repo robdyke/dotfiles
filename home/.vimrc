@@ -68,10 +68,12 @@ vnoremap > >gv
 nnoremap ; :
 
 " if you want to force yourself to use hjkl, uncomment this:
-"map <up> <nop>
-"map <down> <nop>
-"map <left> <nop>
-"map <right> <nop>
+" Get off my lawn
+" https://github.com/thoughtbot/dotfiles/blob/master/vimrc
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
 
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
 
@@ -97,15 +99,17 @@ ca WQ wq
 ca Wq wq
 ca wQ wq
 ca qw wq
-ca Wqa wqa
-ca W w
-ca Q q
 ca q1 q!
-ca 'q   q
-ca q;   q
+ca 'q q
+ca q; q
+ca qq q
+ca W  w
+ca Q  q
 ca Wqaz wqa
 ca Wqqa wqa
-ca qq   q
+ca Wqa  wqa
+ca WQa  wqa
+ca WQA  wqa
 
 " <tab> to toggle nerdtree, persistent across all tabs with vim-nerdtree-tabs!
 " or, choose standard NERDtree
@@ -187,10 +191,16 @@ noremap! <C-e> <End>
 " indent broken)
 "set tabstop=4
 
-" Press F2 to magically fold everything
+command Retab normal! gg=G
+
+" magically fold everything
 map <F2> :set foldmethod=indent<CR><CR>
 
-command Retab normal! gg=G
+map <F3> :Retab<CR><CR>
+map <F4> :!p4 edit %<CR><CR>:w<CR><CR>
+map <F6> :SyntasticCheck<CR><CR>
+map <F7> :FixWhitespace<CR><CR>
+
 
 " airline is lighter than powerline.
 " Old powerline colours are nice.
