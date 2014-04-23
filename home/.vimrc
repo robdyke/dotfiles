@@ -33,6 +33,9 @@ set cursorline
 " ...and column. Good for lining up and feeling like a pro hacker.
 set cursorcolumn
 
+" Stop the pause that you no longer notice exiting insert mode
+set ttimeoutlen=50
+
 au BufNewFile,BufRead *.json   set filetype=javascript
 au BufNewFile,BufRead *.less   set filetype=css
 au BufNewFile,BufRead *.ino    set filetype=c
