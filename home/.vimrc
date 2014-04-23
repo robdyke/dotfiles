@@ -198,5 +198,6 @@ let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" Unsurprisingly, I want to edit dotfiles!
+" Unsurprisingly, I want to edit dotfiles and simlinks!
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_follow_symlinks = 1
