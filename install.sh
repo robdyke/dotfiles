@@ -90,10 +90,10 @@ fi
 echo Installing/updating fonts...
 if [ $PLATFORM == 'Darwin' ]; then
 	mkdir -p ~/Library/Fonts
-	find fonts/ -name '*otf' -or -name '*woff' -exec cp '{}' ~/Library/Fonts/ \;
+	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' -exec cp '{}' ~/Library/Fonts/ \;
 else #if [ $PLATFORM == 'Linux' ]; then
 	mkdir -p ~/.fonts
-	find fonts/ -name '*otf' -or -name '*woff' -exec cp '{}' ~/.fonts/ \;
+	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' -exec cp '{}' ~/.fonts/ \;
 	fc-cache -f ~/.fonts/
 fi
 
