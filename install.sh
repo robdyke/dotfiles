@@ -12,6 +12,7 @@ cd $(dirname $0)
 CHANGE=$(git rev-list HEAD --count)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 VERSION=$BRANCH-$CHANGE
+PLATFORM=$(uname)
 
 cat <<EOF
 ### naggie/dotfiles, version $VERSION.
@@ -84,6 +85,16 @@ if which fish &>/dev/null && fish -v 2>&1 | grep -q 'version 2'; then
 		&& fish -c fish_update_completions
 else
  	warning 'Fish shell version 2 not found. Bash it is, then...'
+fi
+
+echo Installing/updating fonts...
+if [ $PLATFORM == 'Darwin' ]; then
+	mkdir -p ~/Library/Fonts
+	find fonts/ -name '*otf' -or -name '*woff' -exec cp '{}' ~/Library/Fonts/ \;
+else #if [ $PLATFORM == 'Linux' ]; then
+	mkdir -p ~/.fonts
+	find fonts/ -name '*otf' -or -name '*woff' -exec cp '{}' ~/.fonts/ \;
+	fc-cache -f ~/.fonts/
 fi
 
 if [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
