@@ -212,3 +212,6 @@ let g:airline_right_sep=''
 " Unsurprisingly, I want to edit dotfiles and simlinks!
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
+
+" to bottom if log
+au BufNewFile,BufRead *.log normal G
