@@ -200,6 +200,7 @@ map <F3> :Retab<CR><CR>
 map <F4> :!p4 edit %<CR><CR>:w<CR><CR>
 map <F6> :SyntasticCheck<CR><CR>
 map <F7> :FixWhitespace<CR><CR>
+map <F8> :sort<CR><CR>
 
 
 " airline is lighter than powerline.
