@@ -19,9 +19,10 @@ function center {
 	done
 }
 
-if ! which figlet &>/dev/null; then
-	echo "Install figlet first" >&2
-	exit 127
+if [ $(uname) != Linux ]; then
+	echo 'Only Linux is supported at the moment' >&2
+	# OSX problems: figlet, sed, read. Not worth it.
+	exit
 fi
 
 if [ $WIDTH -lt 148 ]; then
@@ -29,6 +30,10 @@ if [ $WIDTH -lt 148 ]; then
 	exit 2
 fi
 
+if ! which figlet &>/dev/null; then
+	echo "Install figlet first" >&2
+	exit 127
+fi
 
 # clear screen (AKA reset terminal)
 echo -ne  "\033c"
