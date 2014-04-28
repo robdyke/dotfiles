@@ -3,6 +3,7 @@
 #  * Silently fail (2>/dev/null)
 #  * Only if $TMUX is not set (equivalent to only new SSH sessions)
 #  * Only automatically launch tmux if one session with no clients
+#  * Any key will cancel the message
 
 
 # DYNAMIC MOTD which centers in screen. Must be run in a terminal, so normal
@@ -64,6 +65,16 @@ hostname -s | sed 's/.*/\u&/' | figlet -ctf roman
 # domain name, double spaced. capital, centered
 hostname -d | sed 's/./& /g' | tr a-z A-Z | center
 
+# Always reset terminal, regardless of termination reason
+function CLEANUP_EXIT {
+	# show cursor
+	echo -ne "\e[?25h"
+	# reset terminal
+	echo -ne  "\033c"
+}
+trap CLEANUP_EXIT EXIT
+
+
 echo
 if [ -r /etc/quotes ]; then
 	echo; echo
@@ -73,13 +84,11 @@ if [ -r /etc/quotes ]; then
 		| center
 
 	# extra pause if there is a quote
-	sleep 1.2
+	read -n1 -t 1.2 && exit
 fi
 
-sleep 1.2
+# wait for up to 1.2 seconds for any character
+# Abortable sleep
+read -n1 -t 1.2
 
-# show cursor
-echo -ne "\e[?25h"
-# reset terminal
-echo -ne  "\033c"
 
