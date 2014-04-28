@@ -11,6 +11,7 @@
 
 # http://parkersamp.com/2010/10/howto-creating-a-dynamic-motd-in-linux/
 
+WIDTH=$(tput cols)
 
 function center {
 	while read; do
@@ -23,7 +24,7 @@ if ! which figlet &>/dev/null; then
 	exit 127
 fi
 
-if [ $(tput cols) -lt 148 ]; then
+if [ $WIDTH -lt 148 ]; then
 	echo Terminal not wide enough >&2
 	exit 2
 fi
@@ -59,7 +60,9 @@ done
 #hostname -s | tr a-z A-Z | toilet -F border -f future
 #hostname -s | tr a-z A-Z | toilet -F border:crop -f future
 #hostname -s | tr a-z A-Z | figlet -ctf roman
-hostname -s | sed 's/.*/\u&/' | figlet -ctf roman
+
+# figlet -t is broken on mac os x. Try -w instead.
+hostname -s | sed 's/.*/\u&/' | figlet -cf roman -w $WIDTH
 
 
 # domain name, double spaced. capital, centered
