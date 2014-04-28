@@ -11,11 +11,12 @@
 
 # http://parkersamp.com/2010/10/howto-creating-a-dynamic-motd-in-linux/
 
-WIDTH=$(tput cols)
+# get true dimensions. tput works, but not if fish is parent shell on fish config.
+eval $(resize)
 
 function center {
 	while read; do
-		printf "%*s\n" $(((${#REPLY}+$(tput cols))/2)) "$REPLY"
+		printf "%*s\n" $(((${#REPLY}+$COLUMNS)/2)) "$REPLY"
 	done
 }
 
@@ -25,7 +26,7 @@ if [ $(uname) != Linux ]; then
 	exit
 fi
 
-if [ $WIDTH -lt 148 ]; then
+if [ $COLUMNS -lt 148 ]; then
 	echo Terminal not wide enough >&2
 	exit 2
 fi
@@ -47,7 +48,7 @@ echo "                                                                          
 # white
 echo -ne "\033[37m"
 
-PADDING=$(($(($(tput lines)-24))/2))
+PADDING=$(($(($LINES-24))/2))
 
 for i in $(seq 1 $PADDING); do
 	echo
@@ -67,7 +68,7 @@ done
 #hostname -s | tr a-z A-Z | figlet -ctf roman
 
 # figlet -t is broken on mac os x. Try -w instead.
-hostname -s | sed 's/.*/\u&/' | figlet -cf roman -w $WIDTH
+hostname -s | sed 's/.*/\u&/' | figlet -cf roman -w $COLUMNS
 
 
 # domain name, double spaced. capital, centered
