@@ -32,7 +32,7 @@ fi
 echo -ne  "\033c"
 
 # hide cursor
-echo -e "\e[?25l"
+echo -ne "\e[?25l"
 
 # clearing screen sometimes leaves bits of last command, blank it
 echo "                                                                                "
@@ -73,9 +73,13 @@ if [ -r /etc/quotes ]; then
 		| center
 
 	# extra pause if there is a quote
-	sleep 2
+	sleep 1.2
 fi
 
-# reset terminal (so it's not necessary to show cursor again with [?25h or
-# reset color)
+sleep 1.2
+
+# show cursor
+echo -ne "\e[?25h"
+# reset terminal
 echo -ne  "\033c"
+
