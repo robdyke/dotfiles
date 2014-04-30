@@ -2,6 +2,9 @@ status --is-interactive; or exit 0
 
 set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH
 
+# only on new shell, fail silently. Must be non-invasive.
+test ! $TMUX; and ~/bin/server-splash.sh ^/dev/null
+
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is
 # ascii. This also allows other programs to use nice UTF-8 symbols, such as
@@ -14,7 +17,7 @@ set -x BC_ENV_ARGS "$HOME/.bcrc -l"
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
 # so just read from /etc/hostname)
- test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
+test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
