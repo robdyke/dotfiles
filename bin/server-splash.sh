@@ -68,7 +68,7 @@ done
 #hostname -s | tr a-z A-Z | figlet -ctf roman
 
 # figlet -t is broken on mac os x. Try -w instead.
-hostname -s | sed 's/.*/\u&/' | figlet -cf roman -w $COLUMNS
+hostname -s | sed 's/.*/\u&/' | figlet -cf ~/.config/figlet/roman.flf -w $COLUMNS
 
 
 # domain name, double spaced. capital, centered
