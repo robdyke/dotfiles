@@ -44,8 +44,9 @@ echo -ne  "\033c"
 # hide cursor
 echo -ne "\e[?25l"
 
-# clearing screen sometimes leaves bits of last command, blank it
-echo "                                                                                "
+# clearing screen sometimes leaves bits of last command, blank it with one line
+# of whitespace
+printf ' %.0s' $(seq 1 $COLUMNS)
 
 # white
 echo -ne "\033[37m"
