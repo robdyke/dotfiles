@@ -1,15 +1,12 @@
 #!/bin/bash
+# DYNAMIC MOTD
 # Run from bashrc, but work as non-invasive as possible
 #  * Silently fail (2>/dev/null)
-#  * Only if $TMUX is not set (equivalent to only new SSH sessions)
+#  * Only if $TMUX is not set (equivalent to only new sessions)
 #  * Only automatically launch tmux if one session with no clients
 #  * Any key will cancel the message
+#  * Only enable on remote session
 
-
-# DYNAMIC MOTD which centers in screen. Must be run in a terminal, so normal
-# MOTD generation not possible.
-
-# http://parkersamp.com/2010/10/howto-creating-a-dynamic-motd-in-linux/
 
 # get true dimensions. tput works, but not if fish is parent shell on fish config.
 eval $(resize)
@@ -19,6 +16,11 @@ function center {
 		printf "%*s\n" $(((${#REPLY}+$COLUMNS)/2)) "$REPLY"
 	done
 }
+
+if [ ! "$SSH_CLIENT" ];then
+	echo 'Only enabled on remote sessions ($SSH_CLIENT)' >&2
+	exit
+fi
 
 if [ $(uname) != Linux ]; then
 	echo 'Only Linux is supported at the moment' >&2
