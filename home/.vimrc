@@ -217,3 +217,6 @@ let g:ctrlp_follow_symlinks = 1
 
 " to bottom if log
 au BufNewFile,BufRead *.log normal G
+
+" abort a merge commit
+ca fail cqa

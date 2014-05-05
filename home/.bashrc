@@ -4,7 +4,7 @@
 export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 
 # only on new shell, fail silently. Must be non-invasive.
-[ ! $TMUX ] && ~/bin/server-splash.sh #2>/dev/null
+[ ! $TMUX ] && ~/bin/server-splash.sh 2>/dev/null
 
 # fix annoying accidental commits and amends
 # and other dangerous commands

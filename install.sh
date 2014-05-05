@@ -62,6 +62,7 @@ echo 'Copying dotfiles...'
 # copy dotfiles separately , normal glob does not match
 cp -r home/.??* ~
 
+# TODO: perserve target executable permissions
 echo 'Copying scripts...'
 cp -a bin ~
 chmod +x ~/bin/*
