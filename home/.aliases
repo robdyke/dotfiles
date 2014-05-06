@@ -3,7 +3,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 # package manager commands
-alias sagi='yes | sudo apt-get install'
+alias sagi='sudo apt-get install'
 alias bi='brew install'
 alias snig='sudo npm install -g'
 
@@ -28,6 +28,8 @@ alias b='git branch -a'
 alias l=ls
 alias v=vim
 alias vo='vim -O'
+alias findn='find -name'
+alias ackl='ack -l'
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
@@ -59,7 +61,5 @@ alias gi=git
 alias cd..='cd ..'
 alias lsd=ls
 alias grepo=grep
-
-# typo fixes (typofix.sh guesses)
 alias rfind=find
 alias lack=ack
