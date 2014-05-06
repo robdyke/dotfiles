@@ -88,14 +88,14 @@ else
 fi
 
 echo Installing/updating fonts...
-# TODO: fix find commands
 if [ $PLATFORM == 'Darwin' ]; then
 	mkdir -p ~/Library/Fonts
-	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' -exec cp '{}' ~/Library/Fonts/ \;
+	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' \
+		| xargs -d '\n'  -I % cp % ~/Library/Fonts/
 else #if [ $PLATFORM == 'Linux' ]; then
 	mkdir -p ~/.fonts
-	cp fonts/*/*{otf,ttf,woff} ~/.fonts/ 2>/dev/null
-	#find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' -exec cp '{}' ~/.fonts/ \;
+	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' \
+		| xargs -d '\n'  -I % cp % ~/.fonts/
 	fc-cache -f ~/.fonts/
 fi
 
