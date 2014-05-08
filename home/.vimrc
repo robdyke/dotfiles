@@ -1,4 +1,6 @@
-" vim 7.3+
+" pathogen as a bundle
+runtime bundle/pathogen/autoload/pathogen.vim
+
 set nocompatible
 call pathogen#infect()
 set laststatus=2
