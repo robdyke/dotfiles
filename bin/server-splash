@@ -23,6 +23,11 @@ if [ ! "$SSH_CLIENT" ];then
 	exit
 fi
 
+if [ $TMUX ]; then
+	echo 'Refusing to operate inside tmux. A splash for every new pane/window is annoying.'
+	exit
+fi
+
 if [ $(uname) != Linux ]; then
 	echo 'Only Linux is supported at the moment' >&2
 	# OSX problems: figlet, sed, read. Not worth it.
@@ -106,7 +111,7 @@ if [ -r /etc/quotes ]; then
 	read -n1 -t $WAIT && exit
 fi
 
-# wait for up to 1.2 seconds for any character
+# wait for up to 1.2 seconds for any key
 # Abortable sleep
 read -n1 -t 1.2
 
