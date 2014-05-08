@@ -26,10 +26,25 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CHANGE=$(git rev-list HEAD --count)
 NAME="darkbuntu-$BRANCH"
 
-UBUNTU_ISO_URL='http://www.ubuntu.com/start-download?distro=desktop&bits=64&release=latest'
-UBUNTU_ISO_URL='http://releases.ubuntu.com/14.04/ubuntu-14.04-desktop-amd64.iso'
-SOURCE='ubuntu-14.04-desktop-amd64.iso'
-TARGET="$NAME.iso"
+function WARNING {
+	# TODO: check PS1, no escape code if not interactive....?
+	echo -e "\e[00;31m> $*\e[00m"
+}
+
+if [ ! "$2" ]; then
+	echo "Usage: make livecd"
+	echo "-OR-"
+	echo "Usage: sudo $0 <source ubuntu 14.04 iso> <destination iso>"
+	exit 121
+fi
+
+SOURCE="$1"
+TARGET="$2"
+
+if [ ! -f "$SOURCE" ]; then
+	WARNING "$SOURCE not found!"
+	exit 23
+fi
 
 if [ $SUDO_USER ]; then
 	LIVECD_USER=$SUDO_USER
@@ -38,23 +53,9 @@ else
 fi
 
 WORKDIR=$(mktemp -d --tmpdir=/tmp $NAME.XXXXXXX)
-
-function WARNING {
-	# TODO: check PS1, no escape code if not interactive....?
-	echo -e "\e[00;31m> $*\e[00m"
-}
-
 if [ `whoami` != root ]; then
 	WARNING Run as root
 	exit
-fi
-
-if [ -f "$TARGET" ]; then
-	SOURCE="$TARGET"
-	echo 'Incremental build'
-elif [ ! -f "$SOURCE" ]; then
-	echo 'Downloading initial ISO'
-	wget "$UBUNTU_ISO_URL" -O "$SOURCE" || exit 2
 fi
 
 echo

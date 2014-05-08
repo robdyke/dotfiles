@@ -91,7 +91,7 @@ echo Installing/updating fonts...
 if [ $PLATFORM == 'Darwin' ]; then
 	mkdir -p ~/Library/Fonts
 	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' \
-		| xargs -d '\n'  -I % cp % ~/Library/Fonts/
+		-print0 | xargs -0 -I % cp % ~/Library/Fonts/
 else #if [ $PLATFORM == 'Linux' ]; then
 	mkdir -p ~/.fonts
 	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' \
@@ -109,7 +109,9 @@ fi
 # generate help files (well, tags) for the vim plugins
 if which vim &>/dev/null; then
 	echo 'Generating helptags for vim submodules...'
-	echo 'call pathogen#helptags()|q' | vim -es -n -T dumb
+	# -e : ex mode, -s : silent batch mode, -n : no swap
+	# must source vimrc in this mode.
+	echo 'source ~/.vimrc | call pathogen#helptags()' | vim -es -n -s
 else
 	warning 'Vim not found! Is your brain functioning correctly?'
 fi
