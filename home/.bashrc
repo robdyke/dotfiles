@@ -9,7 +9,7 @@ export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 # it's putty-256color (which fixes a lot of things) and otherwise it's probably
 # something like xterm-256color. Most, if not all off the terminals I use
 # support 256 colors, so it's safe to force it as a last resort, but warn.
-if [ -z $TMUX ] && test $(tput colors) -ne 256; then
+if [ -z $TMUX ] && test 0$(tput colors 2>/dev/null) -ne 256; then
 	echo -e "\e[00;31m> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color.\e[00m"
 	export TERM=xterm-256color
 fi
