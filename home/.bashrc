@@ -36,7 +36,7 @@ export HOSTNAME
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
 # is configured to provide the correct, 256 color terminal type. For putty,
 # it's putty-256color (which fixes a lot of things) and otherwise it's probably
-# something ilike xterm-256color. Most, if not all off the terminals I use
+# something like xterm-256color. Most, if not all off the terminals I use
 # support 256 colors, so it's safe to force it as a last resort, but warn.
 if [ -z $TMUX ] && test $(tput colors) -ne 256; then
 	echo -e "\e[00;31m> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color.\e[00m"
