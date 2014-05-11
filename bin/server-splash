@@ -44,8 +44,12 @@ if ! which figlet &>/dev/null; then
 	exit 127
 fi
 
+# save screen
+tput smcup
+
 # clear screen (AKA reset terminal)
-echo -ne  "\033c"
+# not necessary with smcup
+#echo -ne  "\033c"
 
 # hide cursor
 echo -ne "\e[?25l"
@@ -89,6 +93,9 @@ function CLEANUP_EXIT {
 	echo -ne "\e[?25h"
 	# reset terminal
 	echo -ne  "\033c"
+
+	# restore screen
+	tput rmcup
 
 	exit 0
 }

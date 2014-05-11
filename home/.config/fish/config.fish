@@ -2,6 +2,19 @@ status --is-interactive; or exit 0
 
 set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH
 
+# TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
+# configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
+# is configured to provide the correct, 256 color terminal type. For putty,
+# it's putty-256color (which fixes a lot of things) and otherwise it's probably
+# something like xterm-256color. Most, if not all off the terminals I use
+# support 256 colors, so it's safe to force it as a last resort, but warn.
+if begin; test -z $TMUX ; and test (tput colors) -ne 256; end
+	set -x TERM xterm-256color
+	set_color red
+	echo "> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color."
+	set_color normal
+end
+
 # only on new shell, fail silently. Must be non-invasive.
 test ! $TMUX; and ~/bin/server-splash ^/dev/null
 
@@ -18,20 +31,6 @@ set -x BC_ENV_ARGS "$HOME/.bcrc -l"
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
 # so just read from /etc/hostname)
 test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
-
-# TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
-# configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
-# is configured to provide the correct, 256 color terminal type. For putty,
-# it's putty-256color (which fixes a lot of things) and otherwise it's probably
-# something ilike xterm-256color. Most, if not all off the terminals I use
-# support 256 colors, so it's safe to force it as a last resort, but warn.
-if begin; test -z $TMUX ; and test (tput colors) -ne 256; end
-	set -x TERM xterm-256color
-	set_color red
-	echo "> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color."
-	set_color normal
-end
-
 
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
