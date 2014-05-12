@@ -20,12 +20,12 @@ function center {
 
 if [ ! "$SSH_CLIENT" ];then
 	echo 'Only enabled on remote sessions ($SSH_CLIENT)' >&2
-	exit
+	exit 23
 fi
 
 if [ $TMUX ]; then
-	echo 'Refusing to operate inside tmux. A splash for every new pane/window is annoying.'
-	exit
+	echo 'Refusing to operate inside tmux. A splash for every new pane/window is annoying.' >&2
+	exit 22
 fi
 
 if [ $(uname) != Linux ]; then
