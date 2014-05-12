@@ -25,7 +25,7 @@ active = [
 	'git@github.com:naggie/speakers.git',
 	'git@github.com:naggie/DSPA.git',
 	'git@github.com:naggie/notes.git',
-	'naggie@chell.darksky.io:rcdos.git',
+        'git@gitlab.com:naggie/rcdos.git',
 ]
 
 inactive = [
