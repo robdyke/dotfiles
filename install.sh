@@ -49,8 +49,10 @@ echo 'Synchronising submodules...'
 git submodule --quiet init || exit 1
 git submodule --quiet update || exit 2
 
-# remove remains of old submodules
+# Garbage collection
+# remove remains of old submodules, scripts, etc
 rm -rf home/.vim/bundle/powerline 2>/dev/null
+rm -f  ~/bin/server-splash.sh     2>/dev/null
 
 echo 'Clobbering...'
 # clobber vim and fish config (because there are dirs)
@@ -68,7 +70,7 @@ echo 'Copying scripts...'
 cp -a bin ~
 chmod +x ~/bin/*
 
-if [ ! $(tput colors) -eq 256 ]; then
+if [ ! 0$(tput colors 2>/dev/null) -eq 256 ]; then
 	warning "TERM '$TERM' is not a 256 colour type! Please set in terminal emulator. EG: Putty should have putty-256color, xterm should have xterm-256color."
 fi
 

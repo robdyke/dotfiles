@@ -3,6 +3,17 @@
 
 export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 
+# TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
+# configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
+# is configured to provide the correct, 256 color terminal type. For putty,
+# it's putty-256color (which fixes a lot of things) and otherwise it's probably
+# something like xterm-256color. Most, if not all off the terminals I use
+# support 256 colors, so it's safe to force it as a last resort, but warn.
+if [ -z $TMUX ] && test 0$(tput colors 2>/dev/null) -ne 256; then
+	echo -e "\e[00;31m> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color.\e[00m"
+	export TERM=xterm-256color
+fi
+
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
@@ -31,17 +42,6 @@ function math {
 # so just read from /etc/hostname)
 [ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
 export HOSTNAME
-
-# TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
-# configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
-# is configured to provide the correct, 256 color terminal type. For putty,
-# it's putty-256color (which fixes a lot of things) and otherwise it's probably
-# something ilike xterm-256color. Most, if not all off the terminals I use
-# support 256 colors, so it's safe to force it as a last resort, but warn.
-if [ -z $TMUX ] && test $(tput colors) -ne 256; then
-	echo -e "\e[00;31m> TERM '$TERM' is not a 256 colour type! Overriding to xterm-256color. Please set. EG: Putty should have putty-256color.\e[00m"
-	export TERM=xterm-256color
-fi
 
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
@@ -139,7 +139,7 @@ function __exit_warn {
 		&& printf "\n\33[31mExited with status %s\33[m" $status
 }
 
-PS1="\$(__exit_warn)\n\[\e[0;32m\]\u@\H \[\e[1;34m\]\$PWD\[\e[0;33m\]\$(__git_ps1)\[\e[m\]\n\$ "
+PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\[\e[0m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases

@@ -48,6 +48,10 @@ au BufNewFile,BufRead *.fdc    set filetype=sdc
 au BufNewFile,BufRead .aliases set filetype=sh
 au BufNewFile,BufRead .bcrc    set filetype=bc
 
+" Auto indent is completely broken for yaml
+au BufNewFile,BufRead *yml     filetype indent off
+au BufNewFile,BufRead *yaml     filetype indent off
+
 " It's not the 70's anymore. Use git or something.
 set noswapfile
 set nobackup
