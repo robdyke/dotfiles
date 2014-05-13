@@ -139,7 +139,7 @@ function __exit_warn {
 		&& printf "\n\33[31mExited with status %s\33[m" $status
 }
 
-PS1="\$(__exit_warn)\n\[\e[0;32m\]\u@\H:\[\e[1;34m\]\$PWD\[\e[0;33m\]\$(__git_ps1)\[\e[m\]\n\$ "
+PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\[\e[0m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases
