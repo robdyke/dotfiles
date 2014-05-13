@@ -25,7 +25,7 @@ active = [
 	'git@github.com:naggie/speakers.git',
 	'git@github.com:naggie/DSPA.git',
 	'git@github.com:naggie/notes.git',
-        'git@gitlab.com:naggie/rcdos.git',
+        'git@gitlab.com:naggie/dsdrop.git',
 ]
 
 inactive = [
@@ -37,6 +37,7 @@ inactive = [
 	'git@github.com:naggie/vosbox.git',
 	'git@github.com:naggie/MLDASH.git',
 	'git@github.com:naggie/algalon.git',
+        'git@gitlab.com:naggie/rcdos.git',
 ]
 
 def step(text):
