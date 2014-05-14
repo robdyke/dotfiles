@@ -58,9 +58,6 @@ echo -ne "\e[?25l"
 # of whitespace
 printf ' %.0s' $(seq 1 $COLUMNS)
 
-# white
-echo -ne "\033[37m"
-
 PADDING=$(($(($LINES-24))/2))
 
 for i in $(seq 1 $PADDING); do
@@ -80,8 +77,14 @@ done
 #hostname -s | tr a-z A-Z | toilet -F border:crop -f future
 #hostname -s | tr a-z A-Z | figlet -ctf roman
 
+# ice blue
+echo -ne "\033[38;5;75m"
+
 # figlet -t is broken on mac os x. Try -w instead.
 hostname -s | sed 's/.*/\u&/' | figlet -cf ~/.config/figlet/roman.flf -w $COLUMNS
+
+# reset
+echo -ne "\033[0m"
 
 
 # domain name, double spaced. capital, centered
