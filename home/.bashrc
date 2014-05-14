@@ -150,12 +150,11 @@ alias tm='test -z $TMUX && (tmux a || tmux)'
 
 # slow completion things in background after bashrc is executed
 function deferred {
-	# git completion (maybe other completion too)
+	# linux
 	[ -f /etc/bash_completion ] && source /etc/bash_completion
 
 	# OS X via homebrew git completion via package bash-completion
 	[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
-
 	# Homebrew completions
 	test -x /usr/local/bin/brew && source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 
@@ -164,6 +163,10 @@ function deferred {
 
 	# hardcoded ssh completions (known_hosts is encrypted mostly)
 	#complete -o default -W 'example.com example.net' ssh scp ping
+
+	# latest git completion and PS1
+	source ~/.git-completion.sh
+	source ~/.git-prompt.sh
 }
 
 # patches for Mac OS X
