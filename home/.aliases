@@ -30,6 +30,7 @@ alias v=vim
 alias vo='vim -O'
 alias findn='find -name'
 alias ackl='ack -l'
+alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
