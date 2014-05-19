@@ -126,12 +126,17 @@ function fish_set_tmux_title --description "Sets tmux pane title to output of fi
 		and printf "\\033k%s\\033\\\\" (fish_tmux_title)
 end
 
+function __fish_p4_prompt
+	test $P4CLIENT; or return
+	echo -n " ($P4CLIENT) "
+end
+
 function fish_prompt --description 'Write out the prompt'
 	# test status of last command without affecting it by using 'or' which tests and forwards
 	or printf "\n\33[31mExited with status %s\33[m" $status
 
-	printf "\n\33[38;5;75m%s@%s:%s\33[90m%s\33[0m\n\$ " \
-		$USER $HOSTNAME $PWD (__fish_git_prompt)
+	printf "\n\33[38;5;75m%s@%s:%s\33[90m%s%s\33[0m\n\$ " \
+		$USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt)
 end
 
 function ssh --description 'SSH wrapper to magically LOCK tmux title to hostname, if tmux is running'

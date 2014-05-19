@@ -129,7 +129,12 @@ function ssh {
 # make sure the function exists, even if it wasn't included
 # this is overridden later
 function __git_ps1 {
-	exit
+	return
+}
+
+function __p4_ps1 {
+	[ $P4CLIENT ] || return
+	echo -n " ($P4CLIENT) "
 }
 
 function __exit_warn {
@@ -139,7 +144,7 @@ function __exit_warn {
 		&& printf "\n\33[31mExited with status %s\33[m" $status
 }
 
-PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\[\e[0m\]\n\$ "
+PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1)\[\e[0m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases
