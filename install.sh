@@ -53,6 +53,7 @@ git submodule --quiet update || exit 2
 # remove remains of old submodules, scripts, etc
 rm -rf home/.vim/bundle/powerline 2>/dev/null
 rm -f  ~/bin/server-splash.sh     2>/dev/null
+rm -f  ~/git-completion.bash      2>/dev/null
 
 echo 'Clobbering...'
 # clobber vim and fish config (because there are dirs)

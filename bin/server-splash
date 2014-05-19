@@ -48,8 +48,7 @@ fi
 tput smcup
 
 # clear screen (AKA reset terminal)
-# not necessary with smcup
-#echo -ne  "\033c"
+echo -ne  "\033c"
 
 # hide cursor
 echo -ne "\e[?25l"
