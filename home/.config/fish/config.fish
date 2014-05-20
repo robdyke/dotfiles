@@ -68,8 +68,14 @@ set -x GCC_COLORS 1
 # aliases shared between fish and bash
 . ~/.aliases
 
-# fish specific aliases
-alias tm 'test -z $TMUX; and tmux a ; or tmux'
+# get new or steal existing tmux
+function tm
+	# must not already be inside tmux
+	test ! $TMUX; or return
+	# detach any other clients
+	# attach or make new if there isn't one
+	tmux attach -d; or tmux
+end
 
 # patches for Mac OS X
 set PLATFORM (uname)

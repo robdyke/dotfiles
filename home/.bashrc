@@ -149,9 +149,14 @@ PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_p
 # aliases shared between fish and bash
 source ~/.aliases
 
-# bash specific aliases
-alias tm='test -z $TMUX && (tmux a || tmux)'
-
+# get new or steal existing tmux
+function tm {
+	# must not already be inside tmux
+	test ! $TMUX || return
+	# detach any other clients
+	# attach or make new if there isn't one
+	tmux attach -d || tmux
+}
 
 # slow completion things in background after bashrc is executed
 function deferred {
