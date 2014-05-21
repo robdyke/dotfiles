@@ -29,6 +29,7 @@ alias l=ls
 alias v=vim
 alias vo='vim -O'
 alias findn='find -name'
+alias findack='find . | ack'
 alias ackl='ack -l'
 alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
 
