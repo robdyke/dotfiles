@@ -33,6 +33,7 @@ alias findack='find . | ack'
 alias ackl='ack -l'
 alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
 alias cdp='cd -P'
+alias gpom='git pull origin master'
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
