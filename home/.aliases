@@ -32,6 +32,7 @@ alias findn='find -name'
 alias findack='find . | ack'
 alias ackl='ack -l'
 alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
+alias cdp='cd -P'
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
