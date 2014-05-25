@@ -105,6 +105,8 @@ fi
 if [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
 	echo 'Merging Xresources...'
 	xrdb -merge ~/.Xresources
+	# kind of forced to put this here. Ubuntu occasionally changes it for absolutely no reason.
+	setxkbmap gb
 else
 	warning "X not configured. Now you can't enjoy the nice urxvt and xterm settings."
 fi
