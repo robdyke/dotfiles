@@ -94,8 +94,6 @@ yes | apt-get --reinstall install bcmwl-kernel-source
 # fish default shell
 useradd -D -s /usr/bin/fish
 
-yes | apt-get upgrade
-
 # orphaned packages
 yes | apt-get autoremove
 
@@ -104,3 +102,6 @@ useradd -D -s /usr/bin/fish
 
 # current sudo user shell
 chsh -s /usr/bin/fish $SUDO_USER || true
+
+
+# note apt-get upgrade can cause problems. Don't do it when building a livecd.

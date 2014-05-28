@@ -210,7 +210,7 @@ INSIDE /etc/skel/dotfiles/install.sh
 # Be sure to remove any temporary files which are no longer needed, as space on a
 # CD is limited. A classic example is downloaded package files, which can be
 # cleaned out using:
-yes | INSIDE apt-get upgrade # just in case it's not already done
+# note apt-get upgrade can cause problems. Don't do it when building a livecd.
 yes | INSIDE apt-get clean
 yes | INSIDE apt-get autoremove
 
