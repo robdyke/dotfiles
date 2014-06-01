@@ -304,6 +304,8 @@ mkisofs -D -r -V "$NAME" -cache-inodes -J -l \
 # http://manpages.ubuntu.com/manpages/natty/man1/isohybrid.1.html
 isohybrid "$TARGET"
 
+[ $SUDO_USER ] && chown $SUDO_USER "$TARGET"
+
 # clean, MUST MAKE SURE EVERYTHING IS UNMOUNTED FIRST, PARTICULARLY dev
 # OR PREPARE FOR CORE MELTDOWN
 # now umount (unmount) special filesystems before creation of iso
