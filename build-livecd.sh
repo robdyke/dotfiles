@@ -65,8 +65,8 @@ echo
 echo
 
 # check dependencies
-if ! which mkisofs mksquashfs &> /dev/null; then
-	WARNING 'Error! required genisoimage and/or squashfs-tools package(s) are not installed'
+if ! which mkisofs mksquashfs isohybrid &> /dev/null; then
+	WARNING 'Error! required genisoimage/squashfs-tools/syslinux package(s) are not installed'
 	exit
 fi
 
@@ -300,14 +300,14 @@ mkisofs -D -r -V "$NAME" -cache-inodes -J -l \
 	-boot-info-table \
 	-o "$TARGET" $WORKDIR/iso_rw/
 
+# postprocess to allow simple dd to flash drive to work?
+# http://manpages.ubuntu.com/manpages/natty/man1/isohybrid.1.html
+isohybrid "$TARGET"
+
 # clean, MUST MAKE SURE EVERYTHING IS UNMOUNTED FIRST, PARTICULARLY dev
 # OR PREPARE FOR CORE MELTDOWN
 # now umount (unmount) special filesystems before creation of iso
 # This is handled by TRAP
-
-# TODO? postprocess to allow simple dd to flash drive to work?
-# isohybrid
-# http://manpages.ubuntu.com/manpages/natty/man1/isohybrid.1.html
 
 
 # TODO? modify isolinux so that default is toram (current use case uses grub on
