@@ -46,11 +46,7 @@ if [ ! -f "$SOURCE" ]; then
 	exit 23
 fi
 
-if [ $SUDO_USER ]; then
-	LIVECD_USER=$SUDO_USER
-else
-	LIVECD_USER=$BRANCH
-fi
+LIVECD_USER=$SUDO_USER
 
 WORKDIR=$(mktemp -d --tmpdir=/tmp $NAME.XXXXXXX)
 if [ `whoami` != root ]; then
