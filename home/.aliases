@@ -30,6 +30,8 @@ alias v=vim
 alias vo='vim -O'
 alias findn='find -name'
 alias findack='find . | ack'
+# find TODO tags in files
+alias TODO='ack TODO'
 alias ackl='ack -l'
 alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
 alias cdp='cd -P'
