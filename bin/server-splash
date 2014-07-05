@@ -10,7 +10,7 @@
 
 
 # get true dimensions. tput works, but not if fish is parent shell on fish config.
-eval $(resize)
+echo $SHELL | grep -q fish && eval $(resize)
 
 function center {
 	while read; do
