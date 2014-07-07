@@ -17,7 +17,6 @@ import sys
 # sets official origins.
 
 active = [
-	'git@github.com:naggie/dotfiles.git',
 	'git@github.com:naggie/naggie.github.com.git',
 	'git@github.com:naggie/darksky.git',
 	'git@github.com:naggie/dscrates.git',
@@ -77,14 +76,17 @@ os.chdir('INACTIVE')
 sync(inactive)
 os.chdir('..')
 
+
 # specific project was specified
 if len(sys.argv) == 2:
     sys.exit(0)
 
-# install latest dotfiles
-step('INST dotfiles')
-os.chdir('dotfiles')
+step('DOTFILES')
+if not os.path.exists('dotfiles/.git'):
+	call(['git','clone','--recursive','--quiet', 'git@github.com:naggie/dotfiles.git','dotfiles'])
+
 call(['git','checkout','naggie'])
-call(['git','fetch','origin','naggie'])
-call(['git','merge','--ff-only','FETCH_HEAD'])
-call(['./install.sh'])
+os.chdir('dotfiles')
+call(['make'])
+os.chdir('..')
+
