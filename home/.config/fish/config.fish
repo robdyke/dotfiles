@@ -145,6 +145,7 @@ function fish_prompt --description 'Write out the prompt'
 		$USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt)
 end
 
+# now with MOAR agent forwarding
 function ssh --description 'SSH wrapper to magically LOCK tmux title to hostname, if tmux is running'
 	if test $TMUX
 		# find host from array (in a dumb way)
@@ -152,11 +153,11 @@ function ssh --description 'SSH wrapper to magically LOCK tmux title to hostname
 
 		printf "\\033k%s\\033\\\\" $host
 		tmux set -q allow-rename off
-		command ssh $argv ; and clear
+		command ssh -A $argv ; and clear
 		tmux set -q allow-rename on
 		fish_set_tmux_title
 	else
-		command ssh $argv ; and clear
+		command ssh -A $argv ; and clear
 	end
 end
 
