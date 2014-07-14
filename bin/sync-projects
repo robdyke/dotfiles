@@ -85,8 +85,8 @@ step('DOTFILES')
 if not os.path.exists('dotfiles/.git'):
 	call(['git','clone','--recursive','--quiet', 'git@github.com:naggie/dotfiles.git','dotfiles'])
 
-call(['git','checkout','naggie'])
 os.chdir('dotfiles')
+call(['git','checkout','naggie'])
 call(['make'])
 os.chdir('..')
 
