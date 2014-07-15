@@ -118,6 +118,9 @@ ca Wqa  wqa
 ca WQa  wqa
 ca WQA  wqa
 
+" if I want to quit all, I'm sure about it
+ca qa qa!
+
 " <tab> to toggle nerdtree, persistent across all tabs with vim-nerdtree-tabs!
 " or, choose standard NERDtree
 nnoremap <tab> :NERDTreeTabsToggle<CR>
