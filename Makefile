@@ -18,13 +18,13 @@ all: pull provision install
 
 # livecd stuff
 livecd: build/ubuntu-14.04-desktop-amd64.iso
-	sudo ./build-livecd.sh build/ubuntu-14.04-desktop-amd64.iso build/darkbuntu-$(CHANGE)-$(BRANCH).iso
+	bin/ehl sudo ./build-livecd.sh build/ubuntu-14.04-desktop-amd64.iso build/darkbuntu-$(CHANGE)-$(BRANCH).iso
 	rm build/darkbuntu-$(BRANCH).iso || true
 	ln -s darkbuntu-$(CHANGE)-$(BRANCH).iso build/darkbuntu-$(BRANCH).iso
 
 livecd_incremental:
 	test -e darkbuntu-$(BRANCH).iso
-	sudo ./build-livecd.sh build/darkbuntu-$(BRANCH).iso build/darkbuntu-$(BRANCH).iso
+	bin/ehl sudo ./build-livecd.sh build/darkbuntu-$(BRANCH).iso build/darkbuntu-$(BRANCH).iso
 	rm build/darkbuntu-$(BRANCH).iso || true
 	ln -s darkbuntu-$(CHANGE)-$(BRANCH).iso build/darkbuntu-$(BRANCH).iso
 
