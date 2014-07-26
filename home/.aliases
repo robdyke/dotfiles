@@ -60,6 +60,11 @@ alias ssh='ssh -A'
 #binwalk # discover things on a firmware image
 #string  # discover strings in a binary blob
 
+# Also, this seems like a good place to note:
+# If you're in a dangling SSH session type
+#    ~.
+# To 'disconnect'
+
 # typo fixes
 alias sl=ls
 alias c=cd
