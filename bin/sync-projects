@@ -30,13 +30,13 @@ urls = [
 	'git@github.com:naggie/runuo.git',
 	'git@github.com:naggie/nnplus.git',
 	'git@github.com:naggie/ninja-motor-controller.git',
-	'git@github.com:naggie/dschat.git',
+	#'git@github.com:naggie/dschat.git',
 	'git@github.com:naggie/averclock.git',
 	'git@github.com:naggie/vosbox.git',
 	'git@github.com:naggie/MLDASH.git',
 	'git@github.com:naggie/algalon.git',
         'git@gitlab.com:naggie/rcdos.git',
-        'git@gitlab.com:naggie/cv.git',
+        'git@gitlab.com:naggie/cv-temporary.git',
         'git@gitlab.com:naggie/dsdrop.git',
 ]
 
