@@ -6,6 +6,7 @@ alias ...='cd ../..'
 alias sagi='sudo apt-get install'
 alias bi='brew install'
 alias snig='sudo npm install -g'
+alias syi='sudo yum install'
 
 # colours and ANSI lines
 alias tree="tree -CA"
@@ -35,7 +36,6 @@ alias TODO='ack TODO'
 alias ackl='ack -l'
 alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
 alias cdp='cd -P'
-alias gpom='git pull origin master'
 alias dush="du -sh | sort -h"
 
 alias webserver='python -m SimpleHTTPServer'
