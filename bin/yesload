@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# recommend `stress` instead. Run `stress -c 10`
+
 
 yes > /dev/null&
 yes > /dev/null&

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ `whoami` == root ]; then
+	echo 'Do not run as root!'
+	exit 5
+fi
+
+
 # initial mac setup
 # A lot of this is from https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
@@ -98,21 +104,31 @@ killall SystemUIServer
 # install xcode and xcode cli tools (large) or xcode cli tools (small)
 # https://developer.apple.com/downloads/index.action
 
+pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || xcode-select --install
+
+until pkgutil --pkg-info=com.apple.pkg.CLTools_Executables; do
+	echo 'Waiting for Xcode to be installed by user...'
+	sleep 5
+done
+
 # install homebrew
-test -x /usr/local/bin/brew || ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+test -x /usr/local/bin/brew || ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 brew update || exit 2
 brew upgrade
 
 # cli apps
 brew install git tmux keychain picocom mcabber htop-osx nodejs autossh \
-	bash-completion gnu-sed coreutils ghostscript ssh-copy-id mpd ncmpcpp fish \
-	python most ctags-exuberant wget tree sox socat netcat nmap p7zip
+	bash-completion gnu-sed coreutils ghostscript ssh-copy-id fish \
+	python most wget tree sox socat netcat nmap p7zip gcc
+#mpd ncmpcpp
 
 # gui apps
-#brew tap phinze/homebrew-cask
-#brew install brew-cask
-#brew cask install google-chrome adium arduino bettertouchtool cyberduck gimp iterm2 macvim virtualbox vlc
+brew tap caskroom/cask
+brew install brew-cask
+brew cask install google-chrome adium arduino cyberduck gimp iterm2 vlc keyfinder spectacle horndis
+# no more bettertouchtool, I refuse to use it as it constantly nags to control your computer. 
+#mactex
 
 # iterm2 prefs
 cp ../etc/com.googlecode.iterm2.plist ~/Library/Preferences/
@@ -122,7 +138,8 @@ if ! grep -q /usr/local/bin/fish /etc/shells; then
 	echo Registering fish shell...
 	echo /usr/local/bin/fish | sudo tee -a /etc/shells
 fi
-chsh -s /usr/local/bin/fish
+
+echo $SHELL | grep -q fish || chsh -s /usr/local/bin/fish
 
 # update completion db from man pages. OMGWOW.
 /usr/local/bin/fish -c fish_update_completions

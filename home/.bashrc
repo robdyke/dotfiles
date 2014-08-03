@@ -102,6 +102,7 @@ PROMPT_COMMAND=onprompt
 
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
 # prefer clear terminal after SSH, on success only
+# now with MOAR agent forwarding
 function ssh {
 	if test $TMUX; then
 		# find host from array (in a dumb way) by getting last argument
@@ -115,10 +116,10 @@ function ssh {
 		printf "\\033k%s\\033\\\\" $host
 
 		tmux set -q allow-rename off
-		command ssh "$@" && clear
+		command ssh -A "$@" && clear
 		tmux set -q allow-rename on
 	else
-		command ssh "$@" && clear
+		command ssh -A "$@" && clear
 	fi
 }
 
@@ -212,6 +213,7 @@ echo
 COLUMNS=80 ls
 
 echo -e "\n> bash, dotfiles version $(cat ~/.naggie-dotfiles-version)"
+echo '>'$(uptime)
 
 # Disable stupid flow control. Ctrl+S can disable the terminal, requiring
 # Ctrl+Q to restore. It can result in an apparent hung terminal, if

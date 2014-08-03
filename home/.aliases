@@ -6,6 +6,7 @@ alias ...='cd ../..'
 alias sagi='sudo apt-get install'
 alias bi='brew install'
 alias snig='sudo npm install -g'
+alias syi='sudo yum install'
 
 # colours and ANSI lines
 alias tree="tree -CA"
@@ -35,7 +36,6 @@ alias TODO='ack TODO'
 alias ackl='ack -l'
 alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
 alias cdp='cd -P'
-alias gpom='git pull origin master'
 alias dush="du -sh | sort -h"
 
 alias webserver='python -m SimpleHTTPServer'
@@ -53,9 +53,17 @@ alias ssh='ssh -A'
 
 # A few more useful commands that don't need aliases. This file is a good
 # place.
-#du -sh # find recursive, human size of given files/directories
-#file   # identify a filetype using fingerprinting
-#ack    # a good , faster, alternative to find | xargs grep -l
+#du -sh  # find recursive, human size of given files/directories
+#file    # identify a filetype using fingerprinting
+#ack     # a good , faster, alternative to find | xargs grep -l
+#stress  # load CPU/mem/disk
+#binwalk # discover things on a firmware image
+#string  # discover strings in a binary blob
+
+# Also, this seems like a good place to note:
+# If you're in a dangling SSH session type
+#    ~.
+# To 'disconnect'
 
 # typo fixes
 alias sl=ls

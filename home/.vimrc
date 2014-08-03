@@ -118,6 +118,9 @@ ca Wqa  wqa
 ca WQa  wqa
 ca WQA  wqa
 
+" if I want to quit all, I'm sure about it
+ca qa qa!
+
 " <tab> to toggle nerdtree, persistent across all tabs with vim-nerdtree-tabs!
 " or, choose standard NERDtree
 nnoremap <tab> :NERDTreeTabsToggle<CR>
@@ -228,3 +231,7 @@ au BufNewFile,BufRead *.log normal G
 
 " abort a merge commit
 ca fail cq
+
+" stop accidentally saving ';' or ':' files due to typo
+" http://stackoverflow.com/questions/6210946/prevent-saving-files-with-certain-names-in-vim
+autocmd BufWritePre [:;]* throw 'Forbidden file name: ' . expand('<afile>')
