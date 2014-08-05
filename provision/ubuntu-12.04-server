@@ -7,16 +7,15 @@ fi
 
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 # debian/ubuntu
-yes | apt-get update || exit 2
-yes | apt-get upgrade
+apt-get --yes --force-yes update || exit 2
 
 # textmode
-yes | apt-get install picocom vim git ssh figlet build-essential \
+apt-get --yes --force-yes install picocom vim git ssh figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
 	squashfs-tools aufs-tools sox socat netcat nmap p7zip-full
 
 # apt-add-repository
-yes | apt-get install python-software-properties
+apt-get --yes --force-yes install python-software-properties
 
 # tmux 1.8, fish 2.0, nodejs 0.10
 # alternative: backports:
@@ -26,21 +25,21 @@ apt-add-repository --yes ppa:fish-shell/release-2
 add-apt-repository --yes ppa:chris-lea/node.js
 add-apt-repository --yes ppa:git-core/ppa
 apt-get update
-yes | apt-get install tmux fish nodejs git
+apt-get --yes --force-yes install tmux fish nodejs git
 
 # https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 # There is a naming conflict with the node package (Amateur Packet Radio Node
 # Program), and the nodejs binary has been renamed from node to nodejs. You'll
 # need to symlink /usr/bin/node to /usr/bin/nodejs or you could uninstall the
 # Amateur Packet Radio Node Program to avoid that conflict.
-yes | apt-get remove node
+apt-get --yes --force-yes remove node
 dpkg-divert --local --divert /usr/bin/node --rename --add /usr/bin/nodejs
 # fix npm
 ln -s /usr/bin/node /usr/bin/nodejs
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
-yes | apt-get install libcap2-bin
+apt-get --yes --force-yes install libcap2-bin
 setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
 
 # default shell (chsh -s /usr/bin/fish for current user)
