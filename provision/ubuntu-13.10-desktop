@@ -19,28 +19,28 @@ add-apt-repository multiverse
 sudo update-locale LANG=en_GB.utf8 LANGUAGE=en_GB.utf8 LC_ALL=en_GB.utf8
 
 # textmode
-yes | apt-get install picocom vim vim-gtk git ssh tmux figlet build-essential \
+apt-get --yes --force-yes install picocom vim vim-gtk git ssh tmux figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
 	squashfs-tools aufs-tools fish sox socat netcat nmap p7zip-full npm \
 	nodejs
 
 # gui
-yes | apt-get install chromium-browser vlc
-yes | apt-get remove --purge firefox 'libreoffice*' 'ubuntuone-*' ssh-askpass-gnome
+apt-get --yes --force-yes install chromium-browser vlc
+apt-get --yes --force-yes remove --purge firefox 'libreoffice*' 'ubuntuone-*' ssh-askpass-gnome
 
 # https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 # There is a naming conflict with the node package (Amateur Packet Radio Node
 # Program), and the nodejs binary has been renamed from node to nodejs. You'll
 # need to symlink /usr/bin/node to /usr/bin/nodejs or you could uninstall the
 # Amateur Packet Radio Node Program to avoid that conflict.
-yes | apt-get remove node
+apt-get --yes --force-yes remove node
 dpkg-divert --local --divert /usr/bin/node --rename --add /usr/bin/nodejs
 # fix npm
 ln -s /usr/bin/node /usr/bin/nodejs
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
-yes | apt-get install libcap2-bin
+apt-get --yes --force-yes install libcap2-bin
 setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
 
 # removed advert apps
@@ -79,25 +79,23 @@ EOF
 
 yes | add-apt-repository ppa:team-xbmc/ppa
 apt-get update
-yes | apt-get install xbmc
+apt-get --yes --force-yes install xbmc
 
 # fix unmet deps caused by removing stuff
-yes | apt-get -f install
+apt-get --yes --force-yes -f install
 
 # BCRM wifi
 # https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
-yes | apt-get install broadcom-sta-common
-yes | apt-get --reinstall install bcmwl-kernel-source
+apt-get --yes --force-yes install broadcom-sta-common
+apt-get --yes --force-yes --reinstall install bcmwl-kernel-source
 # /etc/modules -> wl ?
 # update initramfs?
 
 # fish default shell
 useradd -D -s /usr/bin/fish
 
-yes | apt-get upgrade
-
 # orphaned packages
-yes | apt-get autoremove
+apt-get --yes --force-yes autoremove
 
 # default shell (chsh -s /usr/bin/fish for current user)
 useradd -D -s /usr/bin/fish
