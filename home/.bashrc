@@ -116,10 +116,10 @@ function ssh {
 		printf "\\033k%s\\033\\\\" $host
 
 		tmux set -q allow-rename off
-		command ssh -A "$@" && clear
+		command ssh -A "$@"
 		tmux set -q allow-rename on
 	else
-		command ssh -A "$@" && clear
+		command ssh -A "$@"
 	fi
 }
 
