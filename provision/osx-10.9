@@ -139,7 +139,7 @@ if ! grep -q /usr/local/bin/fish /etc/shells; then
 	echo /usr/local/bin/fish | sudo tee -a /etc/shells
 fi
 
-echo $SHELL | grep -q fish || chsh -s /usr/local/bin/fish
+#echo $SHELL | grep -q fish || chsh -s /usr/local/bin/fish
 
 # update completion db from man pages. OMGWOW.
 /usr/local/bin/fish -c fish_update_completions
