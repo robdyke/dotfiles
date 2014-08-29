@@ -142,8 +142,8 @@ function fish_prompt --description 'Write out the prompt'
 	# test status of last command without affecting it by using 'or' which tests and forwards
 	or printf "\n\33[31mExited with status %s\33[m" $status
 
-	printf "\n\33[38;5;75m%s@%s:%s\33[90m%s%s\33[0m\n\$ " \
-		$USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt)
+	printf "\n\33[38;5;75m%s@%s:%s\33[90m%s %s %s\33[0m\n\$ " \
+		$USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (date +%T)
 end
 
 # now with MOAR agent forwarding
