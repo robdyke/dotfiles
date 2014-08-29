@@ -142,8 +142,8 @@ function fish_prompt --description 'Write out the prompt'
 	# test status of last command without affecting it by using 'or' which tests and forwards
 	or printf "\n\33[31mExited with status %s\33[m" $status
 
-	printf "\n\33[38;5;75m%s@%s:%s\33[90m%s%s\33[0m\n\$ " \
-		$USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt)
+	printf "\n\33[38;5;75m%s@%s:%s\33[90m%s %s %s\33[0m\n\$ " \
+		$USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (date +%T)
 end
 
 # now with MOAR agent forwarding
@@ -154,11 +154,11 @@ function ssh --description 'SSH wrapper to magically LOCK tmux title to hostname
 
 		printf "\\033k%s\\033\\\\" $host
 		tmux set -q allow-rename off
-		command ssh -A $argv ; and clear
+		command ssh -A $argv
 		tmux set -q allow-rename on
 		fish_set_tmux_title
 	else
-		command ssh -A $argv ; and clear
+		command ssh -A $argv
 	end
 end
 
