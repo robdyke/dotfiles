@@ -15,6 +15,7 @@
 [include]
 	path = ~/.gitconfig.local
 [alias]
+	purge = !/bin/bash -c \"git reset --hard HEAD && git clean -dfx\"
 	tpush = push
 	tpull = pull
 	pus = push

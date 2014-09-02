@@ -26,6 +26,7 @@ alias s='git status'
 alias d='git diff'
 alias o='git log'
 alias b='git branch -a'
+alias master='git checkout master'
 alias l=ls
 alias v=vim
 alias vo='vim -O'

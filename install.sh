@@ -86,8 +86,6 @@ fi
 if which fish &>/dev/null && fish -v 2>&1 | grep -q 'version 2'; then
 	test ! -d ~/.config/fish/generated_completions/ \
 		&& fish -c fish_update_completions
-else
- 	warning 'Fish shell version 2 not found. Bash it is, then...'
 fi
 
 echo Installing/updating fonts...

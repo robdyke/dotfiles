@@ -10,7 +10,7 @@ ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 apt-get --yes --force-yes update || exit 2
 
 # textmode
-apt-get --yes --force-yes install picocom vim git ssh figlet build-essential \
+apt-get --yes --force-yes install picocom vim ssh figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
 	squashfs-tools aufs-tools sox socat netcat nmap p7zip-full
 
@@ -41,9 +41,3 @@ ln -s /usr/bin/node /usr/bin/nodejs
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
 apt-get --yes --force-yes install libcap2-bin
 setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
-
-# default shell (chsh -s /usr/bin/fish for current user)
-useradd -D -s /usr/bin/fish
-
-# current sudo user shell
-#chsh -s /usr/bin/fish $SUDO_USER
