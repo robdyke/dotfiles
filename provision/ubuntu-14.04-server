@@ -31,8 +31,3 @@ ln -s /usr/bin/node /usr/bin/nodejs
 apt-get --yes --force-yes install libcap2-bin
 setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
 
-# default shell (chsh -s /usr/bin/fish for current user)
-useradd -D -s /usr/bin/fish
-
-# current sudo user shell
-chsh -s /usr/bin/fish $SUDO_USER

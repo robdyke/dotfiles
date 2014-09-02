@@ -97,11 +97,4 @@ useradd -D -s /usr/bin/fish
 # orphaned packages
 apt-get --yes --force-yes autoremove
 
-# default shell (chsh -s /usr/bin/fish for current user)
-useradd -D -s /usr/bin/fish
-
-# current sudo user shell
-chsh -s /usr/bin/fish $SUDO_USER || true
-
-
 # note apt-get upgrade can cause problems. Don't do it when building a livecd.
