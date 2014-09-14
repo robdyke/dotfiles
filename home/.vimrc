@@ -211,7 +211,7 @@ map <F4> :!p4 edit %<CR><CR>:w<CR><CR>
 
 " http://stackoverflow.com/questions/56052/best-way-to-insert-timestamp-in-vim
 " for my yaml based work log
-imap <F5> <CR><C-R>=strftime("%d-%m-%Y-%a-%H:%M:")<CR><CR>-<Space>
+imap <F5> <CR><C-R>=strftime("%d-%m-%Y-%a-%H:%M:")<CR><Space>
 
 map <F6> :SyntasticCheck<CR><CR>
 map <F7> :FixWhitespace<CR><CR>
