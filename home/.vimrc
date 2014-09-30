@@ -231,6 +231,9 @@ let g:airline_right_sep=''
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
 
+" ... but not binary files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.bin,*.png,*.jpg
+
 " to bottom if log
 au BufNewFile,BufRead *.log normal G
 
