@@ -54,12 +54,13 @@ alias ssh='ssh -A'
 
 # A few more useful commands that don't need aliases. This file is a good
 # place.
-#du -sh  # find recursive, human size of given files/directories
-#file    # identify a filetype using fingerprinting
-#ack     # a good , faster, alternative to find | xargs grep -l
-#stress  # load CPU/mem/disk
-#binwalk # discover things on a firmware image
-#string  # discover strings in a binary blob
+#du -sh      # find recursive, human size of given files/directories
+#file        # identify a filetype using fingerprinting
+#ack         # a good , faster, alternative to find | xargs grep -l
+#stress      # load CPU/mem/disk
+#binwalk     # discover things on a firmware image
+#strings     # discover strings in a binary blob
+#fdupes -r . # look for duplicate files
 
 # Also, this seems like a good place to note:
 # If you're in a dangling SSH session type
