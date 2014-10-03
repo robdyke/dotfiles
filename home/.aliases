@@ -61,6 +61,7 @@ alias ssh='ssh -A'
 #binwalk     # discover things on a firmware image
 #strings     # discover strings in a binary blob
 #fdupes -r . # look for duplicate files
+#ipython     # interactive python shell
 
 # Also, this seems like a good place to note:
 # If you're in a dangling SSH session type
