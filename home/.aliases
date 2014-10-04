@@ -62,6 +62,9 @@ alias ssh='ssh -A'
 #strings     # discover strings in a binary blob
 #fdupes -r . # look for duplicate files
 #ipython     # interactive python shell
+#jq          # shell json parser. Also display with jq .
+#ncdu        # ncurses disk usage analyser
+
 
 # Also, this seems like a good place to note:
 # If you're in a dangling SSH session type
