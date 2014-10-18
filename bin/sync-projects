@@ -38,6 +38,7 @@ urls = [
         'git@gitlab.com:naggie/rcdos.git',
         'git@gitlab.com:naggie/cv-temporary.git',
         'git@gitlab.com:naggie/dsdrop.git',
+        'git@github.com:naggie/taniafitness.com.git',
 ]
 
 if len(sys.argv) >= 2:
