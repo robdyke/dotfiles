@@ -1,0 +1,46 @@
+#!/bin/bash
+if [ `whoami` != root ]; then
+	echo Run as root
+	exit 5
+fi
+
+
+ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+# debian/ubuntu
+apt-get --yes --force-yes update || exit 2
+
+# textmode
+apt-get --yes --force-yes install picocom vim ssh figlet build-essential \
+	bash-completion keychain mcabber htop curl tree genisoimage \
+	squashfs-tools aufs-tools sox socat netcat nmap p7zip-full
+
+# these are PPAs in 12.04
+apt-get --yes --force-yes install fish nodejs git
+
+
+# Make node processes able to listen on port 80
+# http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
+apt-get --yes --force-yes install libcap2-bin
+setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
+
+# tmux 1.9a
+sudo apt-get install libncurses-dev
+pushd /tmp/
+	wget "https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz"
+	tar -xf libevent-2.0.21-stable.tar.gz
+	pushd libevent-2.0.21-stable
+		./configure
+		make
+		make verify
+		sudo make install
+		sudo ldconfig
+	popd
+
+	wget "http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.9/tmux-1.9a.tar.gz"
+	tar -xf tmux-1.9a.tar.gz
+	pushd tmux-1.9a/
+		./configure
+		make
+		sudo make install
+	popd
+popd

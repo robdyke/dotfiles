@@ -83,10 +83,10 @@ else
 	warning "Not inside tmux, so can't tell tmux to reload"
 fi
 
-if which fish &>/dev/null && fish -v 2>&1 | grep -q 'version 2'; then
-	test ! -d ~/.config/fish/generated_completions/ \
-		&& fish -c fish_update_completions
-fi
+#if which fish &>/dev/null && fish -v 2>&1 | grep -q 'version 2'; then
+#	test ! -d ~/.config/fish/generated_completions/ \
+#		&& fish -c fish_update_completions
+#fi
 
 echo Installing/updating fonts...
 if [ $PLATFORM == 'Darwin' ]; then

@@ -71,8 +71,11 @@ shopt -s checkwinsize
 # stop -bash: !": event not found
 set +o histexpand
 
-# Append commands to the history file, rather than overwrite it.
+# Append commands to the history file at end, rather than overwrite it.
 shopt -s histappend
+
+HISTSIZE=2000
+HISTFILESIZE=4000
 
 # Useful title for ssh
 printf "\033]0;%s\007" $HOSTNAME
@@ -95,8 +98,8 @@ function onprompt {
 		echo -ne "\\033k$LABEL\\033\\\\"
 	fi
 
-	# write that command to history for other sessions
-	history -a
+	# write that command to history for other sessions. Not atomic, can get lost.
+	#history -a
 }
 PROMPT_COMMAND=onprompt
 

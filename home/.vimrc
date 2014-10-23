@@ -208,6 +208,11 @@ map <F2> :set foldmethod=indent<CR><CR>
 
 map <F3> :Retab<CR><CR>
 map <F4> :!p4 edit %<CR><CR>:w<CR><CR>
+
+" http://stackoverflow.com/questions/56052/best-way-to-insert-timestamp-in-vim
+" for my yaml based work log
+imap <F5> <CR><C-R>=strftime("%d-%m-%Y-%a-%H:%M:")<CR><Space>
+
 map <F6> :SyntasticCheck<CR><CR>
 map <F7> :FixWhitespace<CR><CR>
 map <F8> :sort<CR><CR>
@@ -225,6 +230,9 @@ let g:airline_right_sep=''
 " Unsurprisingly, I want to edit dotfiles and simlinks!
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
+
+" ... but not binary files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.bin,*.png,*.jpg
 
 " to bottom if log
 au BufNewFile,BufRead *.log normal G

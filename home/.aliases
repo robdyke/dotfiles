@@ -26,7 +26,7 @@ alias s='git status'
 alias d='git diff'
 alias o='git log'
 alias b='git branch -a'
-alias master='git checkout master'
+alias master='git checkout master;git fetch; git fetch origin master; git merge --ff-only FETCH_HEAD'
 alias l=ls
 alias v=vim
 alias vo='vim -O'
@@ -54,12 +54,17 @@ alias ssh='ssh -A'
 
 # A few more useful commands that don't need aliases. This file is a good
 # place.
-#du -sh  # find recursive, human size of given files/directories
-#file    # identify a filetype using fingerprinting
-#ack     # a good , faster, alternative to find | xargs grep -l
-#stress  # load CPU/mem/disk
-#binwalk # discover things on a firmware image
-#string  # discover strings in a binary blob
+#du -sh      # find recursive, human size of given files/directories
+#file        # identify a filetype using fingerprinting
+#ack         # a good , faster, alternative to find | xargs grep -l
+#stress      # load CPU/mem/disk
+#binwalk     # discover things on a firmware image
+#strings     # discover strings in a binary blob
+#fdupes -r . # look for duplicate files
+#ipython     # interactive python shell
+#jq          # shell json parser. Also display with jq .
+#ncdu        # ncurses disk usage analyser
+
 
 # Also, this seems like a good place to note:
 # If you're in a dangling SSH session type
