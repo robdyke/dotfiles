@@ -74,6 +74,9 @@ set +o histexpand
 # Append commands to the history file at end, rather than overwrite it.
 shopt -s histappend
 
+HISTSIZE=2000
+HISTFILESIZE=4000
+
 # Useful title for ssh
 printf "\033]0;%s\007" $HOSTNAME
 
