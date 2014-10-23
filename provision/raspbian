@@ -24,7 +24,7 @@ apt-get --yes --force-yes install libcap2-bin
 setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
 
 # tmux 1.9a
-sudo apt-get install libncurses-dev
+apt-get --yes --force-yes install libncurses-dev
 pushd /tmp/
 	wget "https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz"
 	tar -xf libevent-2.0.21-stable.tar.gz
