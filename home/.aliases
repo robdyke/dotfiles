@@ -15,6 +15,9 @@ alias tree="tree -CA"
 # Also, tabs by default. -O and -o will override, don't worry.
 alias vim='vim -X -p'
 
+# Moar ANSI colours, raw mode
+alias less='less -R'
+
 # list by creation date (I think)
 alias lr='ls -latr'
 # list all
