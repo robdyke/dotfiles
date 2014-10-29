@@ -21,29 +21,29 @@ apt-get --yes --force-yes install fish nodejs git
 
 # From raspi-config https://github.com/asb/raspi-config/blob/master/raspi-config
 if ! [ -h /dev/root ]; then
-whiptail --msgbox "/dev/root does not exist or is not a symlink. Don't know how to expand" 20 60 2
-exit 0
+	echo "/dev/root does not exist or is not a symlink. Don't know how to expand" 20 60 2
+	exit 0
 fi
 
 ROOT_PART=$(readlink /dev/root)
 PART_NUM=${ROOT_PART#mmcblk0p}
 if [ "$PART_NUM" = "$ROOT_PART" ]; then
-whiptail --msgbox "/dev/root is not an SD card. Don't know how to expand" 20 60 2
-exit 0
+	echo "/dev/root is not an SD card. Don't know how to expand" 20 60 2
+	exit 0
 fi
 
 # NOTE: the NOOBS partition layout confuses parted. For now, let's only 
 # agree to work with a sufficiently simple partition layout
 if [ "$PART_NUM" -ne 2 ]; then
-whiptail --msgbox "Your partition layout is not currently supported by this tool. You are probably using NOOBS, in which case your root filesystem is already expanded anyway." 20 60 2
-exit 0
+	echo "Your partition layout is not currently supported by this tool. You are probably using NOOBS, in which case your root filesystem is already expanded anyway." 20 60 2
+	exit 0
 fi
 
 LAST_PART_NUM=$(parted /dev/mmcblk0 -ms unit s p | tail -n 1 | cut -f 1 -d:)
 
 if [ "$LAST_PART_NUM" != "$PART_NUM" ]; then
-whiptail --msgbox "/dev/root is not the last partition. Don't know how to expand" 20 60 2
-exit 0
+	echo "/dev/root is not the last partition. Don't know how to expand" 20 60 2
+	exit 0
 fi
 
 # Get the starting offset of the root partition
