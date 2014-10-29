@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+if [ ! $1 ]; then
+	echo "Usage: $0 <command> <args...>"
+	echo "Run command at one second interval"
+	exit 1
+fi
+
+while sleep 1; do
+	"$@" && exit 0
+	echo -e "\e[31m$1 Failed, trying again...\e[0m"
+done
