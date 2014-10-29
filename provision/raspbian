@@ -5,7 +5,7 @@ if [ `whoami` != root ]; then
 fi
 
 # exit on error
-set -e
+#set -e
 
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 # debian/ubuntu
@@ -96,10 +96,6 @@ EOF
 
 chmod +x /etc/init.d/resize2fs_once &&
 update-rc.d resize2fs_once defaults &&
-if [ "$INTERACTIVE" = True ]; then
-	echo "Root partition has been resized.\nThe filesystem will be enlarged upon the next reboot"
-fi
-
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
