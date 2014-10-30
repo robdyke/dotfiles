@@ -71,11 +71,26 @@ shopt -s checkwinsize
 # stop -bash: !": event not found
 set +o histexpand
 
-# Append commands to the history file at end, rather than overwrite it.
-shopt -s histappend
+# Bash history sharing. History counter is messed up between sessions and
+# commands get lost any other way.
+# Explaination: http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
+# TODO: zshrc
 
-HISTSIZE=2000
-HISTFILESIZE=4000
+HISTSIZE=9000
+HISTFILESIZE=$HISTSIZE
+HISTCONTROL=ignorespace:ignoredups
+
+history() {
+	_bash_history_sync
+	builtin history "$@"
+}
+
+_bash_history_sync() {
+	builtin history -a
+	HISTFILESIZE=$HISTSIZE
+	builtin history -c
+	builtin history -r
+}
 
 # Useful title for ssh
 printf "\033]0;%s\007" $HOSTNAME
@@ -98,9 +113,9 @@ function onprompt {
 		echo -ne "\\033k$LABEL\\033\\\\"
 	fi
 
-	# write that command to history for other sessions. Not atomic, can get lost.
-	#history -a
+	_bash_history_sync
 }
+
 PROMPT_COMMAND=onprompt
 
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
