@@ -31,8 +31,30 @@ zstyle ':completion:*' menu select
 setopt completealiases
 
 # MOAR PROMPT
-autoload -U promptinit
-promptinit
+#autoload -U promptinit
+#promptinit
+function __git_ps1 {
+	return
+}
+
+function __p4_ps1 {
+	[ $P4CLIENT ] || return
+	echo -n " ($P4CLIENT) "
+}
+
+function __exit_warn {
+	# test status of last command without affecting it
+	stat=$?
+	test $stat -ne 0 \
+		&& printf "\n\33[31mExited with status %s\33[m" $stat
+}
+setopt PROMPT_SUBST
+autoload -U colors && colors
+PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
+
+PROMPT="\$(__exit_warn)
+%n@%M:\$PWD\$(__git_ps1)\$(__p4_ps1)
+"
 
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'
@@ -40,4 +62,6 @@ export EDITOR='vim -X'
 # Completion
 compinit
 
-
+# Syntax highlighting
+#git@github.com:zsh-users/zsh-syntax-highlighting.git
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
