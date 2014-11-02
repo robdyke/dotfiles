@@ -53,7 +53,7 @@ autoload -U colors && colors
 PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
 
 PROMPT="\$(__exit_warn)
-%n@%M:\$PWD\$(__git_ps1)\$(__p4_ps1) \$(date +%T)
+%F{75}%n@%M:\$PWD%f\$(__git_ps1)\$(__p4_ps1) %F{239}\$(date +%T)%f
 $ "
 
 # vim -X = don't look for X server, which can be slow
