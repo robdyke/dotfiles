@@ -58,6 +58,11 @@ $ "
 
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'
+export PAGER=~/bin/vimpager
+
+# zsh will use vi bindings if you have vim as the editor. I want emacs.
+# zsh does not use gnu readline, but zle
+bindkey -e
 
 # Completion
 compinit
@@ -65,3 +70,95 @@ compinit
 # Syntax highlighting
 #git@github.com:zsh-users/zsh-syntax-highlighting.git
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# sometimes TMUX can get confused about whether unicode is supported to draw
+# lines or not. tmux may draw x and q instead, or default to - and | which is
+# ascii. This also allows other programs to use nice UTF-8 symbols, such as
+# NERDtree in vim. So very awesome.
+export LANG=en_GB.utf8
+
+# mac bc read the conf file to allow floating point maths
+# and load the standard library
+export BC_ENV_ARGS="$HOME/.bcrc -l"
+# also, copy the fish bc wrapper
+math() {
+	echo "$@" | bc
+}
+
+# On some machines, hostname is not set. Using $(hostname) to do this is slow,
+# so just read from /etc/hostname)
+[ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
+export HOSTNAME
+
+# if you call a different shell, this does not happen automatically. WTF?
+export SHELL=$(which zsh)
+
+# available since 4.8.0
+export GCC_COLORS=1
+
+echo "\nWelcome to $HOSTNAME, $USER! "
+
+# AUTOMATIC TMUX
+# must not launch tmux inside tmux (no memes please)
+# must be installed/single session/no clients
+# term must be sufficiently wide
+test -z "$TMUX" \
+	&& which tmux &> /dev/null \
+	&& test $(tmux list-sessions 2> /dev/null | wc -l) -eq 1 \
+	&& test $(tmux list-clients 2> /dev/null | wc -l) -eq 0 \
+	&& test $(tput cols) -gt 120 \
+	&& tmux attach
+
+# Useful title for ssh
+printf "\033]0;%s\007" $HOSTNAME
+
+# only auto set title based on initial pane
+# this detects if the pane is the first in a new window
+test $TMUX \
+	&& test $(tmux list-panes | wc -l) -eq 1 \
+	&& TMUX_PRIMARY_PANE=set
+
+# Update TMUX title with path using hook
+# Other hooks: http://zsh.sourceforge.net/Doc/Release/Functions.html
+chpwd() {
+	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
+	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
+
+		# to a clever shorthand representation of the current dir
+		LABEL=$(echo $PWD | sed 's/[^a-zA-Z0-9\/]/-/g' | grep -oE '[^\/]+$')
+
+		# do the correct escape codes. BTW terminal title is always set to hostname
+		echo -ne "\\033k$LABEL\\033\\\\"
+	fi
+}
+
+# aliases shared between fish and bash
+source ~/.aliases
+
+
+# get new or steal existing tmux
+function tm {
+	# must not already be inside tmux
+	test ! $TMUX || return
+	# detach any other clients
+	# attach or make new if there isn't one
+	tmux attach -d || tmux
+}
+
+# cd then ls
+function cd {
+	builtin cd "$@" && ls
+}
+
+[ -x /usr/bin/keychain ] && [ -r ~/.ssh/id_rsa ] && eval `keychain --nogui --quiet --eval ~/.ssh/id_rsa`
+test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
+
+# ls is the first thing I normally do when I log in. Let's hope it's not annoying
+echo "Files in $PWD are:"
+echo
+# neat ls with fixed width
+COLUMNS=80 ls
+
+echo -e "\n> zsh, dotfiles version $(cat ~/.naggie-dotfiles-version)"
+echo '>'$(uptime)
+

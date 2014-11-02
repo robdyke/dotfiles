@@ -23,6 +23,7 @@ export HISTIGNORE='git*--amend*:ls:cd:git*-m*:git*-am*:git*-f*:rm -rf*'
 export HISTCONTROL=ignoredups:ignorespace
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'
+export PAGER=~/bin/vimpager
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is
@@ -215,7 +216,6 @@ function cd {
 	builtin cd "$@" && ls
 }
 
-export PAGER=~/bin/vimpager
 
 # fix backspace on some terminals
 stty erase ^?
