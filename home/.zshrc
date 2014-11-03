@@ -144,6 +144,18 @@ function tm {
 	tmux attach -d || tmux
 }
 
+# patches for Mac OS X
+PLATFORM=$(uname)
+if [[ "$PLATFORM" == 'Darwin' ]]; then
+	#alias ls='ls -G'
+	unalias ls
+	export CLICOLOR=1
+	export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+	# slightly different utf8 locale format...
+	# see `locale -a`
+	export LANG='en_GB.UTF-8'
+fi
+
 # cd then ls
 function cd {
 	builtin cd "$@" && ls
