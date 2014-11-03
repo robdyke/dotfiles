@@ -21,6 +21,9 @@ setopt HIST_IGNORE_DUPS
 setopt SHARE_HISTORY
 unsetopt EXTENDED_HISTORY # just commands plskthx
 
+# auto rehash to discover execs in path
+setopt nohashdirs
+
 # history search by suffix
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"    history-beginning-search-backward
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}"  history-beginning-search-forward
