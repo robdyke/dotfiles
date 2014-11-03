@@ -64,7 +64,7 @@ export PAGER=~/bin/vimpager
 bindkey -e
 
 # Completion
-compinit
+autoload -U compinit compinit
 
 # Syntax highlighting
 #git@github.com:zsh-users/zsh-syntax-highlighting.git
@@ -171,5 +171,5 @@ echo
 COLUMNS=80 ls
 
 echo -e "\n> zsh, dotfiles version $(cat ~/.naggie-dotfiles-version)"
-echo '>'$(uptime)
+echo '>' $(uptime)
 
