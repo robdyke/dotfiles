@@ -56,8 +56,8 @@ rm -f  ~/bin/server-splash.sh     2>/dev/null
 rm -f  ~/git-completion.bash      2>/dev/null
 
 echo 'Clobbering...'
-# clobber vim and fish config (because there are dirs)
 test -d ~/.vim/ && rm -rf ~/.vim/
+test -d ~/zsh/ && rm -rf ~/zsh/
 # not for fish as it removes generated completions which have to rebuilt which is a pain
 #test -d ~/.config/fish/ && rm -rf ~/.config/fish/
 
