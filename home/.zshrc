@@ -17,9 +17,10 @@ fi
 
 HISTSIZE=9000
 SAVEHIST=9000
+HISTFILE=~/.bash_history
 setopt HIST_IGNORE_DUPS
-setopt SHARE_HISTORY
-unsetopt EXTENDED_HISTORY # just commands plskthx
+unsetopt EXTENDED_HISTORY # just commands plskthx so bash_history is compatible
+setopt INC_APPEND_HISTORY # immediate sharing of history
 
 # auto rehash to discover execs in path
 setopt nohashdirs
@@ -132,6 +133,9 @@ chpwd() {
 		# do the correct escape codes. BTW terminal title is always set to hostname
 		echo -ne "\\033k$LABEL\\033\\\\"
 	fi
+
+	# reload history to get immediate update because my computer is fast, yo.
+	fc -RI
 }
 
 # aliases shared between fish and bash
