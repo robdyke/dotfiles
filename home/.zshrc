@@ -70,7 +70,7 @@ autoload -U compinit compinit
 #git@github.com:zsh-users/zsh-syntax-highlighting.git
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# history search by suffix like fish and bash (wuth inputrc)
+# history search by substring like fish and bash (with inputrc)
 # git@github.com:zsh-users/zsh-history-substring-search.git
 # must be loaded after syntax highlighting
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -142,12 +142,11 @@ chpwd() {
 
 precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
-	fc -RI
+	fc -R
 }
 
 # aliases shared between fish and bash
 source ~/.aliases
-
 
 # get new or steal existing tmux
 function tm {
