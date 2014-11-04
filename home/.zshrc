@@ -25,10 +25,6 @@ setopt INC_APPEND_HISTORY # immediate sharing of history
 # auto rehash to discover execs in path
 setopt nohashdirs
 
-# history search by suffix
-[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"    history-beginning-search-backward
-[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}"  history-beginning-search-forward
-
 # with arrow keys
 zstyle ':completion:*' menu select
 
@@ -73,6 +69,15 @@ autoload -U compinit compinit
 # Syntax highlighting
 #git@github.com:zsh-users/zsh-syntax-highlighting.git
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# history search by suffix like fish and bash (wuth inputrc)
+# git@github.com:zsh-users/zsh-history-substring-search.git
+# must be loaded after syntax highlighting
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is
