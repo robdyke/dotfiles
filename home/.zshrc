@@ -138,7 +138,9 @@ chpwd() {
 		# do the correct escape codes. BTW terminal title is always set to hostname
 		echo -ne "\\033k$LABEL\\033\\\\"
 	fi
+}
 
+precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -RI
 }
