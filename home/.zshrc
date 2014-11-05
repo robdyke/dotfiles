@@ -177,6 +177,11 @@ function cd {
 [ -x /usr/bin/keychain ] && [ -r ~/.ssh/id_rsa ] && eval `keychain --nogui --quiet --eval ~/.ssh/id_rsa`
 test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
 
+# Disable stupid flow control. Ctrl+S can disable the terminal, requiring
+# Ctrl+Q to restore. It can result in an apparent hung terminal, if
+# accidentally pressed.
+stty -ixon -ixoff
+
 # ls is the first thing I normally do when I log in. Let's hope it's not annoying
 echo "Files in $PWD are:"
 echo
