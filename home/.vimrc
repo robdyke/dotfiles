@@ -248,5 +248,6 @@ autocmd BufWritePre [:;]* throw 'Forbidden file name: ' . expand('<afile>')
 " https://github.com/kien/ctrlp.vim/issues/160
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("h")': ['<c-s>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
