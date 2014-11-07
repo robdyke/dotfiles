@@ -22,7 +22,8 @@ end
 # lines or not. tmux may draw x and q instead, or default to - and | which is
 # ascii. This also allows other programs to use nice UTF-8 symbols, such as
 # NERDtree in vim. So very awesome.
-set -x LANG=en_GB.utf8
+# Use locale-gen en_GB.UTF-8 to install
+set -x LANG=en_GB.UTF-8
 
 # mac bc read the conf file to allow floating point maths
 # and load the standard library
@@ -86,9 +87,6 @@ if test "$PLATFORM" = 'Darwin'
 	#alias ls=ls
 	set -x CLICOLOR 1
 	set -x LSCOLORS gxBxhxDxfxhxhxhxhxcxcx
-	# slightly different utf8 locale format...
-	# see `locale -a`
-	set -x LANG 'en_GB.UTF-8'
 end
 
 function cd
