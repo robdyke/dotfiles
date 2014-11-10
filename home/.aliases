@@ -67,6 +67,9 @@ alias ssh='ssh -A'
 #ipython     # interactive python shell
 #jq          # shell json parser. Also display with jq .
 #ncdu        # ncurses disk usage analyser
+#tig         # browse git repositories, ncurses
+#ngdb        # ncurses gdb
+#mtr         # tracert + ping
 
 
 # Also, this seems like a good place to note:
