@@ -251,3 +251,12 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("h")': ['<c-s>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
+
+" http://blog.sanctum.geek.nz/vim-annoyances/
+" v-block mode: allow capturing blank space
+set virtualedit=block
+
+
+" vsplit/split: swap order so the text does not move
+set splitbelow
+set splitright
