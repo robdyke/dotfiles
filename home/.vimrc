@@ -269,3 +269,11 @@ set synmaxcol=128
 set ttyfast
 " only draw on user input
 set lazyredraw
+
+" http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
+" Automatically cd into the directory that the file is in:
+set autochdir
+" keep at least 5 lines above/below
+set scrolloff=5
+" keep at least 5 lines left/right
+set sidescrolloff=5
