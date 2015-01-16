@@ -260,3 +260,12 @@ set virtualedit=block
 " vsplit/split: swap order so the text does not move
 set splitbelow
 set splitright
+
+
+" Syntax coloring lines that are too long just slows down the world
+" http://superuser.com/questions/302186/vim-scrolls-very-slow-when-a-line-is-too-long
+set synmaxcol=128
+" give the terminal many characters-per-second it it can cope
+set ttyfast
+" only draw on user input
+set lazyredraw
