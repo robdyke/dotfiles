@@ -251,3 +251,29 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("h")': ['<c-s>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
+
+" http://blog.sanctum.geek.nz/vim-annoyances/
+" v-block mode: allow capturing blank space
+set virtualedit=block
+
+
+" vsplit/split: swap order so the text does not move
+set splitbelow
+set splitright
+
+
+" Syntax coloring lines that are too long just slows down the world
+" http://superuser.com/questions/302186/vim-scrolls-very-slow-when-a-line-is-too-long
+set synmaxcol=128
+" give the terminal many characters-per-second it it can cope
+set ttyfast
+" only draw on user input
+set lazyredraw
+
+" http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
+" Automatically cd into the directory that the file is in:
+set autochdir
+" keep at least 5 lines above/below
+set scrolloff=5
+" keep at least 5 lines left/right
+set sidescrolloff=5

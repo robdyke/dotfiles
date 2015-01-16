@@ -1,4 +1,3 @@
-
 #!/bin/bash
 if [ `whoami` != root ]; then
 	echo Run as root
@@ -14,7 +13,7 @@ apt-get --yes --force-yes update || exit 2
 apt-get --yes --force-yes install picocom vim git ssh figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
 	squashfs-tools aufs-tools tmux fish nodejs sox socat netcat \
-	nmap p7zip-full npm
+	nmap p7zip-full npm zsh
 
 # https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 # There is a naming conflict with the node package (Amateur Packet Radio Node
@@ -30,3 +29,7 @@ ln -s /usr/bin/node /usr/bin/nodejs
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
 apt-get --yes --force-yes install libcap2-bin
 setcap 'cap_net_bind_service=+ep' /usr/bin/nodejs
+
+
+locale-gen en_GB.UTF-8
+sudo update-locale LANG=en_GB.UTF-8 lANGUAGE=en_GB.UTF-8 lC_ALL=en_GB.UTF-8

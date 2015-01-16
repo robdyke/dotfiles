@@ -16,7 +16,8 @@ apt-get update || exit 2
 add-apt-repository universe
 add-apt-repository multiverse
 
-sudo update-locale LANG=en_GB.utf8 LANGUAGE=en_GB.utf8 LC_ALL=en_GB.utf8
+locale-gen en_GB.UTF-8
+sudo update-locale LANG=en_GB.UTF-8 lANGUAGE=en_GB.UTF-8 lC_ALL=en_GB.UTF-8
 
 # textmode
 apt-get --yes --force-yes install picocom vim vim-gtk git ssh tmux figlet build-essential \

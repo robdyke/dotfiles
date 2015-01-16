@@ -7,6 +7,7 @@ alias sagi='sudo apt-get install'
 alias bi='brew install'
 alias snig='sudo npm install -g'
 alias syi='sudo yum install'
+alias spi='sudo pip install'
 
 # colours and ANSI lines
 alias tree="tree -CA"
@@ -67,6 +68,9 @@ alias ssh='ssh -A'
 #ipython     # interactive python shell
 #jq          # shell json parser. Also display with jq .
 #ncdu        # ncurses disk usage analyser
+#tig         # browse git repositories, ncurses
+#ngdb        # ncurses gdb
+#mtr         # tracert + ping
 
 
 # Also, this seems like a good place to note:
