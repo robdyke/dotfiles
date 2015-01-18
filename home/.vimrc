@@ -174,8 +174,10 @@ autocmd VimResized * :wincmd =
 " consistent with :%s//g commands.
 " This stops having to escape all regex metachars
 set magic
-nnoremap / /\v
-cnoremap s/ s/\v
+" This is too annoying, as it's triggered wherever you have /. Do \v manually.
+" No better solution online atm.
+"nnoremap / /\v
+"cnoremap s/ s/\v
 
 " some plugins/commands/aliases assume bash
 set shell=bash
