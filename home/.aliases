@@ -71,6 +71,8 @@ alias ssh='ssh -A'
 #tig         # browse git repositories, ncurses
 #ngdb        # ncurses gdb
 #mtr         # tracert + ping
+#gpg         # GNU privacy guard. Symmetric encryption/compression as well as pub-key.
+#gpg-zip     # Make an archive with above. https://www.gnupg.org/documentation/manuals/gnupg/gpg_002dzip.html
 
 
 # Also, this seems like a good place to note:
