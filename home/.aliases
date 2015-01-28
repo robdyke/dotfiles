@@ -73,6 +73,7 @@ alias ssh='ssh -A'
 #mtr         # tracert + ping
 #gpg         # GNU privacy guard. Symmetric encryption/compression as well as pub-key.
 #gpg-zip     # Make an archive with above. https://www.gnupg.org/documentation/manuals/gnupg/gpg_002dzip.html
+#lsblk       # list block devices
 
 
 # Also, this seems like a good place to note:
