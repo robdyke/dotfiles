@@ -5,6 +5,7 @@ alias ...='cd ../..'
 # package manager commands
 alias sagi='sudo apt-get install'
 alias bi='brew install'
+alias bci='brew cask install'
 alias snig='sudo npm install -g'
 alias syi='sudo yum install'
 alias spi='sudo pip install'
