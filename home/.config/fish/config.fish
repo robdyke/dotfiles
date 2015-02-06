@@ -69,6 +69,9 @@ set -x GCC_COLORS 1
 # aliases shared between fish and bash
 . ~/.aliases
 
+# Launch CTRLP vim plugin outside of vim, as I often do instinctively
+bind \cp 'vim -c CtrlP'
+
 # get new or steal existing tmux
 function tm
 	# must not already be inside tmux

@@ -155,6 +155,12 @@ precmd() {
 # aliases shared between fish and bash
 source ~/.aliases
 
+# zsh uses zle, not readine so .inputrc is not used. Match bindings here:
+
+# Launch CTRLP vim plugin outside of vim, as I often do instinctively
+bindkey -s '\C-p' "\C-k \C-u vim -c CtrlP\n"
+
+
 # get new or steal existing tmux
 function tm {
 	# must not already be inside tmux

@@ -174,8 +174,10 @@ autocmd VimResized * :wincmd =
 " consistent with :%s//g commands.
 " This stops having to escape all regex metachars
 set magic
-nnoremap / /\v
-cnoremap s/ s/\v
+" This is too annoying, as it's triggered wherever you have /. Do \v manually.
+" No better solution online atm.
+"nnoremap / /\v
+"cnoremap s/ s/\v
 
 " some plugins/commands/aliases assume bash
 set shell=bash
@@ -209,10 +211,6 @@ map <F2> :set foldmethod=indent<CR><CR>
 map <F3> :Retab<CR><CR>
 map <F4> :!p4 edit %<CR><CR>:w<CR><CR>
 
-" http://stackoverflow.com/questions/56052/best-way-to-insert-timestamp-in-vim
-" for my yaml based work log
-imap <F5> <CR><C-R>=strftime("%d-%m-%Y-%a-%H:%M:")<CR><Space>
-
 map <F6> :SyntasticCheck<CR><CR>
 map <F7> :FixWhitespace<CR><CR>
 map <F8> :sort<CR><CR>
@@ -226,6 +224,7 @@ map <F10> :set paste!<CR><CR>
 let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let  g:airline_section_c='%<%F%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 
 " Unsurprisingly, I want to edit dotfiles and simlinks!
 let g:ctrlp_show_hidden = 1
@@ -264,7 +263,7 @@ set splitright
 
 " Syntax coloring lines that are too long just slows down the world
 " http://superuser.com/questions/302186/vim-scrolls-very-slow-when-a-line-is-too-long
-set synmaxcol=128
+set synmaxcol=256
 " give the terminal many characters-per-second it it can cope
 set ttyfast
 " only draw on user input

@@ -53,3 +53,6 @@ set echo-control-characters off
 # You can also create a key binding that will execute something without
 # disturbing the current command line.  bind -x '"\eW":"who"'
 # http://stackoverflow.com/questions/4200800/in-bash-how-do-i-bind-a-function-key-to-a-command
+
+# Launch CTRLP vim plugin outside of vim, as I often do instinctively
+"\C-p":"\C-k \C-u vim -c CtrlP\n"
