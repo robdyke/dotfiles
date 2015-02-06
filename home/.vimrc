@@ -224,6 +224,7 @@ map <F10> :set paste!<CR><CR>
 let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let  g:airline_section_c='%<%F%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 
 " Unsurprisingly, I want to edit dotfiles and simlinks!
 let g:ctrlp_show_hidden = 1
