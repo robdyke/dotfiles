@@ -64,8 +64,7 @@ dbus-launch gsettings set org.gnome.desktop.session idle-delay uint32 0
 dbus-launch gsettings set com.canonical.Unity.Launcher favorites "['application://nautilus.desktop',
 	'application://gnome-control-center.desktop', 'unity://running-apps',
 	'application://gnome-system-monitor.desktop', 'application://chromium-browser.desktop',
-	'application://debian-xterm.desktop', 'unity://expo-icon', 'unity://devices',
-	'application://xbmc.desktop']"
+	'application://debian-xterm.desktop', 'unity://expo-icon', 'unity://devices']"
 
 # xterm maximized always
 sed -ir 's/Exec=xterm$/Exec=xterm -maximized/g' /usr/share/applications/debian-xterm.desktop
@@ -78,22 +77,18 @@ cat <<- EOF > /etc/default/keyboard
 	XKBOPTIONS=""
 EOF
 
-yes | add-apt-repository ppa:team-xbmc/ppa
-apt-get update
-apt-get --yes --force-yes install xbmc
-
 # fix unmet deps caused by removing stuff
 apt-get --yes --force-yes -f install
 
 # BCRM wifi
 # https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
-apt-get --yes --force-yes install broadcom-sta-common
-apt-get --yes --force-yes --reinstall install bcmwl-kernel-source
+#apt-get --yes --force-yes install broadcom-sta-common
+#apt-get --yes --force-yes --reinstall install bcmwl-kernel-source
 # /etc/modules -> wl ?
 # update initramfs?
 
 # fish default shell
-useradd -D -s /usr/bin/fish
+#useradd -D -s /usr/bin/fish
 
 # orphaned packages
 apt-get --yes --force-yes autoremove
