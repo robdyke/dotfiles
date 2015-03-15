@@ -23,7 +23,7 @@ sudo update-locale LANG=en_GB.UTF-8 lANGUAGE=en_GB.UTF-8 lC_ALL=en_GB.UTF-8
 apt-get --yes --force-yes install picocom vim vim-gtk git ssh tmux figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
 	squashfs-tools aufs-tools fish sox socat netcat nmap p7zip-full npm \
-	nodejs zsh
+	nodejs zsh feh rxvt-unicode dmenu
 
 # gui
 apt-get --yes --force-yes install chromium-browser vlc

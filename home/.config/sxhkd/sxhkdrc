@@ -1,36 +1,30 @@
 #
-# bspwm hotkeys
+# bspwm hotkeys, inspired by OSX and/or my tmux
+#
+# Minimal for now.]
 #
 
+# Quit X
 super + alt + Escape
 	bspc quit
 
-super + w
+# Close window
+super + q
 	bspc window -c
 
-super + t
-	bspc desktop -l next
-
-super + b
+# Balance window sizes
+super + =
 	bspc desktop -B
 
+# Toggle floating/fullscreen
 super + {s,f}
 	bspc window -t {floating,fullscreen}
 
-super + {grave,Tab}
+# Cycle window/desktop focus
+super + {Tab,grave}
 	bspc {window,desktop} -f last
 
-super + apostrophe
-	bspc window -s last
-
-super + {o,i}
-	bspc control --record-history off; \
-	bspc window {older,newer} -f; \
-	bspc control --record-history on
-
-super + y
-	bspc window -w last.manual
-
+# Switch current with biggest (main)
 super + m
 	bspc window -s biggest
 
@@ -40,33 +34,27 @@ super + {_,shift + }{h,j,k,l}
 super + {_,shift + }c
 	bspc window -f {next,prev}
 
-super + {comma,period}
-	bspc desktop -C {backward,forward}
+# Rotate
+super + r
+bspc desktop -C forward
 
-super + bracket{left,right}
+# Next/prev desktop
+super + {p,n}
 	bspc desktop -f {prev,next}
 
-super + ctrl + {h,j,k,l}
-	bspc window -p {left,down,up,right}
-
-super + ctrl + {_,shift + }space
-	bspc {window -p cancel,desktop -c}
-
-super + alt + {h,j,k,l}
+# Resize
+super + alt + {left,down,up,right}
 	bspc window -e {left -10,down +10,up -10,right +10}
 
-super + alt + shift + {h,j,k,l}
-	bspc window -e {right -10,up +10,down -10,left +10}
-
+# Select desktop
 super + ctrl + {1-9}
 	bspc window -r 0.{1-9}
 
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,window -d} ^{1-9,10}
-
+# Left mouse click focus window
 ~button1
 	bspc pointer -g focus
 
+# Mouse resize
 super + button{1-3}
 	bspc pointer -g {move,resize_side,resize_corner}
 
@@ -75,10 +63,6 @@ super + !button{1-3}
 
 super + @button{1-3}
 	bspc pointer -u
-
-#
-# wm independent hotkeys
-#
 
 super + Return
 	xterm
