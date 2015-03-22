@@ -1,5 +1,9 @@
 #! /bin/sh
 
+
+# suggestion: in xinitrc also launch a panel such as mate-panel, lemonboy bar
+# or tint2. Lemonboy bar does not have mouse control.
+
 bspc config border_width        2
 bspc config window_gap         42
 
