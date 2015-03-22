@@ -16,7 +16,7 @@ apt-get --yes --force-yes update || exit 2
 apt-get --yes --force-yes install picocom vim git ssh figlet build-essential \
 	bash-completion keychain mcabber htop curl tree genisoimage \
 	squashfs-tools aufs-tools tmux fish nodejs sox socat netcat \
-	nmap p7zip-full npm zsh zfsutils ubuntu-zfs
+	nmap p7zip-full npm zsh zfsutils ubuntu-zfs python-pip
 
 # https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 # There is a naming conflict with the node package (Amateur Packet Radio Node
@@ -27,6 +27,8 @@ apt-get --yes --force-yes remove node
 dpkg-divert --local --divert /usr/bin/node --rename --add /usr/bin/nodejs
 # fix npm
 ln -s /usr/bin/node /usr/bin/nodejs
+
+pip install ipython
 
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
