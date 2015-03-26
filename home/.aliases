@@ -75,6 +75,8 @@ alias ssh='ssh -A'
 #gpg         # GNU privacy guard. Symmetric encryption/compression as well as pub-key.
 #gpg-zip     # Make an archive with above. https://www.gnupg.org/documentation/manuals/gnupg/gpg_002dzip.html
 #lsblk       # list block devices
+#pm2         # process manager with json definitions
+#vbindiff    # binary diff
 
 
 # Also, this seems like a good place to note:
