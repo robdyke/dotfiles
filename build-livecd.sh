@@ -197,7 +197,7 @@ rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/
 
 # TODO try this instead
 #INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
-INSIDE /etc/skel/dotfiles/provision/ubuntu-14.04-desktop
+INSIDE /etc/skel/dotfiles/provision/ubuntu-14.10-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
