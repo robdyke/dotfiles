@@ -171,8 +171,8 @@ INSIDE add-apt-repository multiverse
 
 INSIDE ln -s /lib/init/upstart-job /etc/init.d/whoopsie || true # required, otherwise apt breaks
 
-yes | INSIDE apt-get update
-yes | INSIDE apt-get install git
+INSIDE apt-get -y --force-yes update
+INSIDE apt-get -y --force-yes install git
 
 # DOTFILES AND PROVISION
 # make sure submodules are here
@@ -202,18 +202,35 @@ INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
 
+INSIDE apt-get install -y --force-yes dkms
+
+# current kernel is wrong obviously
+# http://askubuntu.com/questions/53364/command-to-rebuild-all-dkms-modules-for-all-installed-kernels
+ls $WORKDIR/filesystem_rw/var/lib/initramfs-tools | INSIDE xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
+
+# this livecd may be used in a vbox guest
+INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
+
+
+# build modules for specific kernel (sorry about the hack)
+# maybe sudo dpkg -l | grep linux-image and pick the latest.
+#export KERNEL_VERSION=$(ls $WORKDIR/filesystem_rw/usr/src/ | grep -E 'headers.+generic' | grep -oE '[0-9].+$')
+#BREAKPOINT
+#INSIDE dkms autoinstall -k $KERNEL_VERSION
+
 # CLEANUP
 # Be sure to remove any temporary files which are no longer needed, as space on a
 # CD is limited. A classic example is downloaded package files, which can be
 # cleaned out using:
 # note apt-get upgrade can cause problems. Don't do it when building a livecd.
-yes | INSIDE apt-get clean
-yes | INSIDE apt-get autoremove
+INSIDE apt-get -y --force-yes clean
+INSIDE apt-get -y --force-yes autoremove
+
 
 # New kernel or initrd?
 #cp $WORKDIR/filesystem_rw/boot/vmlinuz-2.6.15-26-k7    $WORKDIR/iso_rw/casper/vmlinuz
 # new initrd generated when Broadcom sta drivers were installed.
-cp $WORKDIR/filesystem_rw/boot/initrd.img* $WORKDIR/iso_rw/casper/initrd.lz
+cp $WORKDIR/filesystem_rw/boot/initrd.img* $WORKDIR/iso_rw/casper/initrd.lz ||:
 # After you've modified the kernel, init scripts or added new kernel
 # modules, you need to rebuild the initrd.gz file and substitute it into
 # the casper directory.
