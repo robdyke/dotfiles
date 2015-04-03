@@ -15,7 +15,7 @@ ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 add-apt-repository universe
 add-apt-repository multiverse
 
-apt-add-repository ppa:numix/ppa
+apt-add-repository --yes ppa:numix/ppa
 
 apt-get update || exit 2
 
