@@ -56,3 +56,6 @@ set echo-control-characters off
 
 # Launch CTRLP vim plugin outside of vim, as I often do instinctively
 "\C-p":"\C-k \C-u vim -c CtrlP\n"
+
+# sudo-ize command
+"\C-s":"\C-a sudo \C-e"

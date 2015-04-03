@@ -160,6 +160,9 @@ source ~/.aliases
 # Launch CTRLP vim plugin outside of vim, as I often do instinctively
 bindkey -s '\C-p' "\C-k \C-u vim -c CtrlP\n"
 
+# sudo-ize command
+bindkey -s '\C-s' "\C-a sudo \C-e"
+
 
 # get new or steal existing tmux
 function tm {
