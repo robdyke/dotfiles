@@ -78,7 +78,7 @@ dbus-launch gsettings set org.gnome.desktop.interface gtk-theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.interface icon-theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.background primary-color '#000000'
 dbus-launch gsettings set org.gnome.desktop.background secondary-color '#000000'
-dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/xgu472hf2by_lariliikala.jpg'
+dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/xgu472hf2_by_lariliikala.jpg'
 
 # xterm maximized always
 #sed -ir 's/Exec=xterm$/Exec=xterm -maximized/g' /usr/share/applications/debian-xterm.desktop
