@@ -74,7 +74,7 @@ dbus-launch gsettings set com.canonical.Unity.Launcher favorites "['application:
 	'application://debian-xterm.desktop', 'unity://expo-icon', 'unity://devices']"
 
 dbus-launch gsettings set org.gnome.desktop.wm.preferences theme 'Numix'
-dbus-launch gsettings set org.gnome.desktop.interface theme 'Numix'
+dbus-launch gsettings set org.gnome.desktop.interface gtk-theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.interface icon-theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.background primary-color '#000000'
 dbus-launch gsettings set org.gnome.desktop.background secondary-color '#000000'
