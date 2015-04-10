@@ -66,19 +66,19 @@ dbus-launch gsettings set com.canonical.Unity.Lenses remote-content-search none
 dbus-launch gsettings set org.gnome.desktop.screensaver lock-enabled false
 dbus-launch gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
 dbus-launch gsettings set org.gnome.desktop.privacy remember-recent-files false
-# sticky mouse between monitors
-dbus-launch gsettings set org.gnome.desktop.session idle-delay uint32 0
+dbus-launch gsettings set org.gnome.desktop.session idle-delay 0 # do not turn off screen after delay
 dbus-launch gsettings set com.canonical.Unity.Launcher favorites "['application://nautilus.desktop',
 	'application://gnome-control-center.desktop', 'unity://running-apps',
 	'application://gnome-system-monitor.desktop', 'application://chromium-browser.desktop',
 	'application://debian-xterm.desktop', 'unity://expo-icon', 'unity://devices']"
 
+# move to provision
 dbus-launch gsettings set org.gnome.desktop.wm.preferences theme 'Numix'
-dbus-launch gsettings set org.gnome.desktop.interface theme 'Numix'
+dbus-launch gsettings set org.gnome.desktop.interface gtk-theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.interface icon-theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.background primary-color '#000000'
 dbus-launch gsettings set org.gnome.desktop.background secondary-color '#000000'
-dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/xgu472hf2by_lariliikala.jpg'
+dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/xgu472hf2_by_lariliikala.jpg'
 
 # xterm maximized always
 #sed -ir 's/Exec=xterm$/Exec=xterm -maximized/g' /usr/share/applications/debian-xterm.desktop

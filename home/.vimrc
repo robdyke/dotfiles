@@ -38,16 +38,18 @@ set cursorcolumn
 " Stop the pause that you no longer notice exiting insert mode
 set ttimeoutlen=50
 
-au BufNewFile,BufRead *.json   set filetype=javascript
-au BufNewFile,BufRead *.less   set filetype=css
-au BufNewFile,BufRead *.cls    set filetype=tex
-au BufNewFile,BufRead *.ino    set filetype=c
-au BufNewFile,BufRead *.pde    set filetype=c
-au BufNewFile,BufRead *.md     set filetype=markdown
-au BufNewFile,BufRead *.fish   set filetype=sh
-au BufNewFile,BufRead *.fdc    set filetype=sdc
-au BufNewFile,BufRead .aliases set filetype=sh
-au BufNewFile,BufRead .bcrc    set filetype=bc
+au BufNewFile,BufRead *.conf.j2 set filetype=dosini
+au BufNewFile,BufRead *.conf    set filetype=dosini
+au BufNewFile,BufRead *.json    set filetype=javascript
+au BufNewFile,BufRead *.less    set filetype=css
+au BufNewFile,BufRead *.cls     set filetype=tex
+au BufNewFile,BufRead *.ino     set filetype=c
+au BufNewFile,BufRead *.pde     set filetype=c
+au BufNewFile,BufRead *.md      set filetype=markdown
+au BufNewFile,BufRead *.fish    set filetype=sh
+au BufNewFile,BufRead *.fdc     set filetype=sdc
+au BufNewFile,BufRead .aliases  set filetype=sh
+au BufNewFile,BufRead .bcrc     set filetype=bc
 
 " Auto indent is completely broken for yaml
 au BufNewFile,BufRead *yml     filetype indent off

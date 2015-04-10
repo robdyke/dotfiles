@@ -77,6 +77,7 @@ alias ssh='ssh -A'
 #lsblk       # list block devices
 #pm2         # process manager with json definitions
 #vbindiff    # binary diff
+#lsof        # list open files/ports (-i :8080) by process (handles)
 
 
 # Also, this seems like a good place to note:
