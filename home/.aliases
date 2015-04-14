@@ -37,6 +37,7 @@ alias v=vim
 alias vo='vim -O'
 alias findn='find -name'
 alias findack='find . | ack'
+alias recursive_sed="ack -f | xargs sed -i -r -e"
 # find TODO tags in files
 alias TODO='ack TODO'
 alias ackl='ack -l'
