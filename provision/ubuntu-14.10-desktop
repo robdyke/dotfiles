@@ -11,6 +11,8 @@ set -x
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 # debian/ubuntu
 
+export SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 # a lot of packages live here
 add-apt-repository universe
 add-apt-repository multiverse
@@ -106,3 +108,8 @@ apt-get --yes --force-yes -f install
 
 # orphaned packages
 apt-get --yes --force-yes autoremove
+
+# note apt-get upgrade can cause problems. Don't do it when building a livecd.
+
+# desaturate!
+$SCRIPT_DIR/desaturate_ubuntu.py

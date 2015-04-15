@@ -37,6 +37,7 @@ alias v=vim
 alias vo='vim -O'
 alias findn='find -name'
 alias findack='find . | ack'
+alias recursive_sed="ack -f | xargs sed -i -r -e"
 # find TODO tags in files
 alias TODO='ack TODO'
 alias ackl='ack -l'
@@ -78,6 +79,9 @@ alias ssh='ssh -A'
 #pm2         # process manager with json definitions
 #vbindiff    # binary diff
 #lsof        # list open files/ports (-i :8080) by process (handles)
+#7zr         # make 7z archives. Requires p7zip-full
+#weechat     # IRC OOB
+#profanity   # XMPP client (kaiwa server or letschat)
 
 
 # Also, this seems like a good place to note:

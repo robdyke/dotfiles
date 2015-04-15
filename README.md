@@ -1,3 +1,18 @@
+# Darkbuntu
+This dotfiles repository is capable of remastering an Ubuntu 14.10 live CD.
+
+On an existing ubuntu machine, run `make livecd` to create a customised Ubuntu
+14.10 ISO based on these dotfiles. There are many tweaks to 'Darkbuntu'
+including:
+
+  * Numix theme
+  * Numic icons
+  * *Desaturation of nearly everything (cool, huh)*
+  * Remove Amazon spyware
+
+![Screenshot](etc/darkbuntu.png "Ubuntu, circa 1950's")
+
+# Dotfiles
 Run `install.sh` to install to your home directory, **overwriting all required
 files.** If you run it as root, it will install to `/etc/skel` so that new
 users get a copy.
@@ -24,7 +39,8 @@ Requirements:
     Switched off in bashrc, [now fixed in in fish][3]
 
 
-![Screenshot](screenshot.png "Why do all terminal screenshots show top or htop running?")
+![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
+
 
 
 [2]: http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
