@@ -226,7 +226,7 @@ map <F10> :set paste!<CR><CR>
 let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let  g:airline_section_c='%<%F%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+let g:airline_section_c='%<%F%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 
 " Unsurprisingly, I want to edit dotfiles and simlinks!
 let g:ctrlp_show_hidden = 1
@@ -247,7 +247,9 @@ autocmd BufWritePre [:;]* throw 'Forbidden file name: ' . expand('<afile>')
 
 " CtrlP open in new tab by default
 " https://github.com/kien/ctrlp.vim/issues/160
-let g:ctrlp_prompt_mappings = {
+" but only apply when a file is read. This means empty vim won't leave an
+" empty buffer when a file is opened in a new tab
+au BufRead * let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("h")': ['<c-s>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
