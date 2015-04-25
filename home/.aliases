@@ -33,17 +33,16 @@ alias o='git log'
 alias b='git branch -a'
 alias master='git checkout master;git fetch; git fetch origin master; git merge --ff-only FETCH_HEAD'
 alias l=ls
-alias v=vim
 alias vo='vim -O'
-alias findn='find -name'
 alias findack='find . | ack'
-alias recursive_sed="ack -f | xargs sed -i -r -e"
+alias sed-recursive="ack -f | xargs sed -i -r -e"
 # find TODO tags in files
 alias TODO='ack TODO'
 alias ackl='ack -l'
-alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;'
+#alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;' # can ruin git objects
 alias cdp='cd -P'
 alias dush="du -sh | sort -h"
+alias tailnf="tail -n1000 -f"
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'

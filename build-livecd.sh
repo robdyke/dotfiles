@@ -34,7 +34,7 @@ function WARNING {
 if [ ! "$2" ]; then
 	echo "Usage: make livecd"
 	echo "-OR-"
-	echo "Usage: sudo $0 <source ubuntu 14.04 iso> <destination iso>"
+	echo "Usage: sudo $0 <source ubuntu 15.04 iso> <destination iso>"
 	exit 121
 fi
 
@@ -197,7 +197,7 @@ rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/
 
 # TODO try this instead
 #INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
-INSIDE /etc/skel/dotfiles/provision/ubuntu-14.10-desktop
+INSIDE /etc/skel/dotfiles/provision/ubuntu-15.04-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
