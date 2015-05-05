@@ -69,8 +69,20 @@ set -x GCC_COLORS 1
 # aliases shared between fish and bash
 . ~/.aliases
 
-# Launch CTRLP vim plugin outside of vim, as I often do instinctively
-bind \cp 'vim -c CtrlP'
+# Very long-winded in fish...
+function _prependsudo
+	commandline -C 0
+	commandline -i 'sudo '
+	commandline -f end-of-line
+end
+
+# binds must be in this wrapper or dedicated file
+function fish_user_key_bindings
+	bind \cs _prependsudo
+
+	# Launch CTRLP vim plugin outside of vim, as I often do instinctively
+	bind \cp 'vim -c CtrlP'
+end
 
 # get new or steal existing tmux
 function tm
