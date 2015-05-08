@@ -67,7 +67,7 @@ export PAGER=~/bin/vimpager
 bindkey -e
 
 # Completion
-autoload -U compinit compinit
+autoload -U compinit && compinit
 
 # Syntax highlighting
 #git@github.com:zsh-users/zsh-syntax-highlighting.git
