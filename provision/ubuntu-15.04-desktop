@@ -31,7 +31,8 @@ apt-get --yes --force-yes install picocom vim vim-gtk git ssh tmux figlet build-
 	nodejs zsh feh rxvt-unicode dmenu python-pip
 
 # theme stuff
-apt-get --yes --force-yes install numix-gtk-theme numix-icon-theme
+apt-get --yes --force-yes install numix-gtk-theme
+# numix-icon-theme is good but I prefer regular desaturated ubuntu icons
 
 # gui
 apt-get --yes --force-yes install chromium-browser vlc
@@ -77,7 +78,7 @@ dbus-launch gsettings set com.canonical.Unity.Launcher favorites "['application:
 # move to provision
 dbus-launch gsettings set org.gnome.desktop.wm.preferences theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.interface gtk-theme 'Numix'
-dbus-launch gsettings set org.gnome.desktop.interface icon-theme 'Numix'
+#dbus-launch gsettings set org.gnome.desktop.interface icon-theme 'Numix'
 dbus-launch gsettings set org.gnome.desktop.background primary-color '#000000'
 dbus-launch gsettings set org.gnome.desktop.background secondary-color '#000000'
 dbus-launch gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/xgu472hf2_by_lariliikala.jpg'

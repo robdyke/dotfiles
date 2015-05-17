@@ -67,7 +67,7 @@ export PAGER=~/bin/vimpager
 bindkey -e
 
 # Completion
-autoload -U compinit compinit
+autoload -U compinit && compinit
 
 # Syntax highlighting
 #git@github.com:zsh-users/zsh-syntax-highlighting.git
@@ -83,7 +83,8 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # case insensitive completion
-zstyle ':completion:*' '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# http://stackoverflow.com/questions/24226685/have-zsh-return-case-insensitive-auto-complete-matches-but-prefer-exact-matches
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is
