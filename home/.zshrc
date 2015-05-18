@@ -22,6 +22,7 @@ HISTSIZE=9000
 SAVEHIST=9000
 HISTFILE=~/.bash_history
 setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
 unsetopt EXTENDED_HISTORY # just commands plskthx so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
 
