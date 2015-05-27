@@ -7,7 +7,7 @@ fi
 
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
-apt-add-repository ppa:zfs-native/stable
+apt-add-repository --yes ppa:zfs-native/stable
 
 # debian/ubuntu
 apt-get --yes --force-yes update || exit 2
