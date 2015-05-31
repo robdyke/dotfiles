@@ -8,7 +8,7 @@ alias bi='brew install'
 alias bci='brew cask install'
 alias snig='sudo npm install -g'
 alias syi='sudo yum install'
-alias spi='sudo pip install'
+alias spi='sudo pip install --upgrade'
 
 # colours and ANSI lines
 alias tree="tree -CA"
