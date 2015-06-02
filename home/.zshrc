@@ -80,6 +80,10 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # bind UP and DOWN arrow keys
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+# https://github.com/zsh-users/zsh-history-substring-search
+# both methods are necessary
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
