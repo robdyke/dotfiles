@@ -195,15 +195,22 @@ map <C-e> <End>
 noremap! <C-a> <Home>
 noremap! <C-e> <End>
 
+" http://usevim.com/2012/08/03/vim101-indentation/
 " 4 spaces for tabs, inserted automatically.
 " Tabs work fine in an ideal world. Sadly, spaces are always more consistent.
 " To refactor code: find ./ -type f -exec sed -i 's/\t/    /g' {} \;
-"set shiftwidth=4
-"set expandtab
 
-" Tabs (actual tabs) to be 4-wide. MOAR CODE ON SCREEN. Sorry, Linus. (block
-" indent broken)
-"set tabstop=4
+" Pressing tab means spaces instead
+set expandtab
+
+" how many spaces when expanding a tab
+set softtabstop=4
+
+" autoindent/shift >> << width
+set shiftwidth=4
+
+" Tabs (actual tabs) to be 4-wide. Sorry, Linus.
+set tabstop=4
 
 command Retab normal! gg=G
 
