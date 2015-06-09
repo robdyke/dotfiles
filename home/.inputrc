@@ -58,4 +58,4 @@ set echo-control-characters off
 "\C-p":"\C-k \C-u vim -c CtrlP\n"
 
 # sudo-ize command
-"\C-s":"\C-a sudo \C-e"
+"\C-s":"\C-asudo \C-e"

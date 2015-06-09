@@ -167,7 +167,7 @@ source ~/.aliases
 bindkey -s '\C-p' "\C-k \C-u vim -c CtrlP\n"
 
 # sudo-ize command
-bindkey -s '\C-s' "\C-a sudo \C-e"
+bindkey -s '\C-s' "\C-asudo \C-e"
 
 
 # get new or steal existing tmux
