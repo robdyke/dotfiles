@@ -51,10 +51,6 @@ au BufNewFile,BufRead *.fdc     set filetype=sdc
 au BufNewFile,BufRead .aliases  set filetype=sh
 au BufNewFile,BufRead .bcrc     set filetype=bc
 
-" Auto indent is completely broken for yaml
-au BufNewFile,BufRead *yml     filetype indent off
-au BufNewFile,BufRead *yaml     filetype indent off
-
 " It's not the 70's anymore. Use git or something.
 set noswapfile
 set nobackup
@@ -211,6 +207,14 @@ set shiftwidth=4
 
 " Tabs (actual tabs) to be 4-wide. Sorry, Linus.
 set tabstop=4
+
+" YAML should have a 2-space indent, as dictionary fields have to line up
+" after a list delimitation.
+autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2 tabstop=2
+" ...yet, still, auto-indent does not work. The YAML superset used by ansible
+" has a vim plugin, which fixes things for all YAML files
+autocmd FileType yaml set filetype=ansible
+
 
 command Retab normal! gg=G
 
