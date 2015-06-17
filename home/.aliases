@@ -85,6 +85,7 @@ alias sudo="sudo "
 #7zr         # make 7z archives. Requires p7zip-full
 #weechat     # IRC OOB
 #profanity   # XMPP client (kaiwa server or letschat)
+#http        # AKA httpie from https://github.com/jakubroztocil/httpie is better than curl
 
 
 # Also, this seems like a good place to note:
