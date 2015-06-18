@@ -208,6 +208,9 @@ set shiftwidth=4
 " Tabs (actual tabs) to be 4-wide. Sorry, Linus.
 set tabstop=4
 
+" Tip: use = in visual-line mode to re-indent
+
+
 " YAML should have a 2-space indent, as dictionary fields have to line up
 " after a list delimitation.
 autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2 tabstop=2
