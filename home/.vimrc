@@ -266,6 +266,8 @@ au BufRead * let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 " http://blog.sanctum.geek.nz/vim-annoyances/
 " v-block mode: allow capturing blank space
 set virtualedit=block
