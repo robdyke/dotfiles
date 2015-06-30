@@ -38,6 +38,7 @@ set cursorcolumn
 " Stop the pause that you no longer notice exiting insert mode
 set ttimeoutlen=50
 
+" Filetype mappings
 au BufNewFile,BufRead *.conf.j2 set filetype=dosini
 au BufNewFile,BufRead *.conf    set filetype=dosini
 au BufNewFile,BufRead *.json    set filetype=javascript
@@ -50,6 +51,9 @@ au BufNewFile,BufRead *.fish    set filetype=sh
 au BufNewFile,BufRead *.fdc     set filetype=sdc
 au BufNewFile,BufRead .aliases  set filetype=sh
 au BufNewFile,BufRead .bcrc     set filetype=bc
+
+au BufNewFile,BufRead /etc/nginx/sites-*/* set filetype=nginx
+au BufNewFile,BufRead *nginx.conf set filetype=nginx
 
 " It's not the 70's anymore. Use git or something.
 set noswapfile
