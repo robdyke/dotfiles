@@ -66,6 +66,11 @@ echo 'Copying dotfiles...'
 # copy dotfiles separately , normal glob does not match
 cp -r home/.??* ~
 
+if [ $PLATFORM == 'Darwin' ]; then
+    echo 'Mac non-hidden...'
+    cp -r home/Library ~
+fi
+
 # TODO: perserve target executable permissions
 echo 'Copying scripts...'
 cp -a bin ~
