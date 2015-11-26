@@ -28,3 +28,15 @@ if ! grep usb_max_current /boot/config.txt; then
 	echo 'usb_max_current=1' >> /boot/config.txt
 	#echo 'gpu_mem=16' >> /boot/config.txt
 fi
+
+# usb audio
+cat << EOF > /etc/asound.conf
+pcm.!default {
+    type hw
+    card 1
+}
+ctl.!default {
+    type hw
+    card 1
+}
+EOF
