@@ -19,6 +19,9 @@ apt-get --yes --force-yes install picocom vim ssh figlet build-essential \
 	bash-completion keychain htop curl tree sox socat netcat nmap p7zip-full \
 	fish nodejs git tmux npm python-pip
 
+# really? again?
+ln -s /usr/bin/nodejs /usr/bin/node
+
 # Make node processes able to listen on port 80
 # http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
 apt-get --yes --force-yes install libcap2-bin
