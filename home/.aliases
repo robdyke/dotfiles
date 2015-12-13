@@ -44,6 +44,8 @@ alias cdp='cd -P'
 alias dush="du -sh | sort -h"
 alias tailnf="tail -n1000 -f"
 
+alias acknonascii="ack '[^\x00-\x7F]'"
+
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
 
