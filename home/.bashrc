@@ -55,6 +55,9 @@ export GCC_COLORS=1
 # Now this doesn't matter thanks to the deferred() system
 echo -ne "\n\033[37m> Welcome to $HOSTNAME, $USER!\033[0m "
 
+# set from hostname
+export SYSTEM_COLOUR=$(~/bin/system-colour.py)
+
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
 # must be installed/single session/no clients
@@ -165,7 +168,7 @@ function __exit_warn {
 		&& printf "\n\33[31mExited with status %s\33[m" $status
 }
 
-PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
+PS1="\$(__exit_warn)\n\[\e[38;5;${SYSTEM_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases

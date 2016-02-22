@@ -55,10 +55,6 @@ autoload -U colors && colors
 ZSH_THEME_GIT_PROMPT_CACHE=1
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 
-PROMPT="\$(__exit_warn)
-%F{75}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
-$ "
-
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'
 export PAGER=~/bin/vimpager
@@ -110,6 +106,13 @@ math() {
 # so just read from /etc/hostname)
 [ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
 export HOSTNAME
+
+# set from hostname
+export SYSTEM_COLOUR=$(~/bin/system-colour.py)
+
+PROMPT="\$(__exit_warn)
+%F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
+$ "
 
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which zsh)

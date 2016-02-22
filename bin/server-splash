@@ -72,11 +72,17 @@ echo Welcome to | center
 echo;echo
 
 # get a number dependent on hostname, in this case the crc32 (was 75 blue)
-SUM=$(echo $HOSTNAME | cksum | cut -d' ' -f1)
+#SUM=$(echo $HOSTNAME | cksum | cut -d' ' -f1)
 #SUM=$RANDOM
 # use modulo operator to get remainer from integer division. This restricts the
 # range.  colours: 0-254 (%255), 16-201 are acceptable
-COLOUR=$(( ($SUM % 185) +15 ))
+#COLOUR=$(( ($SUM % 185) +15 ))
+
+
+# set from hostname
+export SYSTEM_COLOUR=$(~/bin/system-colour.py)
+
+
 echo -ne "\033[38;5;${COLOUR}m"
 
 hostname -s | sed 's/.*/\u&/' | figlet -cf ~/.config/figlet/roman.flf -t
