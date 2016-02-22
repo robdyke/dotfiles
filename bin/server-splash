@@ -111,9 +111,9 @@ trap CLEANUP_EXIT EXIT
 
 
 echo
-if [ -r /etc/quotes ]; then
+if [ -r ~/etc/quotes ]; then
 	echo; echo
-	QUOTE=$(cat /etc/quotes | sort -R | tail -n 1 )
+	QUOTE=$(cat ~/etc/quotes | sort -R | tail -n 1 )
 	echo "$QUOTE" \
 		| sed 's/.*/"&"/g' \
 		| fold -w 76 -s \

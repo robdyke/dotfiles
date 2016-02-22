@@ -71,6 +71,9 @@ if [ $PLATFORM == 'Darwin' ]; then
     cp -r home/Library ~
 fi
 
+echo "Copying ~/etc..."
+cp -a etc ~
+
 # TODO: perserve target executable permissions
 echo 'Copying scripts...'
 cp -a bin ~
