@@ -5,7 +5,7 @@ unsetopt NOMATCH
 [ -z "$PS1" ] && return
 
 typeset -U path
-path=(~/bin /usr/local/bin /usr/local/share/npm/bin $path)
+path=(~/bin /usr/local/bin /usr/loca/sbin /usr/local/share/npm/bin $path)
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
@@ -18,10 +18,14 @@ if [[ -z $TMUX ]] && test 0$(tput colors 2>/dev/null) -ne 256; then
 	export TERM=xterm-256color
 fi
 
+# only on new shell, fail silently. Must be non-invasive.
+[ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
+
 HISTSIZE=9000
 SAVEHIST=9000
 HISTFILE=~/.bash_history
 setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
 unsetopt EXTENDED_HISTORY # just commands plskthx so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
 
@@ -54,10 +58,6 @@ autoload -U colors && colors
 ZSH_THEME_GIT_PROMPT_CACHE=1
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 
-PROMPT="\$(__exit_warn)
-%F{75}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
-$ "
-
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'
 export PAGER=~/bin/vimpager
@@ -79,6 +79,10 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # bind UP and DOWN arrow keys
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+# https://github.com/zsh-users/zsh-history-substring-search
+# both methods are necessary
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
@@ -105,6 +109,13 @@ math() {
 # so just read from /etc/hostname)
 [ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
 export HOSTNAME
+
+# set from hostname
+export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
+
+PROMPT="\$(__exit_warn)
+%F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
+$ "
 
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which zsh)
@@ -162,7 +173,7 @@ source ~/.aliases
 bindkey -s '\C-p' "\C-k \C-u vim -c CtrlP\n"
 
 # sudo-ize command
-bindkey -s '\C-s' "\C-a sudo \C-e"
+bindkey -s '\C-s' "\C-asudo \C-e"
 
 
 # get new or steal existing tmux

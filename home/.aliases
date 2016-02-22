@@ -8,7 +8,7 @@ alias bi='brew install'
 alias bci='brew cask install'
 alias snig='sudo npm install -g'
 alias syi='sudo yum install'
-alias spi='sudo pip install'
+alias spi='sudo pip install --upgrade'
 
 # colours and ANSI lines
 alias tree="tree -CA"
@@ -31,7 +31,7 @@ alias s='git status'
 alias d='git diff'
 alias o='git log'
 alias b='git branch -a'
-alias master='git checkout master;git fetch; git fetch origin master; git merge --ff-only FETCH_HEAD'
+alias master='git checkout master; git fetch; git fetch origin master && git merge --ff-only FETCH_HEAD && git submodule update --init'
 alias l=ls
 alias vo='vim -O'
 alias findack='find . | ack'
@@ -43,6 +43,8 @@ alias ackl='ack -l'
 alias cdp='cd -P'
 alias dush="du -sh | sort -h"
 alias tailnf="tail -n1000 -f"
+
+alias acknonascii="ack '[^\x00-\x7F]'"
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
@@ -56,6 +58,10 @@ alias wget='wget --content-disposition'
 
 # Agent forwarding -- only this seems to work
 alias ssh='ssh -A'
+
+# make bash/zsh (but not fish yet, TODO) aliases work with sudo
+# http://superuser.com/questions/441556/bash-alias-doesnt-carry-over-with-sudo
+alias sudo="sudo "
 
 # A few more useful commands that don't need aliases. This file is a good
 # place.
@@ -81,6 +87,7 @@ alias ssh='ssh -A'
 #7zr         # make 7z archives. Requires p7zip-full
 #weechat     # IRC OOB
 #profanity   # XMPP client (kaiwa server or letschat)
+#http        # AKA httpie from https://github.com/jakubroztocil/httpie is better than curl
 
 
 # Also, this seems like a good place to note:

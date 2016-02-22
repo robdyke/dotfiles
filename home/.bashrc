@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export PATH=~/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
@@ -15,7 +15,7 @@ if [ -z $TMUX ] && test 0$(tput colors 2>/dev/null) -ne 256; then
 fi
 
 # only on new shell, fail silently. Must be non-invasive.
-#[ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
+[ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
 # fix annoying accidental commits and amends
 # and other dangerous commands
@@ -54,6 +54,9 @@ export GCC_COLORS=1
 # this bashrc takes a sec or so thanks to all the completions, so print this first
 # Now this doesn't matter thanks to the deferred() system
 echo -ne "\n\033[37m> Welcome to $HOSTNAME, $USER!\033[0m "
+
+# set from hostname
+export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
 
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
@@ -165,7 +168,7 @@ function __exit_warn {
 		&& printf "\n\33[31mExited with status %s\33[m" $status
 }
 
-PS1="\$(__exit_warn)\n\[\e[38;5;75m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
+PS1="\$(__exit_warn)\n\[\e[38;5;${SYSTEM_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases

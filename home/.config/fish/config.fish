@@ -1,6 +1,6 @@
 status --is-interactive; or exit 0
 
-set -x PATH ~/bin /usr/local/bin /usr/local/share/npm/bin $PATH
+set -x PATH ~/bin /usr/local/bin /usr/loca/sbin /usr/local/share/npm/bin $PATH
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
@@ -16,7 +16,7 @@ if begin; test -z $TMUX ; and test (tput colors) -ne 256; end
 end
 
 # only on new shell, fail silently. Must be non-invasive.
-#test ! $TMUX; and ~/bin/server-splash ^/dev/null
+test ! $TMUX; and ~/bin/server-splash ^/dev/null
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is
@@ -32,6 +32,9 @@ set -x BC_ENV_ARGS "$HOME/.bcrc -l"
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
 # so just read from /etc/hostname)
 test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
+
+# taken from hostname
+set -x SYSTEM_COLOUR (python ~/bin/system-colour.py $HOSTNAME)
 
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
@@ -155,8 +158,8 @@ function fish_prompt --description 'Write out the prompt'
 	# test status of last command without affecting it by using 'or' which tests and forwards
 	or printf "\n\33[31mExited with status %s\33[m" $status
 
-	printf "\n\33[38;5;75m%s@%s:%s\33[90m %s %s %s\33[0m\n\$ " \
-		$USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (date +%T)
+	printf "\n\33[38;5;%sm%s@%s:%s\33[90m %s %s %s\33[0m\n\$ " \
+		$SYSTEM_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (date +%T)
 end
 
 # now with MOAR agent forwarding

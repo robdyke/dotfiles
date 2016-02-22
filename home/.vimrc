@@ -38,6 +38,7 @@ set cursorcolumn
 " Stop the pause that you no longer notice exiting insert mode
 set ttimeoutlen=50
 
+" Filetype mappings
 au BufNewFile,BufRead *.conf.j2 set filetype=dosini
 au BufNewFile,BufRead *.conf    set filetype=dosini
 au BufNewFile,BufRead *.json    set filetype=javascript
@@ -51,9 +52,8 @@ au BufNewFile,BufRead *.fdc     set filetype=sdc
 au BufNewFile,BufRead .aliases  set filetype=sh
 au BufNewFile,BufRead .bcrc     set filetype=bc
 
-" Auto indent is completely broken for yaml
-au BufNewFile,BufRead *yml     filetype indent off
-au BufNewFile,BufRead *yaml     filetype indent off
+au BufNewFile,BufRead /etc/nginx/sites-*/* set filetype=nginx
+au BufNewFile,BufRead *nginx.conf set filetype=nginx
 
 " It's not the 70's anymore. Use git or something.
 set noswapfile
@@ -195,31 +195,38 @@ map <C-e> <End>
 noremap! <C-a> <Home>
 noremap! <C-e> <End>
 
+" http://usevim.com/2012/08/03/vim101-indentation/
 " 4 spaces for tabs, inserted automatically.
 " Tabs work fine in an ideal world. Sadly, spaces are always more consistent.
 " To refactor code: find ./ -type f -exec sed -i 's/\t/    /g' {} \;
-"set shiftwidth=4
-"set expandtab
 
-" Tabs (actual tabs) to be 4-wide. MOAR CODE ON SCREEN. Sorry, Linus. (block
-" indent broken)
-"set tabstop=4
+" Pressing tab means spaces instead
+set expandtab
+
+" how many spaces when expanding a tab
+set softtabstop=4
+
+" autoindent/shift >> << width
+set shiftwidth=4
+
+" Tabs (actual tabs) to be 4-wide. Sorry, Linus.
+set tabstop=4
+
+" Tip: use = in visual-line mode to re-indent
+
+
+" YAML should have a 2-space indent, as dictionary fields have to line up
+" after a list delimitation.
+autocmd FileType yaml setlocal softtabstop=2 shiftwidth=2 tabstop=2
+" ...yet, still, auto-indent does not work. The YAML superset used by ansible
+" has a vim plugin, which fixes things for all YAML files
+autocmd FileType yaml set filetype=ansible
+
 
 command Retab normal! gg=G
 
 " magically fold everything
 map <F2> :set foldmethod=indent<CR><CR>
-
-map <F3> :Retab<CR><CR>
-map <F4> :!p4 edit %<CR><CR>:w<CR><CR>
-
-map <F6> :SyntasticCheck<CR><CR>
-map <F7> :FixWhitespace<CR><CR>
-map <F8> :sort<CR><CR>
-" toggle wrap/paste
-map <F9>  :set wrap!<CR><CR>
-map <F10> :set paste!<CR><CR>
-
 
 " airline is lighter than powerline.
 " Old powerline colours are nice.
@@ -255,6 +262,8 @@ au BufRead * let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 " http://blog.sanctum.geek.nz/vim-annoyances/
 " v-block mode: allow capturing blank space
 set virtualedit=block
@@ -278,3 +287,9 @@ set lazyredraw
 set scrolloff=5
 " keep at least 5 lines left/right
 set sidescrolloff=5
+
+" clipboard in Linux, Mac sync'd with vim
+" Ostensibly needs https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard for
+" mac but works without. Spooky.
+"set clipboard=unnamedplus
+" BROKEN

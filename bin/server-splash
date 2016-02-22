@@ -12,6 +12,9 @@
 # get true dimensions. tput works, but not if fish is parent shell on fish config.
 echo $SHELL | grep -q fish && eval $(resize)
 
+export COLUMNS=$(tput cols)
+export LINES=$(tput lines)
+
 function center {
 	while read; do
 		printf "%*s\n" $(((${#REPLY}+$COLUMNS)/2)) "$REPLY"
@@ -63,36 +66,34 @@ for i in $(seq 1 $PADDING); do
 	echo
 done
 
-# ascii art hostname
-#hostname -s | tr a-z A-Z | figlet -ctf slant
-#hostname -s | tr a-z A-Z | figlet -ct
-#hostname -s | tr a-z A-Z | figlet -ctf roman
-#hostname -s | tr a-z A-Z | figlet -ctf univers.flf
-#hostname -s | tr a-z A-Z | figlet -Wctf colossal.flf
-#echo BLACKMESA | tr a-z A-Z | figlet -Wctf univers.flf
-#echo BLACKMESA | tr a-z A-Z | figlet -Wctf colossal.flf
-#hostname -s | tr a-z A-Z | figlet -ctf slant
-#hostname -s | tr a-z A-Z | toilet -F border -f future
-#hostname -s | tr a-z A-Z | toilet -F border:crop -f future
-#hostname -s | tr a-z A-Z | figlet -ctf roman
+
+echo Welcome to | center
+
+echo;echo
 
 # get a number dependent on hostname, in this case the crc32 (was 75 blue)
-SUM=$(echo $HOSTNAME | cksum | cut -d' ' -f1)
+#SUM=$(echo $HOSTNAME | cksum | cut -d' ' -f1)
 #SUM=$RANDOM
 # use modulo operator to get remainer from integer division. This restricts the
 # range.  colours: 0-254 (%255), 16-201 are acceptable
-COLOUR=$(( ($SUM % 185) +15 ))
-echo -ne "\033[38;5;${COLOUR}m"
+#COLOUR=$(( ($SUM % 185) +15 ))
 
-# figlet -t is broken on mac os x. Try -w instead.
-hostname -s | sed 's/.*/\u&/' | figlet -cf ~/.config/figlet/roman.flf -w $COLUMNS
+
+# set from hostname
+
+export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
+
+
+echo -ne "\033[38;5;${SYSTEM_COLOUR}m"
+
+hostname -s | sed 's/.*/\u&/' | figlet -cf ~/.config/figlet/roman.flf -t
 
 # reset
 echo -ne "\033[0m"
 
 
 # domain name, double spaced. capital, centered
-hostname -d | sed 's/./& /g' | tr a-z A-Z | center
+echo - $(hostname -d) - | sed 's/./& /g' | tr a-z A-Z | center
 
 # Always reset terminal, regardless of termination reason
 function CLEANUP_EXIT {
@@ -110,9 +111,9 @@ trap CLEANUP_EXIT EXIT
 
 
 echo
-if [ -r /etc/quotes ]; then
+if [ -r ~/etc/quotes ]; then
 	echo; echo
-	QUOTE=$(cat /etc/quotes | sort -R | tail -n 1 )
+	QUOTE=$(cat ~/etc/quotes | sort -R | tail -n 1 )
 	echo "$QUOTE" \
 		| sed 's/.*/"&"/g' \
 		| fold -w 76 -s \
