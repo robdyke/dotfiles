@@ -105,7 +105,10 @@ else #if [ $PLATFORM == 'Linux' ]; then
 	fc-cache -f ~/.fonts/
 fi
 
-if [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
+if [ $PLATFORM == 'Darwin' ]; then
+    echo 'Gah! Darwin!? XQuartz crashes in an annoying focus-stealing loop with this .xinirc. Removing...'
+    rm ~/.xinitrc
+elif [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
 	echo 'Merging Xresources...'
 	xrdb -merge ~/.Xresources
 	# kind of forced to put this here. Ubuntu occasionally changes it for absolutely no reason.
