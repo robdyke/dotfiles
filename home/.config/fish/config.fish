@@ -16,7 +16,7 @@ if begin; test -z $TMUX ; and test (tput colors) -ne 256; end
 end
 
 # only on new shell, fail silently. Must be non-invasive.
-#test ! $TMUX; and ~/bin/server-splash ^/dev/null
+test ! $TMUX; and ~/bin/server-splash ^/dev/null
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is

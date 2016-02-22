@@ -15,7 +15,7 @@ if [ -z $TMUX ] && test 0$(tput colors 2>/dev/null) -ne 256; then
 fi
 
 # only on new shell, fail silently. Must be non-invasive.
-#[ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
+[ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
 # fix annoying accidental commits and amends
 # and other dangerous commands
