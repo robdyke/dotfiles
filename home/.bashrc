@@ -56,7 +56,7 @@ export GCC_COLORS=1
 echo -ne "\n\033[37m> Welcome to $HOSTNAME, $USER!\033[0m "
 
 # set from hostname
-export SYSTEM_COLOUR=$(~/bin/system-colour.py)
+export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
 
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)

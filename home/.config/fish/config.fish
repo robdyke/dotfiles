@@ -34,7 +34,7 @@ set -x BC_ENV_ARGS "$HOME/.bcrc -l"
 test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
 
 # taken from hostname
-set -x SYSTEM_COLOUR (python ~/bin/system-colour.py)
+set -x SYSTEM_COLOUR (python ~/bin/system-colour.py $HOSTNAME)
 
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)

@@ -80,10 +80,11 @@ echo;echo
 
 
 # set from hostname
-export SYSTEM_COLOUR=$(~/bin/system-colour.py)
+
+export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
 
 
-echo -ne "\033[38;5;${COLOUR}m"
+echo -ne "\033[38;5;${SYSTEM_COLOUR}m"
 
 hostname -s | sed 's/.*/\u&/' | figlet -cf ~/.config/figlet/roman.flf -t
 

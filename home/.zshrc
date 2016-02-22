@@ -108,7 +108,7 @@ math() {
 export HOSTNAME
 
 # set from hostname
-export SYSTEM_COLOUR=$(~/bin/system-colour.py)
+export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
 
 PROMPT="\$(__exit_warn)
 %F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
