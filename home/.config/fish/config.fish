@@ -35,6 +35,7 @@ test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
 
 # taken from hostname
 set -x SYSTEM_COLOUR (python ~/bin/system-colour.py $HOSTNAME)
+test $TMUX; and tmux set -g status-left-bg colour{$SYSTEM_COLOUR}
 
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
