@@ -57,7 +57,7 @@ echo -ne "\n\033[37m> Welcome to $HOSTNAME, $USER!\033[0m "
 
 # set from hostname
 export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
-[ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR}
+[ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
