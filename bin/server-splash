@@ -9,8 +9,9 @@
 #  * Wait depending on quote length (too short or long is annoying)
 
 
-# get true dimensions. tput works, but not if fish is parent shell on fish config.
-echo $SHELL | grep -q fish && eval $(resize)
+# get true dimensions. tput works, but not if fish is parent shell on fish
+# config or stderr is piped into /dev/null (bizarrely)
+eval $(resize)
 
 export COLUMNS=$(tput cols)
 export LINES=$(tput lines)
