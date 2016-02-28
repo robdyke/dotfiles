@@ -5,7 +5,7 @@ unsetopt NOMATCH
 [ -z "$PS1" ] && return
 
 typeset -U path
-path=(~/bin /usr/local/bin /usr/loca/sbin /usr/local/share/npm/bin $path)
+path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $path)
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
@@ -112,6 +112,7 @@ export HOSTNAME
 
 # set from hostname
 export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
+[ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
 PROMPT="\$(__exit_warn)
 %F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
