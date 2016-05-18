@@ -79,10 +79,10 @@ nnoremap ; :
 " if you want to force yourself to use hjkl, uncomment this:
 " Get off my lawn
 " https://github.com/thoughtbot/dotfiles/blob/master/vimrc
-" nnoremap <Left> :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up> :echoe "Use k"<CR>
-" nnoremap <Down> :echoe "Use j"<CR>
+nnoremap <Left> :echoe "Use [h] for left"<CR>
+nnoremap <Right> :echoe "Use [l] for right"<CR>
+nnoremap <Up> :echoe "Use [k] for up"<CR>
+nnoremap <Down> :echoe "Use [j] for down"<CR>
 
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
 
