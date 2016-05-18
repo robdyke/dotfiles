@@ -28,9 +28,6 @@
 [submodule "home/.vim/bundle/airline"]
 	path = home/.vim/bundle/airline
 	url = git://github.com/bling/vim-airline.git
-[submodule "home/.vim/bundle/ctrlp"]
-	path = home/.vim/bundle/ctrlp
-	url = git://github.com/kien/ctrlp.vim.git
 [submodule "fonts/powerline-patched"]
 	path = fonts/powerline-patched
 	url = git://github.com/Lokaltog/powerline-fonts.git
@@ -52,3 +49,6 @@
 [submodule "home/.vim/bundle/openscad"]
 	path = home/.vim/bundle/openscad
 	url = git://github.com/sirtaj/vim-openscad.git
+[submodule "home/.vim/bundle/ctrlp.vim"]
+	path = home/.vim/bundle/ctrlp.vim
+	url = git://github.com/ctrlpvim/ctrlp.vim.git
