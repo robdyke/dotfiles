@@ -84,6 +84,13 @@ nnoremap <Right> :echoe "Use [l] for right"<CR>
 nnoremap <Up> :echoe "Use [k] for up"<CR>
 nnoremap <Down> :echoe "Use [j] for down"<CR>
 
+inoremap <Left> <C-o>:echoe "Use [h] for left in NORMAL mode"<CR>
+inoremap <Right> <C-o>:echoe "Use [l] for right in NORMAL mode"<CR>
+inoremap <Up> <C-o>:echoe "Use [k] for up in NORMAL mode"<CR>
+inoremap <Down> <C-o>:echoe "Use [j] for down in NORMAL mode"<CR>
+
+
+
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
 
 " 16-color terminal with solarised theme is most accurate
