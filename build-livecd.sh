@@ -194,7 +194,6 @@ INSIDE /etc/skel/dotfiles/provision/ubuntu-15.04-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
-
 INSIDE apt-get install -y --force-yes dkms
 
 # current kernel is wrong obviously
@@ -203,6 +202,7 @@ ls $WORKDIR/filesystem_rw/var/lib/initramfs-tools | INSIDE xargs -n1 /usr/lib/dk
 
 # this livecd may be used in a vbox guest
 #INSIDE apt-get install -y --force-yes virtualbox-guest-additions.iso
+INSIDE mkdir -p /tmp/user/0 # necessary hack
 INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
 
 
