@@ -202,7 +202,7 @@ INSIDE apt-get install -y --force-yes dkms
 ls $WORKDIR/filesystem_rw/var/lib/initramfs-tools | INSIDE xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
 
 # this livecd may be used in a vbox guest
-INSIDE apt-get install -y --force-yes virtualbox-guest-additions.iso
+#INSIDE apt-get install -y --force-yes virtualbox-guest-additions.iso
 #INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
 
 
