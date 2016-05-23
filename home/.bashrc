@@ -19,7 +19,7 @@ fi
 
 # fix annoying accidental commits and amends
 # and other dangerous commands
-export HISTIGNORE='git*--amend*:ls:cd:git*-m*:git*-am*:git*-f*:rm -rf*'
+export HISTIGNORE='git*--amend*:ls:cd'
 export HISTCONTROL=ignoredups:ignorespace
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'

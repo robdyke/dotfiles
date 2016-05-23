@@ -34,7 +34,7 @@ function WARNING {
 if [ ! "$2" ]; then
 	echo "Usage: make livecd"
 	echo "-OR-"
-	echo "Usage: sudo $0 <source ubuntu 15.04 iso> <destination iso>"
+	echo "Usage: sudo $0 <source ubuntu 16.04 iso> <destination iso>"
 	exit 121
 fi
 
@@ -176,16 +176,7 @@ INSIDE apt-get -y --force-yes install git
 
 # DOTFILES AND PROVISION
 # make sure submodules are here
-git submodule --quiet init
-git submodule --quiet update
-
-if ! grep -q ../../../../ home/.vim/bundle/supertab/.git; then
-	WARNING 'Install a recent git version and re-clone this repository.'
-	WARNING 'Submodule references are absolute, so the repository cannot be'
-	WARNING 'moved into the chroot. See'
-	WARNING 'http://stackoverflow.com/questions/17568543/git-add-doesnt-work/17747571'
-	exit
-fi
+git submodule update --init
 
 # installs dotfiles to /etc/skel/ so that live (ubuntu) user will get a
 #cp -a ../dotfiles $WORKDIR/filesystem_rw/root/
@@ -195,13 +186,14 @@ fi
 # git...
 rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/skel/dotfiles/
 
-# TODO try this instead
-#INSIDE git clone -b $BRANCH git://github.com/naggie/dotfiles.git /etc/skel/dotfiles || true
+# git submodule references
+INSIDE git -C /etc/skel/dotfiles submodule foreach rm .git
+INSIDE git -C /etc/skel/dotfiles submodule update --init
+
 INSIDE /etc/skel/dotfiles/provision/ubuntu-15.04-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
-
 INSIDE apt-get install -y --force-yes dkms
 
 # current kernel is wrong obviously
@@ -209,6 +201,8 @@ INSIDE apt-get install -y --force-yes dkms
 ls $WORKDIR/filesystem_rw/var/lib/initramfs-tools | INSIDE xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
 
 # this livecd may be used in a vbox guest
+#INSIDE apt-get install -y --force-yes virtualbox-guest-additions.iso
+INSIDE mkdir -p /tmp/user/0 # necessary hack
 INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
 
 
