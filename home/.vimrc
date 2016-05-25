@@ -78,7 +78,7 @@ nnoremap ; :
 
 " if you want to force yourself to use hjkl, uncomment this:
 " Get off my lawn
-" https://github.com/thoughtbot/dotfiles/blob/master/vimrc
+" Stops regression to arrow keys, encourages learning of advanced motion keys
 nnoremap <Left> :echo "Use [h] for left"<CR>
 nnoremap <Right> :echo "Use [l] for right"<CR>
 nnoremap <Up> :echo "Use [k] for up"<CR>
