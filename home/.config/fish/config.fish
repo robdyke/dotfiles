@@ -23,7 +23,7 @@ test ! $TMUX; and ~/bin/server-splash ^/dev/null
 # ascii. This also allows other programs to use nice UTF-8 symbols, such as
 # NERDtree in vim. So very awesome.
 # Use locale-gen en_GB.UTF-8 to install
-set -x LANG=en_GB.UTF-8
+set -x LANG en_GB.UTF-8
 
 # mac bc read the conf file to allow floating point maths
 # and load the standard library
