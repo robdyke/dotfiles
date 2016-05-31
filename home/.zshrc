@@ -37,8 +37,31 @@ zstyle ':completion:*' menu select
 
 setopt completealiases
 
-# MOAR PROMPT
+# SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
+# prefer clear terminal after SSH, on success only
+# now with MOAR agent forwarding
+function ssh {
+	if test $TMUX; then
+		# find host from array (in a dumb way) by getting last argument
+		# It uses the fact that for implicitly loops over the arguments
+		# if you don't tell it what to loop over, and the fact that for
+		# loop variables aren't scoped: they keep the last value they
+		# were set to
+		# http://stackoverflow.com/questions/1853946/getting-the-last-argument-passed-to-a-shell-script
+		for host; do true; done
 
+        old_window_name=$(tmux display-message -p '#W')
+
+		printf "\\033k%s\\033\\\\" $host
+		command ssh -A "$@"
+		printf "\\033k%s\\033\\\\" $old_window_name
+
+	else
+		command ssh -A "$@"
+	fi
+}
+
+# MOAR PROMPT
 function __p4_ps1 {
 	[ $P4CLIENT ] || return
 	echo -n " ($P4CLIENT) "
