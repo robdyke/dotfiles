@@ -55,3 +55,6 @@
 [submodule "home/.vim/bundle/vim-uci"]
 	path = home/.vim/bundle/vim-uci
 	url = git://github.com/cmcaine/vim-uci.git
+[submodule "home/.vim/bundle/delimitMate"]
+	path = home/.vim/bundle/delimitMate
+	url = git://github.com/Raimondi/delimitMate.git
