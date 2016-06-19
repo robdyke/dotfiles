@@ -23,7 +23,7 @@ test ! $TMUX; and ~/bin/server-splash ^/dev/null
 # ascii. This also allows other programs to use nice UTF-8 symbols, such as
 # NERDtree in vim. So very awesome.
 # Use locale-gen en_GB.UTF-8 to install
-set -x LANG=en_GB.UTF-8
+set -x LANG en_GB.UTF-8
 
 # mac bc read the conf file to allow floating point maths
 # and load the standard library
@@ -163,21 +163,25 @@ function fish_prompt --description 'Write out the prompt'
 		$SYSTEM_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (date +%T)
 end
 
+# SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
+# prefer clear terminal after SSH, on success only
 # now with MOAR agent forwarding
 function ssh --description 'SSH wrapper to magically LOCK tmux title to hostname, if tmux is running'
 	if test $TMUX
 		# find host from array (in a dumb way)
 		set host $argv[-1]
 
+        set old_window_name (tmux display-message -p '#W')
 		printf "\\033k%s\\033\\\\" $host
-		tmux set -q allow-rename off
 		command ssh -A $argv
-		tmux set -q allow-rename on
-		fish_set_tmux_title
+		printf "\\033k%s\\033\\\\" $old_window_name
 	else
 		command ssh -A $argv
 	end
 end
+
+
+
 
 # initially set title
 fish_set_tmux_title

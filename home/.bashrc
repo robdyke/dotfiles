@@ -137,11 +137,12 @@ function ssh {
 		# http://stackoverflow.com/questions/1853946/getting-the-last-argument-passed-to-a-shell-script
 		for host; do true; done
 
-		printf "\\033k%s\\033\\\\" $host
+        old_window_name=$(tmux display-message -p '#W')
 
-		tmux set -q allow-rename off
+		printf "\\033k%s\\033\\\\" $host
 		command ssh -A "$@"
-		tmux set -q allow-rename on
+		printf "\\033k%s\\033\\\\" $old_window_name
+
 	else
 		command ssh -A "$@"
 	fi

@@ -1,9 +1,8 @@
 # Darkbuntu
-This dotfiles repository is capable of remastering an Ubuntu 14.10 live CD.
+This dotfiles repository is capable of remastering an Ubuntu 16.04 live CD.
 
 On an existing ubuntu machine, run `make livecd` to create a customised Ubuntu
-14.10 ISO based on these dotfiles. There are many tweaks to 'Darkbuntu'
-including:
+ISO based on these dotfiles. There are many tweaks to 'Darkbuntu' including:
 
   * Numix theme
   * Numic icons
@@ -40,6 +39,9 @@ Requirements:
 
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
+
+As a bonus, the prompt/hostname colour changes with the hostname so it's easier
+to differentiate between hosts.
 
 
 

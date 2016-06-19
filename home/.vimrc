@@ -78,21 +78,21 @@ nnoremap ; :
 
 " if you want to force yourself to use hjkl, uncomment this:
 " Get off my lawn
-" https://github.com/thoughtbot/dotfiles/blob/master/vimrc
-nnoremap <Left> :echoe "Use [h] for left"<CR>
-nnoremap <Right> :echoe "Use [l] for right"<CR>
-nnoremap <Up> :echoe "Use [k] for up"<CR>
-nnoremap <Down> :echoe "Use [j] for down"<CR>
+" Stops regression to arrow keys, encourages learning of advanced motion keys
+nnoremap <Left> :echo "Use [h] for left"<CR>
+nnoremap <Right> :echo "Use [l] for right"<CR>
+nnoremap <Up> :echo "Use [k] for up"<CR>
+nnoremap <Down> :echo "Use [j] for down"<CR>
 
-inoremap <Left> <C-o>:echoe "Use [h] for left in NORMAL mode"<CR>
-inoremap <Right> <C-o>:echoe "Use [l] for right in NORMAL mode"<CR>
-inoremap <Up> <C-o>:echoe "Use [k] for up in NORMAL mode"<CR>
-inoremap <Down> <C-o>:echoe "Use [j] for down in NORMAL mode"<CR>
+inoremap <Left> <C-o>:echo "Use [h] for left in NORMAL mode"<CR>
+inoremap <Right> <C-o>:echo "Use [l] for right in NORMAL mode"<CR>
+inoremap <Up> <C-o>:echo "Use [k] for up in NORMAL mode"<CR>
+inoremap <Down> <C-o>:echo "Use [j] for down in NORMAL mode"<CR>
 
-vnoremap <Left> <Esc>:echoe "Use [h] for left"<CR>
-vnoremap <Right> <Esc>:echoe "Use [l] for right"<CR>
-vnoremap <Up> <Esc>:echoe "Use [k] for up"<CR>
-vnoremap <Down> <Esc>:echoe "Use [j] for down"<CR>
+vnoremap <Left> <Esc>:echo "Use [h] for left"<CR>
+vnoremap <Right> <Esc>:echo "Use [l] for right"<CR>
+vnoremap <Up> <Esc>:echo "Use [k] for up"<CR>
+vnoremap <Down> <Esc>:echo "Use [j] for down"<CR>
 
 
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
