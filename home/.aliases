@@ -4,11 +4,11 @@ alias ...='cd ../..'
 
 # package manager commands
 alias sagi='sudo apt-get install'
+alias yi='sudo yum install'
 alias bi='brew install'
 alias bci='brew cask install'
-alias snig='sudo npm install -g'
-alias syi='sudo yum install'
-alias spi='sudo pip install --upgrade'
+alias ni='npm install'
+alias piu='pip install --upgrade'
 
 # colours and ANSI lines
 alias tree="tree -CA"
@@ -31,7 +31,6 @@ alias s='git status'
 alias d='git diff'
 alias o='git log'
 alias b='git branch -a'
-alias master='git checkout master; git fetch; git fetch origin master && git merge --ff-only FETCH_HEAD && git submodule update --init'
 alias l=ls
 alias vo='vim -O'
 alias findack='find . | ack'
