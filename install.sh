@@ -148,5 +148,5 @@ if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
 fi
 
 
-tmux -V | grep -q 'tmux 2.0' || warning "tmux 2.0 not installed"
+tmux -V | grep -q 'tmux 2.' || warning "tmux 2.x not installed"
 vim --version | grep -q 'Vi IMproved 7.4' || warning "vim 7.4 not installed"
