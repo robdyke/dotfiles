@@ -28,8 +28,8 @@
 [submodule "home/.vim/bundle/airline"]
 	path = home/.vim/bundle/airline
 	url = git://github.com/bling/vim-airline.git
-[submodule "fonts/powerline-patched"]
-	path = fonts/powerline-patched
+[submodule "etc/powerline-patched"]
+	path = etc/powerline-patched
 	url = git://github.com/Lokaltog/powerline-fonts.git
 [submodule "home/.vim/bundle/pathogen"]
 	path = home/.vim/bundle/pathogen

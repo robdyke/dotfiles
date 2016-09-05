@@ -98,16 +98,7 @@ fi
 #fi
 
 echo Installing/updating fonts...
-if [ $PLATFORM == 'Darwin' ]; then
-	mkdir -p ~/Library/Fonts
-	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' \
-		-print0 | xargs -0 -I % cp % ~/Library/Fonts/
-else #if [ $PLATFORM == 'Linux' ]; then
-	mkdir -p ~/.fonts
-	find fonts/ -name '*otf' -or -name '*woff' -or -name '*ttf' \
-		| xargs -d '\n'  -I % cp % ~/.fonts/
-	fc-cache -f ~/.fonts/
-fi
+./etc/powerline-patched/install.sh
 
 if [ $PLATFORM == 'Darwin' ]; then
     echo 'Gah! Darwin!? XQuartz crashes in an annoying focus-stealing loop with this .xinirc. Removing...'
