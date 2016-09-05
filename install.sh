@@ -140,5 +140,13 @@ elif [[ $BRANCH =~ "*$USER*" ]]; then
 	warning "Branch does not contain user. Sure about this? The convention is to have a custom branch name containing your username."
 fi
 
+
+
+if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
+    echo "Migrating history file..."
+    cp ~/.bash_history ~/.history
+fi
+
+
 tmux -V | grep -q 'tmux 2.0' || warning "tmux 2.0 not installed"
 vim --version | grep -q 'Vi IMproved 7.4' || warning "vim 7.4 not installed"

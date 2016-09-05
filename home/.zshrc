@@ -23,7 +23,9 @@ fi
 
 HISTSIZE=9000
 SAVEHIST=9000
-HISTFILE=~/.bash_history
+# Change default as unconfigured bash could clobber history. Bash can run
+# unconfigured if CTRL+C is hit during initialisation.
+HISTFILE=~/.history
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 unsetopt EXTENDED_HISTORY # just commands plskthx so bash_history is compatible

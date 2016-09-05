@@ -86,6 +86,10 @@ HISTSIZE=9000
 HISTFILESIZE=$HISTSIZE
 HISTCONTROL=ignorespace:ignoredups
 
+# Change default as unconfigured bash could clobber history. Bash can run
+# unconfigured if CTRL+C is hit during initialisation.
+HISTFILE=~/.history
+
 history() {
 	_bash_history_sync
 	builtin history "$@"
