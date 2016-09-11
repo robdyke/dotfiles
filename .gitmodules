@@ -61,3 +61,6 @@
 [submodule "home/.vim/bundles/typescript-vim"]
 	path = home/.vim/bundles/typescript-vim
 	url = git://github.com/leafgarland/typescript-vim.git
+[submodule "home/.vim/bundle/vim-ps1"]
+	path = home/.vim/bundle/vim-ps1
+	url = git@github.com:PProvost/vim-ps1.git
