@@ -58,3 +58,6 @@
 [submodule "home/.vim/bundle/delimitMate"]
 	path = home/.vim/bundle/delimitMate
 	url = git://github.com/Raimondi/delimitMate.git
+[submodule "home/.vim/bundles/typescript-vim"]
+	path = home/.vim/bundles/typescript-vim
+	url = git://github.com/leafgarland/typescript-vim.git
