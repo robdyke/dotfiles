@@ -3,8 +3,8 @@ from __future__ import division
 from hashlib import md5
 from sys import argv
 
-# preselected suitable (vibrant enough) colours
-x256_colours = range(1,8) + range(9,15) + range(34,52) + range(76,87) + range(196,231)
+# preselected suitable (vibrant enough) colours with a fair sample
+x256_colours = [1,2,3,5,6,7,8] + range(9,15) + range(34,52,3) + range(76,87,2) + range(196,231,2)
 
 
 def deterministic_x256(*args):
@@ -29,4 +29,8 @@ def colourise(string):
     return wrap(string,colour)
 
 
-print deterministic_x256(*argv[1:])
+if len(argv) <= 1:
+    for c in x256_colours:
+        print wrap(c,c)
+else:
+    print deterministic_x256(*argv[1:])
