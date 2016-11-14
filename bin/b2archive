@@ -43,7 +43,12 @@ case $1 in
 
 
         7z a -mhe=on -p="$B2ARCHIVE_ENCRYPTION_KEY" "$ARCHIVE" "$DIR"
-        b2 upload_file $B2ARCHIVE_BUCKET_NAME $ARCHIVE $ARCHIVE
+
+
+        while sleep 1; do
+            b2 upload_file $B2ARCHIVE_BUCKET_NAME $ARCHIVE $ARCHIVE && break
+            echo -e "\e[31mUpload Failed, resuming...\e[0m"
+        done
     ;;
     list)
         initialise
