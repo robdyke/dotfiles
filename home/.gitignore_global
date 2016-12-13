@@ -100,3 +100,10 @@ xcuserdata
 
 # node stuff
 node_modules/
+
+# python venv
+bin/
+include/
+lib/
+pip-selfcheck.json
+.Python
