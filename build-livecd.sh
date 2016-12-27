@@ -202,8 +202,8 @@ ls $WORKDIR/filesystem_rw/var/lib/initramfs-tools | INSIDE xargs -n1 /usr/lib/dk
 
 # this livecd may be used in a vbox guest
 #INSIDE apt-get install -y --force-yes virtualbox-guest-additions.iso
-INSIDE mkdir -p /tmp/user/0 # necessary hack
-INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
+#INSIDE mkdir -p /tmp/user/0 # necessary hack
+#INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
 
 
 # build modules for specific kernel (sorry about the hack)
