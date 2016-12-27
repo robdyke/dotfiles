@@ -56,7 +56,7 @@
 	path = home/.vim/bundle/vim-uci
 	url = git://github.com/cmcaine/vim-uci.git
 [submodule "home/.vim/bundles/typescript-vim"]
-	path = home/.vim/bundles/typescript-vim
+	path = home/.vim/bundle/typescript-vim
 	url = git://github.com/leafgarland/typescript-vim.git
 [submodule "home/.vim/bundle/vim-ps1"]
 	path = home/.vim/bundle/vim-ps1
