@@ -52,7 +52,9 @@ git submodule --quiet update || exit 2
 # Garbage collection
 # remove remains of old submodules, scripts, etc
 rm -rf home/.vim/bundle/powerline 2>/dev/null
+rm -rf home/.vim/bundle/delimitmate 2>/dev/null
 rm -rf home/.vim/bundle/ctrlp     2>/dev/null
+rm -rf ~/.config/ipython 2>/dev/null
 rm -f  ~/bin/server-splash.sh     2>/dev/null
 rm -f  ~/git-completion.bash      2>/dev/null
 

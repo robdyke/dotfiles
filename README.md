@@ -1,15 +1,13 @@
-# Darkbuntu
-This dotfiles repository is capable of remastering an Ubuntu 16.04 live CD.
+# My workflow
 
-On an existing ubuntu machine, run `make livecd` to create a customised Ubuntu
-ISO based on these dotfiles. There are many tweaks to 'Darkbuntu' including:
+# shell
 
-  * Numix theme
-  * Numic icons
-  * *Desaturation of nearly everything (cool, huh)*
-  * Remove Amazon spyware
+* `tm` will start or attach to the first `tmux` session. If you're on the only shell, `tmux` session 0 will automatically attach.
+* `CTRL+p` will launch `vim` in find mode.
+* `CTRL+s` will prepend `sudo` to the prompt and move the cursor to the end of the prompt
+* ``tryforever <cmd...>` will run a command in a loop until it fails
+* history is synchronised between open shells
 
-![Screenshot](etc/darkbuntu.png "Ubuntu, circa 1950's")
 
 # Dotfiles
 Run `install.sh` to install to your home directory, **overwriting all required
@@ -49,3 +47,16 @@ to differentiate between hosts.
 [3]: https://github.com/fish-shell/fish-shell/issues/814
 [4]: http://superuser.com/questions/413351/weird-insertion-from-vim-on-mouse-click
 [5]: https://github.com/unphased/putty-X
+
+# Darkbuntu
+This dotfiles repository is capable of remastering an Ubuntu 16.04 live CD.
+
+On an existing ubuntu machine, run `make livecd` to create a customised Ubuntu
+ISO based on these dotfiles. There are many tweaks to 'Darkbuntu' including:
+
+  * Numix theme
+  * Numic icons
+  * *Desaturation of nearly everything (cool, huh)*
+  * Remove Amazon spyware
+
+![Screenshot](etc/darkbuntu.png "Ubuntu, circa 1950's")
