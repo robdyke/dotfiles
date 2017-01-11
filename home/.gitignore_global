@@ -110,3 +110,6 @@ pip-selfcheck.json
 
 # BSD sed-recursive accident
 *-r
+
+# pycoverage files
+.coverage*
