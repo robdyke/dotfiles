@@ -167,6 +167,11 @@ function __p4_ps1 {
 	echo -n " ($P4CLIENT) "
 }
 
+function __sa_ps1 {
+    # is SSH agent wired in?
+    test -e $SSH_AUTH_SOCK && echo -ne "\033[32m[A]\033[90m "
+}
+
 function __exit_warn {
 	# test status of last command without affecting it
 	status=$?
@@ -174,7 +179,7 @@ function __exit_warn {
 		&& printf "\n\33[31mExited with status %s\33[m" $status
 }
 
-PS1="\$(__exit_warn)\n\[\e[38;5;${SYSTEM_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
+PS1="\$(__exit_warn)\n\[\e[38;5;${SYSTEM_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(__sa_ps1)\$(date +%T)\[\e[0m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases

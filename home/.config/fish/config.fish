@@ -155,12 +155,17 @@ function __fish_p4_prompt
 	echo -n " ($P4CLIENT) "
 end
 
+function __sa_prompt
+    # is SSH agent wired in?
+    test -e $SSH_AUTH_SOCK; and echo -ne "\033[32m[A]\033[90m "
+end
+
 function fish_prompt --description 'Write out the prompt'
 	# test status of last command without affecting it by using 'or' which tests and forwards
 	or printf "\n\33[31mExited with status %s\33[m" $status
 
 	printf "\n\33[38;5;%sm%s@%s:%s\33[90m %s %s %s\33[0m\n\$ " \
-		$SYSTEM_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (date +%T)
+        $SYSTEM_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (__sa_prompt)(date +%T)
 end
 
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running

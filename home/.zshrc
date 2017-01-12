@@ -69,6 +69,11 @@ function __p4_ps1 {
 	echo -n " ($P4CLIENT) "
 }
 
+function __sa_ps1 {
+    # is SSH agent wired in?
+    test -e $SSH_AUTH_SOCK && echo -ne "\e[32m[A]\e[90m "
+}
+
 function __exit_warn {
 	# test status of last command without affecting it
 	stat=$?
@@ -140,7 +145,7 @@ export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
 PROMPT="\$(__exit_warn)
-%F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
+%F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)\$(__sa_ps1)%F{239}\$(date +%T)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?
