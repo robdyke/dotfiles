@@ -169,6 +169,7 @@ function __p4_ps1 {
 
 function __sa_ps1 {
     # is SSH agent wired in?
+    test $SSH_AUTH_SOCK || return
     test -e $SSH_AUTH_SOCK && echo -ne "\033[32m[A]\033[90m "
 }
 

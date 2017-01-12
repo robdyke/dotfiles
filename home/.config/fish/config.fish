@@ -157,6 +157,7 @@ end
 
 function __sa_prompt
     # is SSH agent wired in?
+    test $SSH_AUTH_SOCK; or return
     test -e $SSH_AUTH_SOCK; and echo -ne "\033[32m[A]\033[90m "
 end
 
