@@ -33,7 +33,7 @@ echo
 
 function warning {
 	# TODO: check PS1, no escape code if not interactive....?
-	echo -e "\e[00;31m> $*\e[00m"
+	echo -e "\033[00;31m> $*\033[00m"
 }
 
 # sneaky hack to install to skel if run as root
