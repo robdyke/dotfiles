@@ -58,12 +58,6 @@ test -z $TMUX
 	# only then is is safe to assume it's OK to jump in
 	and tmux attach
 
-# totally worth it
-if not test -d ~/.config/fish/generated_completions/
-	echo "One moment..."
-	fish_update_completions
-end
-
 
 # vim -X = don't look for X server, which can be slow
 set -x EDITOR 'vim -X'
