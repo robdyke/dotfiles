@@ -67,7 +67,7 @@ test -d ~/zsh/ && rm -rf ~/zsh/
 echo 'Copying dotfiles...'
 #cp -r home/* ~ # non-dotfiles
 # copy dotfiles separately , normal glob does not match
-cp -r home/.??* ~
+cp -r home/.??* ~ 2> /dev/null
 
 if [ $PLATFORM == 'Darwin' ]; then
     echo 'Mac non-hidden...'
