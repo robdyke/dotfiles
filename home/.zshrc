@@ -131,10 +131,6 @@ export LANG=en_GB.UTF-8
 # mac bc read the conf file to allow floating point maths
 # and load the standard library
 export BC_ENV_ARGS="$HOME/.bcrc -l"
-# also, copy the fish bc wrapper
-math() {
-	echo "$@" | bc
-}
 
 function _tmux_update_env {
     # when an SSH connection is re-established, so is the agent connection.
