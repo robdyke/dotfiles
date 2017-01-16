@@ -136,6 +136,12 @@ math() {
 	echo "$@" | bc
 }
 
+function _tmux_update_env {
+    # when an SSH connection is re-established, so is the agent connection.
+    # Reload it automatically.
+    [ $TMUX ] && eval $(tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
+}
+
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
 # so just read from /etc/hostname)
 [ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
@@ -194,6 +200,7 @@ chpwd() {
 precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -R
+    _tmux_update_env
 }
 
 # aliases shared between fish and bash

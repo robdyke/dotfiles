@@ -3,7 +3,8 @@
 General:
 
 * `vim` : text editor
-* `bash/zsh/fish` : Shells, used interchangibly depending on platform
+* `bash/zsh/fish` : Shells, used interchangibly depending on platform. Fish
+  generates completions from man pages!
 * `tmux` : Terminal multiplexer
 * `git` : version control
 * `ack` : grep alternative for rebasing and source code exploration

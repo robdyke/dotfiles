@@ -17,6 +17,7 @@ fi
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
+
 # fix annoying accidental commits and amends
 # and other dangerous commands
 export HISTIGNORE='git*--amend*:ls:cd'
@@ -38,6 +39,12 @@ export BC_ENV_ARGS="$HOME/.bcrc -l"
 # also, copy the fish bc wrapper
 function math {
 	echo "$@" | bc
+}
+
+function _tmux_update_env {
+    # when an SSH connection is re-established, so is the agent connection.
+    # Reload it automatically.
+    [ $TMUX ] && eval $(tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
 }
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
@@ -80,7 +87,6 @@ set +o histexpand
 # Bash history sharing. History counter is messed up between sessions and
 # commands get lost any other way.
 # Explaination: http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
-# TODO: zshrc
 
 HISTSIZE=9000
 HISTFILESIZE=$HISTSIZE
@@ -112,6 +118,7 @@ test $TMUX \
 	&& TMUX_PRIMARY_PANE=set
 
 # Update TMUX title with path
+# TODO move some to precmd hack
 function onprompt {
 	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
 	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
@@ -124,6 +131,7 @@ function onprompt {
 	fi
 
 	_bash_history_sync
+    _tmux_update_env
 }
 
 PROMPT_COMMAND=onprompt
