@@ -1,12 +1,31 @@
 # My workflow
 
+General:
+
+* `vim` : text editor
+* `bash/zsh/fish` : Shells, used interchangibly depending on platform. Fish
+  generates completions from man pages!
+* `tmux` : Terminal multiplexer
+* `git` : version control
+* `ack` : grep alternative for rebasing and source code exploration
+
+Specific:
+
+* `ipython` : interactive python shell
+* `ansible` : idempotent, agentless deployment
+* `httpie` : curl alternative with better UX
+* `ncdu` : hunt for disk usage
+
+
 # shell
 
 * `tm` will start or attach to the first `tmux` session. If you're on the only shell, `tmux` session 0 will automatically attach.
 * `CTRL+p` will launch `vim` in find mode.
 * `CTRL+s` will prepend `sudo` to the prompt and move the cursor to the end of the prompt
-* ``tryforever <cmd...>` will run a command in a loop until it fails
+* `tryforever <cmd...>` will run a command in a loop until it fails
 * history is synchronised between open shells
+
+See `home/.aliases` and `bin/` for some useful shortcuts.
 
 
 # Dotfiles
@@ -25,7 +44,7 @@ Requirements:
 
   * tmux 1.8+ (which is automatically launched, but only when it's needed)
   * vim 7.3+
-  * fish >2.0 (bash, if you don't have fish > 2.0)
+  * fish >2.0 (bash 3+, if you don't have fish > 2.0, or even Xsh)
   * Dark xterm-256color compatible UTF-8 terminal, SGR 1006 mouse enabled
     (iTerm2, xterm, urxvt-unicode). Urxvt is good.
   * [Mouse support in large terminals][4] is broken with most terminal
@@ -60,3 +79,4 @@ ISO based on these dotfiles. There are many tweaks to 'Darkbuntu' including:
   * Remove Amazon spyware
 
 ![Screenshot](etc/darkbuntu.png "Ubuntu, circa 1950's")
+

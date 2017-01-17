@@ -29,6 +29,13 @@ set -x LANG en_GB.UTF-8
 # and load the standard library
 set -x BC_ENV_ARGS "$HOME/.bcrc -l"
 
+function tmux_update_env --on-event fish_prompt
+    # when an SSH connection is re-established, so is the agent connection.
+    # Reload it automatically.
+    # export is supported in later fish releases.
+    test -z $TMUX; and eval (tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
+end
+
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
 # so just read from /etc/hostname)
 test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
@@ -50,12 +57,6 @@ test -z $TMUX
 	and test (tput cols) -gt 119
 	# only then is is safe to assume it's OK to jump in
 	and tmux attach
-
-# totally worth it
-if not test -d ~/.config/fish/generated_completions/
-	echo "One moment..."
-	fish_update_completions
-end
 
 
 # vim -X = don't look for X server, which can be slow
@@ -155,12 +156,18 @@ function __fish_p4_prompt
 	echo -n " ($P4CLIENT) "
 end
 
+function __sa_prompt
+    # is SSH agent wired in?
+    test $SSH_AUTH_SOCK; or return
+    test -e $SSH_AUTH_SOCK; and echo -ne "\033[32m[A]\033[90m "
+end
+
 function fish_prompt --description 'Write out the prompt'
 	# test status of last command without affecting it by using 'or' which tests and forwards
 	or printf "\n\33[31mExited with status %s\33[m" $status
 
 	printf "\n\33[38;5;%sm%s@%s:%s\33[90m %s %s %s\33[0m\n\$ " \
-		$SYSTEM_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (date +%T)
+        $SYSTEM_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (__sa_prompt)(date +%T)
 end
 
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running

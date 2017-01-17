@@ -33,7 +33,7 @@ echo
 
 function warning {
 	# TODO: check PS1, no escape code if not interactive....?
-	echo -e "\e[00;31m> $*\e[00m"
+	echo -e "\033[00;31m> $*\033[00m"
 }
 
 # sneaky hack to install to skel if run as root
@@ -67,7 +67,7 @@ test -d ~/zsh/ && rm -rf ~/zsh/
 echo 'Copying dotfiles...'
 #cp -r home/* ~ # non-dotfiles
 # copy dotfiles separately , normal glob does not match
-cp -r home/.??* ~
+cp -r home/.??* ~ 2> /dev/null
 
 if [ $PLATFORM == 'Darwin' ]; then
     echo 'Mac non-hidden...'
@@ -143,3 +143,9 @@ fi
 
 tmux -V | grep -q 'tmux 2.' || warning "tmux 2.x not installed"
 vim --version | grep -q 'Vi IMproved 7.4' || warning "vim 7.4 not installed"
+
+# totally worth it
+if which fish > /dev/null; then
+    fish -c fish_update_completions
+fi
+

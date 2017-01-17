@@ -17,6 +17,7 @@ fi
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
+
 # fix annoying accidental commits and amends
 # and other dangerous commands
 export HISTIGNORE='git*--amend*:ls:cd'
@@ -35,9 +36,11 @@ export LANG=en_GB.UTF-8
 # mac bc read the conf file to allow floating point maths
 # and load the standard library
 export BC_ENV_ARGS="$HOME/.bcrc -l"
-# also, copy the fish bc wrapper
-function math {
-	echo "$@" | bc
+
+function _tmux_update_env {
+    # when an SSH connection is re-established, so is the agent connection.
+    # Reload it automatically.
+    [ $TMUX ] && eval $(tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
 }
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
@@ -80,7 +83,6 @@ set +o histexpand
 # Bash history sharing. History counter is messed up between sessions and
 # commands get lost any other way.
 # Explaination: http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
-# TODO: zshrc
 
 HISTSIZE=9000
 HISTFILESIZE=$HISTSIZE
@@ -112,6 +114,7 @@ test $TMUX \
 	&& TMUX_PRIMARY_PANE=set
 
 # Update TMUX title with path
+# TODO move some to precmd hack
 function onprompt {
 	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
 	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
@@ -124,6 +127,7 @@ function onprompt {
 	fi
 
 	_bash_history_sync
+    _tmux_update_env
 }
 
 PROMPT_COMMAND=onprompt
@@ -167,6 +171,12 @@ function __p4_ps1 {
 	echo -n " ($P4CLIENT) "
 }
 
+function __sa_ps1 {
+    # is SSH agent wired in?
+    test $SSH_AUTH_SOCK || return
+    test -e $SSH_AUTH_SOCK && echo -ne "\033[32m[A]\033[90m "
+}
+
 function __exit_warn {
 	# test status of last command without affecting it
 	status=$?
@@ -174,7 +184,7 @@ function __exit_warn {
 		&& printf "\n\33[31mExited with status %s\33[m" $status
 }
 
-PS1="\$(__exit_warn)\n\[\e[38;5;${SYSTEM_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
+PS1="\$(__exit_warn)\n\[\e[38;5;${SYSTEM_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(__sa_ps1)\$(date +%T)\[\e[0m\]\n\$ "
 
 # aliases shared between fish and bash
 source ~/.aliases

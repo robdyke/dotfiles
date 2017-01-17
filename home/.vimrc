@@ -273,7 +273,8 @@ au BufRead * let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+" ignore all files that git does! https://github.com/kien/ctrlp.vim/issues/174
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " http://blog.sanctum.geek.nz/vim-annoyances/
 " v-block mode: allow capturing blank space

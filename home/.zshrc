@@ -69,6 +69,12 @@ function __p4_ps1 {
 	echo -n " ($P4CLIENT) "
 }
 
+function __sa_ps1 {
+    # is SSH agent wired in?
+    test $SSH_AUTH_SOCK || return
+    test -e $SSH_AUTH_SOCK && echo -ne "\e[32m[A]\e[90m "
+}
+
 function __exit_warn {
 	# test status of last command without affecting it
 	stat=$?
@@ -125,9 +131,11 @@ export LANG=en_GB.UTF-8
 # mac bc read the conf file to allow floating point maths
 # and load the standard library
 export BC_ENV_ARGS="$HOME/.bcrc -l"
-# also, copy the fish bc wrapper
-math() {
-	echo "$@" | bc
+
+function _tmux_update_env {
+    # when an SSH connection is re-established, so is the agent connection.
+    # Reload it automatically.
+    [ $TMUX ] && eval $(tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
 }
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
@@ -140,7 +148,7 @@ export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
 PROMPT="\$(__exit_warn)
-%F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1) %F{239}\$(date +%T)%f
+%F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)\$(__sa_ps1)%F{239}\$(date +%T)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?
@@ -188,6 +196,7 @@ chpwd() {
 precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -R
+    _tmux_update_env
 }
 
 # aliases shared between fish and bash
