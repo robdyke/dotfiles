@@ -33,7 +33,7 @@ function tmux_update_env --on-event fish_prompt
     # when an SSH connection is re-established, so is the agent connection.
     # Reload it automatically.
     # export is supported in later fish releases.
-    test -z $TMUX; and eval (tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
+    test -z $TMUX; and eval (tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY' | sed 's/^/export /g')
 end
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,

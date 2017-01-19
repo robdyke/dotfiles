@@ -135,7 +135,7 @@ export BC_ENV_ARGS="$HOME/.bcrc -l"
 function _tmux_update_env {
     # when an SSH connection is re-established, so is the agent connection.
     # Reload it automatically.
-    [ $TMUX ] && eval $(tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
+    [ $TMUX ] && eval $(tmux show-env | grep 'SSH_AUTH_SOCK\|DISPLAY' | sed 's/^/export /g')
 }
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
