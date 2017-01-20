@@ -196,6 +196,10 @@ chpwd() {
 precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -R
+}
+
+preexec() {
+    # no need for another prompt before
     _tmux_update_env
 }
 
