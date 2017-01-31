@@ -42,6 +42,8 @@ alias ackl='ack -l'
 alias cdp='cd -P'
 alias dush="du -sh | sort -h"
 alias tailnf="tail -n1000 -f"
+# use gitignore with ack
+alias gack="git ls-files -oc --exclude-standard | ack -x"
 
 alias acknonascii="ack '[^\x00-\x7F]'"
 
