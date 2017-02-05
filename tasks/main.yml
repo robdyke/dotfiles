@@ -1,0 +1,16 @@
+- name: Install dotfile dependencies
+  apt: name={{item}} state=present
+  with_items:
+    - vim
+    - tmux
+
+- name: Install dotfile dependencies
+  apt: name={{item}} state=present
+  with_items:
+    - vim
+    - tmux
+
+- name: Clone dotfiles
+  # TODO add github.com to authorised hosts instead of accept_hostkey=true!
+  git: repo=git@github.com:naggie/dotfiles.git dest=~/dotfiles version=naggie recursive=yes accept_hostkey=True
+  notify: install dotfiles
