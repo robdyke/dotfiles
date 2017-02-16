@@ -29,11 +29,11 @@ set -x LANG en_GB.UTF-8
 # and load the standard library
 set -x BC_ENV_ARGS "$HOME/.bcrc -l"
 
-function tmux_update_env --on-event fish_prompt
+function tmux_update_env --on-event fish_preexec
     # when an SSH connection is re-established, so is the agent connection.
     # Reload it automatically.
     # export is supported in later fish releases.
-    test -z $TMUX; and eval (tmux show-env -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
+    test -z $TMUX; and eval (tmux show-env -s | grep 'SSH_AUTH_SOCK=\|DISPLAY=' | sed 's/^/export /g')
 end
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
