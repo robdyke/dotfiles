@@ -11,6 +11,5 @@
     - tmux
 
 - name: Clone dotfiles
-  # TODO add github.com to authorised hosts instead of accept_hostkey=true!
-  git: repo=git@github.com:naggie/dotfiles.git dest=~/dotfiles version=naggie recursive=yes accept_hostkey=True
+  git: repo=git@github.com:naggie/dotfiles.git dest=~/dotfiles version=naggie recursive=yes
   notify: install dotfiles
