@@ -56,7 +56,7 @@ export GCC_COLORS=1
 
 # this bashrc takes a sec or so thanks to all the completions, so print this first
 # Now this doesn't matter thanks to the deferred() system
-echo -ne "\n\033[37m> Welcome to $HOSTNAME, $USER!\033[0m "
+echo -ne "\n\033[37mWelcome to $HOSTNAME, $USER!\033[0m "
 
 # set from hostname
 export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
@@ -240,13 +240,12 @@ stty erase ^?
 test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
 
 # ls is the first thing I normally do when I log in. Let's hope it's not annoying
-echo "Files in $PWD are:"
-echo
+echo -e "\nbash, dotfiles version $(cat ~/.naggie-dotfiles-version)"
+uptime
+echo -e "\nFiles in $PWD:\n"
+
 # neat ls with fixed width
 COLUMNS=80 ls
-
-echo -e "\n> bash, dotfiles version $(cat ~/.naggie-dotfiles-version)"
-echo '>'$(uptime)
 
 # Disable stupid flow control. Ctrl+S can disable the terminal, requiring
 # Ctrl+Q to restore. It can result in an apparent hung terminal, if
