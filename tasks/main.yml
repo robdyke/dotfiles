@@ -11,8 +11,3 @@
   git: repo=git@github.com:naggie/dotfiles.git dest=~/dotfiles version=naggie recursive=yes
   notify: install dotfiles
 
-- name: install dotfiles
-  shell: ./install.sh
-  args:
-    chdir: ~/dotfiles
-
