@@ -37,9 +37,9 @@ function warning {
 }
 
 # sneaky hack to install to skel if run as root
-if [ `whoami` == root ]; then
-	HOME=/etc/skel
-fi
+#if [ `whoami` == root ]; then
+#	HOME=/etc/skel
+#fi
 
 # just the arguments (cryptic, I know. That's why you should use fish!)
 PRESETS=$@
