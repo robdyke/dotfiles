@@ -1,5 +1,4 @@
 - name: install dotfiles
-  command: ./install.sh
+  shell: ./install.sh
   args:
     chdir: ~/dotfiles
-
