@@ -26,12 +26,14 @@ alias lr='ls -latr'
 alias la='ls -al'
 
 # Common shortcuts
-alias g=git
-alias s='git status'
-alias d='git diff'
-alias o='git log'
 alias b='git branch -a'
 alias l=ls
+alias o='git log'
+alias g=git
+alias s='git status'
+
+alias d='git difftool'
+
 alias vo='vim -O'
 alias findack='find . | ack'
 alias sed-recursive="ack -f | xargs sed -i -r -e"
