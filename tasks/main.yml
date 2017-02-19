@@ -1,6 +1,6 @@
 - name: Install dotfile dependencies
   apt: name={{item}} state=present
-  become: rue
+  become: true
   with_items:
     - vim
     - tmux
