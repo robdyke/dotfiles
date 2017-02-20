@@ -8,6 +8,7 @@ General:
 * `tmux` : Terminal multiplexer
 * `git` : version control
 * `ack` : grep alternative for rebasing and source code exploration
+* `ssh` : secure remote shell (obvious I know)
 
 Specific:
 
@@ -15,6 +16,12 @@ Specific:
 * `ansible` : idempotent, agentless deployment
 * `httpie` : curl alternative with better UX
 * `ncdu` : hunt for disk usage
+* `brew` : homebrew package manager for OS X
+
+
+Misc:
+
+`sox`,`ffmpeg`
 
 
 # shell
