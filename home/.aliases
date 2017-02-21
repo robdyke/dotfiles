@@ -32,7 +32,7 @@ alias o='git log'
 alias g=git
 alias s='git status'
 
-alias d='git difftool'
+alias d='git difftool -y'
 
 alias vo='vim -O'
 alias findack='find . | ack'
