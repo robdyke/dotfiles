@@ -306,8 +306,3 @@ set sidescrolloff=5
 " mac but works without. Spooky.
 "set clipboard=unnamedplus
 " BROKEN
-
-" annoying
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_conceal = 0
