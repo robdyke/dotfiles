@@ -4,7 +4,8 @@ General:
 
 * `vim` : text editor
 * `bash/zsh/fish` : Shells, used interchangibly depending on platform. Fish
-  generates completions from man pages!
+generates completions from man pages! (but CTRL+R reverse-i-search isn't there
+so I don't use it)
 * `tmux` : Terminal multiplexer
 * `git` : version control
 * `ack` : grep alternative for rebasing and source code exploration
@@ -13,7 +14,7 @@ General:
 Specific:
 
 * `ipython` : interactive python shell
-* `ansible` : idempotent, agentless deployment
+* `ansible` : idempotent, agentless configuration management
 * `httpie` : curl alternative with better UX
 * `ncdu` : hunt for disk usage
 * `brew` : homebrew package manager for OS X
