@@ -113,3 +113,6 @@ pip-selfcheck.json
 
 # pycoverage files
 .coverage*
+
+# ansible
+*.retry
