@@ -25,9 +25,13 @@ Misc:
 `sox`,`ffmpeg`
 
 
+Recommended font: https://github.com/adobe-fonts/source-code-pro
+
+
 # shell
 
-* `tm` will start or attach to the first `tmux` session. If you're on the only shell, `tmux` session 0 will automatically attach.
+* `tm` will start or attach to the first `tmux` session. If you're on the only
+  shell, `tmux` session 0 will automatically attach.
 * `CTRL+p` will launch `vim` in find mode.
 * `CTRL+s` will prepend `sudo` to the prompt and move the cursor to the end of the prompt
 * `tryforever <cmd...>` will run a command in a loop until it fails
