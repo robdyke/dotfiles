@@ -16,8 +16,10 @@ Specific:
 * `ipython` : interactive python shell
 * `ansible` : idempotent, agentless configuration management
 * `httpie` : curl alternative with better UX
+* `jq` : Command line JSON processor (good with httpie)
 * `ncdu` : hunt for disk usage
 * `brew` : homebrew package manager for OS X
+* `pudb` : python debugger
 
 
 Misc:
