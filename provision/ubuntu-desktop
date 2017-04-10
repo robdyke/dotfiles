@@ -74,4 +74,5 @@ apt-get --yes --force-yes autoremove
 # note apt-get upgrade can cause problems. Don't do it when building a livecd.
 
 # desaturate!
-$SCRIPT_DIR/desaturate_ubuntu.py
+#sudo apt-get --yes --force-yes install python-pil
+#$SCRIPT_DIR/desaturate_ubuntu.py
