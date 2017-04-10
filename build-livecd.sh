@@ -190,7 +190,7 @@ rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/
 INSIDE git -C /etc/skel/dotfiles submodule foreach rm .git
 INSIDE git -C /etc/skel/dotfiles submodule update --init
 
-INSIDE /etc/skel/dotfiles/provision/ubuntu-15.04-desktop
+INSIDE /etc/skel/dotfiles/provision/ubuntu-desktop
 INSIDE /etc/skel/dotfiles/install.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
