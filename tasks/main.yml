@@ -6,6 +6,7 @@
     - tmux
     - git
     - ncdu
+    - language-pack-en
 
 - name: Clone dotfiles
   git: repo=git@github.com:naggie/dotfiles.git dest=~/dotfiles version=naggie recursive=yes
