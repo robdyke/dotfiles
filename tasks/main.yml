@@ -6,6 +6,7 @@
     - tmux
     - git
     - ncdu
+    - httpie
     - language-pack-en
 
 - name: Clone dotfiles
