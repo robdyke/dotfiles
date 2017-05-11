@@ -8,8 +8,13 @@
     - ncdu
     - httpie
     - language-pack-en
+    - tree
 
 - name: Clone dotfiles
-  git: repo=git@github.com:naggie/dotfiles.git dest=~/dotfiles version=naggie recursive=yes
+  git:
+    repo: git@github.com:naggie/dotfiles.git
+    dest: ~/dotfiles
+    version: naggie
+    recursive: yes
   notify: install dotfiles
 
