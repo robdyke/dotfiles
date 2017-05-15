@@ -61,3 +61,6 @@
 [submodule "home/.vim/bundle/vim-ps1"]
 	path = home/.vim/bundle/vim-ps1
 	url = git://github.com/PProvost/vim-ps1.git
+[submodule "home/.vim/bundle/requirements.txt.vim"]
+	path = home/.vim/bundle/requirements.txt.vim
+	url = git://github.com/raimon49/requirements.txt.vim.git
