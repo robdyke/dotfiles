@@ -24,7 +24,7 @@ export HISTIGNORE='git*--amend*:ls:cd'
 export HISTCONTROL=ignoredups:ignorespace
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'
-export PAGER=~/bin/vimpager
+export PAGER='less -R'
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
 # lines or not. tmux may draw x and q instead, or default to - and | which is

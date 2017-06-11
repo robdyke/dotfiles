@@ -1,4 +1,4 @@
-status --is-interactive; or exit 0
+etatus --is-interactive; or exit 0
 
 set -x PATH ~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $PATH
 
@@ -62,7 +62,7 @@ test -z $TMUX
 # vim -X = don't look for X server, which can be slow
 set -x EDITOR 'vim -X'
 
-set -x PAGER ~/bin/vimpager
+set -x PAGER 'less -R'
 
 # if you call a different shell, this does not happen automatically. WTF?
 set -x SHELL (which fish)
