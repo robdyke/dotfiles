@@ -1,4 +1,4 @@
-etatus --is-interactive; or exit 0
+status --is-interactive; or exit 0
 
 set -x PATH ~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $PATH
 
