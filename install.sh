@@ -144,7 +144,7 @@ fi
 
 
 tmux -V | grep -q 'tmux 2.' || warning "tmux 2.x not installed"
-vim --version | grep -q 'Vi IMproved 7.4' || warning "vim 7.4 not installed"
+vim --version | grep -q 'Vi IMproved 8.' || warning "vim 8.x not installed"
 
 # totally worth it
 if which fish > /dev/null; then
