@@ -101,15 +101,28 @@ xcuserdata
 # node stuff
 node_modules/
 
-# python venv
+# python stuff
 bin/
 include/
 lib/
 pip-selfcheck.json
 .Python
+*.egg-info
 
 # BSD sed-recursive accident
 *-r
 
 # pycoverage files
 .coverage*
+
+# ansible
+*.retry
+
+
+# redis
+dump.rdb
+
+# python coverage (non-standard?)
+coverage.txt
+coverage.xml
+coverage_html

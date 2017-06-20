@@ -26,12 +26,16 @@ alias lr='ls -latr'
 alias la='ls -al'
 
 # Common shortcuts
-alias g=git
-alias s='git status'
-alias d='git diff'
-alias o='git log'
 alias b='git branch -a'
 alias l=ls
+alias o='git log'
+alias g=git
+alias s='git status'
+
+# use vimdiff when you like. Useful sometimes, but not always.
+#alias d='git difftool -y'
+alias d='git diff'
+
 alias vo='vim -O'
 alias findack='find . | ack'
 alias sed-recursive="ack -f | xargs sed -i -r -e"
@@ -41,7 +45,7 @@ alias ackl='ack -l'
 #alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;' # can ruin git objects
 alias cdp='cd -P'
 alias dush="du -sh | sort -h"
-alias tailnf="tail -n1000 -f"
+alias t="tail -n1000 -f"
 # use gitignore with ack
 alias gack="git ls-files -oc --exclude-standard | ack -x"
 

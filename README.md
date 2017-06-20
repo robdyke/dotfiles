@@ -4,22 +4,36 @@ General:
 
 * `vim` : text editor
 * `bash/zsh/fish` : Shells, used interchangibly depending on platform. Fish
-  generates completions from man pages!
+generates completions from man pages! (but CTRL+R reverse-i-search isn't there
+so I don't use it)
 * `tmux` : Terminal multiplexer
 * `git` : version control
 * `ack` : grep alternative for rebasing and source code exploration
+* `ssh` : secure remote shell (obvious I know)
 
 Specific:
 
 * `ipython` : interactive python shell
-* `ansible` : idempotent, agentless deployment
+* `ansible` : idempotent, agentless configuration management
 * `httpie` : curl alternative with better UX
+* `jq` : Command line JSON processor (good with httpie)
 * `ncdu` : hunt for disk usage
+* `brew` : homebrew package manager for OS X
+* `pudb` : python debugger
+
+
+Misc:
+
+`sox`,`ffmpeg`
+
+
+Recommended font: https://github.com/adobe-fonts/source-code-pro
 
 
 # shell
 
-* `tm` will start or attach to the first `tmux` session. If you're on the only shell, `tmux` session 0 will automatically attach.
+* `tm` will start or attach to the first `tmux` session. If you're on the only
+  shell, `tmux` session 0 will automatically attach.
 * `CTRL+p` will launch `vim` in find mode.
 * `CTRL+s` will prepend `sudo` to the prompt and move the cursor to the end of the prompt
 * `tryforever <cmd...>` will run a command in a loop until it fails

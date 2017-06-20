@@ -91,7 +91,7 @@ source ~/.zsh/zsh-git-prompt/zshrc.sh
 
 # vim -X = don't look for X server, which can be slow
 export EDITOR='vim -X'
-export PAGER=~/bin/vimpager
+export PAGER='less -R'
 
 # zsh will use vi bindings if you have vim as the editor. I want emacs.
 # zsh does not use gnu readline, but zle
@@ -247,11 +247,10 @@ test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
 stty -ixon -ixoff
 
 # ls is the first thing I normally do when I log in. Let's hope it's not annoying
-echo "Files in $PWD are:"
-echo
+echo -e "zsh, dotfiles version $(cat ~/.naggie-dotfiles-version)"
+uptime
+echo -e "\nFiles in $PWD:\n"
+
 # neat ls with fixed width
 COLUMNS=80 ls
-
-echo -e "\n> zsh, dotfiles version $(cat ~/.naggie-dotfiles-version)"
-echo '>' $(uptime)
 

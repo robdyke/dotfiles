@@ -62,7 +62,7 @@ test -z $TMUX
 # vim -X = don't look for X server, which can be slow
 set -x EDITOR 'vim -X'
 
-set -x PAGER ~/bin/vimpager
+set -x PAGER 'less -R'
 
 # if you call a different shell, this does not happen automatically. WTF?
 set -x SHELL (which fish)
@@ -120,10 +120,11 @@ test -x /usr/bin/keychain
 
 # these functions are too small to warrant a separate file
 function fish_greeting
-	echo \n\> Welcome to $HOSTNAME, $USER! Files in $PWD are:\n
+	echo \nWelcome to $HOSTNAME, $USER!
+	echo -e "fish, dotfiles version "(cat ~/.naggie-dotfiles-version)
+    uptime
+    echo -e "\nFiles in $PWD:\n"
 	ls
-	echo -e "\n> fish, dotfiles version "(cat ~/.naggie-dotfiles-version)
-	echo '>'(uptime)
 end
 
 

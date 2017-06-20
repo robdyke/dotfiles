@@ -37,9 +37,9 @@ function warning {
 }
 
 # sneaky hack to install to skel if run as root
-if [ `whoami` == root ]; then
-	HOME=/etc/skel
-fi
+#if [ `whoami` == root ]; then
+#	HOME=/etc/skel
+#fi
 
 # just the arguments (cryptic, I know. That's why you should use fish!)
 PRESETS=$@
@@ -52,6 +52,8 @@ git submodule --quiet update || exit 2
 # Garbage collection
 # remove remains of old submodules, scripts, etc
 rm -rf home/.vim/bundle/powerline 2>/dev/null
+rm -rf home/.vim/bundle/markdown 2>/dev/null
+rm -rf home/.vim/bundle/vim-markdown 2>/dev/null
 rm -rf home/.vim/bundle/delimitmate 2>/dev/null
 rm -rf home/.vim/bundle/ctrlp     2>/dev/null
 rm -rf ~/.config/ipython 2>/dev/null
@@ -142,7 +144,7 @@ fi
 
 
 tmux -V | grep -q 'tmux 2.' || warning "tmux 2.x not installed"
-vim --version | grep -q 'Vi IMproved 7.4' || warning "vim 7.4 not installed"
+vim --version | grep -q 'Vi IMproved 8.' || warning "vim 8.x not installed"
 
 # totally worth it
 if which fish > /dev/null; then
