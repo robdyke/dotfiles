@@ -120,7 +120,7 @@ function onprompt {
 	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
 
 		# to a clever shorthand representation of the current dir
-		LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\/]/-/g | grep -oE '[^\/]+$')
+		LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
 
 		# do the correct escape codes. BTW terminal title is always set to hostname
 		echo -ne "\\033k$LABEL\\033\\\\"
