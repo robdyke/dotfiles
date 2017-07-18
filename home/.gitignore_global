@@ -126,3 +126,6 @@ dump.rdb
 coverage.txt
 coverage.xml
 coverage_html
+
+# sphinx
+_build

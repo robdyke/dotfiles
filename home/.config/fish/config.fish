@@ -135,7 +135,7 @@ end
 
 function fish_tmux_title --description "Set the tmux window title"
 	# to a clever shorthand representation of the current dir. minus whitespace
-	echo $PWD | sed s/[^a-zA-Z0-9\/]/-/g | grep -oE '[^\/]+$'
+	echo $PWD | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$'
 end
 
 # only auto set title based on initial pane
