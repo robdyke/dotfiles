@@ -97,6 +97,8 @@ vnoremap <Down> <Esc>:echo "Use [j] for down"<CR>
 
 
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
+" make supertab load completions from jedi
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " 16-color terminal with solarised theme is most accurate
 " failing this, the following option can be set to use a degraded 256 color palette

@@ -46,8 +46,7 @@ PRESETS=$@
 
 # make sure the submodules are fetched
 echo 'Synchronising submodules...'
-git submodule --quiet init || exit 1
-git submodule --quiet update || exit 2
+git submodule update --init --recursive
 
 # Garbage collection
 # remove remains of old submodules, scripts, etc
