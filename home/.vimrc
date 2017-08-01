@@ -99,7 +99,7 @@ vnoremap <Down> <Esc>:echo "Use [j] for down"<CR>
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
 " make supertab load completions from jedi, omnicompletion taking precedence
 " over contextual completion
-let g:SuperTabDefaultCompletionType = "default"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 autocmd FileType * 
       \if &omnifunc != '' |
       \call SuperTabChain(&omnifunc, "<c-p>") |
