@@ -110,6 +110,12 @@ autocmd FileType *
 " https://github.com/davidhalter/jedi-vim/issues/217
 autocmd FileType python call jedi#configure_call_signatures()
 
+" disable automatic configuration, specifically to stop the pydocs split which
+" causes the cursor to jump around (!)
+" https://github.com/davidhalter/jedi-vim/issues/43
+let g:jedi#auto_vim_configuration = 0
+set completeopt=menuone,longest
+
 " 16-color terminal with solarised theme is most accurate
 " failing this, the following option can be set to use a degraded 256 color palette
 let g:solarized_termcolors=256
