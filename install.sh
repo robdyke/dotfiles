@@ -91,6 +91,8 @@ fi
 if [ -n "$TMUX" ]; then
 	echo 'Reloading tmux configuration...'
 	tmux source-file ~/.tmux.conf >/dev/null
+    export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
+    tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 else
 	warning "Not inside tmux, so can't tell tmux to reload"
 fi
