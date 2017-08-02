@@ -95,26 +95,7 @@ vnoremap <Right> <Esc>:echo "Use [l] for right"<CR>
 vnoremap <Up> <Esc>:echo "Use [k] for up"<CR>
 vnoremap <Down> <Esc>:echo "Use [j] for down"<CR>
 
-
 let g:SuperTabNoCompleteAfter = ['^', '\s', '//', '#']
-" make supertab load completions from jedi, omnicompletion taking precedence
-" over contextual completion
-let g:SuperTabDefaultCompletionType = "<c-n>"
-autocmd FileType * 
-      \if &omnifunc != '' |
-      \call SuperTabChain(&omnifunc, "<c-p>") |
-      \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-      \endif
-
-" necessary to avoid pauses of several seconds before completion
-" https://github.com/davidhalter/jedi-vim/issues/217
-autocmd FileType python call jedi#configure_call_signatures()
-
-" disable automatic configuration, specifically to stop the pydocs split which
-" causes the cursor to jump around (!)
-" https://github.com/davidhalter/jedi-vim/issues/43
-let g:jedi#auto_vim_configuration = 0
-set completeopt=menuone,longest
 
 " 16-color terminal with solarised theme is most accurate
 " failing this, the following option can be set to use a degraded 256 color palette
