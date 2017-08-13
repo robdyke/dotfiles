@@ -34,7 +34,7 @@ Recommended font: https://github.com/adobe-fonts/source-code-pro
 
 * `tm` will start or attach to the first `tmux` session. If you're on the only
   shell, `tmux` session 0 will automatically attach.
-* `CTRL+p` will launch `vim` in find mode.
+* `CTRL+p` will launch `vim` in find mode, also works inside vim
 * `CTRL+s` will prepend `sudo` to the prompt and move the cursor to the end of the prompt
 * `tryforever <cmd...>` will run a command in a loop until it fails
 * history is synchronised between open shells

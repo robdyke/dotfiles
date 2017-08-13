@@ -54,10 +54,10 @@ rm -rf home/.vim/bundle/powerline 2>/dev/null
 rm -rf home/.vim/bundle/markdown 2>/dev/null
 rm -rf home/.vim/bundle/vim-markdown 2>/dev/null
 rm -rf home/.vim/bundle/delimitmate 2>/dev/null
-rm -rf home/.vim/bundle/ctrlp     2>/dev/null
+rm -rf home/.vim/bundle/jedi-vim 2>/dev/null
 rm -rf ~/.config/ipython 2>/dev/null
-rm -f  ~/bin/server-splash.sh     2>/dev/null
-rm -f  ~/git-completion.bash      2>/dev/null
+rm -f  ~/bin/server-splash.sh 2>/dev/null
+rm -f  ~/git-completion.bash 2>/dev/null
 
 echo 'Clobbering...'
 test -d ~/.vim/ && rm -rf ~/.vim/
