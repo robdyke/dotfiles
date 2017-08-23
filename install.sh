@@ -45,8 +45,9 @@ function warning {
 PRESETS=$@
 
 # make sure the submodules are fetched
-echo 'Synchronising submodules...'
-git submodule update --init --recursive
+# subtree is not used instead
+#echo 'Synchronising submodules...'
+#git submodule update --init --recursive
 
 # Garbage collection
 # remove remains of old submodules, scripts, etc
