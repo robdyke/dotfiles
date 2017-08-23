@@ -79,10 +79,8 @@ fi
 echo "Copying ~/etc..."
 cp -a etc ~
 
-# TODO: perserve target executable permissions
 echo 'Copying scripts...'
 cp -a bin ~
-chmod +x ~/bin/*
 
 if [ ! 0$(tput colors 2>/dev/null) -eq 256 ]; then
 	warning "TERM '$TERM' is not a 256 colour type! Please set in terminal emulator. EG: Putty should have putty-256color, xterm should have xterm-256color."
