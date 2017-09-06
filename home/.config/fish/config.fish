@@ -44,6 +44,12 @@ test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
 set -x SYSTEM_COLOUR (python ~/bin/system-colour.py $HOSTNAME)
 test $TMUX; and tmux set -g status-left-bg colour{$SYSTEM_COLOUR} ^/dev/null >/dev/null
 
+if test $USER = root
+    set PROMPT_COLOUR 160 # red
+else
+    set PROMPT_COLOUR $SYSTEM_COLOUR
+end
+
 # AUTOMATIC TMUX
 # must not launch tmux inside tmux (no memes please)
 test -z $TMUX
@@ -147,7 +153,8 @@ test $TMUX
 function fish_set_tmux_title --description "Sets tmux pane title to output of fish_tmux_title, with padding" --on-variable PWD
 	# title of tmux pane, must be separate to fish_title
 	# only run this if tmux is also running
-	test $TMUX
+    test $USER != root
+	    and test $TMUX
 		and test $TMUX_PRIMARY_PANE
 		and printf "\\033k%s\\033\\\\" (fish_tmux_title)
 end
@@ -168,7 +175,7 @@ function fish_prompt --description 'Write out the prompt'
 	or printf "\n\33[31mExited with status %s\33[m" $status
 
 	printf "\n\33[38;5;%sm%s@%s:%s\33[90m %s %s %s\33[0m\n\$ " \
-        $SYSTEM_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (__sa_prompt)(date +%T)
+        $PROMPT_COLOUR $USER $HOSTNAME $PWD (__fish_git_prompt) (__fish_p4_prompt) (__sa_prompt)(date +%T)
 end
 
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running

@@ -147,8 +147,16 @@ export HOSTNAME
 export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
+
+if [ $USER == root ]; then
+    PROMPT_COLOUR=160 # red
+else
+    PROMPT_COLOUR=$SYSTEM_COLOUR
+fi
+
+
 PROMPT="\$(__exit_warn)
-%F{${SYSTEM_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)\$(__sa_ps1)%F{239}\$(date +%T)%f
+%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)\$(__sa_ps1)%F{239}\$(date +%T)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?
