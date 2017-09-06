@@ -300,8 +300,7 @@ set scrolloff=5
 " keep at least 5 lines left/right
 set sidescrolloff=5
 
-" clipboard in Linux, Mac sync'd with vim
-" Ostensibly needs https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard for
-" mac but works without. Spooky.
-"set clipboard=unnamedplus
-" BROKEN
+" line marker
+set colorcolumn=141
+
+highlight ColorColumn ctermbg=black guibg=black
