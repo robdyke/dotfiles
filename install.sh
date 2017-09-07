@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# RUN AS ROOT TO INSTALL TO /etc/skel/ so new users have these dotfiles
+# RUN as root with HOME=/etc/skel/ so new users have these dotfiles
 # or sudo -u <user> ./install.sh to install as any other user
-
-# Else will install to home dir
 
 cd $(dirname $0)
 
@@ -36,38 +34,14 @@ function warning {
 	echo -e "\033[00;31m> $*\033[00m"
 }
 
-# sneaky hack to install to skel if run as root
-#if [ `whoami` == root ]; then
-#	HOME=/etc/skel
-#fi
-
-# just the arguments (cryptic, I know. That's why you should use fish!)
-PRESETS=$@
-
-# make sure the submodules are fetched
-# subtree is not used instead
-#echo 'Synchronising submodules...'
-#git submodule update --init --recursive
-
-# Garbage collection
-# remove remains of old submodules, scripts, etc
-rm -rf home/.vim/bundle/powerline 2>/dev/null
-rm -rf home/.vim/bundle/markdown 2>/dev/null
-rm -rf home/.vim/bundle/vim-markdown 2>/dev/null
-rm -rf home/.vim/bundle/delimitmate 2>/dev/null
-rm -rf home/.vim/bundle/jedi-vim 2>/dev/null
-rm -rf ~/.config/ipython 2>/dev/null
-rm -f  ~/bin/server-splash.sh 2>/dev/null
-rm -f  ~/git-completion.bash 2>/dev/null
 
 echo 'Clobbering...'
 test -d ~/.vim/ && rm -rf ~/.vim/
-test -d ~/zsh/ && rm -rf ~/zsh/
+test -d ~/.zsh/ && rm -rf ~/.zsh/
 # not for fish as it removes generated completions which have to rebuilt which is a pain
 #test -d ~/.config/fish/ && rm -rf ~/.config/fish/
 
 echo 'Copying dotfiles...'
-#cp -r home/* ~ # non-dotfiles
 # copy dotfiles separately , normal glob does not match
 cp -r home/.??* ~ 2> /dev/null
 
@@ -95,11 +69,6 @@ if [ -n "$TMUX" ]; then
 else
 	warning "Not inside tmux, so can't tell tmux to reload"
 fi
-
-#if which fish &>/dev/null && fish -v 2>&1 | grep -q 'version 2'; then
-#	test ! -d ~/.config/fish/generated_completions/ \
-#		&& fish -c fish_update_completions
-#fi
 
 echo Installing/updating fonts...
 ./etc/powerline-patched/install.sh
@@ -135,13 +104,10 @@ elif [[ $BRANCH =~ "*$USER*" ]]; then
 	warning "Branch does not contain user. Sure about this? The convention is to have a custom branch name containing your username."
 fi
 
-
-
 if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
     echo "Migrating history file..."
     cp ~/.bash_history ~/.history
 fi
-
 
 tmux -V | grep -q 'tmux 2.' || warning "tmux 2.x not installed"
 vim --version | grep -q 'Vi IMproved 8.' || warning "vim 8.x not installed"
