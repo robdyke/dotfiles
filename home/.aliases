@@ -61,9 +61,6 @@ alias ls='ls --color=auto'
 # unetbootin-source-494.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Funetbootin%2Ffiles%2FUNetbootin%2F494%2F&ts=1391695063&use_mirror=heanet?)
 alias wget='wget --content-disposition'
 
-# Agent forwarding -- only this seems to work
-alias ssh='ssh -A'
-
 # make bash/zsh (but not fish yet, TODO) aliases work with sudo
 # http://superuser.com/questions/441556/bash-alias-doesnt-carry-over-with-sudo
 alias sudo="sudo "
