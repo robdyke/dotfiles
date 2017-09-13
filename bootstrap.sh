@@ -19,7 +19,8 @@ if [ $(uname) == 'Darwin' ]; then
 elif [ -f /etc/debian_version ]; then
     # debian/ubuntu
     sudo apt-get -y update
-    sudo apt-get -y install tmux vim git ssh language-pack-en
+    # figlet is for server-splash
+    sudo apt-get -y install tmux vim git ssh language-pack-en figlet
     sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 else
     echo "Unsupported OS."
