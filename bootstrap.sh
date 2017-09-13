@@ -18,7 +18,7 @@ if [ $(uname) == 'Darwin' ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    brew install tmux vim git ssh
+    brew install tmux vim git
 elif [ -f /etc/debian_version ]; then
     # debian/ubuntu
     sudo apt-get -y update
