@@ -18,12 +18,12 @@ if [ $(uname) == 'Darwin' ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    brew install tmux vim git
+    brew install tmux vim git httpie ncdu tree
 elif [ -f /etc/debian_version ]; then
     # debian/ubuntu
     sudo apt-get -y update
     # figlet is for server-splash
-    sudo apt-get -y install tmux vim git ssh language-pack-en figlet
+    sudo apt-get -y install tmux vim git ssh language-pack-en figlet httpie ncdu tree
     sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 else
     echo "Unsupported OS."
