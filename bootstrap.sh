@@ -33,3 +33,6 @@ git clone -b naggie git@github.com:naggie/dotfiles.git || git clone https://gith
 
 cd dotfiles
 ./install.sh
+
+# start tmux (with reloaded shell)
+tmux attach || tmux
