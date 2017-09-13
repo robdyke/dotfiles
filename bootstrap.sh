@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# curl -L https://github.com/naggie/dotfiles/raw/naggie/bootstrap.sh | bash
+# curl -sL https://github.com/naggie/dotfiles/raw/naggie/bootstrap.sh | bash
 
 cat <<EOF
 This script will install vim/git/tmux and then dotfiles.
