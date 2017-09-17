@@ -4,7 +4,8 @@ from hashlib import md5
 from sys import argv
 
 # preselected suitable (vibrant enough) colours with a fair sample
-x256_colours = [1,2,3,5,6,7,8] + range(9,15) + range(34,52,3) + range(76,87,2) + range(196,231,2)
+x256_colours = [2,3,5,6,7,8,10,11,12,13,14,34,37,40,43,46,49,76,78,80,82,84,86,197,199,
+        201,203,205,207,209,211,213,215,217,219,221,223,225,227,229]
 
 
 def deterministic_x256(*args):
