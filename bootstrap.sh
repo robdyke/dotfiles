@@ -28,9 +28,15 @@ if [ $(uname) == 'Darwin' ]; then
     # macos
     if [ ! -f /usr/local/bin/brew ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        brew update
     fi
 
-    brew install tmux vim git httpie ncdu tree
+    packages=(tmux vim git httpie ncdu tree)
+    for package in "${packages[@]}"; do
+        brew upgrade $package || brew install $package
+    done
+
 elif grep -q Ubuntu /etc/issue; then
     sudo apt-get -y update
     # figlet is for server-splash
