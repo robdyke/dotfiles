@@ -31,11 +31,16 @@ if [ $(uname) == 'Darwin' ]; then
     fi
 
     brew install tmux vim git httpie ncdu tree
-elif [ -f /etc/debian_version ]; then
-    # debian/ubuntu
+elif grep -q Ubuntu /etc/issue; then
     sudo apt-get -y update
     # figlet is for server-splash
     sudo apt-get -y install tmux vim git ssh language-pack-en figlet httpie ncdu tree
+    sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+elif grep -q Raspbian /etc/issue; then
+    sudo apt-get -y update
+    # Raspbian is British, locale is already correct. language-pack-en isn't a package.
+    # figlet is for server-splash
+    sudo apt-get -y install tmux vim git ssh figlet httpie ncdu tree
     sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 else
     echo "Unsupported OS."
