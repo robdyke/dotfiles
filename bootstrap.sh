@@ -38,6 +38,7 @@ if [ $(uname) == 'Darwin' ]; then
     done
 
 elif grep -q Ubuntu /etc/issue; then
+    sudo apt-add-repository multiverse
     sudo apt-get -y update
     # figlet is for server-splash
     sudo apt-get -y install tmux vim git ssh language-pack-en figlet httpie ncdu tree
