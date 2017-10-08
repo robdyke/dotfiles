@@ -54,6 +54,8 @@ alias acknonascii="ack '[^\x00-\x7F]'"
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
 
+alias cert_expires='openssl x509 -enddate -noout -in'
+
 # note this does not work on mac os x, has to be patched in bash or fish rc
 alias ls='ls --color=auto'
 
