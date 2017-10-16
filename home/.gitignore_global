@@ -129,3 +129,5 @@ coverage_html
 
 # sphinx
 _build
+
+.tox
