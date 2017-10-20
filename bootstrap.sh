@@ -32,7 +32,7 @@ if [ $(uname) == 'Darwin' ]; then
         brew update
     fi
 
-    packages=(tmux vim git httpie ncdu tree)
+    packages=(tmux vim git httpie ncdu tree bash)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
