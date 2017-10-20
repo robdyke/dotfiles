@@ -122,6 +122,7 @@ if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
     echo "Migrating history file..."
     cp ~/.bash_history ~/.history
 fi
+chmod 600 ~/.history
 
 tmux -V | grep -q 'tmux 2.' || warning "tmux 2.x not installed"
 vim --version | grep -q 'Vi IMproved 8.' || warning "vim 8.x not installed"
