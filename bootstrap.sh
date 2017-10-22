@@ -32,6 +32,13 @@ if [ $(uname) == 'Darwin' ]; then
         brew update
     fi
 
+    # recommended, uses /Applications now.
+    brew tap caskrom/cask
+    brew cask install google-chrome spectacle
+
+    # flux is no longer required -- night shift!
+
+    # Upgrade or install (logic necessary)
     packages=(tmux vim git httpie ncdu tree bash)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
