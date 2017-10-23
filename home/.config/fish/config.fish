@@ -38,7 +38,7 @@ end
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
 # so just read from /etc/hostname)
-test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
+test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname -s)
 
 # taken from hostname
 set -x SYSTEM_COLOUR (python ~/bin/system-colour.py $HOSTNAME)

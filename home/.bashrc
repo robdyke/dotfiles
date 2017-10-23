@@ -45,7 +45,7 @@ function _tmux_update_env {
 
 # On some machines, hostname is not set. Using $(hostname) to do this is slow,
 # so just read from /etc/hostname)
-[ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
+[ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname -s)
 export HOSTNAME
 
 # if you call a different shell, this does not happen automatically. WTF?
