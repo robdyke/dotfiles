@@ -246,7 +246,6 @@ stty erase ^?
 test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
 
 # ls is the first thing I normally do when I log in. Let's hope it's not annoying
-echo -e "\nbash, dotfiles version $(cat ~/.naggie-dotfiles-version)"
 uptime
 echo -e "\nFiles in $PWD:\n"
 

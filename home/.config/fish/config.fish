@@ -126,7 +126,6 @@ test -x /usr/bin/keychain
 # these functions are too small to warrant a separate file
 function fish_greeting
 	echo \nWelcome to $HOSTNAME, $USER!
-	echo -e "fish, dotfiles version "(cat ~/.naggie-dotfiles-version)
     uptime
     echo -e "\nFiles in $PWD:\n"
 	ls

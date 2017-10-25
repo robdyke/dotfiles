@@ -9,12 +9,9 @@ cd $(dirname $0)
 #set -e
 CHANGE=$(git rev-list HEAD --count)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-VERSION=$BRANCH-$CHANGE
 PLATFORM=$(uname)
 
 cat <<EOF
-### naggie/dotfiles, version $VERSION.
-
 Dedpendencies:
 
   * tmux 1.8+
@@ -108,8 +105,6 @@ if which vim &>/dev/null; then
 else
 	warning 'Vim not found! Is your brain functioning correctly?'
 fi
-
-echo $VERSION > ~/.naggie-dotfiles-version
 
 # in case someone forgot...
 if [ $BRANCH == 'master' ]; then
