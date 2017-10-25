@@ -36,9 +36,8 @@ function tmux_update_env --on-event fish_preexec
     test -z $TMUX; and eval (tmux show-env -s | grep 'SSH_AUTH_SOCK=\|DISPLAY=' | sed 's/^/export /g')
 end
 
-# On some machines, hostname is not set. Using $(hostname) to do this is slow,
-# so just read from /etc/hostname)
-test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname -s)
+# Sometimes not set or fully qualified; simple name preferred.
+set -x HOSTNAME (hostname -s)
 
 # taken from hostname
 set -x SYSTEM_COLOUR (python ~/bin/system-colour.py $HOSTNAME)

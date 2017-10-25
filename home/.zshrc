@@ -138,10 +138,8 @@ function _tmux_update_env {
     [ $TMUX ] && eval $(tmux show-env | grep 'SSH_AUTH_SOCK=\|DISPLAY=' | sed 's/^/export /g')
 }
 
-# On some machines, hostname is not set. Using $(hostname) to do this is slow,
-# so just read from /etc/hostname)
-[ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname -s)
-export HOSTNAME
+# Sometimes not set or fully qualified; simple name preferred.
+export HOSTNAME=$(hostname -s)
 
 # set from hostname
 export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
