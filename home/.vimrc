@@ -49,6 +49,7 @@ au BufNewFile,BufRead *.pde       set filetype=c
 au BufNewFile,BufRead *.md        set filetype=markdown
 au BufNewFile,BufRead *.fish      set filetype=sh
 au BufNewFile,BufRead *.fdc       set filetype=sdc
+au BufNewFile,BufRead *.spec      set filetype=python
 au BufNewFile,BufRead .aliases    set filetype=sh
 au BufNewFile,BufRead .bcrc       set filetype=bc
 au BufNewFile,BufRead Jenkinsfile set filetype=groovy
