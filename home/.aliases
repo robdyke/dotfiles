@@ -38,7 +38,7 @@ alias d='git diff'
 
 alias vo='vim -O'
 alias findack='find . | ack'
-alias sed-recursive="ack -f | xargs sed -i -r -e"
+alias sed-recursive="ack -f | xargs sed -i '' -E -e"
 # find TODO tags in files
 alias TODO='ack TODO'
 alias ackl='ack -l'
