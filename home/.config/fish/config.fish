@@ -64,8 +64,7 @@ test -z $TMUX
 	and tmux attach
 
 
-# vim -X = don't look for X server, which can be slow
-set -x EDITOR 'vim -X'
+set -x EDITOR vim
 
 set -x PAGER 'less -R'
 

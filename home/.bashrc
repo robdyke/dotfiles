@@ -23,7 +23,7 @@ fi
 export HISTIGNORE='git*--amend*:ls:cd'
 export HISTCONTROL=ignoredups:ignorespace
 # vim -X = don't look for X server, which can be slow
-export EDITOR='vim -X'
+export EDITOR=vim
 export PAGER='less -R'
 
 # sometimes TMUX can get confused about whether unicode is supported to draw

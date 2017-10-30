@@ -90,7 +90,7 @@ ZSH_THEME_GIT_PROMPT_CACHE=1
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 
 # vim -X = don't look for X server, which can be slow
-export EDITOR='vim -X'
+export EDITOR=vim
 export PAGER='less -R'
 
 # zsh will use vi bindings if you have vim as the editor. I want emacs.

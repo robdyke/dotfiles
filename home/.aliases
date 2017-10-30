@@ -13,7 +13,7 @@ alias piu='pip install --upgrade'
 # colours and ANSI lines
 alias tree="tree -CA"
 
-# stop vim taking ages looking for X server
+# vim -X = don't look for X server, which can be slow
 # Also, tabs by default. -O and -o will override, don't worry.
 alias vim='vim -X -p'
 
