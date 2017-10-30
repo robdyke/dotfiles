@@ -39,7 +39,7 @@ if [ $(uname) == 'Darwin' ]; then
     # flux is no longer required -- night shift!
 
     # Upgrade or install (logic necessary)
-    packages=(tmux vim git httpie ncdu tree bash wget)
+    packages=(tmux vim git httpie ncdu tree bash wget task)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
