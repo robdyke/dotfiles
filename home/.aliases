@@ -4,11 +4,8 @@ alias ...='cd ../..'
 
 # package manager commands
 alias sagi='sudo apt-get install'
-alias yi='sudo yum install'
 alias bi='brew install'
 alias bci='brew cask install'
-alias ni='npm install'
-alias piu='pip install --upgrade'
 
 # colours and ANSI lines
 alias tree="tree -CA"
@@ -31,30 +28,24 @@ alias l=ls
 alias o='git log'
 alias g=git
 alias s='git status'
-
-# use vimdiff when you like. Useful sometimes, but not always.
-#alias d='git difftool -y'
+alias a='task add'
+alias n='task next'
+alias t="tail -n100 -f"
 alias d='git diff'
+alias dt='git difftool -y'
 
-alias vo='vim -O'
 alias findack='find . | ack'
 alias sed-recursive="ack -f | xargs sed -i '' -E -e"
-# find TODO tags in files
 alias TODO='ack TODO'
 alias ackl='ack -l'
-#alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;' # can ruin git objects
-alias cdp='cd -P'
-alias dush="du -sh | sort -h"
-alias t="tail -n100 -f"
 # use gitignore with ack
 alias gack="git ls-files -oc --exclude-standard | ack -x"
-
 alias acknonascii="ack '[^\x00-\x7F]'"
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
 
-alias cert_expires='openssl x509 -enddate -noout -in'
+alias openssl-get-expiry='openssl x509 -enddate -noout -in'
 
 # note this does not work on mac os x, has to be patched in bash or fish rc
 alias ls='ls --color=auto'
