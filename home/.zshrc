@@ -7,7 +7,7 @@ unsetopt NOMATCH
 export GOPATH=~/gocode
 
 typeset -U path
-path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $GOPATH/bin $path)
+path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $GOPATH/bin /usr/local/go/bin $path)
 
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
