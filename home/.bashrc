@@ -3,6 +3,8 @@
 
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 
+export GOPATH=~/gocode
+
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
 # is configured to provide the correct, 256 color terminal type. For putty,
