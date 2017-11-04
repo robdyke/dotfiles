@@ -4,10 +4,11 @@ unsetopt NOMATCH
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-typeset -U path
-path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $path)
-
 export GOPATH=~/gocode
+
+typeset -U path
+path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $GOPATH/bin $path)
+
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
