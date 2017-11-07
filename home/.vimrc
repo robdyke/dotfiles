@@ -166,6 +166,11 @@ cmap w!! w !sudo tee % >/dev/null
 " Enable mouse mode. Use xterm >= 277 for mouse mode for large terms.
 set mouse=a
 
+" real time mouse stuff!
+if !has('nvim')
+    set ttymouse=xterm2
+endif
+
 " abbreviations
 ab teh the
 ab THe The
