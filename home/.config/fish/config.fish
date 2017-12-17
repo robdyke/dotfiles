@@ -79,6 +79,7 @@ set -x GCC_COLORS 1
 # alias is just a wrapper for creating a function
 # aliases shared between fish and bash
 . ~/.aliases
+which nvim > /dev/null; and alias vim=nvim
 
 # Very long-winded in fish...
 function _prependsudo
