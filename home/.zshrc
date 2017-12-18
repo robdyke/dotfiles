@@ -205,6 +205,10 @@ chpwd() {
 precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -R
+
+    # reset the terminal, in case something (such as cat-ing a binary file or
+    # failed SSH) sets a strange mode
+    stty sane
 }
 
 preexec() {

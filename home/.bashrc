@@ -122,6 +122,10 @@ test $TMUX \
 # Update TMUX title with path
 # TODO move some to precmd hack
 function onprompt {
+    # reset the terminal, in case something (such as cat-ing a binary file or
+    # failed SSH) sets a strange mode
+    stty sane
+
 	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
 	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
 
