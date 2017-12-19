@@ -17,7 +17,7 @@ Quick installation
 You can copy and paste the commands to your terminal. Comments are fine too.
 ::
     # clone
-    git clone https://github.com/powerline/fonts.git
+    git clone https://github.com/powerline/fonts.git --depth=1
     # install
     cd fonts
     ./install.sh
@@ -48,7 +48,7 @@ Font Families
  Inconsolata-dz for Powerline            Inconsolata-dz            SIL Open Font License, Version 1.0
  Inconsolata-g for Powerline             Inconsolata-g             SIL Open Font License, Version 1.0
  Input Mono                              Input Mono                `Input’s license <http://input.fontbureau.com/license/>`_
- Literation Mono Powerline               Liberation Mono           SIL Open Font License, Version 1.1
+ Liberation Mono Powerline               Liberation Mono           SIL Open Font License, Version 1.1
  ProFontWindows                          ProFont for Powerline     MIT License
  Meslo for Powerline                     Meslo                     Apache License, Version 2.0
  Source Code Pro for Powerline           Source Code Pro           SIL Open Font License, Version 1.1
