@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------------------------------------
-# Copyright (c) 2015 zsh-syntax-highlighting contributors
+# Copyright (c) 2016 zsh-syntax-highlighting contributors
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -28,17 +28,18 @@
 # -------------------------------------------------------------------------------------------------
 
 if [[ $OSTYPE == msys ]]; then
-  skip_test='Cannot chmod +x in msys2'
+  skip_test='Cannot chmod +x in msys2' # cargo culted from option-path_dirs.zsh
 else
-  setopt PATH_DIRS
-  mkdir -p foo/bar
-  touch foo/bar/testing-issue-228
-  chmod  +x foo/bar/testing-issue-228
-  path+=( "$PWD"/foo )
-
-  BUFFER='bar/testing-issue-228'
-
+  mkdir kappa
+  touch kappa.exe
+  chmod +x kappa.exe
+  cd kappa
+  
+  BUFFER='$PWD.exe; ${PWD}.exe'
+  
   expected_region_highlight=(
-    "1 21 command" # bar/testing-issue-228
+    "1 8 unknown-token" # $PWD.exe - not eval'd; issue #328
+    "9 9 commandseparator" # ;
+    "11 20 unknown-token" # ${PWD}.exe
   )
 fi
