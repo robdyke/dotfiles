@@ -49,6 +49,7 @@ au BufNewFile,BufRead *.pde       set filetype=c
 au BufNewFile,BufRead *.md        set filetype=markdown
 au BufNewFile,BufRead *.fish      set filetype=sh
 au BufNewFile,BufRead *.fdc       set filetype=sdc
+au BufNewFile,BufRead *.spec      set filetype=python
 au BufNewFile,BufRead .aliases    set filetype=sh
 au BufNewFile,BufRead .bcrc       set filetype=bc
 au BufNewFile,BufRead Jenkinsfile set filetype=groovy
@@ -164,6 +165,11 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Enable mouse mode. Use xterm >= 277 for mouse mode for large terms.
 set mouse=a
+
+" real time mouse stuff!
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 
 " abbreviations
 ab teh the

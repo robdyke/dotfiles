@@ -1,6 +1,8 @@
 status --is-interactive; or exit 0
 
-set -x PATH ~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $PATH
+set -x GOPATH ~/gocode
+
+set -x PATH ~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $GOPATH/bin /usr/local/go/bin $PATH
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
@@ -36,9 +38,8 @@ function tmux_update_env --on-event fish_preexec
     test -z $TMUX; and eval (tmux show-env -s | grep 'SSH_AUTH_SOCK=\|DISPLAY=' | sed 's/^/export /g')
 end
 
-# On some machines, hostname is not set. Using $(hostname) to do this is slow,
-# so just read from /etc/hostname)
-test $HOSTNAME; or set -x HOSTNAME (cat /etc/hostname 2>/dev/null; or hostname)
+# Sometimes not set or fully qualified; simple name preferred.
+set -x HOSTNAME (hostname -s)
 
 # taken from hostname
 set -x SYSTEM_COLOUR (python ~/bin/system-colour.py $HOSTNAME)
@@ -65,8 +66,7 @@ test -z $TMUX
 	and tmux attach
 
 
-# vim -X = don't look for X server, which can be slow
-set -x EDITOR 'vim -X'
+set -x EDITOR vim
 
 set -x PAGER 'less -R'
 
@@ -79,6 +79,7 @@ set -x GCC_COLORS 1
 # alias is just a wrapper for creating a function
 # aliases shared between fish and bash
 . ~/.aliases
+which nvim > /dev/null; and alias vim=nvim
 
 # Very long-winded in fish...
 function _prependsudo
@@ -127,7 +128,6 @@ test -x /usr/bin/keychain
 # these functions are too small to warrant a separate file
 function fish_greeting
 	echo \nWelcome to $HOSTNAME, $USER!
-	echo -e "fish, dotfiles version "(cat ~/.naggie-dotfiles-version)
     uptime
     echo -e "\nFiles in $PWD:\n"
 	ls

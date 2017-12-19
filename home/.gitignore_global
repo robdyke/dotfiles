@@ -102,12 +102,13 @@ xcuserdata
 node_modules/
 
 # python stuff
-bin/
-include/
-lib/
 pip-selfcheck.json
 .Python
 *.egg-info
+env
+venv
+__pycache__
+dist
 
 # BSD sed-recursive accident
 *-r
@@ -129,3 +130,5 @@ coverage_html
 
 # sphinx
 _build
+
+.tox

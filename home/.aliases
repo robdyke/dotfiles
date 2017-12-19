@@ -4,16 +4,13 @@ alias ...='cd ../..'
 
 # package manager commands
 alias sagi='sudo apt-get install'
-alias yi='sudo yum install'
 alias bi='brew install'
 alias bci='brew cask install'
-alias ni='npm install'
-alias piu='pip install --upgrade'
 
 # colours and ANSI lines
 alias tree="tree -CA"
 
-# stop vim taking ages looking for X server
+# vim -X = don't look for X server, which can be slow
 # Also, tabs by default. -O and -o will override, don't worry.
 alias vim='vim -X -p'
 
@@ -31,28 +28,25 @@ alias l=ls
 alias o='git log'
 alias g=git
 alias s='git status'
-
-# use vimdiff when you like. Useful sometimes, but not always.
-#alias d='git difftool -y'
+# task default command is "next", hence "n"
+alias n='task'
+alias in='task add +in'
+alias t="tail -n100 -f"
 alias d='git diff'
+alias dt='git difftool -y'
 
-alias vo='vim -O'
 alias findack='find . | ack'
-alias sed-recursive="ack -f | xargs sed -i -r -e"
-# find TODO tags in files
+alias sed-recursive="ack -f | xargs sed -i '' -E -e"
 alias TODO='ack TODO'
 alias ackl='ack -l'
-#alias dos2unixRecursive='find . -name "*" -type f -exec dos2unix {} \;' # can ruin git objects
-alias cdp='cd -P'
-alias dush="du -sh | sort -h"
-alias t="tail -n100 -f"
 # use gitignore with ack
 alias gack="git ls-files -oc --exclude-standard | ack -x"
-
 alias acknonascii="ack '[^\x00-\x7F]'"
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
+
+alias openssl-get-expiry='openssl x509 -enddate -noout -in'
 
 # note this does not work on mac os x, has to be patched in bash or fish rc
 alias ls='ls --color=auto'

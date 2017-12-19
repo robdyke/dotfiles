@@ -9,12 +9,9 @@ cd $(dirname $0)
 #set -e
 CHANGE=$(git rev-list HEAD --count)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-VERSION=$BRANCH-$CHANGE
 PLATFORM=$(uname)
 
 cat <<EOF
-### naggie/dotfiles, version $VERSION.
-
 Dedpendencies:
 
   * tmux 1.8+
@@ -51,7 +48,7 @@ fi
 touch ~/.ssh/known_hosts
 chmod 600 ~/.ssh/known_hosts
 
-grep github.com ~/.ssh/known_hosts || cat <<EOF >> ~/.ssh/known_hosts
+grep -q github.com ~/.ssh/known_hosts || cat <<EOF >> ~/.ssh/known_hosts
 github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
 EOF
 
@@ -109,8 +106,6 @@ else
 	warning 'Vim not found! Is your brain functioning correctly?'
 fi
 
-echo $VERSION > ~/.naggie-dotfiles-version
-
 # in case someone forgot...
 if [ $BRANCH == 'master' ]; then
 	warning "Generic version installed from master branch. Make your own branch for user/host-specific things."
@@ -122,6 +117,7 @@ if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
     echo "Migrating history file..."
     cp ~/.bash_history ~/.history
 fi
+chmod 600 ~/.history
 
 tmux -V | grep -q 'tmux 2.' || warning "tmux 2.x not installed"
 vim --version | grep -q 'Vi IMproved 8.' || warning "vim 8.x not installed"

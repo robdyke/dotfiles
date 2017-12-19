@@ -4,8 +4,11 @@ unsetopt NOMATCH
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export GOPATH=~/gocode
+
 typeset -U path
-path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $path)
+path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $GOPATH/bin /usr/local/go/bin $path)
+
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
@@ -90,7 +93,7 @@ ZSH_THEME_GIT_PROMPT_CACHE=1
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 
 # vim -X = don't look for X server, which can be slow
-export EDITOR='vim -X'
+export EDITOR=vim
 export PAGER='less -R'
 
 # zsh will use vi bindings if you have vim as the editor. I want emacs.
@@ -138,10 +141,8 @@ function _tmux_update_env {
     [ $TMUX ] && eval $(tmux show-env | grep 'SSH_AUTH_SOCK=\|DISPLAY=' | sed 's/^/export /g')
 }
 
-# On some machines, hostname is not set. Using $(hostname) to do this is slow,
-# so just read from /etc/hostname)
-[ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
-export HOSTNAME
+# Sometimes not set or fully qualified; simple name preferred.
+export HOSTNAME=$(hostname -s)
 
 # set from hostname
 export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
@@ -204,6 +205,10 @@ chpwd() {
 precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -R
+
+    # reset the terminal, in case something (such as cat-ing a binary file or
+    # failed SSH) sets a strange mode
+    stty sane
 }
 
 preexec() {
@@ -213,6 +218,7 @@ preexec() {
 
 # aliases shared between fish and bash
 source ~/.aliases
+which nvim > /dev/null && alias vim=nvim
 
 # zsh uses zle, not readine so .inputrc is not used. Match bindings here:
 
@@ -255,7 +261,6 @@ test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
 stty -ixon -ixoff
 
 # ls is the first thing I normally do when I log in. Let's hope it's not annoying
-echo -e "zsh, dotfiles version $(cat ~/.naggie-dotfiles-version)"
 uptime
 echo -e "\nFiles in $PWD:\n"
 

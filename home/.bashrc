@@ -1,7 +1,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+export GOPATH=~/gocode
+
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$GOPATH/bin:/usr/local/go/bin:$PATH
 
 # TERM TYPE Inside screen/tmux, it should be screen-256color -- this is
 # configured in .tmux.conf.  Outside, it's up to you to make sure your terminal
@@ -23,7 +25,7 @@ fi
 export HISTIGNORE='git*--amend*:ls:cd'
 export HISTCONTROL=ignoredups:ignorespace
 # vim -X = don't look for X server, which can be slow
-export EDITOR='vim -X'
+export EDITOR=vim
 export PAGER='less -R'
 
 # sometimes TMUX can get confused about whether unicode is supported to draw
@@ -43,10 +45,8 @@ function _tmux_update_env {
     [ $TMUX ] && eval $(tmux show-env | grep 'SSH_AUTH_SOCK=\|DISPLAY=' | sed 's/^/export /g')
 }
 
-# On some machines, hostname is not set. Using $(hostname) to do this is slow,
-# so just read from /etc/hostname)
-[ $HOSTNAME ] || HOSTNAME=$(cat /etc/hostname 2>/dev/null || hostname)
-export HOSTNAME
+# Sometimes not set or fully qualified; simple name preferred.
+export HOSTNAME=$(hostname -s)
 
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
@@ -122,6 +122,10 @@ test $TMUX \
 # Update TMUX title with path
 # TODO move some to precmd hack
 function onprompt {
+    # reset the terminal, in case something (such as cat-ing a binary file or
+    # failed SSH) sets a strange mode
+    stty sane
+
 	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
 	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
 
@@ -194,6 +198,7 @@ PS1="\$(__exit_warn)\n\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git
 
 # aliases shared between fish and bash
 source ~/.aliases
+which nvim > /dev/null && alias vim=nvim
 
 # get new or steal existing tmux
 function tm {
@@ -221,6 +226,10 @@ function deferred {
 	# latest git completion and PS1
 	source ~/.git-completion.sh
 	source ~/.git-prompt.sh
+    # fish/zsh already have this
+    which task > /dev/null && source ~/.task-completions.sh
+    # completions for aliases
+    source ~/.wrap-alias.sh
 }
 
 # patches for Mac OS X
@@ -246,7 +255,6 @@ stty erase ^?
 test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
 
 # ls is the first thing I normally do when I log in. Let's hope it's not annoying
-echo -e "\nbash, dotfiles version $(cat ~/.naggie-dotfiles-version)"
 uptime
 echo -e "\nFiles in $PWD:\n"
 
