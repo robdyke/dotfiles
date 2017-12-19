@@ -76,7 +76,7 @@ endfunction
 function! airline#switch_matching_theme()
   if exists('g:colors_name')
     let existing = g:airline_theme
-    let theme = substitute(g:colors_name, '-', '_', 'g')
+    let theme = substitute(tolower(g:colors_name), '-', '_', 'g')
     try
       let palette = g:airline#themes#{theme}#palette
       call airline#switch_theme(theme)
@@ -143,16 +143,7 @@ function! airline#statusline(winnr)
 endfunction
 
 function! airline#check_mode(winnr)
-  if !exists("s:airline_run")
-    let s:airline_run = 0
-  endif
-  let s:airline_run += 1
-
   let context = s:contexts[a:winnr]
-  let is_term = 0
-  if has("terminal")
-    let is_term = index(term_list(), bufnr('')) > -1
-  endif
 
   if get(w:, 'airline_active', 1)
     let l:m = mode()
@@ -162,9 +153,8 @@ function! airline#check_mode(winnr)
       let l:mode = ['replace']
     elseif l:m =~# '\v(v|V||s|S|)'
       let l:mode = ['visual']
-    elseif l:m ==# "t" || is_term
+    elseif l:m ==# "t"
       let l:mode = ['terminal']
-      let l:m = 't'
     else
       let l:mode = ['normal']
     endif
@@ -195,13 +185,6 @@ function! airline#check_mode(winnr)
   endif
 
   let mode_string = join(l:mode)
-  if s:airline_run < 3
-    " skip this round.
-    " When this function is run too early after startup,
-    " it forces a redraw by vim which will remove the intro screen.
-    let w:airline_lastmode = mode_string
-    return ''
-  endif
   if get(w:, 'airline_lastmode', '') != mode_string
     call airline#highlighter#highlight_modified_inactive(context.bufnr)
     call airline#highlighter#highlight(l:mode, context.bufnr)
