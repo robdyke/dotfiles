@@ -228,6 +228,8 @@ function deferred {
 	source ~/.git-prompt.sh
     # fish/zsh already have this
     which task > /dev/null && source ~/.task-completions.sh
+    # completions for aliases
+    source ~/.wrap-alias.sh
 }
 
 # patches for Mac OS X
