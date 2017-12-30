@@ -199,6 +199,8 @@ PS1="\$(__exit_warn)\n\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git
 # aliases shared between fish and bash
 source ~/.aliases
 which nvim > /dev/null && alias vim=nvim
+# completions for aliases
+source ~/.wrap-alias.sh
 
 # get new or steal existing tmux
 function tm {
@@ -228,8 +230,6 @@ function deferred {
 	source ~/.git-prompt.sh
     # fish/zsh already have this
     which task > /dev/null && source ~/.task-completions.sh
-    # completions for aliases
-    source ~/.wrap-alias.sh
 }
 
 # patches for Mac OS X
