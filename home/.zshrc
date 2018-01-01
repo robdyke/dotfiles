@@ -218,7 +218,7 @@ preexec() {
 
 # aliases shared between fish and bash
 source ~/.aliases
-which nvim > /dev/null && alias vim=nvim
+which nvim > /dev/null && alias vim="nvim -p"
 
 # zsh uses zle, not readine so .inputrc is not used. Match bindings here:
 
