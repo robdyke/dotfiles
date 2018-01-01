@@ -44,6 +44,11 @@ if [ $(uname) == 'Darwin' ]; then
         brew upgrade $package || brew install $package
     done
 
+    # remove everything from dock (only active applications should be there, as
+    # I use spotlight to launch apps with CMD+Space)
+    defaults write com.apple.dock persistent-apps -array
+    killall Dock # reload dock
+
 elif grep -q Ubuntu /etc/issue; then
     sudo apt-add-repository multiverse
     sudo apt-get -y update
