@@ -28,9 +28,12 @@ alias l=ls
 alias o='git log'
 alias g=git
 alias s='git status'
+
 # task default command is "next", hence "n"
 alias n='task'
 alias in='task add +in'
+alias w='task log +@work'
+
 alias t="tail -n100 -f"
 alias d='git diff'
 alias dt='git difftool -y'
