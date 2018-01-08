@@ -46,9 +46,8 @@ alias ackl='ack -l'
 alias gack="git ls-files -oc --exclude-standard | ack -x"
 alias acknonascii="ack '[^\x00-\x7F]'"
 
-# unreference a symlink to a file, replacing the link with the file it points
-# to
-alias unreference="sed -i ''"
+# replace a symlink with the file it points to
+alias rewrite="sed -i ''"
 
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
