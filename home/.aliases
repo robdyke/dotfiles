@@ -65,6 +65,10 @@ alias wget='wget --content-disposition'
 # http://superuser.com/questions/441556/bash-alias-doesnt-carry-over-with-sudo
 alias sudo="sudo "
 
+# ~/.gnupg config directories are incompatible (so why do they share the same
+# namespace???) so force-choose gpg2, which is faster due to AVX etc.
+alias gpg=gpg2
+
 # A few more useful commands that don't need aliases. This file is a good
 # place.
 #du -sh      # find recursive, human size of given files/directories
