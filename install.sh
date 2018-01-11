@@ -127,3 +127,4 @@ if which fish > /dev/null; then
     fish -c fish_update_completions
 fi
 
+chmod 0700 ~/.gnupg
