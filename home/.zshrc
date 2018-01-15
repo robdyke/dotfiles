@@ -259,6 +259,9 @@ test -x /usr/bin/dircolors && eval $(dircolors ~/.dir_colors)
 # Ctrl+Q to restore. It can result in an apparent hung terminal, if
 # accidentally pressed.
 stty -ixon -ixoff
+# https://superuser.com/questions/385175/how-to-reclaim-s-in-zsh
+stty stop undef
+stty start undef
 
 # ls is the first thing I normally do when I log in. Let's hope it's not annoying
 uptime

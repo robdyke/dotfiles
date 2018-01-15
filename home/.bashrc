@@ -265,6 +265,9 @@ COLUMNS=80 ls
 # Ctrl+Q to restore. It can result in an apparent hung terminal, if
 # accidentally pressed.
 stty -ixon -ixoff
+# https://superuser.com/questions/385175/how-to-reclaim-s-in-zsh
+stty stop undef
+stty start undef
 
 # run the deferred function in the background in this context after bashrc
 # http://superuser.com/questions/267771/bash-completion-makes-bash-start-slowly
