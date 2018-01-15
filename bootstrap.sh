@@ -39,10 +39,13 @@ if [ $(uname) == 'Darwin' ]; then
     # flux is no longer required -- night shift!
 
     # Upgrade or install (logic necessary)
-    packages=(tmux vim git httpie ncdu tree bash wget task htop)
+    packages=(tmux vim git httpie ncdu tree bash wget task htop gnupg2)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
+
+    # correct so alias works cross platform
+    ln -s /usr/local/bin/gpg /usr/local/bin/gpg2
 
     # remove everything from dock (only active applications should be there, as
     # I use spotlight to launch apps with CMD+Space)
@@ -53,13 +56,13 @@ elif grep -q Ubuntu /etc/issue; then
     sudo apt-add-repository multiverse
     sudo apt-get -y update
     # figlet is for server-splash
-    sudo apt-get -y install tmux vim git ssh language-pack-en figlet httpie ncdu tree wget htop
+    sudo apt-get -y install tmux vim git ssh language-pack-en figlet httpie ncdu tree wget htop gnupg2
     sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 elif grep -q Raspbian /etc/issue; then
     sudo apt-get -y update
     # Raspbian is British, locale is already correct. language-pack-en isn't a package.
     # figlet is for server-splash
-    sudo apt-get -y install tmux vim git ssh figlet httpie ncdu tree wget htop
+    sudo apt-get -y install tmux vim git ssh figlet httpie ncdu tree wget htop gnupg2
     sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 else
     echo "Unsupported OS."
