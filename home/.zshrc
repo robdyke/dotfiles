@@ -78,7 +78,7 @@ fi
 
 
 PROMPT="\$(__exit_warn)
-%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)\$(__sa_ps1)%F{239}\$(date +%T)%f
+%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)%F{239} \$(date +%T)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?
