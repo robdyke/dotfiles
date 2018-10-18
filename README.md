@@ -1,4 +1,4 @@
-# Noteworthy bindings
+# Custom bindings
 
 ## Shell
 * `CTRL+p`: search current directory with FZF and launch editor with results. Tab to select multiple.
@@ -15,9 +15,10 @@ See `home/.aliases` for and `bin/` for more handy shortcuts/wrappers.
 
 Tmux has been configured to follow vim bindings where possible. Check `home/.tmux.conf` for a walk-through.
 
-# Noteworthy features
+# Notable features
 * Workflows and application configuration profiled for speed. See section on Latency for more information.
 * Prompt/hostname colour based on hostname to make it easy to distinguish between hosts.
+* SSH agent managed by keychain locally, and forwarded remotely. SSH_AUTH_SOCK is synchronised between tmux sessions.
 
 # Software
 
@@ -144,3 +145,7 @@ _may_ help reduce latency:
 
 [6]: https://www.bufferbloat.net/projects/bloat/wiki/What_can_I_do_about_Bufferbloat/
 
+
+# Tips
+
+1. Run a vim selection through a command with `:!cmd`
