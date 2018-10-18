@@ -6,6 +6,8 @@ unsetopt NOMATCH
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+source ~/.functions.sh
+
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
@@ -31,48 +33,6 @@ zstyle ':completion:*' menu select
 
 setopt completealiases
 
-# SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
-# prefer clear terminal after SSH, on success only
-# now with MOAR agent forwarding
-function ssh {
-	if test $TMUX; then
-		# find host from array (in a dumb way) by getting last argument
-		# It uses the fact that for implicitly loops over the arguments
-		# if you don't tell it what to loop over, and the fact that for
-		# loop variables aren't scoped: they keep the last value they
-		# were set to
-		# http://stackoverflow.com/questions/1853946/getting-the-last-argument-passed-to-a-shell-script
-		for host; do true; done
-
-        old_window_name=$(tmux display-message -p '#W')
-
-		printf "\\033k%s\\033\\\\" $host
-		command ssh -A "$@"
-		printf "\\033k%s\\033\\\\" $old_window_name
-
-	else
-		command ssh -A "$@"
-	fi
-}
-
-# MOAR PROMPT
-function __p4_ps1 {
-	[ $P4CLIENT ] || return
-	echo -n " ($P4CLIENT) "
-}
-
-function __sa_ps1 {
-    # is SSH agent wired in?
-    test $SSH_AUTH_SOCK || return
-    test -e $SSH_AUTH_SOCK && echo -ne "\e[32m[A]\e[90m "
-}
-
-function __exit_warn {
-	# test status of last command without affecting it
-	stat=$?
-	test $stat -ne 0 \
-		&& printf "\n\33[31mExited with status %s\33[m" $stat
-}
 setopt PROMPT_SUBST
 autoload -U colors && colors
 
@@ -108,20 +68,6 @@ bindkey '^[[B' history-substring-search-down
 # case insensitive completion
 # http://stackoverflow.com/questions/24226685/have-zsh-return-case-insensitive-auto-complete-matches-but-prefer-exact-matches
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-function _tmux_update_env {
-    # tmux must be running
-    [ $TMUX ] || return
-
-    # must be remote host (else it clobbers keychain, which runs local only)
-    tmux show-environment -g | grep -q SSH_CONNECTION || return
-
-    # when an SSH connection is re-established, so is the agent connection.
-    # Reload it automatically.
-    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
-    echo "Synced env"
-}
-
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
 if [ $USER == root ]; then
@@ -192,21 +138,6 @@ bindkey -s '\C-p' "\C-k \C-u fzf --multi | tr '\\\n' '\\\0' | xargs -0 sh -c '\$
 
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"
-
-
-# get new or steal existing tmux
-function tm {
-	# must not already be inside tmux
-	test ! $TMUX || return
-	# detach any other clients
-	# attach or make new if there isn't one
-	tmux attach -d || tmux
-}
-
-# cd then ls
-function cd {
-	builtin cd "$@" && ls
-}
 
 # take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
 # keychain used in a non-invasive way where it's up to you to add your keys to the agent.

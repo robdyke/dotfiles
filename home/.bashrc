@@ -3,6 +3,8 @@ source ~/.env.sh
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+source ~/.functions.sh
+
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
@@ -10,19 +12,6 @@ source ~/.env.sh
 # and other dangerous commands, yubikey OTP, mouse escape codes
 export HISTIGNORE='git*--amend*:ls:cd:cccccc*:*reboot*:*halt*:0*:task*'
 export HISTCONTROL=ignoredups:ignorespace:erasedups
-
-function _tmux_update_env {
-    # tmux must be running
-    [ $TMUX ] || return
-
-    # must be remote host (else it clobbers keychain, which runs local only)
-    tmux show-environment -g | grep -q SSH_CONNECTION || return
-
-    # when an SSH connection is re-established, so is the agent connection.
-    # Reload it automatically.
-    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK\|DISPLAY')
-    echo "Synced env"
-}
 
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
@@ -105,70 +94,9 @@ function onprompt {
 
 PROMPT_COMMAND=onprompt
 
-# SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
-# prefer clear terminal after SSH, on success only
-# now with MOAR agent forwarding
-function ssh {
-	if test $TMUX; then
-		# find host from array (in a dumb way) by getting last argument
-		# It uses the fact that for implicitly loops over the arguments
-		# if you don't tell it what to loop over, and the fact that for
-		# loop variables aren't scoped: they keep the last value they
-		# were set to
-		# http://stackoverflow.com/questions/1853946/getting-the-last-argument-passed-to-a-shell-script
-		for host; do true; done
-
-        old_window_name=$(tmux display-message -p '#W')
-
-		printf "\\033k%s\\033\\\\" $host
-		command ssh -A "$@"
-		printf "\\033k%s\\033\\\\" $old_window_name
-
-	else
-		command ssh -A "$@"
-	fi
-}
-
-
-
-# MOAR PROMPT
-# with git branch
-# make sure the function exists, even if it wasn't included
-# this is overridden later
-function __git_ps1 {
-	return
-}
-
-function __p4_ps1 {
-	[ $P4CLIENT ] || return
-	echo -n " ($P4CLIENT) "
-}
-
-function __sa_ps1 {
-    # is SSH agent wired in?
-    test $SSH_AUTH_SOCK || return
-    test -e $SSH_AUTH_SOCK && echo -ne "\033[32m[A]\033[90m "
-}
-
-function __exit_warn {
-	# test status of last command without affecting it
-	status=$?
-	test $status -ne 0 \
-		&& printf "\n\33[31mExited with status %s\33[m" $status
-}
-
 PS1="\$(__exit_warn)\n\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(__sa_ps1)\$(date +%T)\[\e[0m\]\n\$ "
 
 source ~/.aliases
-
-# get new or steal existing tmux
-function tm {
-	# must not already be inside tmux
-	test ! $TMUX || return
-	# detach any other clients
-	# attach or make new if there isn't one
-	tmux attach -d || tmux
-}
 
 # slow completion things in background after bashrc is executed
 function _deferred {
@@ -191,11 +119,6 @@ function _deferred {
 
 	# hardcoded ssh completions (known_hosts is encrypted mostly)
 	#complete -o default -W 'example.com example.net' ssh scp ping
-}
-
-# cd then ls
-function cd {
-	builtin cd "$@" && ls
 }
 
 # fix backspace on some terminals
