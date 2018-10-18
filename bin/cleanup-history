@@ -12,7 +12,8 @@ from sys import argv
 history_file = argv[1]
 
 with open(history_file, 'rb') as f:
-    lines = [line.decode('utf-8', 'ignore').strip() for line in f]
+    # strip lines and remove non utf-8 chars
+    lines = [line.decode('utf-8', 'ignore').replace("\ufffd", "").strip() for line in f]
 
 seen = set()
 new_lines = list()
@@ -26,6 +27,6 @@ for line in reversed(lines):
 
 new_lines.reverse()
 
-with open(history_file, "wb") as f:
+with open(history_file, "w") as f:
     for line in new_lines:
         f.write(line + "\n")
