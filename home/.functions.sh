@@ -59,6 +59,16 @@ function _set_term_title {
     printf "\033]0;%s\007" $HOSTNAME
 }
 
+function _disable_flow_control {
+    # Ctrl+S can freeze the terminal, requiring
+    # Ctrl+Q to restore. It can result in an apparent hung terminal, if
+    # accidentally pressed.
+    stty -ixon -ixoff
+    # https://superuser.com/questions/385175/how-to-reclaim-s-in-zsh
+    stty stop undef
+    stty start undef
+}
+
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
 # prefer clear terminal after SSH, on success only
 # now with MOAR agent forwarding

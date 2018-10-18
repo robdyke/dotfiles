@@ -133,13 +133,7 @@ test -x $SSH_CONNECTION && \
 
 which dircolors &> /dev/null &&  eval $(dircolors ~/.dir_colors)
 
-# Disable stupid flow control. Ctrl+S can disable the terminal, requiring
-# Ctrl+Q to restore. It can result in an apparent hung terminal, if
-# accidentally pressed.
-stty -ixon -ixoff
-# https://superuser.com/questions/385175/how-to-reclaim-s-in-zsh
-stty stop undef
-stty start undef
+_disable_flow_control
 
 # fix gpg-agent ncurses passphrase prompt
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
