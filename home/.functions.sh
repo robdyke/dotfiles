@@ -27,7 +27,7 @@ function tm {
 
 # cd then ls
 function cd {
-	builtin cd "$@" && ls
+	builtin cd "$@" && ls --color=auto
 }
 
 function _tmux_update_env {
