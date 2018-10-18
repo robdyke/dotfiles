@@ -84,14 +84,7 @@ $ "
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which zsh)
 
-# AUTOMATIC TMUX
-# must not launch tmux inside tmux (no memes please)
-# must be installed/single session/no clients
-test -z "$TMUX" \
-	&& which tmux &> /dev/null \
-	&& test $(tmux list-sessions 2> /dev/null | wc -l) -eq 1 \
-	&& test $(tmux list-clients 2> /dev/null | wc -l) -eq 0 \
-	&& tmux attach
+_auto_tmux
 
 # Useful title for ssh
 printf "\033]0;%s\007" $HOSTNAME

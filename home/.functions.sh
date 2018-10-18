@@ -30,7 +30,6 @@ function cd {
 	builtin cd "$@" && ls
 }
 
-
 function _tmux_update_env {
     # tmux must be running
     [ $TMUX ] || return
@@ -44,6 +43,16 @@ function _tmux_update_env {
     echo "Synced env"
 }
 
+function _auto_tmux {
+    # AUTOMATIC TMUX
+    # must not launch tmux inside tmux (no memes please)
+    # must be installed/single session/no clients
+    test -z "$TMUX" \
+        && which tmux &> /dev/null \
+        && test $(tmux list-sessions 2> /dev/null | wc -l) -eq 1 \
+        && test $(tmux list-clients 2> /dev/null | wc -l) -eq 0 \
+        && tmux attach
+}
 
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
 # prefer clear terminal after SSH, on success only
