@@ -122,13 +122,7 @@ function _tmux_update_env {
     echo "Synced env"
 }
 
-# Sometimes not set or fully qualified; simple name preferred.
-export HOSTNAME=$(hostname -s)
-
-# set from hostname
-export SYSTEM_COLOUR=$(~/.local/bin/system-colour $HOSTNAME)
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
-
 
 if [ $USER == root ]; then
     PROMPT_COLOUR=160 # red

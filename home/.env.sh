@@ -9,3 +9,8 @@ export GCC_COLORS=1
 # note that ~ does not expand in .ripgreprc
 export FZF_DEFAULT_COMMAND="rg --smart-case --files --hidden --ignore-file=~/.rgignore"
 export FZF_CTRL_T_COMMAND="rg --smart-case --files --hidden --ignore-file=~/.rgignore"
+
+# Sometimes not set or fully qualified; simple name preferred.
+export HOSTNAME=$(hostname -s)
+export SYSTEM_COLOUR=$(~/.local/bin/system-colour $HOSTNAME)
+
