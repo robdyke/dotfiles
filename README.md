@@ -148,4 +148,7 @@ _may_ help reduce latency:
 
 # Tips
 
-1. Run a vim selection through a command with `:!cmd`
+1. Run a vim selection through a command with `:!cmd`. Useful for formatting as
+   well as copying on a mac: `!pbcopy`. Write from the clipboard with
+   `r!pbpaste`.
+

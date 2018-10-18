@@ -1,8 +1,5 @@
 source ~/.env.sh
 
-# pass * if globbing fails (etc)
-unsetopt NOMATCH
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -21,21 +18,19 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 unsetopt EXTENDED_HISTORY # just commands plskthx so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
+# pass * if globbing fails (etc)
+unsetopt NOMATCH
+# auto rehash to discover execs in path
+setopt nohashdirs
+# with arrow keys
+zstyle ':completion:*' menu select
+setopt completealiases
+setopt PROMPT_SUBST
+autoload -U colors && colors
 
 # fix annoying accidental commits and amends
 # and other dangerous commands, yubikey OTP
 export HISTORY_IGNORE='(git*--amend*|ls|cd|cccccc*|*reboot*|*halt*|0*|task*)'
-
-# auto rehash to discover execs in path
-setopt nohashdirs
-
-# with arrow keys
-zstyle ':completion:*' menu select
-
-setopt completealiases
-
-setopt PROMPT_SUBST
-autoload -U colors && colors
 
 # git
 # git@github.com:olivierverdier/zsh-git-prompt.git
@@ -58,19 +53,10 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # must be loaded after syntax highlighting
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# bind UP and DOWN arrow keys
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-# https://github.com/zsh-users/zsh-history-substring-search
-# both methods are necessary
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
 # case insensitive completion
 # http://stackoverflow.com/questions/24226685/have-zsh-return-case-insensitive-auto-complete-matches-but-prefer-exact-matches
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
-
 
 PROMPT="\$(__exit_warn)
 %F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)%F{239} \$(date +%T)%f
@@ -80,7 +66,6 @@ $ "
 export SHELL=$(which zsh)
 
 _auto_tmux_attach
-
 _set_term_title
 
 chpwd() {
@@ -109,6 +94,13 @@ bindkey -s '\C-p' "\C-k \C-u fzf --multi | tr '\\\n' '\\\0' | xargs -0 sh -c '\$
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"
 
+# bind UP and DOWN arrow keys
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+# https://github.com/zsh-users/zsh-history-substring-search
+# both methods are necessary
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 which dircolors &> /dev/null &&  eval $(dircolors ~/.dir_colors)
 

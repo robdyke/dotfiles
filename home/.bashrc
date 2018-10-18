@@ -13,7 +13,6 @@ source ~/.aliases
 # and other dangerous commands, yubikey OTP, mouse escape codes
 export HISTIGNORE='git*--amend*:ls:cd:cccccc*:*reboot*:*halt*:0*:task*'
 export HISTCONTROL=ignoredups:ignorespace:erasedups
-
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
 
