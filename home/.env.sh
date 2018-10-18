@@ -1,4 +1,4 @@
-# common env. Fish needs an export polyfil. No dynamic stuff here (thanks, fish)
+# common static env here
 export GOPATH=~/gocode
 export PATH=~/.local/bin:~/bin:/usr/local/bin:/snap/bin:/usr/local/sbin:/usr/local/share/npm/bin:$GOPATH/bin:/usr/local/go/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export EDITOR=_vim

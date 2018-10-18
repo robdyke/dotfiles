@@ -189,7 +189,6 @@ preexec() {
     _tmux_update_env
 }
 
-# aliases shared between fish and bash
 source ~/.aliases
 
 # zsh uses zle, not readine so .inputrc is not used. Match bindings here:

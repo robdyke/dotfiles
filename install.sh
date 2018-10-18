@@ -11,8 +11,6 @@ which task &>/dev/null && TASK_CONTEXT=$(task _get rc.context)
 
 test -d ~/.vim/ && rm -rf ~/.vim/
 test -d ~/.zsh/ && rm -rf ~/.zsh/
-# not for fish as it removes generated completions which have to rebuilt which is a pain
-#test -d ~/.config/fish/ && rm -rf ~/.config/fish/
 
 mkdir -p ~/.local/bin
 mkdir -p ~/.ssh

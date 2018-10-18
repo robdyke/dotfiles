@@ -24,7 +24,7 @@ Tmux has been configured to follow vim bindings where possible. Check `home/.tmu
 General:
 
 * `vim`/`neovim` : text editor (theme: gruvbox)
-* `bash/zsh/fish` : Shells, used interchangibly depending on platform. Fish
+* `bash/zsh` : Shells, used interchangibly depending on platform.
 generates completions from man pages! (but CTRL+R reverse-i-search isn't there
 so I don't use it)
 * `tmux` : Terminal multiplexer
@@ -61,7 +61,6 @@ so I don't use it)
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
 
 [2]: http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
-[3]: https://github.com/fish-shell/fish-shell/issues/814
 [4]: http://superuser.com/questions/413351/weird-insertion-from-vim-on-mouse-click
 [5]: https://github.com/unphased/putty-X
 

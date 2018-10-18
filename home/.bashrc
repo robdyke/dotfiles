@@ -164,7 +164,6 @@ function __exit_warn {
 
 PS1="\$(__exit_warn)\n\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(__sa_ps1)\$(date +%T)\[\e[0m\]\n\$ "
 
-# aliases shared between fish and bash
 source ~/.aliases
 
 # get new or steal existing tmux
