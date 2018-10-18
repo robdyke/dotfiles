@@ -74,7 +74,7 @@ function _set_up_keychain {
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
     test -x $SSH_CONNECTION && \
         which keychain &>/dev/null && \
-        eval `keychain --ignore-missing --nogui --noask --eval --noinherit --agents ssh`
+        eval `keychain --gpg2 --ignore-missing --nogui --noask --eval --noinherit --agents ssh`
 }
 
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
