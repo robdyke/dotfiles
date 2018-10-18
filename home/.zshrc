@@ -124,11 +124,7 @@ bindkey -s '\C-p' "\C-k \C-u fzf --multi | tr '\\\n' '\\\0' | xargs -0 sh -c '\$
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"
 
-# take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
-# keychain used in a non-invasive way where it's up to you to add your keys to the agent.
-test -x $SSH_CONNECTION && \
-    which keychain &>/dev/null && \
-    eval `keychain --ignore-missing --nogui --noask --eval --noinherit --agents ssh`
+_set_up_keychain
 
 which dircolors &> /dev/null &&  eval $(dircolors ~/.dir_colors)
 
