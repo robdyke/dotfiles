@@ -54,6 +54,11 @@ function _auto_tmux {
         && tmux attach
 }
 
+function _set_term_title {
+    [ $TMUX ] || return
+    printf "\033]0;%s\007" $HOSTNAME
+}
+
 # SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
 # prefer clear terminal after SSH, on success only
 # now with MOAR agent forwarding

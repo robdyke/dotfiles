@@ -80,8 +80,7 @@ export SHELL=$(which zsh)
 
 _auto_tmux
 
-# Useful title for ssh
-printf "\033]0;%s\007" $HOSTNAME
+_set_term_title
 
 # only auto set title based on initial pane
 # this detects if the pane is the first in a new window

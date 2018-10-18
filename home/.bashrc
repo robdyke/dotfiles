@@ -17,6 +17,7 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 export SHELL=$(which bash)
 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
+
 _auto_tmux
 
 # update the values of LINES and COLUMNS. Automatically
@@ -48,8 +49,7 @@ _bash_history_sync() {
 	builtin history -r
 }
 
-# Useful title for ssh
-printf "\033]0;%s\007" $HOSTNAME
+_set_term_title
 
 # only auto set title based on initial pane
 # this detects if the pane is the first in a new window
