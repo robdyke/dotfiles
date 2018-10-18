@@ -18,7 +18,7 @@ alias ls='ls --color=auto'
 # don't use URL to create filename (do I really want a file called
 # unetbootin-source-494.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Funetbootin%2Ffiles%2FUNetbootin%2F494%2F&ts=1391695063&use_mirror=heanet?)
 alias wget='wget --content-disposition'
-alias rg="rg --smart-case --hidden --ignore-file=~/.rgignore"
+alias rg="rg --smart-case --hidden --ignore-file=$HOME/.rgignore"
 
 # COMMON SHORTCUTS
 alias sagi='sudo apt-get install'
@@ -43,7 +43,7 @@ alias rewrite="sed -i ''"
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
 alias openssl-get-expiry='openssl x509 -enddate -noout -in'
-alias sed-recursive="rg --files --hidden --ignore-file=~/.rgignore | xargs sed -i '' -E -e"
+alias sed-recursive="rg --files --hidden --ignore-file=$HOME/.rgignore | xargs sed -i '' -E -e"
 alias r="rgfzf"
 
 # MISC FIXES
@@ -51,7 +51,7 @@ alias r="rgfzf"
 # http://superuser.com/questions/441556/bash-alias-doesnt-carry-over-with-sudo
 alias sudo="sudo "
 
-# ~/.gnupg config directories are incompatible (so why do they share the same
+# $HOME/.gnupg config directories are incompatible (so why do they share the same
 # namespace???) so force-choose gpg2, which is faster due to AVX etc.
 alias gpg=gpg2
 
