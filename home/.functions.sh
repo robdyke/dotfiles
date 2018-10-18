@@ -43,7 +43,7 @@ function _tmux_update_env {
     echo "Synced env"
 }
 
-function _auto_tmux {
+function _auto_tmux_attach {
     # AUTOMATIC TMUX
     # must not launch tmux inside tmux (no memes please)
     # must be installed/single session/no clients
@@ -55,8 +55,17 @@ function _auto_tmux {
 }
 
 function _set_term_title {
-    [ $TMUX ] || return
-    printf "\033]0;%s\007" $HOSTNAME
+    if [ $TMUX ]; then
+        # only auto set title based on initial pane
+        if [ $(tmux list-panes | wc -l) -eq 1 ]; then
+            # shorthand representation of the current dir
+            LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
+            tmux rename-window "$LABEL"
+        fi
+    else
+        # base session, set title of terminal
+        printf "\033]0;%s\007" $HOSTNAME
+    fi
 }
 
 function _disable_flow_control {

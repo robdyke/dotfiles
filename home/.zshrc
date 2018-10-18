@@ -79,27 +79,12 @@ $ "
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which zsh)
 
-_auto_tmux
+_auto_tmux_attach
 
 _set_term_title
 
-# only auto set title based on initial pane
-# this detects if the pane is the first in a new window
-test $TMUX \
-	&& test $(tmux list-panes | wc -l) -eq 1 \
-	&& TMUX_PRIMARY_PANE=set
-
-# Update TMUX title with path using hook
-# Other hooks: http://zsh.sourceforge.net/Doc/Release/Functions.html
 chpwd() {
-	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
-	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
-
-		# to a clever shorthand representation of the current dir
-		LABEL=$(echo $PWD | sed 's/[^a-zA-Z0-9\.\/]/-/g' | grep -oE '[^\/]+$')
-
-        tmux rename-window "$LABEL"
-	fi
+    _set_term_title
 }
 
 precmd() {
@@ -124,11 +109,11 @@ bindkey -s '\C-p' "\C-k \C-u fzf --multi | tr '\\\n' '\\\0' | xargs -0 sh -c '\$
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"
 
-_set_up_keychain
 
 which dircolors &> /dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
+_set_up_keychain
 
 # fix gpg-agent ncurses passphrase prompt
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html

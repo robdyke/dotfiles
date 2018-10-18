@@ -19,7 +19,7 @@ export SHELL=$(which bash)
 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
-_auto_tmux
+_auto_tmux_attach
 
 # update the values of LINES and COLUMNS. Automatically
 shopt -s checkwinsize
@@ -52,28 +52,13 @@ _bash_history_sync() {
 
 _set_term_title
 
-# only auto set title based on initial pane
-# this detects if the pane is the first in a new window
-test $TMUX \
-	&& test $(tmux list-panes | wc -l) -eq 1 \
-	&& TMUX_PRIMARY_PANE=set
-
 # Update TMUX title with path
-# TODO move some to precmd hack
 function onprompt {
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
 
-	# only if TMUX is running, and it's safe to assume the user wants to have the tab automatically named
-	if [ -n "$TMUX" ] && [ $TMUX_PRIMARY_PANE ]; then
-
-		# to a clever shorthand representation of the current dir
-		LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
-
-        tmux rename-window "$LABEL"
-	fi
-
+    _set_term_title
 	_bash_history_sync
     _tmux_update_env
 }
@@ -109,11 +94,11 @@ function _deferred {
 stty erase ^?
 #stty erase ^H
 
-_set_up_keychain
 
 which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
+_set_up_keychain
 
 # fix gpg-agent ncurses passphrase prompt
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
