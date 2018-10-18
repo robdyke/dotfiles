@@ -57,15 +57,15 @@ alias sudo="sudo "
 alias gpg=gpg2
 
 # wrappers
-alias vim=_vim
-alias scp=_scp
+alias vim=vim-wrapper
+alias scp=scp-wrapper
 
 # TYPO FIXES
 alias sl=ls
 alias c=cd
 alias xs=cd
-alias cim=_vim
-alias bim=_vim
+alias cim=vim-wrapper
+alias bim=vim-wrapper
 alias nom=npm
 alias gi=git
 alias cd..='cd ..'

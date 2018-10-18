@@ -2,7 +2,7 @@
 export HOME=~
 export GOPATH=$HOME/gocode
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:/snap/bin:/usr/local/sbin:/usr/local/share/npm/bin:$GOPATH/bin:/usr/local/go/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH
-export EDITOR=_vim
+export EDITOR=vim-wrapper
 export PAGER="less -R"
 export LANG=en_GB.UTF-8
 export BC_ENV_ARGS="$HOME/.bcrc -l"
