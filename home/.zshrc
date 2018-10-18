@@ -7,6 +7,7 @@ unsetopt NOMATCH
 [ -z "$PS1" ] && return
 
 source ~/.functions.sh
+source ~/.aliases
 
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
@@ -114,9 +115,7 @@ preexec() {
     # no need for another prompt before
     _tmux_update_env
 }
-
-source ~/.aliases
-
+#
 # zsh uses zle, not readine so .inputrc is not used. Match bindings here:
 
 # Launch FZF vim plugin outside of vim (with a tty)
