@@ -70,12 +70,6 @@ bindkey '^[[B' history-substring-search-down
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
-if [ $USER == root ]; then
-    PROMPT_COLOUR=160 # red
-else
-    PROMPT_COLOUR=$SYSTEM_COLOUR
-fi
-
 
 PROMPT="\$(__exit_warn)
 %F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)%F{239} \$(date +%T)%f

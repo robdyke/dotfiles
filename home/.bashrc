@@ -17,13 +17,6 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 export SHELL=$(which bash)
 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
-
-if [ $USER == root ]; then
-    PROMPT_COLOUR=160 # red
-else
-    PROMPT_COLOUR=$SYSTEM_COLOUR
-fi
-
 _auto_tmux
 
 # update the values of LINES and COLUMNS. Automatically

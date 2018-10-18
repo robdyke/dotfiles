@@ -14,3 +14,8 @@ export FZF_CTRL_T_COMMAND="rg --smart-case --files --hidden --ignore-file=~/.rgi
 export HOSTNAME=$(hostname -s)
 export SYSTEM_COLOUR=$(~/.local/bin/system-colour $HOSTNAME)
 
+if [ $USER == root ]; then
+    PROMPT_COLOUR=160 # red
+else
+    PROMPT_COLOUR=$SYSTEM_COLOUR
+fi
