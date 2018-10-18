@@ -86,26 +86,10 @@ function _set_up_keychain {
         eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
 }
 
-# SSH wrapper to magically LOCK tmux title to hostname, if tmux is running
-# prefer clear terminal after SSH, on success only
-# now with MOAR agent forwarding
 function ssh {
-	if test $TMUX; then
-		# find host from array (in a dumb way) by getting last argument
-		# It uses the fact that for implicitly loops over the arguments
-		# if you don't tell it what to loop over, and the fact that for
-		# loop variables aren't scoped: they keep the last value they
-		# were set to
-		# http://stackoverflow.com/questions/1853946/getting-the-last-argument-passed-to-a-shell-script
+	if [ $TMUX ] && [ $(tmux list-panes | wc -l) -eq 1 ]; then
 		for host; do true; done
-
-        old_window_name=$(tmux display-message -p '#W')
-
-		printf "\\033k%s\\033\\\\" $host
-		command ssh -A "$@"
-		printf "\\033k%s\\033\\\\" $old_window_name
-
-	else
-		command ssh -A "$@"
+        tmux rename-window "$host"
 	fi
+	command ssh -A "$@"
 }
