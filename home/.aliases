@@ -43,7 +43,8 @@ alias rewrite="sed -i ''"
 alias webserver='python -m SimpleHTTPServer'
 alias grep='grep --color=auto'
 alias openssl-get-expiry='openssl x509 -enddate -noout -in'
-alias sed-recursive="rg --files --hidden --ignore-file=$HOME/.rgignore | xargs sed -i '' -E -e"
+# --files lists all files including binary. --files-with-matches and an empty string match effectively lists all text files.
+alias sed-recursive="rg --files-with-matches --hidden --ignore-file=$HOME/.rgignore '' | xargs sed -i '' -E -e"
 alias r="rgfzf"
 
 # MISC FIXES
