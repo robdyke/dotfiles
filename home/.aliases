@@ -58,7 +58,6 @@ alias gpg=gpg2
 
 # wrappers
 alias vim=vim-wrapper
-alias scp=scp-wrapper
 
 # TYPO FIXES
 alias sl=ls

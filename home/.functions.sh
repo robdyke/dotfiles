@@ -93,3 +93,15 @@ function ssh {
 	fi
 	command ssh -A "$@"
 }
+
+# this is a simple wrapper for scp to prevent local copying when a colon is forgotten
+# It's annoying to create files named naggie@10.0.0.1
+# use ~/.aliases to enable.
+function scp {
+    if [ $1 ] && ! echo "$@" | grep -q ':' &> /dev/null; then
+        echo "No remote host specified. You forgot ':'"
+        return 1
+    fi
+
+    command scp "$@"
+}
