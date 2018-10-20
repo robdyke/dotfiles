@@ -19,3 +19,5 @@ if [[ $USER == root ]]; then
 else
     PROMPT_COLOUR=$SYSTEM_COLOUR
 fi
+
+HISTSIZE=5000

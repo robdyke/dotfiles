@@ -9,8 +9,7 @@ source ~/.aliases
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
-HISTSIZE=1000
-SAVEHIST=1000
+SAVEHIST=$HISTSIZE
 # Change default as unconfigured bash could clobber history. Bash can run
 # unconfigured if CTRL+C is hit during initialisation.
 HISTFILE=~/.history
