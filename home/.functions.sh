@@ -13,7 +13,7 @@ function __exit_warn {
 	# test status of last command without affecting it
 	st=$?
 	test $st -ne 0 \
-		&& printf "\n\33[31mExited with status %s\33[m" $status
+		&& printf "\n\33[31mExited with status %s\33[m" $st
 }
 
 # get new or steal existing tmux
