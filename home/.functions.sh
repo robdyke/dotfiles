@@ -58,8 +58,9 @@ function _set_term_title {
     if [ $TMUX ]; then
         # only auto set title based on initial pane
         if [ $(tmux list-panes | wc -l) -eq 1 ]; then
-            # shorthand representation of the current dir
-            LABEL=$(echo $PWD | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
+            # shorthand representation of git dir or current dir
+            dir="$(git rev-parse --show-toplevel 2>/dev/null)" || dir="$PWD"
+            LABEL=$(echo $dir | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
             tmux rename-window "$LABEL"
         fi
     else
