@@ -12,6 +12,9 @@
 [include]
 	path = ~/.gitconfig.local
 [alias]
+    # execute command in git root: eg git exec make
+	exec = "!exec "
+    # only files in HEAD
 	purge = !/bin/bash -c \"git reset --hard HEAD && git clean -dffx && git submodule update --init\"
 	tpush = push
 	tpull = pull
