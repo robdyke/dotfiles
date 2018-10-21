@@ -102,7 +102,8 @@ _set_up_keychain
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
 export GPG_TTY=$(tty)
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source ~/.fzf/shell/completion.bash
+source ~/.fzf/shell/key-bindings.bash
 
 # run the deferred function in the background in this context after bashrc
 # http://superuser.com/questions/267771/bash-completion-makes-bash-start-slowly
