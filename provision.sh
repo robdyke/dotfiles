@@ -97,18 +97,16 @@ fi
 
 # all platforms
 
-# FZF
-test ! -d ~/.fzf && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-git -C ~/.fzf pull origin master
-~/.fzf/install --all
-
 # clone main repository to home
 cd ~
 test ! -d ~/dotfiles && git clone https://github.com/naggie/dotfiles.git
 cd dotfiles
 git pull --ff-only origin master
 
-# Adobe source code pro (powershell patched)
+# Fuzzyfind bash/vim/zsh bindings and (web) installer
+~/.fzf/install --all
+
+# For Adobe source code pro (powershell patched)
 ./etc/powerline-patched/install.sh
 
 # install dotfiles configuration

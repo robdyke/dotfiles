@@ -11,6 +11,7 @@ which task &>/dev/null && TASK_CONTEXT=$(task _get rc.context)
 
 test -d ~/.vim/ && rm -rf ~/.vim/
 test -d ~/.zsh/ && rm -rf ~/.zsh/
+test -d ~/.fzf/ && rm -rf ~/.fzf/
 
 mkdir -p ~/.local/bin
 mkdir -p ~/.ssh
