@@ -37,3 +37,4 @@ report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-1week ) and ( +PENDING or +WAITING )
 context.work=+work -home -someday
 context.home=+home -work -someday
+context.dotfiles=+dotfiles
