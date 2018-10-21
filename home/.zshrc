@@ -67,10 +67,6 @@ export SHELL=$(which zsh)
 _auto_tmux_attach
 _set_term_title
 
-chpwd() {
-    _set_term_title
-}
-
 precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -R
@@ -78,6 +74,8 @@ precmd() {
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
+
+    _set_term_title
 }
 
 preexec() {
