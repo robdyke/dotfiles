@@ -101,10 +101,10 @@ fi
 cd ~
 test ! -d ~/dotfiles && git clone https://github.com/naggie/dotfiles.git
 cd dotfiles
-git pull --ff-only origin master
+git pull --ff-only origin master || true
 
 # Fuzzyfind bash/vim/zsh bindings and (web) installer
-~/.fzf/install --all
+~/dotfiles/home/.fzf/install --all
 
 # For Adobe source code pro (powershell patched)
 ./etc/powerline-patched/install.sh
