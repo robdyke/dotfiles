@@ -20,15 +20,15 @@ sleep 3
 
 # platform detection. Desktop is always a superset of server.
 if [ $(uname) == 'Darwin' ]; then
+    export MACOS=1
     export MACOS_DESKTOP=1
 elif grep -q Ubuntu /etc/issue; then
+    export UBUNTU=1
     if dpkg -l | grep -q xorg-server; then
         export UBUNTU_DESKTOP=1
-    else
-        export UBUNTU_SERVER=1
     fi
 elif grep -q Raspbian /etc/issue; then
-    export RASPBIAN_SERVER=1
+    export RASPBIAN=1
 else
     echo "Unsupported OS."
     exit 2
@@ -68,7 +68,7 @@ if [ $MACOS_DESKTOP ]; then
     ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
 fi
 
-if [ $UBUNTU_SERVER ] || [ $UBUNTU_DESKTOP ]; then
+if [ $UBUNTU ]; then
     sudo -E apt-add-repository multiverse
     sudo -E apt-get -y install language-pack-en
     sudo -E apt-get -y install curl
@@ -78,12 +78,12 @@ if [ $UBUNTU_SERVER ] || [ $UBUNTU_DESKTOP ]; then
     rm /tmp/ripgrep.deb
 fi
 
-if [ $RASPBIAN_SERVER ]; then
+if [ $RASPBIAN ]; then
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz \
         | sudo tar -C /usr/local/bin --strip=1 -xzf - ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
 fi
 
-if [ $UBUNTU_DESKTOP ] || [ $UBUNTU_SERVER ] || [ $RASPBIAN_SERVER ]; then
+if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo -E apt-get -y update
     sudo -E apt-get -y install tmux vim git tig zsh ssh figlet httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
         jq sox ffmpeg httrack python python3 golang libffi-dev python-pip python3-pip python-dev python3-dev libssl-dev dconf-cli
