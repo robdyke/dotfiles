@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if which pbcopy &>/dev/null; then
+    exec pbcopy
+else
+    exec xclip -selection clipboard
+fi
