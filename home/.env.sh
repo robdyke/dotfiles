@@ -21,3 +21,7 @@ else
 fi
 
 HISTSIZE=5000
+
+if [ -f ~/.env-local.sh ]; then
+    source ~/.env-local.sh
+fi
