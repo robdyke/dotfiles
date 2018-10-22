@@ -9,16 +9,26 @@
 See `home/.aliases` for and `bin/` for more handy shortcuts/wrappers.
 
 ## Vim
-* `CTRL+p` search current directory with FZF and launch editor with results. Tab to select multiple.
+* `CTRL+p` search current directory with FZF and launch editor with results.
+  Tab to select multiple. Vim will go to the line with the first match.
 
 ## Tmux
 
 Tmux has been configured to follow vim bindings where possible. Check `home/.tmux.conf` for a walk-through.
 
 # Notable features
-* Workflows and application configuration profiled for speed. See section on Latency for more information.
-* Prompt/hostname colour based on hostname to make it easy to distinguish between hosts.
-* SSH agent managed by keychain locally, and forwarded remotely. SSH_AUTH_SOCK is synchronised between tmux sessions.
+* Workflows and application configuration profiled for speed. See section on
+  Latency for more information.
+* Prompt/hostname colour based on hostname to make it easy to distinguish
+  between hosts.
+* SSH agent managed by keychain locally, and forwarded remotely. SSH_AUTH_SOCK
+  is synchronised between tmux sessions.
+* history is globally shared, as I use my history as a database
+* History management: History is de-duplicated, most recent persists. History
+  is also filtered leaving only useful commands. This increases the SNR in the
+  history file about 5x, which makes searching the history using FZF quicker.
+  History is only cleaned up on shell exit, so you won't lose your immediate
+  history which allows for command correction.
 
 # Software
 
@@ -56,7 +66,6 @@ so I don't use it)
 * `kill <tab>` will use fzf to find a process to kill
 * `cd **<tab>` will use fzf to find a directory to change to
 * `ssh **<tab>` will use fzf to find a host to ssh to
-* history is globally shared, allowing CTRL+R search
 
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")

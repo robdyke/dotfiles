@@ -26,10 +26,7 @@ zstyle ':completion:*' menu select
 setopt completealiases
 setopt PROMPT_SUBST
 autoload -U colors && colors
-
-# fix annoying accidental commits and amends
-# and other dangerous commands, yubikey OTP
-export HISTORY_IGNORE='(git*--amend*|ls|cd|cccccc*|*reboot*|*halt*|0*|task*)'
+# note HISTORY_IGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 
 # git
 # git@github.com:olivierverdier/zsh-git-prompt.git

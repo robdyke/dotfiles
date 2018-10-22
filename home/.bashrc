@@ -9,9 +9,7 @@ source ~/.aliases
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
-# fix annoying accidental commits and amends
-# and other dangerous commands, yubikey OTP, mouse escape codes
-export HISTIGNORE='git*--amend*:ls:cd:cccccc*:*reboot*:*halt*:0*:task*'
+# note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
