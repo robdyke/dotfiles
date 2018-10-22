@@ -6,6 +6,14 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
+if [[ $EDITOR == *vim* ]]; then
+    # file and line number (requires file-line plugin)
+    FIELDS="1-2"
+else
+    # just the file
+    FIELDS="1"
+fi
+
 # tty required, see GNU xargs man page
 # Note that BSD args does not allow the delimiter to be \n so \0 must be used with the -0 option.
 rg --smart-case --hidden --vimgrep --ignore-file=$HOME/.rgignore --color=always "$@" | fzf --multi --ansi | cut -d ':' -f 1-2 | tr '\n' '\0' | exec xargs -0 sh -c 'exec $0 "$@" </dev/tty' $EDITOR
