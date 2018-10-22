@@ -103,9 +103,12 @@ test ! -d ~/dotfiles && git clone https://github.com/naggie/dotfiles.git
 cd dotfiles
 git pull --ff-only origin master || true
 
-# FZF -- install binary only
-~/dotfiles/home/ .fzf/install --bin
-mv ~/dotfiles/home/.fzf/bin ~/.local/bin
+# FZF -- install binary only. install script is expecting repo in ~/.fzf
+test -d ~/.fzf/ && rm -rf ~/.fzf/
+cp -a home/.fzf ~
+~/.fzf/install --bin
+# standard install location, already in $PATH
+mv ~/.fzf/bin ~/.local/bin
 
 # For Adobe source code pro (powershell patched)
 ./etc/powerline-patched/install.sh
