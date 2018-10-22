@@ -9,9 +9,9 @@ source ~/.aliases
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
-# note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
-export HISTCONTROL=ignoredups:ignorespace:erasedups
-# if you call a different shell, this does not happen automatically. WTF?
+# note HISTIGNORE, HISTCONTROL is no longer defined -- see cleanup-history for
+# the replacement mechanism
+
 export SHELL=$(which bash)
 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null

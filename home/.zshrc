@@ -13,9 +13,7 @@ SAVEHIST=$HISTSIZE
 # Change default as unconfigured bash could clobber history. Bash can run
 # unconfigured if CTRL+C is hit during initialisation.
 HISTFILE=~/.history
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-unsetopt EXTENDED_HISTORY # just commands plskthx so bash_history is compatible
+unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
 # pass * if globbing fails (etc)
 unsetopt NOMATCH

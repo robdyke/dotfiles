@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """
-Edits history to deduplicate, leaving the last occurrence of each command. Also normalises whitespace.
+Edits history to deduplicate, leaving the last occurrence of each command.
+Filters useless entries. Also normalises whitespace.
 
 To install, add this to .bashrc:
 
@@ -19,6 +20,8 @@ history_file = argv[1]
 ignore = [
     # short things
     r'^.{1,3}$',
+    # changing into relative directories
+    '^cd [^\~/]'
     # taskwarrior operations (+ alias)
     r'^task',
     r'^n ',
@@ -33,11 +36,12 @@ ignore = [
     r'halt',
     # mouse esc codes
     r'^0',
-    # changing into relative directories
-    '^cd [^\~/]'
+    # commands explicitly hidden by user
+    r'^ ',
 ]
 
 compiled_ignore = [re.compile(i) for i in ignore]
+
 
 def ignored(line):
     for pattern in compiled_ignore:
@@ -50,6 +54,7 @@ def ignored(line):
 with open(history_file, 'rb') as f:
     # strip lines and remove non utf-8 chars
     lines = [line.decode('utf-8', 'ignore').replace("\ufffd", "").strip() for line in f]
+
 
 seen = set()
 new_lines = list()
