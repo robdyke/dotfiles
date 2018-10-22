@@ -108,7 +108,7 @@ test -d ~/.fzf/ && rm -rf ~/.fzf/
 cp -a home/.fzf ~
 ~/.fzf/install --bin
 # standard install location, already in $PATH
-mv ~/.fzf/bin ~/.local/bin
+mv ~/.fzf/bin/fzf ~/.local/bin
 
 # For Adobe source code pro (powershell patched)
 ./etc/powerline-patched/install.sh
