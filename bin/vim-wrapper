@@ -28,10 +28,19 @@ def which(cmd):
 seen = set()
 argv = list()
 
+
+# rgfzf and vim file-line allow vim to open files with line numbers in the
+# format name:line, eg test.py:9.
+# If multiple lines are matched with the same file, rgfzf will produce a given
+# file multiple times. I want vim to open each file only one, with the first
+# file opened at the first matching line. Therefore, just the filename part is
+# used to calculate the final set of arguments.
+
 for arg in sys.argv[1:]:
-    if arg not in seen:
+    filename = arg.split(':')[0]
+    if filename not in seen:
         argv.append(arg)
-        seen.add(arg)
+        seen.add(filename)
 
 cmd_path = which('nvim') or which('vim')
 
