@@ -13,6 +13,7 @@ git subtree pull -m 'update vim-rooter' --squash --prefix=home/.vim/bundle/vim-r
 git subtree pull -m 'update vim-openscad' --squash --prefix=home/.vim/bundle/openscad https://github.com/sirtaj/vim-openscad.git master
 git subtree pull -m 'update vim-uci' --squash --prefix=home/.vim/bundle/vim-uci https://github.com/cmcaine/vim-uci.git master
 git subtree pull -m 'update vim requirements.txt' --squash --prefix=home/.vim/bundle/requirements.txt.vim https://github.com/raimon49/requirements.txt.vim.git master
+git subtree pull -m 'update vim file-line' --squash --prefix=home/.vim/bundle/file-line https://github.com/bogado/file-line.git master
 
 # misc
 git subtree pull -m 'update powerline-fonts' --squash --prefix=etc/powerline-patched https://github.com/Lokaltog/powerline-fonts.git master
