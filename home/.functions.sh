@@ -55,8 +55,10 @@ function _auto_tmux_attach {
 }
 
 function _set_term_title {
-    # set window pane title if this is the first pane
-    if [ $TMUX ] && [ $(tmux list-panes | wc -l) -eq 1 ]; then
+    # set window pane title if inside tmux
+    # NOTE this used to apply to the primary pane only, but since git root use
+    # used it could be simplified to any pane
+    if [ $TMUX ]; then
         # shorthand representation of git dir or current dir
         dir="$(git rev-parse --show-toplevel 2>/dev/null)" || dir="$PWD"
         LABEL=$(echo $dir | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
@@ -92,10 +94,7 @@ function ssh {
     for host; do true; done
 
 	if [ $TMUX ]; then
-        # tmux primary pane, set tmux pane title
-        if [ $(tmux list-panes | wc -l) -eq 1 ]; then
-            tmux rename-window "$host"
-        fi
+        tmux rename-window "$host"
     elif [ ! "$SSH_CONNECTION" ]; then
         # dedicated local terminal, set title of terminal
         printf "\033]0;%s\007" "$host"
