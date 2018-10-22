@@ -104,8 +104,8 @@ cd dotfiles
 git pull --ff-only origin master || true
 
 # FZF -- install binary only
-~/.fzf/install --bin
-mv ~/.fzf/bin ~/.local/bin
+~/dotfiles/home/ .fzf/install --bin
+mv ~/dotfiles/home/.fzf/bin ~/.local/bin
 
 # For Adobe source code pro (powershell patched)
 ./etc/powerline-patched/install.sh
