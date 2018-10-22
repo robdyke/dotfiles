@@ -55,17 +55,17 @@ function _auto_tmux_attach {
 }
 
 function _set_term_title {
-    if [ $TMUX ]; then
-        # only auto set title based on initial pane
-        if [ $(tmux list-panes | wc -l) -eq 1 ]; then
-            # shorthand representation of git dir or current dir
-            dir="$(git rev-parse --show-toplevel 2>/dev/null)" || dir="$PWD"
-            LABEL=$(echo $dir | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
-            tmux rename-window "$LABEL"
-        fi
-    else
-        # base session, set title of terminal
-        printf "\033]0;%s\007" $HOSTNAME
+    # set window pane title if this is the first pane
+    if [ $TMUX ] && [ $(tmux list-panes | wc -l) -eq 1 ]; then
+        # shorthand representation of git dir or current dir
+        dir="$(git rev-parse --show-toplevel 2>/dev/null)" || dir="$PWD"
+        LABEL=$(echo $dir | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
+        tmux rename-window "$LABEL"
+    fi
+
+    # reset terminal title if this terminal is local
+    if [ ! "$SSH_CONNECTION" ]; then
+        printf "\033]0;%s\007" "$HOSTNAME"
     fi
 }
 
@@ -88,11 +88,22 @@ function _set_up_keychain {
 }
 
 function ssh {
-	if [ $TMUX ] && [ $(tmux list-panes | wc -l) -eq 1 ]; then
-		for host; do true; done
-        tmux rename-window "$host"
-	fi
-	command ssh -A "$@"
+    # last arg is probably host
+    for host; do true; done
+
+	if [ $TMUX ]; then
+        # tmux primary pane, set tmux pane title
+        if [ $(tmux list-panes | wc -l) -eq 1 ]; then
+            tmux rename-window "$host"
+        fi
+    elif [ ! "$SSH_CONNECTION" ]; then
+        # dedicated local terminal, set title of terminal
+        printf "\033]0;%s\007" "$host"
+    fi
+
+    command ssh -A "$@"
+
+    # _set_term_title will reset the title now.
 }
 
 # this is a simple wrapper for scp to prevent local copying when a colon is forgotten
