@@ -140,6 +140,7 @@ very pleasant and makes other systems feel irritating to use once you are
 familiar with the experience. Beyond the configuration here, here are some
 other things that _may_ help reduce latency:
 
+## Things that noticeably help
 * Use an accelerated terminal such as `kitty` or `alacritty`
 * Turn all animations off where possible. For example, Firefox's "cosmetic"
   animations and "smooth" scrolling.
@@ -147,9 +148,11 @@ other things that _may_ help reduce latency:
 * Use a SSD (preferably NVMe m.2 PCI-E based)
 * Use a tiling window manager (no 3D nonsense or time spent adjusting windows)
 * Adjust keyboard repeat rate to the lowest setting
+* Mitigate [Bufferbloat][6]
+
+## Things that may help
 * Use a monitor with low latency and high refresh rate. Again, gaming monitors
   are usually optimised for this.
-* Mitigate [Bufferbloat][6]
 * Use a keyboard with a fast polling rate and minimal debounce time. A lot of
   gaming keyboards such as the Corsair K70 are optimised for this. MX Speed
   switches may also help.
