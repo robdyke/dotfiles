@@ -6,6 +6,9 @@ from os import mkdir
 from os import path
 from os import getenv
 from os import listdir
+from os import environ
+import sys
+from subprocess import call
 
 profile_search_paths = [
     # linux
@@ -17,18 +20,36 @@ profile_search_paths = [
     path.expanduser("~/Library/Mozilla/Firefox/Profiles/"),
 ]
 
+profile_name = "default"
+
+# in case we're on os x
+environ['PATH'] = environ['PATH'] + ":/Applications/Firefox.app/Contents/MacOS/"
+
 def find_profiles():
-    # TODO return default profile, too
     for _path in profile_search_paths:
         if path.isdir(_path):
             for d in listdir(_path):
                 profile = path.join(_path, d)
-                if path.isdir(profile) and profile.endswith('.default'):
+                if path.isdir(profile) and profile.endswith('.' + profile_name):
                     yield profile
 
-for profile in find_profiles():
-    print(profile)
 
+def create_default_profile():
+    call(['firefox', '-CreateProfile', 'default'])
+
+
+profiles = list(find_profiles())
+
+if len(profiles) == 0:
+    create_default_profile()
+    profiles = list(find_profiles())
+
+if len(profiles) == 0:
+    print("Firefox profile could not be found or created")
+    sys.exit(1)
+
+create_default_profile()
+print(profiles)
 
 
 ## install some autoexec JS to load mozilla.cfg, the configuration file
