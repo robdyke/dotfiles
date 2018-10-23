@@ -23,7 +23,7 @@ def find_profiles():
         if path.isdir(_path):
             for d in listdir(_path):
                 profile = path.join(_path, d)
-                if path.isdir(profile):
+                if path.isdir(profile) and profile.endswith('.default'):
                     yield profile
 
 for profile in find_profiles():
