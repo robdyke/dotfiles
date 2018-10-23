@@ -35,7 +35,7 @@ def find_profiles():
 
 
 def create_default_profile():
-    call(['firefox', '-CreateProfile', 'default'])
+    call(['firefox', '-CreateProfile', 'default', '-headless'])
 
 
 profiles = list(find_profiles())
