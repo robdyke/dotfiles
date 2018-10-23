@@ -24,18 +24,10 @@ shopt -s checkwinsize
 # stop -bash: !": event not found
 set +o histexpand
 
-# Bash history sharing. History counter is messed up between sessions and
-# commands get lost any other way.
-# Explaination: http://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
-
 HISTFILESIZE=$HISTSIZE
 
-# Change default as unconfigured bash could clobber history. Bash can run
-# unconfigured if CTRL+C is hit during initialisation.
-HISTFILE=~/.history
-
 _bash_history_sync() {
-    # append last command to history file without messing up position in file
+    # append last command to history file without messing up history counter in file
     history | tail -n 1 | cut -c 8- >> $HISTFILE
     # clear history
 	builtin history -c

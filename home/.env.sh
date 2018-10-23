@@ -22,6 +22,10 @@ fi
 
 HISTSIZE=5000
 
+# Change default as unconfigured bash could clobber history. Bash can run
+# unconfigured if CTRL+C is hit during initialisation.
+HISTFILE=~/.history
+
 if [ -f ~/.env-local.sh ]; then
     source ~/.env-local.sh
 fi
