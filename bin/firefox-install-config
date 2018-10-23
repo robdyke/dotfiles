@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+from __future__ import print_function
+from shutil import copy
+from os import makedirs
+from os import mkdir
+from os import path
+from os import getenv
+from os import listdir
+
+profile_search_paths = [
+    # linux
+    path.expanduser("~/.mozilla/firefox/"),
+    # windows
+    path.join(getenv('APPDATA', ''), 'Mozilla', 'Firefox', 'Profiles'),
+    # mac
+    path.expanduser("~/Library/Application Support/Firefox/Profiles/"),
+    path.expanduser("~/Library/Mozilla/Firefox/Profiles/"),
+]
+
+def find_profiles():
+    # TODO return default profile, too
+    for _path in profile_search_paths:
+        if path.isdir(_path):
+            for d in listdir(_path):
+                profile = path.join(_path, d)
+                if path.isdir(profile):
+                    yield profile
+
+for profile in find_profiles():
+    print(profile)
+
+
+
+## install some autoexec JS to load mozilla.cfg, the configuration file
+#with open('build/core/defaults/pref/autoconfig.js', 'w') as f:
+#    f.write("""
+#// Configuration file for Firefox -- first line must be comment, for some reason.
+#pref("general.config.obscure_value", 0);
+#pref("general.config.filename","mozilla.cfg");
+#""")
+#
+#
+#copy('mozilla.cfg', 'build/core/')
+#
+## https://support.mozilla.org/en-US/questions/966922
+## https://developer.mozilla.org/en-US/Add-ons/Installing_extensions -- GUID
+## required.
+## https://addons.mozilla.org/en-GB/firefox/addon/nocontextmenu/
+## https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Alternative_distribution_options
+#makedirs('build/core/distribution/extensions')
+#copy('{99b7c416-82dc-4f9f-9909-ebc038fddefc}.xpi', 'build/core/distribution/extensions/')
+#
+#makedirs('build/core/browser/defaults/profile/chrome')
+#copy('userChrome.css', 'build/core/browser/defaults/profile/chrome')
+#copy('userContent.css', 'build/core/browser/defaults/profile/chrome')

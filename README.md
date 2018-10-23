@@ -160,4 +160,5 @@ _may_ help reduce latency:
 1. Run a vim selection through a command with `:!cmd`. Useful for formatting as
    well as copying on a mac: `!pbcopy`. Write from the clipboard with
    `r!pbpaste`.
+1. Keep useful local environment variables in ~/.env-local.sh
 
