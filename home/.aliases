@@ -68,9 +68,6 @@ alias bim=vim-wrapper
 alias nom=npm
 alias gi=git
 alias cd..='cd ..'
-alias lsd=ls
-alias grepo=grep
-alias rfind=find
 alias car=cat
 
 # DEPRECATIONS

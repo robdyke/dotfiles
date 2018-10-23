@@ -38,6 +38,22 @@ ignore = [
     r'^0',
     # commands explicitly hidden by user
     r'^ ',
+    # frequent typos (see .aliases)
+    r'^git psuh',
+    r'^cim ',
+    r'^sl ',
+    r'^c ',
+    r'^xs ',
+    r'^cim ',
+    r'^bim ',
+    r'^nom ',
+    r'^gi ',
+    r'^cd.. ',
+    r'^car ',
+    # deprecations
+    r'^findack ',
+    r'^ack ',
+
 ]
 
 compiled_ignore = [re.compile(i) for i in ignore]
