@@ -9,9 +9,9 @@ source ~/.aliases
 # only on new shell, fail silently. Must be non-invasive.
 [ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
 
-# note HISTIGNORE, HISTCONTROL is no longer defined -- see cleanup-history for
-# the replacement mechanism
-
+# note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
+export HISTCONTROL=ignoredups:ignorespace:erasedups
+# if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
@@ -34,15 +34,12 @@ HISTFILESIZE=$HISTSIZE
 # unconfigured if CTRL+C is hit during initialisation.
 HISTFILE=~/.history
 
-history() {
-	_bash_history_sync
-	builtin history "$@"
-}
-
 _bash_history_sync() {
-	builtin history -a
-	HISTFILESIZE=$HISTSIZE
+    # append last command to history file without messing up position in file
+    history | tail -n 1 | cut -c 8- >> $HISTFILE
+    # clear history
 	builtin history -c
+    # reload history
 	builtin history -r
 }
 
