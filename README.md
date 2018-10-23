@@ -131,25 +131,28 @@ I think it's important not to put tasks on the queue for the sake of it. Only
 put tasks on the queue if you need to track them.
 
 
-# Latency
+# Latency and speed
 
-The lowest possible latency is a target for my workflow and this repository.
-Too many user interfaces waste time on stupid animations or are just generally
-slow; working with a setup that is perceptually instantaneous is very pleasant
-and makes other systems feel irritating to use once you are familiar with the
-experience. Beyond the configuration here, here are some other things that
-_may_ help reduce latency:
+The lowest possible latency is a target for my workflow and code in this
+repository.  Too many user interfaces waste time on stupid animations or are
+just generally slow; working with a setup that is perceptually instantaneous is
+very pleasant and makes other systems feel irritating to use once you are
+familiar with the experience. Beyond the configuration here, here are some
+other things that _may_ help reduce latency:
 
 * Use an accelerated terminal such as `kitty` or `alacritty`
-* Use a keyboard with a fast polling rate and minimal debounce time. A lot of
-  gaming keyboards such as the Corsair K70 are optimised for this. MX Speed
-  switches may also help.
-* Turn all animations off where possible
-* Use a SSD (preferably NVMe m.2 PCI-E based one)
+* Turn all animations off where possible. For example, Firefox's "cosmetic"
+  animations and "smooth" scrolling.
+* Profile  and optimise application startup time
+* Use a SSD (preferably NVMe m.2 PCI-E based)
+* Use a tiling window manager (no 3D nonsense or time spent adjusting windows)
 * Adjust keyboard repeat rate to the lowest setting
 * Use a monitor with low latency and high refresh rate. Again, gaming monitors
   are usually optimised for this.
 * Mitigate [Bufferbloat][6]
+* Use a keyboard with a fast polling rate and minimal debounce time. A lot of
+  gaming keyboards such as the Corsair K70 are optimised for this. MX Speed
+  switches may also help.
 
 
 [6]: https://www.bufferbloat.net/projects/bloat/wiki/What_can_I_do_about_Bufferbloat/
@@ -162,3 +165,18 @@ _may_ help reduce latency:
    `r!pbpaste`.
 1. Keep useful local environment variables in ~/.env-local.sh
 
+# Operational security
+With major services being compromised more and more, good OPSEC is important.
+
+1. 2FA (U2F) where possible
+1. A different password for every service (important to prevent attacker pivot)
+1. Yubikey (as an openPGP smartcard) to store my SSH and GPG keys
+1. Full-disk encryption for every device
+1. Lock-screen for every device
+1. Backup 2FA codes, backup passwords and master passwords are in a physical fire safe
+1. I may switch to a password manager (pass or Keepassxc)
+1. UBlock origin on Firefox
+1. HTTPS everywhere on Firefox
+1. Own web services configured with A+ rating from ssllabs (best cipher suite, protocol etc)
+1. Regular updates of all software
+1. Subscription to vulnerability mailing lists
