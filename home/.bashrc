@@ -6,9 +6,6 @@ source ~/.env.sh
 source ~/.functions.sh
 source ~/.aliases
 
-# only on new shell, fail silently. Must be non-invasive.
-[ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
-
 # note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 # if you call a different shell, this does not happen automatically. WTF?

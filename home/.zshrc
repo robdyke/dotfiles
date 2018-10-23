@@ -6,9 +6,6 @@ source ~/.env.sh
 source ~/.functions.sh
 source ~/.aliases
 
-# only on new shell, fail silently. Must be non-invasive.
-[ ! $TMUX ] && ~/bin/server-splash 2>/dev/null
-
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
