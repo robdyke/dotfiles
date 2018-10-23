@@ -28,7 +28,7 @@ HISTFILESIZE=$HISTSIZE
 
 _bash_history_sync() {
     # append last command to history file without messing up history counter in file
-    history | tail -n 1 | cut -c 8- >> $HISTFILE
+    builtin history | tail -n 1 | cut -c 8- >> $HISTFILE
     # clear history
 	builtin history -c
     # reload history
@@ -96,4 +96,12 @@ source ~/.fzf/shell/key-bindings.bash
 # http://superuser.com/questions/267771/bash-completion-makes-bash-start-slowly
 trap '_deferred 2>/dev/null; trap USR1' USR1
 { sleep 0.1 ; builtin kill -USR1 $$ ; } & disown
+
+# clear history
+~/.local/bin/cleanup-history ~/.history
+# clear history
+builtin history -c
+# reload history
+builtin history -r
+
 trap "~/.local/bin/cleanup-history ~/.history" EXIT

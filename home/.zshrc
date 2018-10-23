@@ -104,4 +104,6 @@ source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+~/.local/bin/cleanup-history ~/.history
+fc -R # reload history
 trap "~/.local/bin/cleanup-history ~/.history" EXIT
