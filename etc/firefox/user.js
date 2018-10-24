@@ -28,3 +28,5 @@ user_pref("lightweightThemes.selectedThemeID", "firefox-compact-dark@mozilla.org
 
 // highlight all matches when finding
 user_pref("findbar.highlightAll", true);
+
+user_pref("layout.spellcheckDefault", 1);
