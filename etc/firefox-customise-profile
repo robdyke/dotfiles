@@ -52,7 +52,7 @@ if len(profiles) == 0:
     sys.exit(1)
 
 # we only expect to match the default profile for the current user
-assert len(profiles) == 0
+assert len(profiles) == 1
 
 profile = profiles[0]
 

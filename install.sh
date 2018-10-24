@@ -100,3 +100,7 @@ test $TASK_CONTEXT && task context $TASK_CONTEXT &>/dev/null
 # set caps lock to act as esc if possible
 test $DISPLAY && which dconf &> /dev/null && \
     dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
+
+if PATH="$PATH:/Applications/Firefox.app/Contents/MacOS/" which firefox &> /dev/null; then
+    etc/firefox-customise-profile
+fi
