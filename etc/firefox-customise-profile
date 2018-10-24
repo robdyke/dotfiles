@@ -55,16 +55,25 @@ if len(profiles) == 0:
 assert len(profiles) == 1
 
 profile = profiles[0]
+chrome_dir = path.join(profile, 'chrome')
+extensions_dir = path.join(profile, 'extensions')
 
 copy(path.join(template_dir, 'user.js'), profile)
-
-chrome_dir = path.join(profile, 'chrome')
 
 if not path.isdir(chrome_dir):
     makedirs(chrome_dir)
 
-copy(path.join(template_dir, 'UserChrome.css'), chrome_dir)
+copy(path.join(template_dir, 'chrome/UserChrome.css'), chrome_dir)
 
+
+# copy extensions; only if they don't exist as FF manages updates to them
+# automatically. Note they must be signed unless Firefox ESR is used and
+# configured correctly. Using unsigned extensions is not recommended.
+for e in listdir(path.join(template_dir, 'extensions')):
+    source = path.join(template_dir, 'extensions', e)
+    target = path.join(extensions_dir, e)
+    if not path.isfile(target):
+        copy(source, target)
 
 #copy('{99b7c416-82dc-4f9f-9909-ebc038fddefc}.xpi', 'build/core/distribution/extensions/')
 #; https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Alternative_distribution_options/Sideloading_add-ons#Installation_using_the_standard_extension_folders
