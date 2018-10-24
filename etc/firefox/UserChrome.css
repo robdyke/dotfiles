@@ -1,3 +1,4 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
 #main-window,
 #content,
 browser[type="content-primary"],
@@ -9,3 +10,6 @@ browser[type="content"] > html {
 a, a:active, a:focus {
    outline: none !important;
 }
+
+/* remove autohiding location bar, as I find autohiding things infuriating */
+#fullscr-toggler { display:none!important; }
