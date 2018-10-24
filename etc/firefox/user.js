@@ -25,3 +25,6 @@ user_pref("app.shield.optoutstudies.enabled", true);
 user_pref("extensions.autoDisableScopes", 0);
 
 user_pref("lightweightThemes.selectedThemeID", "firefox-compact-dark@mozilla.org");
+
+// highlight all matches when finding
+user_pref("findbar.highlightAll", true);
