@@ -94,6 +94,10 @@ if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo -E ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 fi
 
+if [ $UBUNTU_DESKTOP ]; then
+    sudo -E apt-get -y install firefox
+fi
+
 
 # all platforms
 
