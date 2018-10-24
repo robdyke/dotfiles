@@ -57,8 +57,12 @@ assert len(profiles) == 1
 profile = profiles[0]
 
 copy(path.join(template_dir, 'user.js'), profile)
+
 chrome_dir = path.join(profile, 'chrome')
-mkdirs(chrome_dir)
+
+if not path.isdir(chrome_dir):
+    makedirs(chrome_dir)
+
 copy(path.join(template_dir, 'UserChrome.css'), chrome_dir)
 
 
