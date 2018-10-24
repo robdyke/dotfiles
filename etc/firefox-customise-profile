@@ -57,6 +57,9 @@ assert len(profiles) == 1
 profile = profiles[0]
 
 copy(path.join(template_dir, 'user.js'), profile)
+chrome_dir = path.join(profile, 'chrome')
+mkdirs(chrome_dir)
+copy(path.join(template_dir, 'UserChrome.css'), chrome_dir)
 
 
 #copy('{99b7c416-82dc-4f9f-9909-ebc038fddefc}.xpi', 'build/core/distribution/extensions/')
@@ -64,5 +67,4 @@ copy(path.join(template_dir, 'user.js'), profile)
 #FileCreateDir, %A_AppData%\Mozilla\Extensions\{ec8030f7-c20a-464f-9b0e-13a3a9e97384}
 #FileCopy, distribution\extensions\*, %A_AppData%\Mozilla\Extensions\{ec8030f7-c20a-464f-9b0e-13a3a9e97384}\, 1
 #makedirs('build/core/browser/defaults/profile/chrome')
-#copy('userChrome.css', 'build/core/browser/defaults/profile/chrome')
 #copy('userContent.css', 'build/core/browser/defaults/profile/chrome')

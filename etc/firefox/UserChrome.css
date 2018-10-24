@@ -1,0 +1,11 @@
+#main-window,
+#content,
+browser[type="content-primary"],
+browser[type="content"],
+browser[type="content"] > html {
+  background: #16171d !important;
+}
+
+a, a:active, a:focus {
+   outline: none !important;
+}
