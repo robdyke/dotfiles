@@ -10,6 +10,9 @@ from os import environ
 import sys
 from subprocess import call
 
+script_dir = path.dirname(path.realpath(__file__))
+template_dir = path.join(script_dir, 'firefox')
+
 profile_search_paths = [
     # linux
     path.expanduser("~/.mozilla/firefox/"),
@@ -48,29 +51,18 @@ if len(profiles) == 0:
     print("Firefox profile could not be found or created")
     sys.exit(1)
 
-create_default_profile()
-print(profiles)
+# we only expect to match the default profile for the current user
+assert len(profiles) == 0
+
+profile = profiles[0]
+
+copy(path.join(template_dir, 'user.js'), profile)
 
 
-## install some autoexec JS to load mozilla.cfg, the configuration file
-#with open('build/core/defaults/pref/autoconfig.js', 'w') as f:
-#    f.write("""
-#// Configuration file for Firefox -- first line must be comment, for some reason.
-#pref("general.config.obscure_value", 0);
-#pref("general.config.filename","mozilla.cfg");
-#""")
-#
-#
-#copy('mozilla.cfg', 'build/core/')
-#
-## https://support.mozilla.org/en-US/questions/966922
-## https://developer.mozilla.org/en-US/Add-ons/Installing_extensions -- GUID
-## required.
-## https://addons.mozilla.org/en-GB/firefox/addon/nocontextmenu/
-## https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Alternative_distribution_options
-#makedirs('build/core/distribution/extensions')
 #copy('{99b7c416-82dc-4f9f-9909-ebc038fddefc}.xpi', 'build/core/distribution/extensions/')
-#
+#; https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Alternative_distribution_options/Sideloading_add-ons#Installation_using_the_standard_extension_folders
+#FileCreateDir, %A_AppData%\Mozilla\Extensions\{ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+#FileCopy, distribution\extensions\*, %A_AppData%\Mozilla\Extensions\{ec8030f7-c20a-464f-9b0e-13a3a9e97384}\, 1
 #makedirs('build/core/browser/defaults/profile/chrome')
 #copy('userChrome.css', 'build/core/browser/defaults/profile/chrome')
 #copy('userContent.css', 'build/core/browser/defaults/profile/chrome')
