@@ -94,7 +94,13 @@ if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo -E ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
     # set keyboard layout (with caps lock as esc)
-    sudo cp etc/keyboard /etc/default/
+    cat <<'EOF' | sudo tee /etc/default/keyboard
+XKBMODEL="pc104"
+XKBLAYOUT="gb"
+XKBVARIANT=""
+XKBOPTIONS="caps:escape"
+BACKSPACE="guess"
+EOF
     sudo service keyboard-setup restart
     # apply temporarily, as above requires restart (I think)
     setxkbmap -option "caps:escape" gb
