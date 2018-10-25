@@ -5,18 +5,6 @@
 
 set -e
 set -x
-# curl -sL https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
-
-cat <<EOF
-This script is intended to be run once. It will install packages then sync
-dotfiles.
-
-Hit CTRL+C to abort in the next 3 seconds....
-
-EOF
-
-sleep 3
-
 
 # platform detection. Desktop is always a superset of server.
 if [ $(uname) == 'Darwin' ]; then
