@@ -15,6 +15,7 @@ test -d ~/.fzf/ && rm -rf ~/.fzf/
 
 mkdir -p ~/.local/bin
 mkdir -p ~/.ssh
+mkdir -p ~/.gnupg
 chmod 700 ~/.ssh
 
 touch ~/.ssh/known_hosts
