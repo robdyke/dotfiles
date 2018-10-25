@@ -60,8 +60,9 @@ extensions_dir = path.join(profile, "extensions")
 
 copy(path.join(script_dir, "user.js"), profile)
 
-if not path.isdir(chrome_dir):
-    makedirs(chrome_dir)
+for d in [chrome_dir, extensions_dir]:
+    if not path.isdir(d):
+        makedirs(d)
 
 copy(path.join(script_dir, "chrome/UserChrome.css"), chrome_dir)
 
