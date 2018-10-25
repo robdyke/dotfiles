@@ -90,7 +90,7 @@ XKBOPTIONS="caps:escape"
 BACKSPACE="guess"
 EOF
     # apply temporarily, as above requires restart (I think)
-    setxkbmap -option "caps:escape" gb
+    test $DISPLAY && setxkbmap -option "caps:escape" gb
 fi
 
 if [ $UBUNTU_DESKTOP ]; then
