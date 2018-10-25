@@ -125,6 +125,7 @@ test -d ~/.fzf/ && rm -rf ~/.fzf/
 cp -a home/.fzf ~
 # download binary but annoyingly create symlink in path (not configurable)
 mkdir -p ~/.local/bin/
+test -f ~/.local/bin/fzf && rm ~/.local/bin/fzf
 ~/.fzf/install --bin
 # standard install location, already in $PATH. Remove symlink annoyingly
 # created by fzf installer (if installer had ~/.local/bin in path) and copy actual binary
