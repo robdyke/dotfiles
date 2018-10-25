@@ -14,8 +14,10 @@ if len(sys.argv) == 1:
     print("No files to edit")
     sys.exit(1)
 
+
 def is_exe(fpath):
     return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
 
 def which(cmd):
     for path in os.environ["PATH"].split(os.pathsep):
@@ -23,6 +25,7 @@ def which(cmd):
 
         if is_exe(exe):
             return exe
+
 
 # iterate to preserve order
 seen = set()
@@ -37,15 +40,15 @@ argv = list()
 # used to calculate the final set of arguments.
 
 for arg in sys.argv[1:]:
-    filename = arg.split(':')[0]
+    filename = arg.split(":")[0]
     if filename not in seen:
         argv.append(arg)
         seen.add(filename)
 
-cmd_path = which('nvim') or which('vim')
+cmd_path = which("nvim") or which("vim")
 
 if cmd_path is None:
     print("Neither vim nor nvim found")
     sys.exit(1)
 
-os.execl(cmd_path, os.path.basename(cmd_path), '-p', *argv)
+os.execl(cmd_path, os.path.basename(cmd_path), "-p", *argv)

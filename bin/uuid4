@@ -2,4 +2,5 @@
 from __future__ import print_function
 
 import uuid
+
 print(str(uuid.uuid4()), end="")
