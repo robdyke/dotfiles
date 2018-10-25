@@ -111,9 +111,12 @@ git pull --ff-only origin master || true
 # FZF -- install binary only. install script is expecting repo in ~/.fzf
 test -d ~/.fzf/ && rm -rf ~/.fzf/
 cp -a home/.fzf ~
-~/.fzf/install --bin
-# standard install location, already in $PATH
+# download binary but annoyingly create symlink in path (not configurable)
 mkdir -p ~/.local/bin/
+~/.fzf/install --bin
+# standard install location, already in $PATH. Remove symlink annoyingly
+# created by fzf installer (if installer had ~/.local/bin in path) and copy actual binary
+test -f ~/.local/bin/fzf && rm ~/.local/bin/fzf
 mv ~/.fzf/bin/fzf ~/.local/bin/
 
 # For Adobe source code pro (powershell patched)
