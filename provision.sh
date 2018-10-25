@@ -96,6 +96,8 @@ if [ $UBUNTU ] || [ $RASPBIAN ]; then
     # set keyboard layout (with caps lock as esc)
     sudo cp etc/keyboard /etc/default/
     sudo service keyboard-setup restart
+    # apply temporarily, as above requires restart (I think)
+    setxkbmap -option "caps:escape" gb
 fi
 
 if [ $UBUNTU_DESKTOP ]; then
