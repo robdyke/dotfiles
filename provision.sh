@@ -92,6 +92,10 @@ if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo python3 -m pip install --upgrade ansible ipython
 
     sudo -E ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+
+    # set keyboard layout (with caps lock as esc)
+    sudo cp etc/keyboard /etc/default/
+    sudo service keyboard-setup restart
 fi
 
 if [ $UBUNTU_DESKTOP ]; then
