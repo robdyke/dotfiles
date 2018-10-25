@@ -73,7 +73,7 @@ fi
 if [ -n "$TMUX" ]; then
 	tmux source-file ~/.tmux.conf >/dev/null
     export SYSTEM_COLOUR=$(~/.local/bin/system-colour $HOSTNAME)
-    tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
+    tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null || true
 fi
 
 if [ $PLATFORM == 'Darwin' ]; then
