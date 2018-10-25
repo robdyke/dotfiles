@@ -105,7 +105,7 @@ fi
 cd ~
 test ! -d ~/dotfiles && git clone https://github.com/naggie/dotfiles.git
 cd dotfiles
-git pull --ff-only origin master || true
+git pull --ff-only https://github.com/naggie/dotfiles.git master || true
 
 # FZF -- install binary only. install script is expecting repo in ~/.fzf
 test -d ~/.fzf/ && rm -rf ~/.fzf/
