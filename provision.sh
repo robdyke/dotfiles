@@ -89,7 +89,6 @@ XKBVARIANT=""
 XKBOPTIONS="caps:escape"
 BACKSPACE="guess"
 EOF
-    sudo service keyboard-setup restart
     # apply temporarily, as above requires restart (I think)
     setxkbmap -option "caps:escape" gb
 fi
