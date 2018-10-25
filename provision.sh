@@ -24,7 +24,7 @@ if [ $(uname) == 'Darwin' ]; then
     export MACOS_DESKTOP=1
 elif grep -q Ubuntu /etc/issue; then
     export UBUNTU=1
-    if dpkg -l | grep -q xorg-server; then
+    if dpkg -l | grep -vq landscape; then
         export UBUNTU_DESKTOP=1
     fi
 elif grep -q Raspbian /etc/issue; then
