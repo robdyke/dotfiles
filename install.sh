@@ -91,8 +91,8 @@ fi
 
 if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
     cp ~/.bash_history ~/.history
+    chmod 600 ~/.history
 fi
-chmod 600 ~/.history
 
 # restore task context (maybe)
 test $TASK_CONTEXT && task context $TASK_CONTEXT &>/dev/null
