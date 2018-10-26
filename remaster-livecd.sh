@@ -1,30 +1,16 @@
 #!/bin/bash
 
 # Builds darksky ubuntu (naggie/dotfiles based) which is a remastered live CD.
-# See example grub.cfg in etc/ to boot from a flash drive.
-# Uses current branch.
-
-# Incremental approach, using an existing ISO.
 
 # Use the 'toram' kernel parameter. The result is a super-fast, disposable
 # environment! You'll need at least 3GB of RAM though.
-#
-# Based on https://help.ubuntu.com/community/LiveCDCustomization
-
-# Modes of operation:
-#
-# 1. Source and Target non-existent: New source is downloaded, target is compiled
-# 2. Target exists: Target is used as source
-# 3. Just source exists: New target is created
-
 
 # Install pre-requisities
 #sudo apt-get install squashfs-tools genisoimage aufs-tools
 
 cd $(dirname $0)
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CHANGE=$(git rev-list HEAD --count)
-NAME="darkbuntu-$BRANCH"
+NAME="darkbuntu"
 
 function WARNING {
 	# TODO: check PS1, no escape code if not interactive....?
@@ -32,10 +18,8 @@ function WARNING {
 }
 
 if [ ! "$2" ]; then
-	echo "Usage: make livecd"
-	echo "-OR-"
-	echo "Usage: sudo $0 <source ubuntu 16.04 iso> <destination iso>"
-	exit 121
+	echo "Usage: sudo $0 <source ubuntu iso> <destination iso>"
+	exit 1
 fi
 
 SOURCE="$1"
@@ -54,26 +38,14 @@ if [ `whoami` != root ]; then
 	exit
 fi
 
-echo
-echo SOURCE: $SOURCE
-echo TARGET: $TARGET
-echo
-echo
-
 # check dependencies
 if ! which mkisofs mksquashfs isohybrid &> /dev/null; then
 	WARNING 'Error! required genisoimage/squashfs-tools/syslinux package(s) are not installed'
 	exit
 fi
 
-if [ $(uname -m) != x86_64 ]; then
-	WARNING 'Error! x86_64 architecture required.'
-	exit
-fi
-
 # less typing, with environment variables set
-# HACK home dir = /etc/skel? so dbus-launch gsettings works.
-# This will be copied to home dir of new user.
+# as home is skel, home contents will be copied to home dir of new user.
 function INSIDE {
 	chroot $WORKDIR/filesystem_rw \
 		/usr/bin/env \
@@ -87,16 +59,13 @@ function BREAKPOINT {
 	INSIDE /bin/bash
 }
 
-# remove all trace of building in a safe way on termination
-# might fail if things are not there yet, but that's fine.
 function CLEANUP_EXIT {
 	STATUS=$?
-	# the following commands can fail, they must proceed
 	set +e
 	# -d always free loop device, prevent leaking them
 	# TODO FIXME WARNING -l may leave a loop dev used
 	sync
-	# order is important: there are dependencies
+	# order is important
 	umount -l $WORKDIR/filesystem_rw/proc
 	umount    $WORKDIR/filesystem_rw/sys
 	umount -l $WORKDIR/filesystem_rw/dev
@@ -108,8 +77,6 @@ function CLEANUP_EXIT {
 	exit $STATUS
 }
 
-# always clean up on CTRL+C (and anything, now)
-#trap CLEANUP_EXIT SIGINT
 trap CLEANUP_EXIT EXIT
 
 # echo commands to aid debugging
@@ -156,7 +123,7 @@ mount --bind /dev/   $WORKDIR/filesystem_rw/dev
 cat <<- EOF > $WORKDIR/filesystem_rw/etc/casper.conf
 	export USERNAME=$LIVECD_USER
 	export USERFULLNAME="Live session user"
-	export HOST=darkbuntu-$CHANGE
+	export HOST=darkbuntu
 	export BUILD_SYSTEM="Ubuntu"
 	export FLAVOUR=Ubuntu # required to make above apply
 EOF
@@ -169,14 +136,10 @@ INSIDE ln -s /bin/true /sbin/initctl || true
 INSIDE add-apt-repository universe
 INSIDE add-apt-repository multiverse
 
-INSIDE ln -s /lib/init/upstart-job /etc/init.d/whoopsie || true # required, otherwise apt breaks
+#INSIDE ln -s /lib/init/upstart-job /etc/init.d/whoopsie || true # required, otherwise apt breaks
 
 INSIDE apt-get -y --force-yes update
 INSIDE apt-get -y --force-yes install git
-
-# DOTFILES AND PROVISION
-# make sure submodules are here
-git submodule update --init
 
 # installs dotfiles to /etc/skel/ so that live (ubuntu) user will get a
 #cp -a ../dotfiles $WORKDIR/filesystem_rw/root/
@@ -190,8 +153,8 @@ rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/
 INSIDE git -C /etc/skel/dotfiles submodule foreach rm .git
 INSIDE git -C /etc/skel/dotfiles submodule update --init
 
-INSIDE /etc/skel/dotfiles/provision/ubuntu-desktop
-INSIDE /etc/skel/dotfiles/install.sh
+INSIDE /etc/skel/dotfiles/provision.sh
+INSIDE /etc/skel/dotfiles/install-naggie.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
 INSIDE apt-get install -y --force-yes dkms
@@ -201,12 +164,12 @@ INSIDE apt-get install -y --force-yes dkms
 ls $WORKDIR/filesystem_rw/var/lib/initramfs-tools | INSIDE xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
 
 # this livecd may be used in a vbox guest
-#INSIDE apt-get install -y --force-yes virtualbox-guest-additions.iso
+#INSIDE apt-get install -y --force-yes virtualbox-guest-additions-iso
 #INSIDE mkdir -p /tmp/user/0 # necessary hack
 #INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
 
 
-# build modules for specific kernel (sorry about the hack)
+# build modules for specific kernel
 # maybe sudo dpkg -l | grep linux-image and pick the latest.
 #export KERNEL_VERSION=$(ls $WORKDIR/filesystem_rw/usr/src/ | grep -E 'headers.+generic' | grep -oE '[0-9].+$')
 #BREAKPOINT
@@ -242,7 +205,8 @@ sed -i -re "s/'en': *'us',/'en': 'gb',/g" \
 	$WORKDIR/filesystem_rw/usr/lib/ubiquity/ubiquity/misc.py
 
 rm -rf $WORKDIR/filesystem_rw/tmp/*
-rm     $WORKDIR/filesystem_rw/etc/skel/.bash_history || true # don't 'fail'
+rm     $WORKDIR/filesystem_rw/etc/skel/.bash_history ||
+rm     $WORKDIR/filesystem_rw/etc/skel/.history || true
 
 # RM/UMOUNT STUFF THAT SHOULDN'T BE IN FILESYSTEM IMAGE
 rm $WORKDIR/filesystem_rw/etc/hosts
