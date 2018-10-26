@@ -195,13 +195,8 @@ cp $WORKDIR/filesystem_rw/boot/initrd.img* $WORKDIR/iso_rw/casper/initrd.lz ||:
 #mv edit/initrd.gz iso_rw-cd/casper/
 # may need to convert to LZ gzip -dc initrd.gz | sudo lzma -7 > initrd.lz
 
-
-# Utterly stupid hack required to fix keyboard map for installer on livecd.
-# must be done last, otherwise clobbered by ubiquity update.
-# .Xmodmap is used for live session. /etc/default/keyboard is the debian
-# X/console keyboard main config file. `setxkbmap gb` would also work in
-# session.
-sed -i -re "s/'en': *'us',/'en': 'gb',/g" \
+# prevent Ubiquity installer from modifying keyboard
+sed -i -r "s/def apply_keyboard():/def apply_keyboard():\n    return/g" \
 	$WORKDIR/filesystem_rw/usr/lib/ubiquity/ubiquity/misc.py
 
 rm -rf $WORKDIR/filesystem_rw/tmp/*
@@ -277,36 +272,10 @@ isohybrid "$TARGET"
 
 [ $SUDO_USER ] && chown $SUDO_USER "$TARGET"
 
-# clean, MUST MAKE SURE EVERYTHING IS UNMOUNTED FIRST, PARTICULARLY dev
-# OR PREPARE FOR CORE MELTDOWN
-# now umount (unmount) special filesystems before creation of iso
-# This is handled by TRAP
-
-
-# TODO? modify isolinux so that default is toram (current use case uses grub on
-# flash drive)
-
-# TODO? EFI support for grub2+flash drive, so can boot on mac.
-
-
 # Example: burn the image to CD with:
 #cdrecord dev=/dev/cdrom ubuntu-9.04-desktop-i386-custom.iso
 
-# Could order files to reduce seeking time, but not normally used from CD any more.
-# http://lichota.net/~krzysiek/projects/kubuntu/dapper-livecd-optimization/
-
-# To virtualise and test:
-
 #sudo apt-get install qemu kvm
 #sudo adduser naggie kvm
-#qemu-system-x86_64 -m 1024 -usbdevice tablet -k en-gb -vnc :0,lossy -vga std -cdrom darkbuntu-naggie.iso
-#
-# After this, on an intermediate host
-#
-# forward port 5900, which is :0
-#ssh -g -L 5900:localhost:5900 naggie@chell.darksky.io
-#
-#
-# Then connect using a vncviewer. Performance is pretty much as if it was
-# local due to kvm and vnc. The letdown is really the fancy effects making
-# it slow.
+# newgrp kvm
+#qemu-system-x86_64 -m 4096 -enable-kvm -usbdevice tablet -k en-gb -vnc :0,lossy -vga std -cdrom darkbuntu-naggie.iso
