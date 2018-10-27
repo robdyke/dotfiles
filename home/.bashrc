@@ -5,6 +5,8 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
+_tmux_update_env
+_set_up_agent
 
 # note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 export HISTCONTROL=ignoredups:ignorespace:erasedups
@@ -80,7 +82,6 @@ stty erase ^?
 which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
-_set_up_agent
 
 # fix gpg-agent ncurses passphrase prompt
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html

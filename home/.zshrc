@@ -5,6 +5,8 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
+_tmux_update_env
+_set_up_agent
 
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
@@ -91,7 +93,6 @@ bindkey '^[[B' history-substring-search-down
 which dircolors &> /dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
-_set_up_agent
 
 # fix gpg-agent ncurses passphrase prompt
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
