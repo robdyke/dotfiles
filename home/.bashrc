@@ -80,7 +80,7 @@ stty erase ^?
 which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
-_set_up_keychain
+_set_up_agent
 
 # fix gpg-agent ncurses passphrase prompt
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
