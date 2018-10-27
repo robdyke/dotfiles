@@ -35,14 +35,14 @@ function _tmux_update_env {
     [ $TMUX ] || return
 
     # update display to location
-    eval $(tmux show-environment -s | grep '=DISPLAY')
+    eval $(tmux show-environment -s | grep 'DISPLAY=')
 
     # must be remote host (else it clobbers keychain, which runs local only)
-    tmux show-environment | grep -q "=SSH_CONNECTION" || return
+    tmux show-environment | grep -q "SSH_CONNECTION=" || return
 
     # when an SSH connection is re-established, so is the agent connection.
     # Reload it automatically.
-    eval $(tmux show-environment -s | grep '=SSH_AUTH_SOCK')
+    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
     echo "Synced env"
 }
 
