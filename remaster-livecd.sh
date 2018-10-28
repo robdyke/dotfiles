@@ -154,7 +154,7 @@ INSIDE git -C /etc/skel/dotfiles submodule foreach rm .git
 INSIDE git -C /etc/skel/dotfiles submodule update --init
 
 INSIDE /etc/skel/dotfiles/provision.sh
-INSIDE /etc/skel/dotfiles/install-naggie.sh
+#INSIDE /etc/skel/dotfiles/install-naggie.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
 INSIDE apt-get install -y --force-yes dkms
@@ -198,7 +198,6 @@ cp $WORKDIR/filesystem_rw/boot/initrd.img* $WORKDIR/iso_rw/casper/initrd.lz ||:
 # prevent Ubiquity installer from modifying keyboard
 sed -i -e "s/def apply_keyboard():/def apply_keyboard():\n    return/g" \
 	$WORKDIR/filesystem_rw/usr/lib/ubiquity/bin/ubiquity
-BREAKPOINT
 
 rm -rf $WORKDIR/filesystem_rw/tmp/*
 rm     $WORKDIR/filesystem_rw/etc/skel/.bash_history ||
