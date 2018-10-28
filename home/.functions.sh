@@ -87,7 +87,9 @@ function _setup_ssh_agent {
     # take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
     if [ ! "$SSH_CONNECTION" ] && which keychain &>/dev/null; then
-        eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
+        #eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
+		export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+        gpg-connect-agent /bye
     fi
 }
 
