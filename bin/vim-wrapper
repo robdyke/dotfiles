@@ -32,10 +32,10 @@ seen = set()
 argv = list()
 
 
-# rgfzf and vim file-line allow vim to open files with line numbers in the
-# format name:line, eg test.py:9.
+# rgfzf and vim-fetch allow vim to open files with line numbers in the
+# format name:line:col, eg test.py:9:19.
 # If multiple lines are matched with the same file, rgfzf will produce a given
-# file multiple times. I want vim to open each file only one, with the first
+# file multiple times. I want vim to open each file only once, with the first
 # file opened at the first matching line. Therefore, just the filename part is
 # used to calculate the final set of arguments.
 
