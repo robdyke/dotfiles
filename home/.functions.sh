@@ -43,7 +43,6 @@ function _tmux_update_env {
     # when an SSH connection is re-established, so is the agent connection.
     # Reload it automatically.
     eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
-    echo "Synced env"
 }
 
 function _auto_tmux_attach {
