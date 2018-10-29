@@ -7,7 +7,7 @@ export PAGER="less -R"
 export LANG=en_GB.UTF-8
 export BC_ENV_ARGS="$HOME/.bcrc -l"
 export GCC_COLORS=1
-export FZF_DEFAULT_COMMAND="rg --smart-case --files --hidden --ignore-file=$HOME/.rgignore --cycle"
+export FZF_DEFAULT_COMMAND="rg --smart-case --files --hidden --ignore-file=$HOME/.rgignore"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Sometimes not set or fully qualified; simple name preferred.
