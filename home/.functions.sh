@@ -83,7 +83,7 @@ function _disable_flow_control {
     stty start undef
 }
 
-function _set_up_agent {
+function _setup_ssh_agent {
     # take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
     if [ ! "$SSH_CONNECTION" ] && which keychain &>/dev/null; then

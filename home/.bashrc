@@ -6,7 +6,7 @@ source ~/.env.sh
 source ~/.functions.sh
 source ~/.aliases
 _tmux_update_env
-_set_up_agent
+_setup_ssh_agent
 
 # note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 export HISTCONTROL=ignoredups:ignorespace:erasedups
