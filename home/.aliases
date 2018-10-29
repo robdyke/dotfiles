@@ -57,14 +57,15 @@ alias sudo="sudo "
 alias gpg=gpg2
 
 # wrappers
-alias vim=vim-wrapper
+# abs path so that sudo can use wrapper with a different $PATH
+alias vim=$HOME/.local/bin/vim-wrapper
 
 # TYPO FIXES
 alias sl=ls
 alias c=cd
 alias xs=cd
-alias cim=vim-wrapper
-alias bim=vim-wrapper
+alias cim=vim
+alias bim=vim
 alias nom=npm
 alias gi=git
 alias cd..='cd ..'
