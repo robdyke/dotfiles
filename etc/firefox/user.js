@@ -31,3 +31,7 @@ user_pref("devtools.theme", "dark");
 user_pref("findbar.highlightAll", true);
 
 user_pref("layout.spellcheckDefault", 1);
+
+
+// don't remember passwords
+user_pred("signon.rememberSignons", false);
