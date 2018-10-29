@@ -32,6 +32,8 @@ user_pref("findbar.highlightAll", true);
 
 user_pref("layout.spellcheckDefault", 1);
 
-
 // don't remember passwords
 user_pred("signon.rememberSignons", false);
+
+// enable U2F auth (see https://www.yubico.com/2017/11/how-to-navigate-fido-u2f-in-firefox-quantum/ -- things will change)
+user_pref("security.webauth.u2f");
