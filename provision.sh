@@ -6,6 +6,9 @@
 set -e
 set -x
 
+# make sure the upstream for local master is remote master
+git branch --set-upstream-to=origin/master master
+
 # platform detection. Desktop is always a superset of server.
 if [ $(uname) == 'Darwin' ]; then
     export MACOS=1
