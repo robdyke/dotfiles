@@ -2,13 +2,16 @@
 source ./install.sh
 
 
-# git+ssh for push access
-git remote rm origin
-git remote add origin git@github.com:naggie/dotfiles.git
+if git remote -v | grep -q https; then
+    # git+ssh for push access
+    git remote rm origin
+    git remote add origin git@github.com:naggie/dotfiles.git
 
-# make sure the upstream for local master is remote master after change of
-# origin
-git branch --set-upstream-to=origin/master master
+    # make sure the upstream for local master is remote master after change of
+    # origin
+    git fetch --all
+    git branch --set-upstream-to=origin/master master
+fi
 
 
 

@@ -6,9 +6,6 @@
 set -e
 set -x
 
-# make sure the upstream for local master is remote master
-git branch --set-upstream-to=origin/master master
-
 # platform detection. Desktop is always a superset of server.
 if [ $(uname) == 'Darwin' ]; then
     export MACOS=1
@@ -108,7 +105,10 @@ fi
 cd ~
 test ! -d ~/dotfiles && git clone https://github.com/naggie/dotfiles.git
 cd dotfiles
-git pull --ff-only https://github.com/naggie/dotfiles.git master || true
+git pull --ff-only origin master || true
+
+# make sure the upstream for local master is remote master
+git branch --set-upstream-to=origin/master master
 
 # FZF -- install binary only. install script is expecting repo in ~/.fzf
 test -d ~/.fzf/ && rm -rf ~/.fzf/
