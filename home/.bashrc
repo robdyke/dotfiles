@@ -45,6 +45,9 @@ function onprompt {
     _set_term_title
 	_bash_history_sync
     _tmux_update_env
+
+    # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
+    echo UPDATESTARTUPTTY | gpg-connect-agent
 }
 
 PROMPT_COMMAND=onprompt
