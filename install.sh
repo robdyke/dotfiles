@@ -33,8 +33,12 @@ cp -a etc ~
 cp -a bin/* ~/.local/bin/
 
 
-# pinentry program needs absolute path and can't expand ~, so do it here.
+# pinentry program and gpg agent socket needs absolute path and can't expand ~,
+# so do it here.
 echo pinentry-program ~/.local/bin/pinentry-sane >> ~/.gnupg/gpg-agent.conf
+echo extra-socket ~/.gnupg/S.gpg-agent.extra >> ~/.gnupg/gpg-agent.conf
+
+
 
 if [ $PLATFORM == 'Darwin' ]; then
     cp -r home/Library ~
