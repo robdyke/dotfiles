@@ -19,12 +19,14 @@ cat <<EOF >> ~/.gitconfig
 [user]
 	name = Callan Bryant
 	email = callan.bryant@gmail.com
+	signingkey = callan.bryant@gmail.com
 [github]
 	user = naggie
-
 ; go get -- use ssh for private repository support without typing in password
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[commit]
+	gpgsign = true
 EOF
 
 cat <<EOF > ~/.ssh/authorized_keys
