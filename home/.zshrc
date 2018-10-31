@@ -69,7 +69,7 @@ precmd() {
     _set_term_title
 
     # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
-    echo UPDATESTARTUPTTY | gpg-connect-agent
+    echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
 }
 
 preexec() {
