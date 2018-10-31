@@ -32,6 +32,10 @@ cp -r home/.??* ~ 2> /dev/null
 cp -a etc ~
 cp -a bin/* ~/.local/bin/
 
+
+# pinentry program needs absolute path and can't expand ~, so do it here.
+echo pinentry-program ~/.local/bin/pinentry-sane >> ~/.gnupg/gpg-agent.conf
+
 if [ $PLATFORM == 'Darwin' ]; then
     cp -r home/Library ~
     defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
