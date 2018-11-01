@@ -1,22 +1,39 @@
 #!/bin/bash
 
-# generates the simplest possible GPG key topology.
-# See https://security.stackexchange.com/questions/31594/what-is-a-good-general-purpose-gnupg-key-setup
-# for the many caveats.
+# Generates a keyset. Note that with RSA, different keys should be used to sign/authenticate/certify vs encrypt.
+# https://crypto.stackexchange.com/questions/12090/using-the-same-rsa-keypair-to-sign-and-encrypt
+# See also https://security.stackexchange.com/questions/31594/what-is-a-good-general-purpose-gnupg-key-setup
+# RE key length: see https://security.stackexchange.com/questions/65174/4096-bit-rsa-encryption-keys-vs-2048
 
-#export GNUPGHOME="$(mktemp -d)"
+# WARNING this is incomplete. Do not use.
+
+# Suggested usage
+# Move subkeys to 2 yubikeys and master key to safe
+
+
+# TODO Master key CS 30Y
+# TODO subkeys S,E,A 10Y
+
+export GNUPGHOME="$(mktemp -d)"
 cat <<EOF | gpg --batch --generate-key
     Key-Type: RSA
     Key-Length: 4096
+    Key-Usage: cert,sign
+    Expire-Date: 20300101T000000
     Name-Real: $(git config --get user.name)
     # Name-Comment: something
     Name-Email: $(git config --get user.email)
-    Expire-Date: 0
-    # Passphrase: abc
+
+    Subkey-Type: RSA
+    Subkey-Length: 2048
+    Subkey-Usage: encrypt
+
+
+    Passphrase: testonly
     %commit
 EOF
 
 gpg --list-keys
 gpg --export --armor > pubkey.asc
 
-#rm -rf $GNUPGHOME
+rm -rf $GNUPGHOME
