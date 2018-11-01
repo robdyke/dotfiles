@@ -40,6 +40,8 @@ echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --pass
 echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 auth 20300101T000000
 
 gpg --list-keys
-gpg --export --armor > pubkey.asc
+gpg --export --armor > gpg-pubkeys.pem
+gpg --export-ssh-key $EMAIL > ssh-pubkey.txt
+echo $FINGERPRINT > gpg-fingerprint.txt
 
 #rm -rf $GNUPGHOME
