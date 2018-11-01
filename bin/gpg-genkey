@@ -11,8 +11,8 @@
 # Move subkeys to 2 yubikeys and master key to safe
 
 
-# TODO Master key CS 30Y
-# TODO subkeys S,E,A 10Y
+NAME=$(git config --get user.name)
+EMAIL=$(git config --get user.email)
 
 export GNUPGHOME="$(mktemp -d)"
 cat <<EOF | gpg --batch --generate-key
@@ -20,18 +20,25 @@ cat <<EOF | gpg --batch --generate-key
     Key-Length: 4096
     Key-Usage: cert,sign
     Expire-Date: 20300101T000000
-    Name-Real: $(git config --get user.name)
+    Name-Real: $NAME
     # Name-Comment: something
-    Name-Email: $(git config --get user.email)
+    Name-Email: $EMAIL
 
+    # possible to generate one subkey only
     Subkey-Type: RSA
     Subkey-Length: 2048
     Subkey-Usage: encrypt
 
 
-    Passphrase: testonly
+    Passphrase: notsecret
     %commit
 EOF
+
+
+FINGERPRINT=$(gpg --list-key $EMAIL | grep -oE '[A-Z0-9]{40}')
+
+echo notsecret | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 sign 20300101T000000
+echo notsecret | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 auth 20300101T000000
 
 gpg --list-keys
 gpg --export --armor > pubkey.asc
