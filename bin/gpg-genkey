@@ -14,6 +14,10 @@
 NAME=$(git config --get user.name)
 EMAIL=$(git config --get user.email)
 
+read -s -p "Passphrase: " PASSPHRASE
+echo
+
+
 export GNUPGHOME="$(mktemp -d)"
 cat <<EOF | gpg --batch --generate-key
     Key-Type: RSA
@@ -30,15 +34,15 @@ cat <<EOF | gpg --batch --generate-key
     Subkey-Usage: encrypt
 
 
-    Passphrase: notsecret
+    Passphrase: $PASSPHRASE
     %commit
 EOF
 
 
 FINGERPRINT=$(gpg --list-key $EMAIL | grep -oE '[A-Z0-9]{40}')
 
-echo notsecret | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 sign 20300101T000000
-echo notsecret | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 auth 20300101T000000
+echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 sign 20300101T000000
+echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 auth 20300101T000000
 
 gpg --list-keys
 gpg --export --armor > pubkey.asc
