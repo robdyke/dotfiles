@@ -5,8 +5,6 @@
 # See also https://security.stackexchange.com/questions/31594/what-is-a-good-general-purpose-gnupg-key-setup
 # RE key length: see https://security.stackexchange.com/questions/65174/4096-bit-rsa-encryption-keys-vs-2048
 
-# WARNING this is incomplete. Do not use.
-
 # Suggested usage
 # Move subkeys to 2 yubikeys and master key to safe
 
@@ -14,26 +12,21 @@
 NAME=$(git config --get user.name)
 EMAIL=$(git config --get user.email)
 
+echo "Name: $NAME"
+echo "Email: $EMAIL"
 read -s -p "Passphrase: " PASSPHRASE
 echo
 
-
-export GNUPGHOME="$(mktemp -d)"
+# master key
+#export GNUPGHOME="$(mktemp -d)"
 cat <<EOF | gpg --batch --generate-key
     Key-Type: RSA
     Key-Length: 4096
     Key-Usage: cert,sign
-    Expire-Date: 20300101T000000
+    Expire-Date: 20320101T000000
     Name-Real: $NAME
     # Name-Comment: something
     Name-Email: $EMAIL
-
-    # possible to generate one subkey only
-    Subkey-Type: RSA
-    Subkey-Length: 2048
-    Subkey-Usage: encrypt
-
-
     Passphrase: $PASSPHRASE
     %commit
 EOF
@@ -41,10 +34,12 @@ EOF
 
 FINGERPRINT=$(gpg --list-key $EMAIL | grep -oE '[A-Z0-9]{40}')
 
+# subkeys
+echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 encrypt 20300101T000000
 echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 sign 20300101T000000
 echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 auth 20300101T000000
 
 gpg --list-keys
 gpg --export --armor > pubkey.asc
 
-rm -rf $GNUPGHOME
+#rm -rf $GNUPGHOME
