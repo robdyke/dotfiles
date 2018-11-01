@@ -3,10 +3,9 @@
 # Generates a keyset. Note that with RSA, different keys should be used to sign/authenticate/certify vs encrypt.
 # https://crypto.stackexchange.com/questions/12090/using-the-same-rsa-keypair-to-sign-and-encrypt
 # See also https://security.stackexchange.com/questions/31594/what-is-a-good-general-purpose-gnupg-key-setup
-# RE key length: see https://security.stackexchange.com/questions/65174/4096-bit-rsa-encryption-keys-vs-2048
 
 # Suggested usage
-# Move subkeys to 2 yubikeys and master key to safe
+# Move subkeys to 2 yubikeys and primary key to safe
 
 
 NAME=$(git config --get user.name)
@@ -18,7 +17,7 @@ read -s -p "Passphrase: " PASSPHRASE
 echo
 
 # master key
-#export GNUPGHOME="$(mktemp -d)"
+export GNUPGHOME="$(mktemp -d)"
 cat <<EOF | gpg --batch --generate-key
     Key-Type: RSA
     Key-Length: 4096
@@ -35,13 +34,14 @@ EOF
 FINGERPRINT=$(gpg --list-key $EMAIL | grep -oE '[A-Z0-9]{40}')
 
 # subkeys
-echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 encrypt 20300101T000000
-echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 sign 20300101T000000
-echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa2048 auth 20300101T000000
+echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa4096 encrypt 20300101T000000
+echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa4096 sign 20300101T000000
+echo "$PASSPHRASE" | gpg2 --pinentry-mode loopback --batch --no-tty --yes --passphrase-fd 0 --quick-add-key $FINGERPRINT rsa4096 auth 20300101T000000
 
 gpg --list-keys
 gpg --export --armor > gpg-pubkeys.pem
 gpg --export-ssh-key $EMAIL > ssh-pubkey.txt
 echo $FINGERPRINT > gpg-fingerprint.txt
+tar -C ~/.gnupg/ --exclude='S.*' -cf gnupghome.tar .
 
-#rm -rf $GNUPGHOME
+rm -rf $GNUPGHOME
