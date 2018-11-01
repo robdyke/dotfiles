@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# generates the simplest possible GPG key topology.
+# See https://security.stackexchange.com/questions/31594/what-is-a-good-general-purpose-gnupg-key-setup
+# for the many caveats.
+
+#export GNUPGHOME="$(mktemp -d)"
+cat <<EOF | gpg --batch --generate-key
+    Key-Type: RSA
+    Key-Length: 4096
+    Name-Real: $(git config --get user.name)
+    # Name-Comment: something
+    Name-Email: $(git config --get user.email)
+    Expire-Date: 0
+    # Passphrase: abc
+    %commit
+EOF
+
+gpg --list-keys
+gpg --export --armor > pubkey.asc
+
+#rm -rf $GNUPGHOME
