@@ -8,6 +8,11 @@
 # Move subkeys to 2 yubikeys and primary key to safe
 
 
+if [ "$(ls)" ]; then
+    echo "Must run in empty directory"
+    exit 1
+fi
+
 NAME=$(git config --get user.name)
 EMAIL=$(git config --get user.email)
 
@@ -17,7 +22,7 @@ read -s -p "Passphrase: " PASSPHRASE
 echo
 
 # master key
-export GNUPGHOME="$(mktemp -d)"
+export GNUPGHOME="$(pwd)/gnupghome"
 cat <<EOF | gpg --batch --generate-key
     Key-Type: RSA
     Key-Length: 4096
@@ -42,6 +47,4 @@ gpg --list-keys
 gpg --export --armor > gpg-pubkeys.pem
 gpg --export-ssh-key $EMAIL > ssh-pubkey.txt
 echo $FINGERPRINT > gpg-fingerprint.txt
-tar -C ~/.gnupg/ --exclude='S.*' -cf gnupghome.tar .
-
-rm -rf $GNUPGHOME
+tar -C $GNUPGHOME --exclude='S.*' -cf gnupghome.tar .
