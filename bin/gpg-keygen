@@ -23,6 +23,8 @@ echo
 
 # master key
 export GNUPGHOME="$(pwd)/gnupghome"
+mkdir $GNUPGHOME
+chmod 0700 $GNUPGHOME
 cat <<EOF | gpg --batch --generate-key
     Key-Type: RSA
     Key-Length: 4096
