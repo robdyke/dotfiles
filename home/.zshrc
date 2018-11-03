@@ -6,7 +6,7 @@ source ~/.env.sh
 source ~/.functions.sh
 source ~/.aliases
 _tmux_update_env
-_setup_ssh_agent
+_init_agents
 
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
