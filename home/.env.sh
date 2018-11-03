@@ -14,6 +14,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export HOSTNAME=$(hostname -s)
 export SYSTEM_COLOUR=$($HOME/.local/bin/system-colour $HOSTNAME)
 
+# gpg-agent needs to know which tty to use
+export GPG_TTY=$(tty)
+
 if [[ $USER == root ]]; then
     PROMPT_COLOUR=160 # red
 else

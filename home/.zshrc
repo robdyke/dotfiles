@@ -93,10 +93,6 @@ which dircolors &> /dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
 
-# fix gpg-agent ncurses passphrase prompt
-# https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
-export GPG_TTY=$(tty)
-
 source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
 

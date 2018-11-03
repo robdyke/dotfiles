@@ -89,8 +89,10 @@ function _init_agents {
 }
 
 function _update_agents {
-    # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
-    echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+    if [ ! $SSH_CONNECTION ]; then
+        # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
+        echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+    fi
 }
 
 # wrappers
