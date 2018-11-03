@@ -124,9 +124,18 @@ function ssh {
         printf "\033]0;%s\007" "$host"
     fi
 
-    command ssh -A "$@"
+    command ssh "$@"
 
     # _set_term_title will reset the title now.
+}
+
+# ssh with gpg and ssh agent forwarding enabled. Use only on trusted hosts.
+# Remote side requires dotfiles.
+function gssh {
+    # TODO: could usue ssh command to find out true remote path and delete it instead
+    # would require GNUPGHOME to be set for non-interactive sessions to work with ssh
+    socket=/tmp/S.${USER}.gpg-agent.new
+    ssh -A -R $socket:$(gpgconf --list-dirs agent-extra-socket) "$@"
 }
 
 # this is a simple wrapper for scp to prevent local copying when a colon is forgotten
