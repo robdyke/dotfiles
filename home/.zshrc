@@ -64,11 +64,8 @@ precmd() {
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
-
     _set_term_title
-
-    # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
-    echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+    _update_agents
 }
 
 preexec() {

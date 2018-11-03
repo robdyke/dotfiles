@@ -5,7 +5,6 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
-_tmux_update_env
 _init_agents
 
 # note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
@@ -41,13 +40,10 @@ function onprompt {
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
-
     _set_term_title
 	_bash_history_sync
     _tmux_update_env
-
-    # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
-    echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+    _update_agents
 }
 
 PROMPT_COMMAND=onprompt

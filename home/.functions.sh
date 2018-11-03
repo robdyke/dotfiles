@@ -1,3 +1,18 @@
+function _tmux_update_env {
+    # tmux must be running
+    [ $TMUX ] || return
+
+    # update display to location
+    eval $(tmux show-environment -s | grep 'DISPLAY=')
+
+    # must be remote host (else it clobbers keychain, which runs local only)
+    tmux show-environment | grep -q "SSH_CONNECTION=" || return
+
+    # when an SSH connection is re-established, so is the agent connection.
+    # Reload it automatically.
+    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
+}
+
 # make sure the function exists, even if it wasn't included
 # this is overridden later
 function __git_ps1 {
@@ -23,26 +38,6 @@ function tm {
 	# detach any other clients
 	# attach or make new if there isn't one
 	tmux attach -d || tmux
-}
-
-# cd then ls
-function cd {
-	builtin cd "$@" && ls --color=auto
-}
-
-function _tmux_update_env {
-    # tmux must be running
-    [ $TMUX ] || return
-
-    # update display to location
-    eval $(tmux show-environment -s | grep 'DISPLAY=')
-
-    # must be remote host (else it clobbers keychain, which runs local only)
-    tmux show-environment | grep -q "SSH_CONNECTION=" || return
-
-    # when an SSH connection is re-established, so is the agent connection.
-    # Reload it automatically.
-    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
 }
 
 function _auto_tmux_attach {
@@ -93,6 +88,12 @@ function _init_agents {
     fi
 }
 
+function _update_agents {
+    # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
+    echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+}
+
+# wrappers
 function ssh {
     # last arg is probably host
     for host; do true; done
@@ -120,3 +121,9 @@ function scp {
 
     command scp "$@"
 }
+
+# cd then ls
+function cd {
+	builtin cd "$@" && ls --color=auto
+}
+
