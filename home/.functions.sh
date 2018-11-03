@@ -13,6 +13,7 @@ function _tmux_update_env {
     eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
 }
 
+# Prompt functions
 # make sure the function exists, even if it wasn't included
 # this is overridden later
 function __git_ps1 {
@@ -89,7 +90,23 @@ function _init_agents {
 }
 
 function _update_agents {
-    if [ ! $SSH_CONNECTION ]; then
+    if [ $SSH_CONNECTION ]; then
+        # move temporary socket (forwarded by SSH) so that reaping the socket
+        # is not required by the sshd_config (StreamLocalBindUnlink)
+        # Separate GNUPGHOME location so that any local GPG agent is not
+        # clobbered
+        export GNUPGHOME=~/.gnupgremote
+        socket=/tmp/S.${USER}.gpg-agent.new
+        if [ -S $socket ];then
+            mv $socket $(gpgconf --list-dirs agent-socket)
+        fi
+        if [ ! -d $GNUPGHOME ]; then
+            mkdir $GNUPGHOME
+            chmod 0700 $GNUPGHOME
+        fi
+        gpgconf --kill gpg-agent  # no local agent should run with this config
+    else
+        export GNUPGHOME=~/.gnupg
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
         echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
     fi
