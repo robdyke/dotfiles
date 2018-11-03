@@ -5,7 +5,6 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
-_tmux_update_env
 _init_agents
 
 SAVEHIST=$HISTSIZE
