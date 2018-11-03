@@ -5,7 +5,11 @@
 # See also https://security.stackexchange.com/questions/31594/what-is-a-good-general-purpose-gnupg-key-setup
 
 # Suggested usage
-# Move subkeys to 2 yubikeys and primary key to safe
+# Move subkeys to 2 yubikeys (from a backup gnupghome) and primary key to safe.
+# See install-naggie.sh for how to set up a new PC to work with the Yubikeys --
+# note that running
+#    gpg --card-status
+# will bind one (and only one) yubikey to youe installation.
 
 
 if [ "$(ls)" ]; then
@@ -51,4 +55,5 @@ tar -C $GNUPGHOME --exclude='S.*' -cf gnupghome.tar .
 gpg --export --armor > gpg-pubkeys.asc
 gpg --export-ssh-key $EMAIL > ssh-pubkey.txt
 echo $FINGERPRINT > gpg-fingerprint.txt
+echo $FINGERPRINT | tail -c 17 > gpg-keyid.txt # includes /n -- (long) key id is last 16 chara
 echo "$PASSPHRASE" | gpg --no-tty --yes --passphrase-fd 0 --export-secret-key --armor --batch --pinentry-mode loopback $EMAIL > gpg-privkeys.asc
