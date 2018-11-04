@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# GnuPG 2.2+ required for new non-interactive commands
+
 # Generates a keyset. Note that with RSA, different keys should be used to sign/authenticate/certify vs encrypt.
 # https://crypto.stackexchange.com/questions/12090/using-the-same-rsa-keypair-to-sign-and-encrypt
 # See also https://security.stackexchange.com/questions/31594/what-is-a-good-general-purpose-gnupg-key-setup

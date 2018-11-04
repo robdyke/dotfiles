@@ -127,6 +127,11 @@ function gssh {
     echo "Perparing host for forwarded GPG agent..." >&2
 
     # prepare remote for agent forwarding, get socket
+    # Remove the socket in this pre-command as an alternative to requiring
+    # StreamLocalBindUnlink to be set on the remote SSH server.
+    # Find the path of the agent socket remotely to avoid manual configuration
+    # client side. The location of the socket varies per version of GPG,
+    # username, and host OS.
     socket=$(cat <<'EOF' | command ssh "$@" bash
         set -e
         socket=$(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
