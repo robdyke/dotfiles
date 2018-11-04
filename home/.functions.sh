@@ -90,7 +90,7 @@ function _init_agents {
 }
 
 function _update_agents {
-    if [ $SSH_CONNECTION ]; then
+    if [ "$SSH_CONNECTION" ]; then
         # move temporary socket (forwarded by SSH) so that reaping the socket
         # is not required by the sshd_config (StreamLocalBindUnlink)
         # Separate GNUPGHOME location so that any local GPG agent is not
