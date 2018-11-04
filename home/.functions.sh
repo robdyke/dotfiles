@@ -91,16 +91,7 @@ function _init_agents {
 
 function _update_agents {
     # guaranteed to be current thanks to _tmux_update_env
-    if [ "$SSH_CONNECTION" ]; then
-        # remote, so no local gpg agent wanted (as I always use a yubikey)
-        gpgconf --kill gpg-agent  # no local agent should run with this config
-        # move temporary socket (forwarded by SSH) so that reaping the socket
-        # is not required by the sshd_config (StreamLocalBindUnlink)
-        socket=/tmp/S.${USER}.gpg-agent.new
-        if [ -S $socket ];then
-            mv $socket $(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
-        fi
-    else
+    if [ ! "$SSH_CONNECTION" ]; then
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
         # incidentally, this will start an agent if none is found
         echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
@@ -124,8 +115,7 @@ function ssh {
     # _set_term_title will reset the title now.
 }
 
-# ssh with gpg and ssh agent forwarding enabled. Use only on trusted hosts.
-# Remote side requires dotfiles.
+# ssh with gpg and ssh agent forwarding Use only on trusted hosts.
 function gssh {
     for host; do true; done
     if [[ $host == *@* ]]; then
@@ -134,9 +124,23 @@ function gssh {
         username=$USER
     fi
 
-    # TODO: could use ssh command to find out true remote path and delete it
-    # instead after killing gpg-agent
-    socket=/tmp/S.${username}.gpg-agent.new
+    echo "Perparing host for forwarded GPG agent..." >&2
+
+    # prepare remote for agent forwarding, get socket
+    socket=$(cat <<'EOF' | command ssh "$@" bash
+        set -e
+        socket=$(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
+        gpgconf --kill gpg-agent
+        test -S $socket && rm $socket
+        echo $socket
+EOF
+)
+    if [ ! $? -eq 0 ]; then
+        echo "Problem with remote GPG. use ssh -A $@ for ssh with agent forwarding only." >&2
+        return
+    fi
+
+    echo "Connecting..." >&2
     ssh -A -R $socket:$(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) "$@"
 }
 
