@@ -115,3 +115,7 @@ test $DISPLAY && which dconf &> /dev/null && \
 if PATH="$PATH:/Applications/Firefox.app/Contents/MacOS/" which firefox &> /dev/null; then
     etc/firefox/customise-profile
 fi
+
+# stop and stub systemd user gpg-agent
+systemctl --user stop gpg-agent &>/dev/null || true
+systemctl --user daemon-reload &>/dev/null || true
