@@ -90,24 +90,19 @@ function _init_agents {
 }
 
 function _update_agents {
+    # guaranteed to be current thanks to _tmux_update_env
     if [ "$SSH_CONNECTION" ]; then
+        # remote, so no local gpg agent wanted (as I always use a yubikey)
+        gpgconf --kill gpg-agent  # no local agent should run with this config
         # move temporary socket (forwarded by SSH) so that reaping the socket
         # is not required by the sshd_config (StreamLocalBindUnlink)
-        # Separate GNUPGHOME location so that any local GPG agent is not
-        # clobbered
-        export GNUPGHOME=~/.gnupgremote
         socket=/tmp/S.${USER}.gpg-agent.new
         if [ -S $socket ];then
             mv $socket $(gpgconf --list-dirs agent-socket)
         fi
-        if [ ! -d $GNUPGHOME ]; then
-            mkdir $GNUPGHOME
-            chmod 0700 $GNUPGHOME
-        fi
-        gpgconf --kill gpg-agent  # no local agent should run with this config
     else
-        export GNUPGHOME=~/.gnupg
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
+        # incidentally, this will start an agent if none is found
         echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
     fi
 }
