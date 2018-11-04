@@ -1,3 +1,19 @@
+function _tmux_update_env {
+    # tmux must be running
+    [ $TMUX ] || return
+
+    # update display to location
+    eval $(tmux show-environment -s | grep 'DISPLAY=')
+
+    # must be remote host (else it clobbers keychain, which runs local only)
+    tmux show-environment | grep -q "SSH_CONNECTION=" || return
+
+    # when an SSH connection is re-established, so is the agent connection.
+    # Reload it automatically.
+    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
+}
+
+# Prompt functions
 # make sure the function exists, even if it wasn't included
 # this is overridden later
 function __git_ps1 {
@@ -23,26 +39,6 @@ function tm {
 	# detach any other clients
 	# attach or make new if there isn't one
 	tmux attach -d || tmux
-}
-
-# cd then ls
-function cd {
-	builtin cd "$@" && ls --color=auto
-}
-
-function _tmux_update_env {
-    # tmux must be running
-    [ $TMUX ] || return
-
-    # update display to location
-    eval $(tmux show-environment -s | grep 'DISPLAY=')
-
-    # must be remote host (else it clobbers keychain, which runs local only)
-    tmux show-environment | grep -q "SSH_CONNECTION=" || return
-
-    # when an SSH connection is re-established, so is the agent connection.
-    # Reload it automatically.
-    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
 }
 
 function _auto_tmux_attach {
@@ -83,14 +79,26 @@ function _disable_flow_control {
     stty start undef
 }
 
-function _setup_ssh_agent {
+function _init_agents {
     # take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
     if [ ! "$SSH_CONNECTION" ] && which keychain &>/dev/null; then
-        eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
+        #eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
+		export SSH_AUTH_SOCK=$(gpgconf --list-dirs | grep agent-ssh-socket | cut -f 2 -d :)
+        gpg-connect-agent /bye
     fi
 }
 
+function _update_agents {
+    # guaranteed to be current thanks to _tmux_update_env
+    if [ ! "$SSH_CONNECTION" ]; then
+        # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
+        # incidentally, this will start an agent if none is found
+        echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+    fi
+}
+
+# wrappers
 function ssh {
     # last arg is probably host
     for host; do true; done
@@ -102,9 +110,38 @@ function ssh {
         printf "\033]0;%s\007" "$host"
     fi
 
-    command ssh -A "$@"
+    command ssh "$@"
 
     # _set_term_title will reset the title now.
+}
+
+# ssh with gpg and ssh agent forwarding Use only on trusted hosts.
+function gssh {
+    for host; do true; done
+    if [[ $host == *@* ]]; then
+        username=$(echo $host | cut -d @ -f 1)
+    else
+        username=$USER
+    fi
+
+    echo "Perparing host for forwarded GPG agent..." >&2
+
+    # prepare remote for agent forwarding, get socket
+    socket=$(cat <<'EOF' | command ssh "$@" bash
+        set -e
+        socket=$(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
+        gpgconf --kill gpg-agent
+        test -S $socket && rm $socket
+        echo $socket
+EOF
+)
+    if [ ! $? -eq 0 ]; then
+        echo "Problem with remote GPG. use ssh -A $@ for ssh with agent forwarding only." >&2
+        return
+    fi
+
+    echo "Connecting..." >&2
+    ssh -A -R $socket:$(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) "$@"
 }
 
 # this is a simple wrapper for scp to prevent local copying when a colon is forgotten
@@ -118,3 +155,9 @@ function scp {
 
     command scp "$@"
 }
+
+# cd then ls
+function cd {
+	builtin cd "$@" && ls --color=auto
+}
+

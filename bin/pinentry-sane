@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if which /usr/local/bin/pinentry-mac &> /dev/null; then
+    exec /usr/local/bin/pinentry-mac
+elif which /usr/bin/pinentry-x11 &> /dev/null; then
+    exec /usr/bin/pinentry-x11
+else
+    exit 2
+fi

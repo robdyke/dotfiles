@@ -32,6 +32,14 @@ cp -r home/.??* ~ 2> /dev/null
 cp -a etc ~
 cp -a bin/* ~/.local/bin/
 
+
+# pinentry program and gpg agent socket needs absolute path and can't expand ~,
+# so do it here.
+echo pinentry-program ~/.local/bin/pinentry-sane >> ~/.gnupg/gpg-agent.conf
+echo extra-socket $(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) >> ~/.gnupg/gpg-agent.conf
+
+
+
 if [ $PLATFORM == 'Darwin' ]; then
     cp -r home/Library ~
     defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -106,4 +114,16 @@ test $DISPLAY && which dconf &> /dev/null && \
 
 if PATH="$PATH:/Applications/Firefox.app/Contents/MacOS/" which firefox &> /dev/null; then
     etc/firefox/customise-profile
+fi
+
+# stop and stub systemd user gpg-agent
+systemctl --user stop gpg-agent.service &>/dev/null || true
+systemctl --user stop gpg-agent.socket &>/dev/null || true
+systemctl --user daemon-reload &>/dev/null || true
+
+# if GPG agent is running but doesn't yet know about the extra socket, restart
+# it. This can happen with system-managed gpg-agents. This should happen on local machine only.
+if [ ! -S $(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) ] && [ ! "$SSH_CONNECTION" ]; then
+    gpgconf --kill gpg-agent
+    gpg-connect-agent /bye
 fi
