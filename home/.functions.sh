@@ -133,7 +133,7 @@ function ssh {
 # Remote side requires dotfiles.
 function gssh {
     for host; do true; done
-    if [[ $host == *@* ]];
+    if [[ $host == *@* ]]; then
         username=$(echo $host | cut -d @ -f 1)
     else
         username=$USER
