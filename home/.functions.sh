@@ -132,9 +132,16 @@ function ssh {
 # ssh with gpg and ssh agent forwarding enabled. Use only on trusted hosts.
 # Remote side requires dotfiles.
 function gssh {
-    # TODO: could usue ssh command to find out true remote path and delete it instead
-    # would require GNUPGHOME to be set for non-interactive sessions to work with ssh
-    socket=/tmp/S.${USER}.gpg-agent.new
+    for host; do true; done
+    if [[ $host == *@* ]];
+        username=$(echo $host | cut -d @ -f 1)
+    else
+        username=$USER
+    fi
+
+    # TODO: could use ssh command to find out true remote path and delete it
+    # instead after killing gpg-agent
+    socket=/tmp/S.${username}.gpg-agent.new
     ssh -A -R $socket:$(gpgconf --list-dirs agent-extra-socket) "$@"
 }
 
