@@ -84,7 +84,7 @@ function _init_agents {
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
     if [ ! "$SSH_CONNECTION" ] && which keychain &>/dev/null; then
         #eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
-		export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+		export SSH_AUTH_SOCK=$(gpgconf --list-dirs | grep agent-ssh-socket | cut -f 2 -d :)
         gpg-connect-agent /bye
     fi
 }
@@ -98,7 +98,7 @@ function _update_agents {
         # is not required by the sshd_config (StreamLocalBindUnlink)
         socket=/tmp/S.${USER}.gpg-agent.new
         if [ -S $socket ];then
-            mv $socket $(gpgconf --list-dirs agent-socket)
+            mv $socket $(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
         fi
     else
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
@@ -137,7 +137,7 @@ function gssh {
     # TODO: could use ssh command to find out true remote path and delete it
     # instead after killing gpg-agent
     socket=/tmp/S.${username}.gpg-agent.new
-    ssh -A -R $socket:$(gpgconf --list-dirs agent-extra-socket) "$@"
+    ssh -A -R $socket:$(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) "$@"
 }
 
 # this is a simple wrapper for scp to prevent local copying when a colon is forgotten
