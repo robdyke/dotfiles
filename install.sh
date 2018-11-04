@@ -117,5 +117,6 @@ if PATH="$PATH:/Applications/Firefox.app/Contents/MacOS/" which firefox &> /dev/
 fi
 
 # stop and stub systemd user gpg-agent
-systemctl --user stop gpg-agent &>/dev/null || true
+systemctl --user stop gpg-agent.service &>/dev/null || true
+systemctl --user stop gpg-agent.socket &>/dev/null || true
 systemctl --user daemon-reload &>/dev/null || true
