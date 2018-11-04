@@ -120,3 +120,10 @@ fi
 systemctl --user stop gpg-agent.service &>/dev/null || true
 systemctl --user stop gpg-agent.socket &>/dev/null || true
 systemctl --user daemon-reload &>/dev/null || true
+
+# if GPG agent is running but doesn't yet know about the extra socket, restart
+# it. This can happen with system-managed gpg-agents. This should happen on local machine only.
+if [ ! -S $(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) ] && [ ! "$SSH_CONNECTION" ]; then
+    gpgconf --kill gpg-agent
+    gpg-connect-agent /bye
+fi
