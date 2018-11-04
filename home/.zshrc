@@ -75,8 +75,8 @@ preexec() {
 #
 # zsh uses zle, not readine so .inputrc is not used. Match bindings here:
 
-# Launch FZF vim plugin outside of vim (with a tty)
-bindkey -s '\C-p' "\C-k \C-u fzf --cycle --multi | tr '\\\n' '\\\0' | xargs -0 sh -c '\$0 \"\$@\" </dev/tty' $EDITOR\n"
+# Launch FZF -> vim
+bindkey -s '\C-p' "\C-k \C-u vimfzf\n"
 
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"
