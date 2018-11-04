@@ -39,7 +39,7 @@ cat <<EOF >> ~/.gnupg/gpg.conf
 trusted-key 9D37503A7DA6F9B6
 EOF
 
-cat <<EOF | gpg2 --import
+cat <<EOF | gpg2 --quiet --import
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQINBFvcuO0BEAC3PykhgUWRF7Matj1SKMDHr/hW3TH3zRWIT3t5GZE6jdmh+ghM
