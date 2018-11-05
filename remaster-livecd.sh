@@ -149,10 +149,6 @@ INSIDE apt-get -y --force-yes install git
 # git...
 rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/skel/dotfiles/
 
-# git submodule references
-INSIDE git -C /etc/skel/dotfiles submodule foreach rm .git
-INSIDE git -C /etc/skel/dotfiles submodule update --init
-
 INSIDE /etc/skel/dotfiles/provision.sh
 INSIDE /etc/skel/dotfiles/install-naggie.sh
 
