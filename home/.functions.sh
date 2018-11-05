@@ -117,13 +117,6 @@ function ssh {
 
 # ssh with gpg and ssh agent forwarding Use only on trusted hosts.
 function gssh {
-    for host; do true; done
-    if [[ $host == *@* ]]; then
-        username=$(echo $host | cut -d @ -f 1)
-    else
-        username=$USER
-    fi
-
     echo "Perparing host for forwarded GPG agent..." >&2
 
     # prepare remote for agent forwarding, get socket
