@@ -132,7 +132,7 @@ function gssh {
     # Find the path of the agent socket remotely to avoid manual configuration
     # client side. The location of the socket varies per version of GPG,
     # username, and host OS.
-    socket=$(cat <<'EOF' | command ssh -T "$@" bash
+    remote_socket=$(cat <<'EOF' | command ssh -T "$@" bash
         set -e
         socket=$(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
         gpgconf --kill gpg-agent
@@ -145,8 +145,21 @@ EOF
         return
     fi
 
+    if [ "$SSH_CONNECTION" ]; then
+        # agent on this host is forwarded, allow chaining
+        local_socket=$(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
+    else
+        # agent on this host is running locally, use special remote socket
+        local_socket=$(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :)
+    fi
+
+    if [ ! -S $local_socket ]; then
+        echo "Could not find suitable local GPG agent socket" 2>&1
+        return
+    fi
+
     echo "Connecting..." >&2
-    ssh -A -R $socket:$(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) "$@"
+    ssh -A -R $remote_socket:$local_socket "$@"
 }
 
 # this is a simple wrapper for scp to prevent local copying when a colon is forgotten
