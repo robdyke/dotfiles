@@ -3,6 +3,8 @@
 
 # CAVEAT: nvim not installed on raspbian (apt version too old)
 
+ORIGIN=https://github.com/naggie/dotfiles.git
+
 set -e
 set -x
 
@@ -104,9 +106,9 @@ fi
 
 # clone main repository to home
 cd ~
-test ! -d ~/dotfiles && git clone https://github.com/naggie/dotfiles.git
+test ! -d ~/dotfiles && git clone $ORIGIN
 cd dotfiles
-git pull --ff-only origin master || true
+git pull --ff-only $ORIGIN master || true
 
 # make sure the upstream for local master is remote master
 git branch --set-upstream-to=origin/master master
