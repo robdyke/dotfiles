@@ -154,7 +154,7 @@ INSIDE git -C /etc/skel/dotfiles submodule foreach rm .git
 INSIDE git -C /etc/skel/dotfiles submodule update --init
 
 INSIDE /etc/skel/dotfiles/provision.sh
-#INSIDE /etc/skel/dotfiles/install-naggie.sh
+INSIDE /etc/skel/dotfiles/install-naggie.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
 INSIDE apt-get install -y --force-yes dkms

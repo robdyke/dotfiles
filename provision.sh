@@ -91,7 +91,7 @@ if [ $UBUNTU ] || [ $RASPBIAN ]; then
         BACKSPACE="guess"
 EOF
     # apply temporarily, as above requires restart (I think)
-    test $DISPLAY && setxkbmap -option "caps:escape" gb
+    test $DISPLAY && setxkbmap -option "caps:escape" gb || true
 fi
 
 if [ $UBUNTU_DESKTOP ]; then

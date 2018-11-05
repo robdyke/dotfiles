@@ -3,7 +3,7 @@
 #xmodmap .Xmodmap
 #sxhkd &
 #xrdb -merge ~/.Xresources
-#setxkbmap gb
+#setxkbmap -option "caps:escape" gb
 #xsetroot -cursor_name left_ptr
 #feh --bg-fill ~/background.jpg &
 #xterm &
