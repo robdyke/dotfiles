@@ -150,7 +150,7 @@ INSIDE apt-get -y --force-yes install git
 rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/skel/dotfiles/
 
 INSIDE /etc/skel/dotfiles/provision.sh
-INSIDE /etc/skel/dotfiles/install-naggie.sh
+#INSIDE /etc/skel/dotfiles/install-naggie.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
 INSIDE apt-get install -y --force-yes dkms
