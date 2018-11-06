@@ -82,7 +82,7 @@ function _disable_flow_control {
 function _init_agents {
     # take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
-    if [ ! "$SSH_CONNECTION" ] && which keychain &>/dev/null; then
+    if [ ! "$SSH_CONNECTION" ] && which gpg-connect-agent &>/dev/null; then
         #eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
 		export SSH_AUTH_SOCK=$(gpgconf --list-dirs | grep agent-ssh-socket | cut -f 2 -d :)
         gpg-connect-agent /bye
@@ -91,7 +91,7 @@ function _init_agents {
 
 function _update_agents {
     # guaranteed to be current thanks to _tmux_update_env
-    if [ ! "$SSH_CONNECTION" ]; then
+    if [ ! "$SSH_CONNECTION" ] && which gpg-connect-agent &>/dev/null; then
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
         # incidentally, this will start an agent if none is found
         echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
