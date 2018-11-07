@@ -289,3 +289,8 @@ let g:fzf_action = {
       \ }
 
 nnoremap <c-p> :FZF<cr>
+
+" disable background color erase (problem with kitty + vim)
+" In theory this is fixed with the correct terminfo files but in practice it
+" keeps causing lots of missing background color
+set t_ut=
