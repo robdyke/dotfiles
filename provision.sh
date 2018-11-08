@@ -45,7 +45,7 @@ if [ $MACOS_DESKTOP ]; then
     # flux is no longer required -- night shift!
 
     # Upgrade or install (logic necessary)
-    packages=(tmux vim git tig httpie ncdu tree bash zsh openssh jq wget task htop gnupg2 bash-completion keychain iproute2mac tmpreaper \
+    packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget task htop gnupg2 bash-completion keychain iproute2mac tmpreaper \
         coreutils sox ffmpeg httrack python ripgrep python go)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
@@ -75,7 +75,7 @@ fi
 
 if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo -E apt-get -y update
-    sudo -E apt-get -y install tmux vim git tig zsh ssh figlet httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
+    sudo -E apt-get -y install tmux vim git tig zsh ssh pass figlet httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
         jq sox ffmpeg httrack python python3 golang libffi-dev python-pip python3-pip python-dev python3-dev libssl-dev dconf-cli scdaemon \
         pcscd
 
