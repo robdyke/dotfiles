@@ -61,7 +61,9 @@
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
 
+
 # Custom bindings
+
 | Binding        | Context      | Description                                                                                                                                    |
 | -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CTRL+p`       | bash/zsh/vim | Search current directory with FZF and launch editor with results. Tab to select multiple.                                                      |
