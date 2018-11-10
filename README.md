@@ -5,7 +5,7 @@
 | Text editor            | [vim][16] / [neovim][1] | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                   |
 | Password store         | [pass][2]               | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15].                  |
 | Code searcher          | [ripgrep][4] + [fzf][3] | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                            |
-| Terminal multiplexer   | [tmux][5]               |                                                                                            |
+| Terminal multiplexer   | [tmux][5]               | Bindings adjusted to match vim                                                             |
 | Version control        | [git][15]               | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
 | Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
 | SSH Agent              | [GnuPG2][14]            | Used with a Yubikey                                                                        |
@@ -41,7 +41,6 @@ See `home/.aliases` for and `bin/` for more handy shortcuts/wrappers.
 
 ## Vim
 * `CTRL+p` search current directory with FZF and launch editor with results.
-  Tab to select multiple. Vim will go to the line with the first match.
 
 ## Tmux
 
@@ -76,15 +75,13 @@ Tmux has been configured to follow vim bindings where possible. Check `home/.tmu
 * `tig` : Git history visualiser
 * `sox`/`ffmpeg`/`gstreamer` Tools to convert multimedia
 * `httrack` : a website crawler better than wget (i.e. it works)
-* `kitty` : GPU accelerated terminal (see also: `alacritty`) Recommended font: https://github.com/adobe-fonts/source-code-pro Tip: Minimise keyboard repeat delay and maximise keyboard repeat rate for a faster experience. Latency is everything.  NOTE Alacrity/kitty.  
-
-
+* `kitty` : GPU accelerated terminal (see also: `alacritty`) Recommended font:
+  https://github.com/adobe-fonts/source-code-pro Tip: Minimise keyboard repeat
+  delay and maximise keyboard repeat rate for a faster experience. Latency is
+  everything.  NOTE Alacrity/kitty.
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
 
-[2]: http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
-[4]: http://superuser.com/questions/413351/weird-insertion-from-vim-on-mouse-click
-[5]: https://github.com/unphased/putty-X
 
 # Supported OSes
 
@@ -116,8 +113,6 @@ Ubuntu 17.04 does not have curl by default.
 ```bash
 wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
 ```
-
-
 
 # Task management
 
