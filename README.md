@@ -10,7 +10,6 @@
 | Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
 | SSH Agent              | [GnuPG2][14]            | Used with a Yubikey                                                                        |
 | Task management        | [Taskwarrior][10]       |                                                                                            |
-|                        |                         |                                                                                            |
 
 [1]: https://neovim.io/
 [2]: http://passwordstore.org/
@@ -27,25 +26,6 @@
 [15]: https://git-scm.com/
 [16]: https://www.vim.org/
 
-# Custom bindings
-## Shell
-| Binding        | Description                                                                                                                                    |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CTRL+p`       | Search current directory with FZF and launch editor with results. Tab to select multiple.                                                      |
-| `r <string>`   | Search current directory with ripgrep for files containing `<string>`, filter with FZF and launch editor with results. Tab to select multiple. |
-| `CTRL+r`       | History search using fzf.                                                                                                                      |
-| `tm`           | Launch or connect tmux single session. This is automatic if there is already an unconnected session.                                           |
-| `CTRL+s`       | Prepend `sudo` to the prompt and move the cursor back to the end of the prompt.                                                                |
-
-See `home/.aliases` for and `bin/` for more handy shortcuts/wrappers.
-
-## Vim
-* `CTRL+p` search current directory with FZF and launch editor with results.
-
-## Tmux
-
-Tmux has been configured to follow vim bindings where possible. Check `home/.tmux.conf` for a walk-through.
-
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
   Latency for more information.
@@ -59,7 +39,6 @@ Tmux has been configured to follow vim bindings where possible. Check `home/.tmu
   history file about 5x, which makes searching the history using FZF quicker.
   History is only cleaned up on shell exit, so you won't lose your immediate
   history which allows for command correction.
-
 
 # Other software
 * `tinc` : A reliable mesh VPN
@@ -82,6 +61,17 @@ Tmux has been configured to follow vim bindings where possible. Check `home/.tmu
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
 
+# Custom bindings
+| Binding        | Context      | Description                                                                                                                                    |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CTRL+p`       | bash/zsh/vim | Search current directory with FZF and launch editor with results. Tab to select multiple.                                                      |
+| `r <string>`   | bash/zsh     | Search current directory with ripgrep for files containing `<string>`, filter with FZF and launch editor with results. Tab to select multiple. |
+| `CTRL+r`       | bash/zsh     | History search using fzf.                                                                                                                      |
+| `tm`           | bash/zsh     | Launch or connect tmux single session. This is automatic if there is already an unconnected session.                                           |
+| `CTRL+s`       | bash/zsh     | Prepend `sudo` to the prompt and move the cursor back to the end of the prompt.                                                                |
+
+See `home/.aliases`, `bin/`, `home/.functions.sh` and `home/.tmux.conf` for
+more handy shortcuts/wrappers/bindings.
 
 # Supported OSes
 
@@ -155,7 +145,7 @@ other things that _may_ help reduce latency:
 * Use a SSD (preferably NVMe m.2 PCI-E based)
 * Use a tiling window manager (no 3D nonsense or time spent adjusting windows)
 * Adjust keyboard repeat rate to the lowest setting
-* Mitigate [Bufferbloat][6]
+* Mitigate [Bufferbloat][17]
 
 ## Things that may help
 * Use a monitor with low latency and high refresh rate. Again, gaming monitors
@@ -165,7 +155,7 @@ other things that _may_ help reduce latency:
   switches may also help.
 
 
-[6]: https://www.bufferbloat.net/projects/bloat/wiki/What_can_I_do_about_Bufferbloat/
+[17]: https://www.bufferbloat.net/projects/bloat/wiki/What_can_I_do_about_Bufferbloat/
 
 
 # Tips
