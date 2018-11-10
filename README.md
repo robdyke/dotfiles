@@ -12,6 +12,13 @@
 | Task management        | [Taskwarrior][10]       |                                                                                            |
 |                        |                         |                                                                                            |
 
+[1]: https://neovim.io/
+[2]: http://passwordstore.org/
+[11]: https://github.com/sheerun/vim-polyglot
+[12]: https://github.com/morhetz/gruvbox
+[13]: https://www.yubico.com/product/yubikey-5-nfc/
+[16]: https://www.vim.org/
+
 # Custom bindings
 ## Shell
 | Binding        | Description                                                                                                                                    |
