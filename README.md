@@ -1,10 +1,26 @@
-# Custom bindings
+# Tools
 
+| Tool                   | Choice                  | Comments                                                                                   |
+| ---------------------- | ----------------------- | ------------------------------------------------------------------------------------------ |
+| Text editor            | [vim][16] / [neovim][1] | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                   |
+| Password store         | [pass][2]               | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15].                  |
+| Code searcher          | [ripgrep][4] + [fzf][3] | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                            |
+| Terminal multiplexer   | [tmux][5]               |                                                                                            |
+| Version control        | [git][6]                | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
+| Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
+| SSH Agent              | [GnuPG2][9]             | Used with a Yubikey                                                                        |
+| Task management        | [Taskwarrior][10]       |                                                                                            |
+|                        |                         |                                                                                            |
+
+# Custom bindings
 ## Shell
-* `CTRL+p`: search current directory with FZF and launch editor with results. Tab to select multiple.
-* `r <string>`: search current directory with ripgrep for files containing `<string>`, filter with FZF and launch editor with results. Tab to select multiple.
-* `CTRL+r` history search using fzf
-* `tm`: Launch or connect tmux single session. This is automatic if there is already an unconnected session.
+| Binding        | Description                                                                                                                                    |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CTRL+p`       | Search current directory with FZF and launch editor with results. Tab to select multiple.                                                      |
+| `r <string>`   | Search current directory with ripgrep for files containing `<string>`, filter with FZF and launch editor with results. Tab to select multiple. |
+| `CTRL+r`       | History search using fzf.                                                                                                                      |
+| `tm`           | Launch or connect tmux single session. This is automatic if there is already an unconnected session.                                           |
+| `CTRL+s`       | Prepend `sudo` to the prompt and move the cursor back to the end of the prompt.                                                                |
 
 See `home/.aliases` for and `bin/` for more handy shortcuts/wrappers.
 
@@ -30,42 +46,23 @@ Tmux has been configured to follow vim bindings where possible. Check `home/.tmu
   History is only cleaned up on shell exit, so you won't lose your immediate
   history which allows for command correction.
 
-# Software
 
-General:
-
-* `vim`/`neovim` : text editor (theme: gruvbox)
-* `bash/zsh` : Shells, used interchangibly depending on platform.
-generates completions from man pages! (but CTRL+R reverse-i-search isn't there
-so I don't use it)
-* `tmux` : Terminal multiplexer
-* `git` : version control
-* `ripgrep` : find/grep alternative for refactoring and source code exploration
-* `fzf` : fuzzy list filtering used with ripgrep and vim
-* `ssh` : secure remote shell (obvious I know)
-* `gnupg2`: OpenPGP cryptographic suite
+# Other software
+* `tinc` : A reliable mesh VPN
+* `ncdu` + `tmpreaper` : tools for clearing up disk space
 * `ipython` : interactive python shell
 * `ansible` : idempotent, agentless configuration management
 * `httpie` : curl alternative with better UX
 * `jq` : Command line JSON processor (good with httpie)
-* `ncdu` + `tmpreaper` : tools for clearing up disk space
 * `brew` : homebrew package manager for OS X
 * `brew cask` : cask bundle manager for OS X
 * `restic` : backup software
-* `tinc` : A reliable mesh VPN
-* `taskwarrior` : todo application with contexts
 * `draw.io` : Diagram software
 * `tig` : Git history visualiser
 * `sox`/`ffmpeg`/`gstreamer` Tools to convert multimedia
 * `httrack` : a website crawler better than wget (i.e. it works)
-* `gruvbox` : A calm colorscheme with good enough contrast. I moved from solarised.
 * `kitty` : GPU accelerated terminal (see also: `alacritty`) Recommended font: https://github.com/adobe-fonts/source-code-pro Tip: Minimise keyboard repeat delay and maximise keyboard repeat rate for a faster experience. Latency is everything.  NOTE Alacrity/kitty.  
 
-* `CTRL+s` will prepend `sudo` to the prompt and move the cursor to the end of the prompt
-* `tryforever <cmd...>` will run a command in a loop until it fails
-* `kill <tab>` will use fzf to find a process to kill
-* `cd **<tab>` will use fzf to find a directory to change to
-* `ssh **<tab>` will use fzf to find a host to ssh to
 
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
