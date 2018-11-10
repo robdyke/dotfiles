@@ -6,17 +6,25 @@
 | Password store         | [pass][2]               | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15].                  |
 | Code searcher          | [ripgrep][4] + [fzf][3] | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                            |
 | Terminal multiplexer   | [tmux][5]               |                                                                                            |
-| Version control        | [git][6]                | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
+| Version control        | [git][15]               | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
 | Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
-| SSH Agent              | [GnuPG2][9]             | Used with a Yubikey                                                                        |
+| SSH Agent              | [GnuPG2][14]            | Used with a Yubikey                                                                        |
 | Task management        | [Taskwarrior][10]       |                                                                                            |
 |                        |                         |                                                                                            |
 
 [1]: https://neovim.io/
 [2]: http://passwordstore.org/
+[3]: https://github.com/junegunn/fzf
+[4]: https://github.com/BurntSushi/ripgrep
+[5]: https://github.com/tmux/tmux
+[7]: https://www.gnu.org/software/bash/
+[8]: https://www.zsh.org/
+[10]: https://taskwarrior.org/
 [11]: https://github.com/sheerun/vim-polyglot
 [12]: https://github.com/morhetz/gruvbox
 [13]: https://www.yubico.com/product/yubikey-5-nfc/
+[14]: https://www.gnupg.org/
+[15]: https://git-scm.com/
 [16]: https://www.vim.org/
 
 # Custom bindings
