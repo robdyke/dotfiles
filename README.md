@@ -5,12 +5,13 @@
 | Text editor            | [vim][16] / [neovim][1] | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                   |
 | Password store         | [pass][2]               | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15].                  |
 | Code searcher          | [ripgrep][4] + [fzf][3] | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                            |
-| Terminal multiplexer   | [tmux][5]               |                                                                                            |
+| Terminal multiplexer   | [tmux][5]               | Bindings adjusted to match vim                                                             |
 | Version control        | [git][15]               | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
 | Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
 | SSH Agent              | [GnuPG2][14]            | Used with a Yubikey                                                                        |
 | Task management        | [Taskwarrior][10]       |                                                                                            |
-|                        |                         |                                                                                            |
+| Terminal               | [Alacritty][18]         | GPU accelerated. Used with Adobe Source code pro. I also use `kitty`                       |
+| Security device        | [Yubikey 5][13]         | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                    |
 
 [1]: https://neovim.io/
 [2]: http://passwordstore.org/
@@ -26,65 +27,51 @@
 [14]: https://www.gnupg.org/
 [15]: https://git-scm.com/
 [16]: https://www.vim.org/
-
-# Custom bindings
-## Shell
-| Binding        | Description                                                                                                                                    |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CTRL+p`       | Search current directory with FZF and launch editor with results. Tab to select multiple.                                                      |
-| `r <string>`   | Search current directory with ripgrep for files containing `<string>`, filter with FZF and launch editor with results. Tab to select multiple. |
-| `CTRL+r`       | History search using fzf.                                                                                                                      |
-| `tm`           | Launch or connect tmux single session. This is automatic if there is already an unconnected session.                                           |
-| `CTRL+s`       | Prepend `sudo` to the prompt and move the cursor back to the end of the prompt.                                                                |
-
-See `home/.aliases` for and `bin/` for more handy shortcuts/wrappers.
-
-## Vim
-* `CTRL+p` search current directory with FZF and launch editor with results.
-  Tab to select multiple. Vim will go to the line with the first match.
-
-## Tmux
-
-Tmux has been configured to follow vim bindings where possible. Check `home/.tmux.conf` for a walk-through.
+[17]: https://github.com/jwilm/alacritty
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
   Latency for more information.
 * Prompt/hostname colour based on hostname to make it easy to distinguish
   between hosts.
-* SSH agent managed by keychain locally, and forwarded remotely. SSH_AUTH_SOCK
+* SSH+GPG agent runs locally, forwarded remotely. SSH_AUTH_SOCK
   is synchronised between tmux sessions.
-* history is globally shared, as I use my history as a database
-* History management: History is de-duplicated, most recent persists. History
+* history is globally shared, as I use my history as a database to search
+* History is automaticall filtered: History is de-duplicated, most recent persists. History
   is also filtered leaving only useful commands. This increases the SNR in the
   history file about 5x, which makes searching the history using FZF quicker.
   History is only cleaned up on shell exit, so you won't lose your immediate
   history which allows for command correction.
 
-
-# Other software
+# Other software I use
 * `tinc` : A reliable mesh VPN
 * `ncdu` + `tmpreaper` : tools for clearing up disk space
 * `ipython` : interactive python shell
 * `ansible` : idempotent, agentless configuration management
 * `httpie` : curl alternative with better UX
 * `jq` : Command line JSON processor (good with httpie)
-* `brew` : homebrew package manager for OS X
-* `brew cask` : cask bundle manager for OS X
+* `brew` + `brew cask` : homebrew package manager for OS X
 * `restic` : backup software
-* `draw.io` : Diagram software
+* `draw.io` : Diagram creation software
 * `tig` : Git history visualiser
 * `sox`/`ffmpeg`/`gstreamer` Tools to convert multimedia
 * `httrack` : a website crawler better than wget (i.e. it works)
-* `kitty` : GPU accelerated terminal (see also: `alacritty`) Recommended font: https://github.com/adobe-fonts/source-code-pro Tip: Minimise keyboard repeat delay and maximise keyboard repeat rate for a faster experience. Latency is everything.  NOTE Alacrity/kitty.  
-
-
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
 
-[2]: http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
-[4]: http://superuser.com/questions/413351/weird-insertion-from-vim-on-mouse-click
-[5]: https://github.com/unphased/putty-X
+
+# Custom bindings
+
+| Binding        | Context      | Description                                                                                                                                    |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CTRL+p`       | bash/zsh/vim | Search current directory with FZF and launch editor with results. Tab to select multiple.                                                      |
+| `r <string>`   | bash/zsh     | Search current directory with ripgrep for files containing `<string>`, filter with FZF and launch editor with results. Tab to select multiple. |
+| `CTRL+r`       | bash/zsh     | History search using fzf.                                                                                                                      |
+| `tm`           | bash/zsh     | Launch or connect tmux single session. This is automatic if there is already an unconnected session.                                           |
+| `CTRL+s`       | bash/zsh     | Prepend `sudo` to the prompt and move the cursor back to the end of the prompt.                                                                |
+
+See `home/.aliases`, `bin/`, `home/.functions.sh` and `home/.tmux.conf` for
+more handy shortcuts/wrappers/bindings.
 
 # Supported OSes
 
@@ -116,8 +103,6 @@ Ubuntu 17.04 does not have curl by default.
 ```bash
 wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
 ```
-
-
 
 # Task management
 
@@ -160,7 +145,7 @@ other things that _may_ help reduce latency:
 * Use a SSD (preferably NVMe m.2 PCI-E based)
 * Use a tiling window manager (no 3D nonsense or time spent adjusting windows)
 * Adjust keyboard repeat rate to the lowest setting
-* Mitigate [Bufferbloat][6]
+* Mitigate [Bufferbloat][17]
 
 ## Things that may help
 * Use a monitor with low latency and high refresh rate. Again, gaming monitors
@@ -170,7 +155,7 @@ other things that _may_ help reduce latency:
   switches may also help.
 
 
-[6]: https://www.bufferbloat.net/projects/bloat/wiki/What_can_I_do_about_Bufferbloat/
+[17]: https://www.bufferbloat.net/projects/bloat/wiki/What_can_I_do_about_Bufferbloat/
 
 
 # Tips
