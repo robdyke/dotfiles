@@ -10,6 +10,8 @@
 | Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
 | SSH Agent              | [GnuPG2][14]            | Used with a Yubikey                                                                        |
 | Task management        | [Taskwarrior][10]       |                                                                                            |
+| Terminal               | [Alacritty][18]         | GPU accelerated. Used with Adobe Source code pro. I also use `kitty`                       |
+| Security device        | [Yubikey 5][13]         | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                    |
 
 [1]: https://neovim.io/
 [2]: http://passwordstore.org/
@@ -25,39 +27,35 @@
 [14]: https://www.gnupg.org/
 [15]: https://git-scm.com/
 [16]: https://www.vim.org/
+[17]: https://github.com/jwilm/alacritty
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
   Latency for more information.
 * Prompt/hostname colour based on hostname to make it easy to distinguish
   between hosts.
-* SSH agent managed by keychain locally, and forwarded remotely. SSH_AUTH_SOCK
+* SSH+GPG agent runs locally, forwarded remotely. SSH_AUTH_SOCK
   is synchronised between tmux sessions.
-* history is globally shared, as I use my history as a database
-* History management: History is de-duplicated, most recent persists. History
+* history is globally shared, as I use my history as a database to search
+* History is automaticall filtered: History is de-duplicated, most recent persists. History
   is also filtered leaving only useful commands. This increases the SNR in the
   history file about 5x, which makes searching the history using FZF quicker.
   History is only cleaned up on shell exit, so you won't lose your immediate
   history which allows for command correction.
 
-# Other software
+# Other software I use
 * `tinc` : A reliable mesh VPN
 * `ncdu` + `tmpreaper` : tools for clearing up disk space
 * `ipython` : interactive python shell
 * `ansible` : idempotent, agentless configuration management
 * `httpie` : curl alternative with better UX
 * `jq` : Command line JSON processor (good with httpie)
-* `brew` : homebrew package manager for OS X
-* `brew cask` : cask bundle manager for OS X
+* `brew` + `brew cask` : homebrew package manager for OS X
 * `restic` : backup software
-* `draw.io` : Diagram software
+* `draw.io` : Diagram creation software
 * `tig` : Git history visualiser
 * `sox`/`ffmpeg`/`gstreamer` Tools to convert multimedia
 * `httrack` : a website crawler better than wget (i.e. it works)
-* `kitty` : GPU accelerated terminal (see also: `alacritty`) Recommended font:
-  https://github.com/adobe-fonts/source-code-pro Tip: Minimise keyboard repeat
-  delay and maximise keyboard repeat rate for a faster experience. Latency is
-  everything.  NOTE Alacrity/kitty.
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
 
