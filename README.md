@@ -10,7 +10,7 @@
 | Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
 | SSH Agent              | [GnuPG2][14]            | Used with a Yubikey                                                                        |
 | Task management        | [Taskwarrior][10]       |                                                                                            |
-| Terminal               | [Alacritty][18]         | GPU accelerated. Used with Adobe Source code pro. I also use `kitty`                       |
+| Terminal               | [Alacritty][18]         | GPU accelerated and minimal. Used with Adobe Source code pro. I also use `kitty.`          |
 | Security device        | [Yubikey 5][13]         | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                    |
 
 [1]: https://neovim.io/
@@ -27,7 +27,7 @@
 [14]: https://www.gnupg.org/
 [15]: https://git-scm.com/
 [16]: https://www.vim.org/
-[17]: https://github.com/jwilm/alacritty
+[18]: https://github.com/jwilm/alacritty
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
