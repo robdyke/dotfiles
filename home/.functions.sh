@@ -117,7 +117,7 @@ function ssh {
 
 # ssh with gpg and ssh agent forwarding Use only on trusted hosts.
 function gssh {
-    echo "Perparing host for forwarded GPG agent..." >&2
+    echo "Preparing host for forwarded GPG agent..." >&2
 
     # prepare remote for agent forwarding, get socket
     # Remove the socket in this pre-command as an alternative to requiring
