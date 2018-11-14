@@ -1,17 +1,18 @@
 # Tools
 
-| Tool                   | Choice                  | Comments                                                                                   |
-| ---------------------- | ----------------------- | ------------------------------------------------------------------------------------------ |
-| Text editor            | [vim][16] / [neovim][1] | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                   |
-| Password store         | [pass][2]               | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15].                  |
-| Code searcher          | [ripgrep][4] + [fzf][3] | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                            |
-| Terminal multiplexer   | [tmux][5]               | Bindings adjusted to match vim                                                             |
-| Version control        | [git][15]               | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
-| Shell                  | [bash][7]/[zsh][8]      | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
-| SSH Agent              | [GnuPG2][14]            | Used with a Yubikey                                                                        |
-| Task management        | [Taskwarrior][10]       |                                                                                            |
-| Terminal               | [Alacritty][18]         | GPU accelerated and minimal. Used with Adobe Source code pro. I also use `kitty.`          |
-| Security device        | [Yubikey 5][13]         | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                    |
+| Purpose                | Tool(s)                             | Comments                                                                                   |
+| ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
+| Text editor            | [vim][16] / [neovim][1]             | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                   |
+| Password store         | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15].                  |
+| Code searcher          | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                            |
+| Terminal multiplexer   | [tmux][5]                           | Bindings adjusted to match vim                                                             |
+| Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
+| Shell                  | [bash][7]/[zsh][8]                  | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
+| SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey                                                                        |
+| Task management        | [Taskwarrior][10]                   | See section on time management below                                                       |                                    |
+| Terminal               | [Alacritty][18]                     | GPU accelerated and minimal. Used with Adobe Source code pro. I also use `kitty.`          |
+| Security device        | [Yubikey 5][13]                     | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                    |
+| Note taking            | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes                 |
 
 [1]: https://neovim.io/
 [2]: http://passwordstore.org/
