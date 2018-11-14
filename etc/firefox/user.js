@@ -37,3 +37,6 @@ user_pred("signon.rememberSignons", false);
 
 // enable U2F auth (see https://www.yubico.com/2017/11/how-to-navigate-fido-u2f-in-firefox-quantum/ -- things will change)
 user_pref("security.webauth.u2f");
+
+// don't ask google (or whoever) for search suggestions (which appear above historic pages!)
+user_pref("browser.search.suggest.enabled", "false");
