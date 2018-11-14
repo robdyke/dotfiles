@@ -1,18 +1,19 @@
-# Tools
+# General Tools
 
-| Purpose                | Tool(s)                             | Comments                                                                                   |
-| ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| Text editor            | [vim][16] / [neovim][1]             | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                   |
-| Password store         | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15].                  |
-| Code searcher          | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                            |
-| Terminal multiplexer   | [tmux][5]                           | Bindings adjusted to match vim                                                             |
-| Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`              |
-| Shell                  | [bash][7]/[zsh][8]                  | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain. |
-| SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey                                                                        |
-| Task management        | [Taskwarrior][10]                   | See section on time management below                                                       |                                    |
-| Terminal               | [Alacritty][18]                     | GPU accelerated and minimal. Used with Adobe Source code pro. I also use `kitty.`          |
-| Security device        | [Yubikey 5][13]                     | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                    |
-| Note taking            | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes                 |
+| Purpose                | Tool(s)                             | Comments                                                                                                                                               |
+| ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Text editing           | [vim][16] / [neovim][1]             | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                                                                               |
+| Password management    | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15]. Mental offload as it is no longer necessary to remember dozens of passwords. |
+| Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                                                                                        |
+| Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
+| SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey                                                                                                                                    |
+| Task management        | [Taskwarrior][10]                   | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
+| Security device        | [Yubikey 5][13]                     | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                                                                                |
+| Note taking            | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes. Yet another mental offload.                                                |
+| Shell                  | [bash][7]/[zsh][8]                  | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain.                                                             |
+| Terminal multiplexing  | [tmux][5]                           | Bindings adjusted to match vim                                                                                                                         |
+| Terminal               | [Alacritty][18]                     | GPU accelerated and minimal. Used with Adobe Source code pro. I also use `kitty.`                                                                      |
+| Window management      | [i3wm][19]                          | Much faster than Unity, Gnome 3 etc as there are no animations. See openbox if you don't like tiling window managers.                                  |
 
 [1]: https://neovim.io/
 [2]: http://passwordstore.org/
@@ -29,6 +30,37 @@
 [15]: https://git-scm.com/
 [16]: https://www.vim.org/
 [18]: https://github.com/jwilm/alacritty
+[33]: https://en.wikipedia.org/wiki/Getting_Things_Done
+
+# Specific tools
+
+| Purpose                | Tool(s)                                    | Comments                                                                                                              |
+| ---------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| Web browser            | [firefox][20]                              | Fast since Quantum. Animations disabled for speed.                                                                    |
+| VPN                    | [tinc][21]                                 | Tinc has been 100% reliable and is able to work with most firewalls.                                                  |
+| Disk space reclaim     | [ncdu][22] + [tmpreaper][23]               | Tools for clearing up disk space. I run the latter against /tmp/ with cron.                                           |
+| Server configuration   | [ansible][24]                              | Idempotent, agentless configuration management. Used with git.                                                        |
+| HTTP Client            | [httpie][25]                               | curl alternative with better UX. Sometimes used with jq.                                                              |
+| System backup          | [restic][26]                               | See also rclone, zsync, rsync.                                                                                        |
+| Diagramming            | [draw.io][27]                              | Diagram creation software. See also dia, graphviz, tikz.                                                              |
+| Music playback         | [cmus][28]                                 | Fast terminal music player. See also MPD, mopidy.                                                                     |
+| Audio/video conversion | [sox][29] + [ffmpeg][30] + [gstreamer][31] |                                                                                                                       |
+| Web crawling           | [httrack][32]                              | Better than wget for crawling (i.e. it works)                                                                         |
+
+[19]: https://i3wm.org/
+[20]: https://www.mozilla.org/en-GB/firefox/
+[21]: https://www.tinc-vpn.org/
+[22]: https://dev.yorhel.nl/ncdu
+[23]: http://manpages.ubuntu.com/manpages/bionic/man8/tmpreaper.8.html
+[24]: https://www.ansible.com/
+[25]: https://httpie.org/
+[26]: https://restic.net/
+[27]: https://github.com/jgraph/drawio
+[28]: https://cmus.github.io/
+[29]: http://sox.sourceforge.net/sox.html
+[30]: https://www.ffmpeg.org/
+[31]: https://gstreamer.freedesktop.org/
+[32]: https://www.httrack.com/
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
@@ -44,19 +76,6 @@
   History is only cleaned up on shell exit, so you won't lose your immediate
   history which allows for command correction.
 
-# Other software I use
-* `tinc` : A reliable mesh VPN
-* `ncdu` + `tmpreaper` : tools for clearing up disk space
-* `ipython` : interactive python shell
-* `ansible` : idempotent, agentless configuration management
-* `httpie` : curl alternative with better UX
-* `jq` : Command line JSON processor (good with httpie)
-* `brew` + `brew cask` : homebrew package manager for OS X
-* `restic` : backup software
-* `draw.io` : Diagram creation software
-* `tig` : Git history visualiser
-* `sox`/`ffmpeg`/`gstreamer` Tools to convert multimedia
-* `httrack` : a website crawler better than wget (i.e. it works)
 
 ![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
 
@@ -133,9 +152,8 @@ put tasks on the queue if you need to track them.
 The lowest possible latency is a target for my workflow and code in this
 repository.  Too many user interfaces waste time on stupid animations or are
 just generally slow; working with a setup that is perceptually instantaneous is
-very pleasant and makes other systems feel irritating to use once you are
-familiar with the experience. Beyond the configuration here, here are some
-other things that _may_ help reduce latency:
+very pleasant and makes other systems feel irritating to use. Beyond the
+configuration here, here are some other things that _may_ help reduce latency:
 
 ## Things that noticeably help
 * Use an accelerated terminal such as `kitty` or `alacritty`
@@ -143,7 +161,7 @@ other things that _may_ help reduce latency:
   animations and "smooth" scrolling.
 * Profile  and optimise application startup time
 * Use a SSD (preferably NVMe m.2 PCI-E based)
-* Use a tiling window manager (no 3D nonsense or time spent adjusting windows)
+* Use a tiling window manager (no 3D nonsense, animations or time spent adjusting windows)
 * Adjust keyboard repeat rate to the lowest setting
 * Mitigate [Bufferbloat][17]
 
