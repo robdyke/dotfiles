@@ -30,7 +30,7 @@ user_pref("devtools.theme", "dark");
 // highlight all matches when finding
 user_pref("findbar.highlightAll", true);
 
-user_pref("layout.spellcheckDefault", 1);
+user_pref("layout.spellcheckDefault", 2);
 
 // don't remember passwords
 user_pred("signon.rememberSignons", false);
