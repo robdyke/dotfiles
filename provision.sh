@@ -1,8 +1,6 @@
 #!/bin/bash
 # This script installs dependencies required by dotfiles, and then the configuration files with git repo.
 
-# CAVEAT: nvim not installed on raspbian (apt version too old)
-
 ORIGIN=https://github.com/naggie/dotfiles.git
 
 set -e
@@ -46,7 +44,7 @@ if [ $MACOS_DESKTOP ]; then
 
     # Upgrade or install (logic necessary)
     packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget task htop gnupg2 bash-completion keychain iproute2mac tmpreaper \
-        coreutils sox ffmpeg httrack python ripgrep python go)
+        coreutils sox ffmpeg httrack python ripgrep python go nvim)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
@@ -63,11 +61,14 @@ fi
 if [ $UBUNTU ]; then
     sudo -E apt-add-repository multiverse
     sudo -E apt-get -y install language-pack-en
-    sudo -E apt-get -y install curl
+    sudo -E apt-get -y install curl software-properties-common
+    sudo -E apt-add-repository -y ppa:neovim-ppa/stable
+    sudo -E apt-get -y update
     # FYI -- ripgrep is an official 18.04 package
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb > /tmp/ripgrep.deb
     sudo dpkg -i /tmp/ripgrep.deb
     rm /tmp/ripgrep.deb
+
 fi
 
 if [ $RASPBIAN ]; then
@@ -77,7 +78,7 @@ fi
 
 if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo -E apt-get -y update
-    sudo -E apt-get -y install tmux vim git tig zsh ssh pass figlet httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
+    sudo -E apt-get -y install tmux vim neovim git tig zsh ssh pass figlet httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
         jq sox ffmpeg httrack python python3 golang libffi-dev python-pip python3-pip python-dev python3-dev libssl-dev dconf-cli scdaemon \
         pcscd
 
