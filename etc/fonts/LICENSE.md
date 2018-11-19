@@ -1,8 +1,8 @@
-Copyright (c) 2011, wmk69 (wmk69@o2.pl),
-with Reserved Font Name NovaMono.
+Copyright 2010, 2012 Adobe Systems Incorporated (http://www.adobe.com/), with Reserved Font Name 'Source'. All Rights Reserved. Source is a trademark of Adobe Systems Incorporated in the United States and/or other countries.
+
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
-This license is copied below, and is also available with a FAQ at:
-http://scripts.sil.org/OFL
+
+This license is copied below, and is also available with a FAQ at: http://scripts.sil.org/OFL
 
 
 -----------------------------------------------------------

@@ -128,8 +128,5 @@ test -f ~/.local/bin/fzf && rm ~/.local/bin/fzf
 test -f ~/.local/bin/fzf && rm ~/.local/bin/fzf
 mv ~/.fzf/bin/fzf ~/.local/bin/
 
-# For Adobe source code pro (powershell patched)
-./etc/powerline-patched/install.sh
-
 # install dotfiles configuration
 ./install.sh
