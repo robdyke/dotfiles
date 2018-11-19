@@ -5,8 +5,8 @@ if which alacritty &> /dev/null; then
     exec alacritty "$@"
 elif which kitty &> /dev/null; then
     exec kitty "$@"
-elif which urxvt-unicode &> /dev/null; then
-    exec urxvt-unicode "$@"
+elif which rxvt-unicode &> /dev/null; then
+    exec rxvt-unicode "$@"
 elif which xterm &> /dev/null; then
     exec xterm "$@"
 elif which gnome-terminal &> /dev/null; then
