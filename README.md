@@ -6,10 +6,11 @@
 | Password management    | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15]. Mental offload as it is no longer necessary to remember dozens of passwords. |
 | Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                                                                                        |
 | Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
-| SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey                                                                                                                                    |
+| SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                         |
 | Task management        | [Taskwarrior][10]                   | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
 | Security device        | [Yubikey 5][13]                     | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                                                                                |
 | Note taking            | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes. Yet another mental offload.                                                |
+| Personal cryptography  | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
 | Shell                  | [bash][7]/[zsh][8]                  | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain.                                                             |
 | Terminal multiplexing  | [tmux][5]                           | Bindings adjusted to match vim                                                                                                                         |
 | Terminal               | [Alacritty][18]                     | GPU accelerated and minimal. Used with Adobe Source code pro. I also use `kitty.`                                                                      |
@@ -31,6 +32,7 @@
 [16]: https://www.vim.org/
 [18]: https://github.com/jwilm/alacritty
 [33]: https://en.wikipedia.org/wiki/Getting_Things_Done
+[34]: https://github.com/naggie/dotfiles/blob/master/etc/yubikey.md
 
 # Specific tools
 
@@ -184,11 +186,11 @@ configuration here, here are some other things that _may_ help reduce latency:
 1. Keep useful local environment variables in ~/.env-local.sh
 
 # Operational security
-With major services being compromised more and more, good OPSEC is important.
+With major services being compromised more and more, good OPSEC is important. I use:
 
 1. 2FA (U2F) where possible
 1. A different password for every service (important to prevent attacker pivot)
-1. Yubikey (as an openPGP smartcard) to store my SSH and GPG keys
+1. Yubikey (as an openPGP smartcard) to store my SSH and GPG keys. See my [set up guide.][34]
 1. Full-disk encryption for every device
 1. Lock-screen for every device
 1. Backup 2FA codes, backup passwords and master passwords are in a physical fire safe
