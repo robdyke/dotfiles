@@ -60,10 +60,9 @@ fi
 
 if [ $UBUNTU ]; then
     sudo -E apt-add-repository multiverse
-    sudo -E apt-get -y install language-pack-en
-    sudo -E apt-get -y install curl software-properties-common
     sudo -E apt-add-repository -y ppa:neovim-ppa/stable
     sudo -E apt-get -y update
+    sudo -E apt-get -y install language-pack-en curl software-properties-common
     # FYI -- ripgrep is an official 18.04 package
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb > /tmp/ripgrep.deb
     sudo dpkg -i /tmp/ripgrep.deb
