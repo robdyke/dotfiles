@@ -48,6 +48,8 @@
 | Music playback         | [cmus][28]                                 | Fast terminal music player. See also MPD, mopidy.                                                                     |
 | Audio/video conversion | [sox][29] + [ffmpeg][30] + [gstreamer][31] |                                                                                                                       |
 | Web crawling           | [httrack][32]                              | Better than wget for crawling (i.e. it works)                                                                         |
+| Document conversion    | [pandoc][35]                               | See also [pdflatex][36], which I use for formal reports.                                                              |
+| Static blog            | [hugo][37]                                 | Chosen in an attempt to make myself stop writing blog engines and write articles instead.                             |
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
@@ -63,6 +65,9 @@
 [30]: https://www.ffmpeg.org/
 [31]: https://gstreamer.freedesktop.org/
 [32]: https://www.httrack.com/
+[35]: https://pandoc.org/
+[36]: https://www.tug.org/applications/pdftex/
+[37]: https://gohugo.io/
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
