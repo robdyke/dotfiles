@@ -9,6 +9,9 @@ ORIGIN=https://github.com/naggie/dotfiles.git
 # 3. Exe (or appimage) to /usr/local/bin (with hash check)
 # 4. PPA if absolutely necessary
 
+# Possible compromise
+# Native package manager or local appimage/exe (.local/bin)
+
 set -e
 set -x
 

@@ -30,7 +30,7 @@ EOF
 # copy dotfiles separately , normal glob does not match
 cp -r home/.??* ~ 2> /dev/null
 cp -a etc ~
-cp -a bin/* ~/.local/bin/
+cp -a scripts/* ~/.local/bin/
 
 
 # pinentry program and gpg agent socket needs absolute path and can't expand ~,
