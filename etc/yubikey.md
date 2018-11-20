@@ -56,7 +56,7 @@ using some scripts I\'ve made to make things reliable and secure:
     have GPG1 by default -- you will have to alias the **gpg2** binary
     to **gpg.**
 2.  Generate your GPG PKI (gnupg2.2+) using
-    <https://github.com/naggie/dotfiles/blob/master/bin/gpg-keygen> on a
+    <https://github.com/naggie/dotfiles/blob/master/scripts/gpg-keygen> on a
     livecd (for security). This should be run in an empty directory, and
     will create a new gnupg home along with exported public/private
     keys, fingerprint, key ID etc using your name and email from git.
