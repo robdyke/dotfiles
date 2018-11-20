@@ -43,7 +43,7 @@ if [ $MACOS_DESKTOP ]; then
 
     # recommended, uses /Applications now.
     brew tap caskroom/homebrew-cask
-    brew cask install spectacle firefox
+    brew cask install spectacle firefox alacritty
 
     # flux is no longer required -- night shift!
 
