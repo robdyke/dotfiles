@@ -1,7 +1,13 @@
 #!/bin/bash
-# This script installs dependencies required by dotfiles, and then the configuration files with git repo.
+# This script installs global dependencies and executables required by dotfiles, and then the configuration files with ./install.sh
 
 ORIGIN=https://github.com/naggie/dotfiles.git
+
+# binary installation methods in order of preference
+# 1. Native package manager
+# 2. deb package
+# 3. Exe (or appimage) to /usr/local/bin (with hash check)
+# 4. PPA if absolutely necessary
 
 set -e
 set -x
@@ -21,7 +27,6 @@ else
     echo "Unsupported OS."
     exit 2
 fi
-
 
 # tmpreaper tries to do a post-install "configuration" screen to warn the user.
 export DEBIAN_FRONTEND=noninteractive
