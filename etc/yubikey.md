@@ -10,7 +10,7 @@ SSH key storage
 It\'s possible to use a Yubikey to hold an SSH key by using GPG-agent as
 the SSH-agent and storing the key as a GPG key with authentication
 capabilities. This makes your SSH ID more secure, and portable between
-machines with some comnfiguration.
+machines with some configuration.
 
 Git commit signing
 ------------------
@@ -23,15 +23,13 @@ Encryption and signing
 ----------------------
 
 GPG can be used for encrypting and signing things for transfer over
-untrusted networks. [This is not currently approved under our
-ISMS.]{style="color: rgb(255,0,0);"}
+untrusted networks.
 
 PAM / Windows Hello
 -------------------
 
 Yubikeys can be used to login to Ubuntu, Windows or Mac operating
-systems. [This is not currently approved under our
-ISMS.]{style="color: rgb(255,0,0);"}
+systems.
 
 PIV
 ---

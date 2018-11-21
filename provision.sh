@@ -10,7 +10,7 @@ ORIGIN=https://github.com/naggie/dotfiles.git
 # 4. PPA if absolutely necessary
 
 # Possible compromise
-# Native package manager or local appimage/exe (.local/bin)
+# Native package manager or local appimage/exe (.local/bin) (but where would the exe come from?)
 
 set -e
 set -x
