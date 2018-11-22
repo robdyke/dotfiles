@@ -84,8 +84,15 @@ if [ $UBUNTU ]; then
 fi
 
 if [ $RASPBIAN ]; then
+    # ripgrep
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz \
-        | sudo tar -C /usr/local/bin --strip=1 -xzf - ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
+        | tar -C ~/.local/bin --strip=1 -xzf - ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
+
+    if ! sha256sum ~/.local/bin/rg | grep -q 17825561dddf366fc86bcde47e0ba35ab47b03145405174ebde697cb446e041f; then
+        chmod -x ~/.local/bin/rg
+        echo "Corrupt or compromised rg binary detected! See ~/.local/bin/"
+        exit 4
+    fi
 fi
 
 if [ $UBUNTU ] || [ $RASPBIAN ]; then
