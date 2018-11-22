@@ -3,14 +3,17 @@
 
 ORIGIN=https://github.com/naggie/dotfiles.git
 
-# binary installation methods in order of preference
-# 1. Native package manager
-# 2. deb package
-# 3. Exe (or appimage) to /usr/local/bin (with hash check)
-# 4. PPA if absolutely necessary
+# Installation: No PPAs.
+# Native package manager or local checksummed appimage/exe (.local/bin) (from tar if necessary)
 
-# Possible compromise
-# Native package manager or local appimage/exe (.local/bin) (but where would the exe come from?)
+# Essential:
+# * vim/neovim
+# * tmux
+# * ripgrep
+# * FZF
+# * Task
+# * Pass
+# * Bash/zsh
 
 set -e
 set -x
@@ -52,7 +55,7 @@ if [ $MACOS_DESKTOP ]; then
 
     # Upgrade or install (logic necessary)
     packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget task htop gnupg2 bash-completion keychain iproute2mac tmpreaper \
-        coreutils sox ffmpeg httrack python ripgrep python go nvim)
+        coreutils sox ffmpeg httrack python ripgrep python go nvim fzf)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
@@ -122,18 +125,6 @@ git pull --ff-only $ORIGIN master || true
 
 # make sure the upstream for local master is remote master
 git branch --set-upstream-to=origin/master master
-
-# FZF -- install binary only. install script is expecting repo in ~/.fzf
-test -d ~/.fzf/ && rm -rf ~/.fzf/
-cp -a home/.fzf ~
-# download binary but annoyingly create symlink in path (not configurable)
-mkdir -p ~/.local/bin/
-test -f ~/.local/bin/fzf && rm ~/.local/bin/fzf
-~/.fzf/install --bin
-# standard install location, already in $PATH. Remove symlink annoyingly
-# created by fzf installer (if installer had ~/.local/bin in path) and copy actual binary
-test -f ~/.local/bin/fzf && rm ~/.local/bin/fzf
-mv ~/.fzf/bin/fzf ~/.local/bin/
 
 # install dotfiles configuration
 ./install.sh
