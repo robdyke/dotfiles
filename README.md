@@ -105,10 +105,10 @@ more handy shortcuts/wrappers/bindings.
 
 AKA the OSes I actively use.
 
-* Ubuntu 16.04 LTS
-* Ubuntu 18.04 LTS
-* MacOS (~10.13 High Sierra) (GUI applications too)
-* Raspbian Stretch
+* Ubuntu 16.04 LTS (x86_64)
+* Ubuntu 18.04 LTS (x86_64)
+* Current MacOS
+* Raspbian Stretch (armv7)
 * ~~Raspbian Jessie~~
 * ~~RHEL5~~
 * ~~RHEL6~~

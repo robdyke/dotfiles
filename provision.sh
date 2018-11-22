@@ -76,11 +76,16 @@ if [ $UBUNTU ]; then
     sudo -E apt-add-repository multiverse
     sudo -E apt-get -y update
     sudo -E apt-get -y install language-pack-en curl
-    # FYI -- ripgrep is an official 18.04 package
-    curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb > /tmp/ripgrep.deb
-    sudo dpkg -i /tmp/ripgrep.deb
-    rm /tmp/ripgrep.deb
 
+    # ripgrep
+    curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
+        | tar -C ~/.local/bin --strip=1 -xzf - ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
+
+    if ! sha256sum ~/.local/bin/rg | grep -q 6a618aa3ae055866e99ea633079e8eff8623bdfe3209fe3bddf20bd4451b2b08; then
+        chmod -x ~/.local/bin/rg
+        echo "Corrupt or compromised rg binary detected! See ~/.local/bin/"
+        exit 4
+    fi
 fi
 
 if [ $RASPBIAN ]; then
