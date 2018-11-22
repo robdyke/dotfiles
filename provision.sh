@@ -74,9 +74,8 @@ fi
 
 if [ $UBUNTU ]; then
     sudo -E apt-add-repository multiverse
-    sudo -E apt-add-repository -y ppa:neovim-ppa/stable
     sudo -E apt-get -y update
-    sudo -E apt-get -y install language-pack-en curl software-properties-common
+    sudo -E apt-get -y install language-pack-en curl
     # FYI -- ripgrep is an official 18.04 package
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb > /tmp/ripgrep.deb
     sudo dpkg -i /tmp/ripgrep.deb
@@ -91,7 +90,7 @@ fi
 
 if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo -E apt-get -y update
-    sudo -E apt-get -y install tmux vim neovim git tig zsh ssh pass figlet httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
+    sudo -E apt-get -y install tmux vim git tig zsh ssh pass figlet httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
         jq sox ffmpeg httrack python python3 golang libffi-dev python-pip python3-pip python-dev python3-dev libssl-dev dconf-cli scdaemon \
         pcscd rxvt-unicode-256color
 
