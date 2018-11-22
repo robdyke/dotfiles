@@ -4,7 +4,10 @@
 ORIGIN=https://github.com/naggie/dotfiles.git
 
 # Installation: No PPAs.
-# Native package manager or local checksummed appimage/exe (.local/bin) (from tar if necessary)
+# Native package manager or local checksummed appimage/exe (.local/bin) (from
+# tar if necessary). No magic scripts, except homebrew.
+
+# local or global? same for pip with install --user
 
 # Essential:
 # * vim/neovim
@@ -92,8 +95,8 @@ if [ $UBUNTU ] || [ $RASPBIAN ]; then
         jq sox ffmpeg httrack python python3 golang libffi-dev python-pip python3-pip python-dev python3-dev libssl-dev dconf-cli scdaemon \
         pcscd rxvt-unicode-256color
 
-    sudo python3 -m pip install --upgrade pip
-    sudo python3 -m pip install --upgrade ansible ipython
+    python3 -m pip install --user --upgrade pip
+    python3 -m pip install --user --upgrade ansible ipython
 
     sudo -E ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
