@@ -96,6 +96,16 @@ if [ $UBUNTU ]; then
         echo "Corrupt or compromised fzf binary detected! See ~/.local/bin/"
         exit 4
     fi
+
+    # alacritty -- onyl binary available is deb
+    ALACRITTY_DEB_FILE="$(mktemp --suffix=.deb)"
+    curl "https://github.com/jwilm/alacritty/releases/download/v0.2.3/Alacritty-v0.2.3_amd64.deb" > "$ALACRITTY_DEB_FILE"
+    if ! sha256sum "$ALACRITTY_DEB_FILE" | grep -q 184f3ed80c70fe9c73f486178fc1d72d2c968998b0ac69c9fd8a9f676447f188; then
+        echo "Corrupt or compromised Alacritty deb detected! See $ALACRITTY_DEB_FILE"
+        exit 4
+    fi
+    sudo dpkg -i "$ALACRITTY_DEB_FILE"
+    rm "$ALACRITTY_DEB_FILE"
 fi
 
 if [ $RASPBIAN ]; then
