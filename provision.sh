@@ -86,6 +86,16 @@ if [ $UBUNTU ]; then
         echo "Corrupt or compromised rg binary detected! See ~/.local/bin/"
         exit 4
     fi
+
+    # FZF
+    curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
+        | tar -C ~/.local/bin --strip=1 -xzf - fzf-0.17.5-linux_amd64/fzf
+
+    if ! sha256sum ~/.local/bin/fzf | grep -q 8ddd8339b522fed766d45688432d74cdf4ecae384417d39be326ed24565b20ce; then
+        chmod -x ~/.local/bin/fzf
+        echo "Corrupt or compromised fzf binary detected! See ~/.local/bin/"
+        exit 4
+    fi
 fi
 
 if [ $RASPBIAN ]; then
@@ -96,6 +106,16 @@ if [ $RASPBIAN ]; then
     if ! sha256sum ~/.local/bin/rg | grep -q 17825561dddf366fc86bcde47e0ba35ab47b03145405174ebde697cb446e041f; then
         chmod -x ~/.local/bin/rg
         echo "Corrupt or compromised rg binary detected! See ~/.local/bin/"
+        exit 4
+    fi
+
+    # FZF
+    curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz \
+        | tar -C ~/.local/bin --strip=1 -xzf - fzf-0.17.5-linux_arm5/fzf
+
+    if ! sha256sum ~/.local/bin/fzf | grep -q 65d4f3fd9af4449f1608eb3b0e91c8bc2617b9630b9c3e10b3e3040955025083; then
+        chmod -x ~/.local/bin/fzf
+        echo "Corrupt or compromised fzf binary detected! See ~/.local/bin/"
         exit 4
     fi
 fi
