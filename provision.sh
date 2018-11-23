@@ -89,7 +89,7 @@ if [ $UBUNTU ]; then
 
     # FZF
     curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
-        | tar -C ~/.local/bin --strip=1 -xzf - fzf-0.17.5-linux_amd64/fzf
+        | tar -C ~/.local/bin --strip=1 -xzf - fzf
 
     if ! sha256sum ~/.local/bin/fzf | grep -q 8ddd8339b522fed766d45688432d74cdf4ecae384417d39be326ed24565b20ce; then
         chmod -x ~/.local/bin/fzf
@@ -99,7 +99,7 @@ if [ $UBUNTU ]; then
 
     # alacritty -- onyl binary available is deb
     ALACRITTY_DEB_FILE="$(mktemp --suffix=.deb)"
-    curl "https://github.com/jwilm/alacritty/releases/download/v0.2.3/Alacritty-v0.2.3_amd64.deb" > "$ALACRITTY_DEB_FILE"
+    curl -L "https://github.com/jwilm/alacritty/releases/download/v0.2.3/Alacritty-v0.2.3_amd64.deb" > "$ALACRITTY_DEB_FILE"
     if ! sha256sum "$ALACRITTY_DEB_FILE" | grep -q 184f3ed80c70fe9c73f486178fc1d72d2c968998b0ac69c9fd8a9f676447f188; then
         echo "Corrupt or compromised Alacritty deb detected! See $ALACRITTY_DEB_FILE"
         exit 4
@@ -121,7 +121,7 @@ if [ $RASPBIAN ]; then
 
     # FZF
     curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz \
-        | tar -C ~/.local/bin --strip=1 -xzf - fzf-0.17.5-linux_arm5/fzf
+        | tar -C ~/.local/bin --strip=1 -xzf - fzf
 
     if ! sha256sum ~/.local/bin/fzf | grep -q 65d4f3fd9af4449f1608eb3b0e91c8bc2617b9630b9c3e10b3e3040955025083; then
         chmod -x ~/.local/bin/fzf
