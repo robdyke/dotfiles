@@ -99,7 +99,7 @@ if [ $UBUNTU ]; then
 
     # alacritty
     curl -L https://github.com/jwilm/alacritty/releases/download/v0.2.3/Alacritty-v0.2.3-x86_64.tar.gz \
-        | tar -C ~/.local/bin --strip=1 -xzf - alacritty
+        | tar xzf - -C ~/.local/bin
 
     if ! sha256sum ~/.local/bin/alacritty | grep -q e0d913e422dce0674061ad412c0cd1dfd50eb069b436433a03cf96e85bb4720f; then
         chmod -x ~/.local/bin/alacritty
