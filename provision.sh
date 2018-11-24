@@ -46,6 +46,10 @@ export DEBIAN_FRONTEND=noninteractive
 # packages are installed via the stock system package manager unless a more
 # recent version is available elsewhere.
 
+
+# for local installs, added to PATH with env.sh
+mkdir -p ~/.local/bin
+
 if [ $MACOS_DESKTOP ]; then
     if [ ! -f /usr/local/bin/brew ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
