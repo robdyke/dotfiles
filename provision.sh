@@ -96,7 +96,7 @@ if [ $UBUNTU ]; then
 
     # FZF
     curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
-        | tar -C ~/.local/bin --strip=1 -xzf - fzf
+        | tar xzf - -C ~/.local/bin
 
     if ! sha256sum ~/.local/bin/fzf | grep -q 8ddd8339b522fed766d45688432d74cdf4ecae384417d39be326ed24565b20ce; then
         chmod -x ~/.local/bin/fzf
