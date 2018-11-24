@@ -133,3 +133,6 @@ coverage_html
 _build
 
 .tox
+
+# go
+vendor
