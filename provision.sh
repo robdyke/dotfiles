@@ -140,7 +140,7 @@ if [ $RASPBIAN ]; then
     curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz \
         | tar -C ~/.local/bin --strip=1 -xzf - fzf
 
-    if ! sha256sum ~/.local/bin/fzf | grep -q 65d4f3fd9af4449f1608eb3b0e91c8bc2617b9630b9c3e10b3e3040955025083; then
+    if ! sha256sum ~/.local/bin/fzf | grep -q 6113f87573163cd711e29244992b5321424f9ac8ecf57f2ae6a98d738d5361a4; then
         chmod -x ~/.local/bin/fzf
         echo "Corrupt or compromised fzf binary detected! See ~/.local/bin/"
         exit 4
