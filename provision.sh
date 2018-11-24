@@ -113,6 +113,16 @@ if [ $UBUNTU ]; then
         echo "Corrupt or compromised alacritty binary detected! See ~/.local/bin/"
         exit 4
     fi
+
+    # neovim
+    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > ~/.local/bin/nvim
+    chmod +x ~/.local/bin/nvim
+
+    if ! sha256sum ~/.local/bin/nvim | grep -q 5f34d714eebbd45489f3628bc96f2aee72077b794f7510fdeb6883a78b18032b; then
+        chmod -x ~/.local/bin/nvim
+        echo "Corrupt or compromised nvim binary detected! See ~/.local/bin/"
+        exit 4
+    fi
 fi
 
 if [ $RASPBIAN ]; then
