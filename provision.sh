@@ -7,6 +7,9 @@ ORIGIN=https://github.com/naggie/dotfiles.git
 # Native package manager or local checksummed appimage/exe (.local/bin) (from
 # tar if necessary). No magic scripts, except homebrew.
 
+# Note that tar commands, reading from stdin are quite brittle. Removing or
+# adding a - prefix to the flags will break things.
+
 # local or global? same for pip with install --user
 
 # Essential:
