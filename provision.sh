@@ -114,15 +114,17 @@ if [ $UBUNTU ]; then
         exit 4
     fi
 
-    # neovim
-    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > ~/.local/bin/nvim
-    chmod +x ~/.local/bin/nvim
+    # neovim (don't write directly, swap atomically so running nvim won't block)
+    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > ~/.local/bin/nvim.new
+    chmod +x ~/.local/bin/nvim.new
 
-    if ! sha256sum ~/.local/bin/nvim | grep -q 5f34d714eebbd45489f3628bc96f2aee72077b794f7510fdeb6883a78b18032b; then
-        chmod -x ~/.local/bin/nvim
-        echo "Corrupt or compromised nvim binary detected! See ~/.local/bin/"
+    if ! sha256sum ~/.local/bin/nvim.new | grep -q 5f34d714eebbd45489f3628bc96f2aee72077b794f7510fdeb6883a78b18032b; then
+        chmod -x ~/.local/bin/nvim.new
+        echo "Corrupt or compromised nvim binary detected! See ~/.local/bin/nvim.new"
         exit 4
     fi
+
+    mv ~/.local/bin/nvim.new ~/.local/bin/nvim
 fi
 
 if [ $RASPBIAN ]; then
