@@ -30,8 +30,6 @@ if [ ! -f "$SOURCE" ]; then
 	exit 23
 fi
 
-LIVECD_USER=$SUDO_USER
-
 WORKDIR=$(mktemp -d --tmpdir=/tmp $NAME.XXXXXXX)
 if [ `whoami` != root ]; then
 	WARNING Run as root
@@ -116,17 +114,6 @@ mount -t proc   none $WORKDIR/filesystem_rw/proc
 mount -t sysfs  none $WORKDIR/filesystem_rw/sys
 mount -t devpts none $WORKDIR/filesystem_rw/dev/pts
 mount --bind /dev/   $WORKDIR/filesystem_rw/dev
-
-# hostname, username:
-# <<- : no leading whitespace
-# EOF in single quotes for no variable substitution
-cat <<- EOF > $WORKDIR/filesystem_rw/etc/casper.conf
-	export USERNAME=$LIVECD_USER
-	export USERFULLNAME="Live session user"
-	export HOST=darkbuntu
-	export BUILD_SYSTEM="Ubuntu"
-	export FLAVOUR=Ubuntu # required to make above apply
-EOF
 
 # In 9.10, (+?) before installing or upgrading packages you need to run
 # also may as well update/upgrade and add repositories
