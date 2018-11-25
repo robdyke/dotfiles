@@ -207,6 +207,7 @@ With major services being compromised more and more, good OPSEC is important. I 
 1. Own web services configured with A+ rating from ssllabs (best cipher suite, protocol etc)
 1. Regular updates of all software
 1. Subscription to vulnerability mailing lists
+1. Don't forward SSH/GPG agent by default
 
 # LiveCD
 

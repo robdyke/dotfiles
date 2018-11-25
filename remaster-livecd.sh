@@ -120,43 +120,20 @@ mount --bind /dev/   $WORKDIR/filesystem_rw/dev
 dbus-uuidgen | INSIDE tee /var/lib/dbus/machine-id
 INSIDE dpkg-divert --local --rename --add /sbin/initctl
 INSIDE ln -s /bin/true /sbin/initctl || true
-INSIDE add-apt-repository universe
-INSIDE add-apt-repository multiverse
 
 #INSIDE ln -s /lib/init/upstart-job /etc/init.d/whoopsie || true # required, otherwise apt breaks
 
-INSIDE apt-get -y --force-yes update
-INSIDE apt-get -y --force-yes install git
-
-# installs dotfiles to /etc/skel/ so that live (ubuntu) user will get a
+# installs dotfiles to /etc/skel/ so that live (ubuntu) user will get dotfiles
 #cp -a ../dotfiles $WORKDIR/filesystem_rw/root/
 #git clone . $WORKDIR/filesystem_rw/root/dotfiles
-# rsync preserves original origin and submodules, but git submodules have
-# absolute references which break if you move the git folder on old versions of
-# git...
 rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/skel/dotfiles/
 
 INSIDE /etc/skel/dotfiles/provision.sh
+
+# If you're me, just run this in the live session rather than producing separate ISOs
 #INSIDE /etc/skel/dotfiles/install-naggie.sh
 
 # edit variables in /etc/casper.conf for distro/host/username
-INSIDE apt-get install -y --force-yes dkms
-
-# current kernel is wrong obviously
-# http://askubuntu.com/questions/53364/command-to-rebuild-all-dkms-modules-for-all-installed-kernels
-ls $WORKDIR/filesystem_rw/var/lib/initramfs-tools | INSIDE xargs -n1 /usr/lib/dkms/dkms_autoinstaller start
-
-# this livecd may be used in a vbox guest
-#INSIDE apt-get install -y --force-yes virtualbox-guest-additions-iso
-#INSIDE mkdir -p /tmp/user/0 # necessary hack
-#INSIDE apt-get install -y --force-yes virtualbox-guest-dkms
-
-
-# build modules for specific kernel
-# maybe sudo dpkg -l | grep linux-image and pick the latest.
-#export KERNEL_VERSION=$(ls $WORKDIR/filesystem_rw/usr/src/ | grep -E 'headers.+generic' | grep -oE '[0-9].+$')
-#BREAKPOINT
-#INSIDE dkms autoinstall -k $KERNEL_VERSION
 
 # CLEANUP
 # Be sure to remove any temporary files which are no longer needed, as space on a
@@ -171,19 +148,13 @@ INSIDE apt-get -y --force-yes autoremove
 #cp $WORKDIR/filesystem_rw/boot/vmlinuz-2.6.15-26-k7    $WORKDIR/iso_rw/casper/vmlinuz
 # new initrd generated when Broadcom sta drivers were installed.
 cp $WORKDIR/filesystem_rw/boot/initrd.img* $WORKDIR/iso_rw/casper/initrd.lz ||:
-# After you've modified the kernel, init scripts or added new kernel
-# modules, you need to rebuild the initrd.gz file and substitute it into
-# the casper directory.
-#INSIDE mkinitramfs -o /initrd.gz 2.6.15-26-k7
-#mv edit/initrd.gz iso_rw-cd/casper/
-# may need to convert to LZ gzip -dc initrd.gz | sudo lzma -7 > initrd.lz
 
 # prevent Ubiquity installer from modifying keyboard
 sed -i -e "s/def apply_keyboard():/def apply_keyboard():\n    return/g" \
 	$WORKDIR/filesystem_rw/usr/lib/ubiquity/bin/ubiquity
 
 rm -rf $WORKDIR/filesystem_rw/tmp/*
-rm     $WORKDIR/filesystem_rw/etc/skel/.bash_history ||
+rm     $WORKDIR/filesystem_rw/etc/skel/.bash_history || true
 rm     $WORKDIR/filesystem_rw/etc/skel/.history || true
 
 # RM/UMOUNT STUFF THAT SHOULDN'T BE IN FILESYSTEM IMAGE
