@@ -133,8 +133,6 @@ INSIDE /etc/skel/dotfiles/provision.sh
 # If you're me, just run this in the live session rather than producing separate ISOs
 #INSIDE /etc/skel/dotfiles/install-naggie.sh
 
-# edit variables in /etc/casper.conf for distro/host/username
-
 # CLEANUP
 # Be sure to remove any temporary files which are no longer needed, as space on a
 # CD is limited. A classic example is downloaded package files, which can be
@@ -142,7 +140,6 @@ INSIDE /etc/skel/dotfiles/provision.sh
 # note apt-get upgrade can cause problems. Don't do it when building a livecd.
 INSIDE apt-get -y --force-yes clean
 INSIDE apt-get -y --force-yes autoremove
-
 
 # New kernel or initrd?
 #cp $WORKDIR/filesystem_rw/boot/vmlinuz-2.6.15-26-k7    $WORKDIR/iso_rw/casper/vmlinuz

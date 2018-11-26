@@ -115,10 +115,10 @@ if [ $UBUNTU ]; then
     fi
 
     # neovim (don't write directly, swap atomically so running nvim won't block)
-    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > ~/.local/bin/nvim.new
+    curl -L https://github.com/neovim/neovim/releases/download/v0.3.1/nvim.appimage > ~/.local/bin/nvim.new
     chmod +x ~/.local/bin/nvim.new
 
-    if ! sha256sum ~/.local/bin/nvim.new | grep -q 622941f72c3fbc6ce83f17d583caee1cbdbb5e48bf9b88286020a4f61460caac; then
+    if ! sha256sum ~/.local/bin/nvim.new | grep -q ade95e2e2ba025827151c322bf28814f52260dbeafba7cf185d46511eceedbe9; then
         chmod -x ~/.local/bin/nvim.new
         echo "Corrupt or compromised nvim binary detected! See ~/.local/bin/nvim.new"
         exit 4
