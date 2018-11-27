@@ -40,3 +40,6 @@ user_pref("security.webauth.u2f");
 
 // don't ask google (or whoever) for search suggestions (which appear above historic pages!)
 user_pref("browser.search.suggest.enabled", "false");
+
+// tabs get an annoying rolodex/scroller when there are too many. This makes having too many tabs open worse. Disable it.
+user_pref("browser.tabs.tabMinWidth", 0);
