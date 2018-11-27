@@ -1,16 +1,10 @@
+# should be first, others may change env
 function _tmux_update_env {
     # tmux must be running
     [ $TMUX ] || return
 
-    # update display to location
-    eval $(tmux show-environment -s | grep 'DISPLAY=')
-
-    # must be remote host (else it clobbers keychain, which runs local only)
-    tmux show-environment | grep -q "SSH_CONNECTION=" || return
-
-    # when an SSH connection is re-established, so is the agent connection.
-    # Reload it automatically.
-    eval $(tmux show-environment -s | grep 'SSH_AUTH_SOCK=')
+    # update current shell to parent tmux shell (useful for new SSH connections, x forwarding, etc)
+    eval $(tmux show-environment -s | grep 'DISPLAY\|SSH_CONNECTION\|SSH_AUTH_SOCK')
 }
 
 # Prompt functions
@@ -83,7 +77,6 @@ function _init_agents {
     # take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
     if [ ! "$SSH_CONNECTION" ] && which gpg-connect-agent &>/dev/null; then
-        #eval `keychain --gpg2 --ignore-missing --quiet --nogui --noask --eval --noinherit --agents ssh`
 		export SSH_AUTH_SOCK=$(gpgconf --list-dirs | grep agent-ssh-socket | cut -f 2 -d :)
         gpg-connect-agent /bye
     fi
