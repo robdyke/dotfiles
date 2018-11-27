@@ -14,7 +14,6 @@ export SHELL=$(which bash)
 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
-_auto_tmux_attach
 
 # update the values of LINES and COLUMNS. Automatically
 shopt -s checkwinsize
@@ -33,21 +32,25 @@ _bash_history_sync() {
 	builtin history -r
 }
 
+_auto_tmux_attach
 _set_term_title
 
-# Update TMUX title with path
-function onprompt {
-    # should be first, others may change env
-    _tmux_update_env
+# before prompt (which is after command)
+function precmd() {
+	_bash_history_sync
+
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
-    _set_term_title
-	_bash_history_sync
-    _update_agents
 }
 
-PROMPT_COMMAND=onprompt
+# just before cmd is executed
+function preexec() {
+    # should be first, others may change env
+    _tmux_update_env
+    _set_term_title
+    _update_agents
+}
 
 PS1="\$(__exit_warn)\n\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
 
@@ -98,4 +101,5 @@ builtin history -c
 # reload history
 builtin history -r
 
+source ~/.bash-preexec.sh
 trap "~/.local/bin/cleanup-history ~/.history" EXIT

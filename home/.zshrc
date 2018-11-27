@@ -57,7 +57,8 @@ export SHELL=$(which zsh)
 _auto_tmux_attach
 _set_term_title
 
-precmd() {
+# before prompt (which is after command)
+function precmd() {
 	# reload history to get immediate update because my computer is fast, yo.
 	fc -R
 
@@ -66,7 +67,8 @@ precmd() {
     stty sane
 }
 
-preexec() {
+# just before cmd is executed
+function preexec() {
     # should be first, others may change env
     _tmux_update_env
     _set_term_title
