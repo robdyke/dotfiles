@@ -64,13 +64,13 @@ precmd() {
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
-    _set_term_title
-    _update_agents
 }
 
 preexec() {
-    # no need for another prompt before
+    # should be first, others may change env
     _tmux_update_env
+    _set_term_title
+    _update_agents
 }
 #
 # zsh uses zle, not readine so .inputrc is not used. Match bindings here:

@@ -37,12 +37,13 @@ _set_term_title
 
 # Update TMUX title with path
 function onprompt {
+    # should be first, others may change env
+    _tmux_update_env
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
     _set_term_title
 	_bash_history_sync
-    _tmux_update_env
     _update_agents
 }
 
