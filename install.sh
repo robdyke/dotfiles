@@ -140,3 +140,5 @@ else
     fi
 fi
 
+# now is a good time to associate the yubikey GPG private keys if it is connected
+gpg --card-status &> /dev/null || true
