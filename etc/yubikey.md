@@ -39,6 +39,31 @@ private keys hidden inside. This may be useful to create a secure Private CA,
 make client authentication easier or for physical access control. May be
 investigated later.
 
+Payload bootstrapper
+--------------------
+
+A bit like a [USB rubber ducky,](https://www.hak5.org/gear/usb-rubber-ducky)
+yubikeys can be used to deliver a payload. This is achieved by using the
+"static password" feature of the yubikey -- with a payload instead of a
+password. The payload has some limitations, though. The payload is limited to
+38 characters, and may be implicated by differences between keyboard layouts.
+
+I have my yubikey set up with the following payload:
+
+```
+wget -O.p https://<domain>/p;bash .p
+```
+
+Where `<domain>` is a website for my home network. The resultant URL serves a
+redirect to the raw `provision.sh` within this repository, such that a
+long-press on my yubikey will provision any ubuntu/mac/raspbian based computer
+with my dotfiles.
+
+Note that I could have used a pipe to eliminate the temporary file, but the
+pipe character has a different scan code across US/GB/Mac keyboard layouts
+making the payload less reliable. All characters in the above payload have
+consistent scancodes across all keyboards that I am likely to encounter.
+
 
 ------------------------------------------------------------------------
 
