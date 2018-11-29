@@ -4,7 +4,9 @@
 # N.B. PATH may not include ~/.local/bin if launched from window manager
 
 if [[ -x ~/.local/bin/alacritty ]]; then
-    exec ~/.local/bin/alacritty "$@"
+    # device pixel ratio scaling is annoying, disable
+    # https://github.com/jwilm/alacritty/issues/1501
+    WINIT_HIDPI_FACTOR=1.0 exec ~/.local/bin/alacritty "$@"
 elif which kitty &> /dev/null; then
     exec kitty "$@"
 elif which rxvt-unicode &> /dev/null; then
