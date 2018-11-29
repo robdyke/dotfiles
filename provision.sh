@@ -190,4 +190,8 @@ git pull --ff-only $ORIGIN master || true
 git branch --set-upstream-to=origin/master master
 
 # install dotfiles configuration
-./install.sh
+if [[ $(whoami) == naggie ]]; then
+    ./install-naggie.sh
+else
+    ./install.sh
+fi
