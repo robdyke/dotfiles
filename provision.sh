@@ -76,7 +76,7 @@ if [ $MACOS_DESKTOP ]; then
     # correct so alias works cross platform
     ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
 
-    sudo chsh -s /usr/local/bin/bash -u $(whoami)
+    sudo chsh -s /usr/local/bin/bash $(whoami)
 fi
 
 if [ $UBUNTU ]; then
