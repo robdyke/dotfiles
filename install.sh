@@ -128,11 +128,13 @@ if [ ! -S $(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) ] && 
     gpg-connect-agent /bye
 fi
 
+
 # copy terminal font and rebuild font cache if necessary
 if [ $PLATFORM == 'Darwin' ]; then
     mkdir -p ~/Library/Fonts
     cp etc/fonts/SourceCodePro-Regular.otf ~/Library/Fonts/
 else
+    # list fonts with fc-list
     mkdir -p ~/.fonts
     cp etc/fonts/SourceCodePro-Regular.otf ~/.fonts/
     if [ etc/fonts/SourceCodePro-Regular.otf -nt ~/.fonts/SourceCodePro-Regular.otf ]; then
