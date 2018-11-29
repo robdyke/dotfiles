@@ -132,11 +132,11 @@ fi
 # copy terminal font and rebuild font cache if necessary
 if [ $PLATFORM == 'Darwin' ]; then
     mkdir -p ~/Library/Fonts
-    cp etc/fonts/SourceCodePro-Regular.otf ~/Library/Fonts/
+    cp etc/fonts/* ~/Library/Fonts/
 else
     # list fonts with fc-list
     mkdir -p ~/.fonts
-    cp etc/fonts/SourceCodePro-Regular.otf ~/.fonts/
+    cp etc/fonts/* ~/.fonts/
     if [ etc/fonts/SourceCodePro-Regular.otf -nt ~/.fonts/SourceCodePro-Regular.otf ]; then
         fc-cache -f -v
     fi
