@@ -30,9 +30,9 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+Return exec naggie-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec naggie-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill

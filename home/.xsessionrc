@@ -1,0 +1,3 @@
+# see https://unix.stackexchange.com/questions/281858/difference-between-xinitrc-xsession-and-xsessionrc
+# this is sourced by the display manager scripts quite early. I use it to get ~/.local/bin in path
+. ~/.env.sh
