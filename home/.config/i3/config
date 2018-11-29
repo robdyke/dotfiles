@@ -158,3 +158,6 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# a good thing to start
+exec naggie-sensible-terminal
