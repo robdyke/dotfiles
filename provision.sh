@@ -65,7 +65,7 @@ if [ $MACOS_DESKTOP ]; then
 
     # Upgrade or install (logic necessary)
     packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget task htop gnupg2 bash-completion keychain iproute2mac tmpreaper \
-        coreutils sox ffmpeg httrack python ripgrep python go nvim fzf)
+        coreutils sox ffmpeg httrack python ripgrep python go nvim fzf pinentry-mac)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
