@@ -36,10 +36,10 @@ user_pref("layout.spellcheckDefault", 2);
 user_pref("signon.rememberSignons", false);
 
 // enable U2F auth (see https://www.yubico.com/2017/11/how-to-navigate-fido-u2f-in-firefox-quantum/ -- things will change)
-user_pref("security.webauth.u2f");
+user_pref("security.webauth.u2f", true);
 
 // don't ask google (or whoever) for search suggestions (which appear above historic pages!)
-user_pref("browser.search.suggest.enabled", "false");
+user_pref("browser.search.suggest.enabled", false);
 
 // tabs get an annoying rolodex/scroller when there are too many. This makes having too many tabs open worse. Disable it.
 user_pref("browser.tabs.tabMinWidth", 0);
