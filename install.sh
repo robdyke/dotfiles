@@ -84,6 +84,9 @@ if [ -n "$TMUX" ]; then
     tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null || true
 fi
 
+# also i3
+which i3-msg &>/dev/null && i3-msg reload &>/dev/null
+
 if [ $PLATFORM == 'Darwin' ]; then
     # 'Gah! Darwin!? XQuartz crashes in an annoying focus-stealing loop with this .xinirc. Removing...'
     rm ~/.xinitrc
