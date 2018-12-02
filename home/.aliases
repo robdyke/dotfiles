@@ -34,6 +34,7 @@ alias d='git diff'
 alias dt='git difftool -y'
 # task default command is "next", hence "n"
 alias n='task'
+alias p=pass
 alias in='task add +in'
 alias week='task end.after:today-1wk completed'
 alias day='task end.after:today completed'
