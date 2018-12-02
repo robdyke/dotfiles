@@ -180,6 +180,11 @@ bar {
     status_command i3status
 }
 
+# Set (solid colour) background
+# could go in .xsessionrc, I think. However, nice to have it here with the rest
+# of the theme.
+exec --no-startup-id xsetroot -solid "#333333"
+
 # a good thing to start
 exec naggie-sensible-terminal
 
