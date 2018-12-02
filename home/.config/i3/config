@@ -161,3 +161,6 @@ bar {
 
 # a good thing to start
 exec naggie-sensible-terminal
+
+# remove window titles on new windows (titles are unnecessary as content is obvious
+new_window 1pixel
