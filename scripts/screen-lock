@@ -1,0 +1,5 @@
+#!/bin/sh -e
+# Turn the screen off after a delay of 1hr post lock
+#sleep 3600; pgrep i3lock && xset dpms force off
+
+exec i3lock -t -i ~/.local/share/locked.png -c 000000
