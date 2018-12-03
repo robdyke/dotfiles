@@ -174,7 +174,7 @@ fi
 
 if [ $UBUNTU_DESKTOP ]; then
     # note i3-gaps may be used in future
-    sudo -E apt-get -y install firefox i3 i3status dmenu
+    sudo -E apt-get -y install firefox i3 i3status dmenu xautolock
 fi
 
 
