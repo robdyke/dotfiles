@@ -44,7 +44,7 @@ bindsym $mod+Shift+q kill
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#777777' -sf '#EEEEEE' -fn 'monospace-10' -p 'dmenu >'"
+bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#777777' -sf '#EEEEEE' -fn 'pango:Source Code Pro, 10' -p 'dmenu >'"
 
 # change focus
 bindsym $mod+j focus left
