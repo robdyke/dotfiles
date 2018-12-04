@@ -166,18 +166,21 @@ function cd {
 }
 
 function _cmd_timer_start {
-    CMD_START_TIMESTAMP=$(date +%s)
+    CMD_TIMER_START=$(date +%s)
 }
 
 # must be in precmd not prompt (which creates a subshell)
-function _cmd_timer_elapsed {
-    test -z $CMD_START_TIMESTAMP && return
-    CMD_END_TIMESTAMP=$(date +%s)
-    DURATION=$(($CMD_END_TIMESTAMP - $CMD_START_TIMESTAMP))
+# stops/resets timer and sets CMD_TIMER_PROMPT
+function _cmd_timer_end  {
+    unset CMD_TIMER_PROMPT
+    test -z $CMD_TIMER_START && return
+    CMD_TIMER_STOP=$(date +%s)
+    DURATION=$(($CMD_TIMER_STOP - $CMD_TIMER_START))
     (( $DURATION < 6 )) && return
 
-    printf "\n\33[36mCommand duration: %s\33[m" \
-        $(~/.local/bin/human-time $CMD_START_TIMESTAMP)
+    CMD_TIMER_PROMPT="\n\033[36mDuration: $(~/.local/bin/human-time $CMD_TIMER_START)\33[m"
 
     # precmd is not run if there is no cmd, so don't keep the timer running
     # note unset does not work due to scope
+    unset CMD_TIMER_START
+}
