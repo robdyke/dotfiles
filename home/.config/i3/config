@@ -192,7 +192,7 @@ exec naggie-sensible-terminal
 exec xautolock -time 60 -locker ~/.local/bin/screen-lock &
 
 # turn off screen after 2h of inactivity
-xset s 7200 7200
+exec xset s 7200 7200
 
 # remove window titles on new windows (titles are unnecessary as content is obvious
 new_window pixel 1
