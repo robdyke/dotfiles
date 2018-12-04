@@ -175,6 +175,8 @@ fi
 if [ $UBUNTU_DESKTOP ]; then
     # note i3-gaps may be used in future
     sudo -E apt-get -y install firefox i3 i3status dmenu xautolock
+    # stop default screen locker (xubuntu)
+    sudo -E apt-get -y purge light-locker
 fi
 
 
