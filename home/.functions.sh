@@ -165,3 +165,19 @@ function cd {
 	builtin cd "$@" && ls --color=auto
 }
 
+function _cmd_timer_start {
+    CMD_START_TIMESTAMP=$(date +%s)
+}
+
+# must be in precmd not prompt (which creates a subshell)
+function _cmd_timer_elapsed {
+    test -z $CMD_START_TIMESTAMP && return
+    CMD_END_TIMESTAMP=$(date +%s)
+    DURATION=$(($CMD_END_TIMESTAMP - $CMD_START_TIMESTAMP))
+    (( $DURATION < 6 )) && return
+
+    printf "\n\33[36mCommand duration: %s\33[m" \
+        $(~/.local/bin/human-time $CMD_START_TIMESTAMP)
+
+    # precmd is not run if there is no cmd, so don't keep the timer running
+    # note unset does not work due to scope

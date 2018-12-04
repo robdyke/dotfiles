@@ -42,6 +42,9 @@ function precmd() {
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
+
+    __exit_warn
+    _cmd_timer_elapsed
 }
 
 # just before cmd is executed
@@ -50,9 +53,10 @@ function preexec() {
     _tmux_update_env
     _set_term_title
     _update_agents
+    _cmd_timer_start
 }
 
-PS1="\$(__exit_warn)\n\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
+PS1="\n\$(__exit_warn)\n\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
 
 # slow completion things in background after bashrc is executed
 function _deferred {
