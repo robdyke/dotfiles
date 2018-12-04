@@ -176,9 +176,10 @@ function _cmd_timer_end  {
     test -z $CMD_TIMER_START && return
     CMD_TIMER_STOP=$(date +%s)
     DURATION=$(($CMD_TIMER_STOP - $CMD_TIMER_START))
-    (( $DURATION < 6 )) && return
+    (( $DURATION < 60 )) && return
 
-    CMD_TIMER_PROMPT="\n\033[36mDuration: $(~/.local/bin/human-time $CMD_TIMER_START)\33[m"
+    CMD_TIMER_PROMPT="Duration: $(~/.local/bin/human-time $CMD_TIMER_START)
+"
 
     # precmd is not run if there is no cmd, so don't keep the timer running
     # note unset does not work due to scope

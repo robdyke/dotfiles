@@ -56,7 +56,7 @@ function preexec() {
     _cmd_timer_start
 }
 
-PS1="\n\$(__exit_warn)\n\${CMD_TIMER_PROMPT}\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
+PS1="\n\$(__exit_warn)\n\[\e[36m\]\${CMD_TIMER_PROMPT}\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]\n\$ "
 
 # slow completion things in background after bashrc is executed
 function _deferred {

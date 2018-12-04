@@ -48,7 +48,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
 PROMPT="\$(__exit_warn)
-%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)%F{239} \$(date +%T)%f
+%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)%F{239} \$(date +%T)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?
@@ -65,6 +65,7 @@ function precmd() {
     # reset the terminal, in case something (such as cat-ing a binary file or
     # failed SSH) sets a strange mode
     stty sane
+    _cmd_timer_end
 }
 
 # just before cmd is executed
@@ -73,6 +74,7 @@ function preexec() {
     _tmux_update_env
     _set_term_title
     _update_agents
+    _cmd_timer_start
 }
 #
 # zsh uses zle, not readine so .inputrc is not used. Match bindings here:
