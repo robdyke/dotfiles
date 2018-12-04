@@ -188,11 +188,11 @@ exec --no-startup-id xsetroot -solid "#333333"
 # a good thing to start with
 exec naggie-sensible-terminal
 
-# lock screen after 1hr of inactivity (and then turn off display after another hour)
+# lock screen after 1hr of inactivity
 exec xautolock -time 60 -locker ~/.local/bin/screen-lock &
 
-# remove default screen timeout
-xset s 0 0
+# turn off screen after 2h of inactivity
+xset s 7200 7200
 
 # remove window titles on new windows (titles are unnecessary as content is obvious
 new_window pixel 1
