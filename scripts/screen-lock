@@ -1,4 +1,11 @@
 #!/bin/sh -e
+# fork, exec and detach i3lock
 # Turn the screen off after a delay of 1hr post lock
-(sleep 3600; pgrep i3lock && xset dpms force off)&
-exec i3lock -t -i ~/.local/share/locked.png -c 000000
+(exec i3lock -t -i ~/.local/share/locked.png -c 000000)&
+
+# wait and power off displays if i3lock is running, stopping any similar
+# concurrent timers that may turn off the displays sooner than expected if the
+# display has been locked more than once in the last hour
+killall screen-lock
+sleep 3600
+pgrep i3lock && xset dpms force off
