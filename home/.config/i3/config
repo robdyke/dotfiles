@@ -191,7 +191,8 @@ exec naggie-sensible-terminal
 # lock screen after 1hr of inactivity
 exec xautolock -time 60 -locker ~/.local/bin/screen-lock &
 
-# turn off screen after 2h of inactivity
+# turn off screen after 2h of inactivity, disabling dpms
+exec xset -dpms
 exec xset s 7200 7200
 
 # remove window titles on new windows (titles are unnecessary as content is obvious
