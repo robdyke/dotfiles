@@ -40,6 +40,9 @@ else
     exit 2
 fi
 
+# where to install bare EXEs (or softare compile from src)
+PREFIX=/usr/local/bin
+
 # tmpreaper tries to do a post-install "configuration" screen to warn the user.
 export DEBIAN_FRONTEND=noninteractive
 
@@ -86,65 +89,65 @@ if [ $UBUNTU ]; then
 
     # ripgrep
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
-        | tar -C ~/.local/bin --strip=1 -xzf - ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
+        | tar -C $PREFIX --strip=1 -xzf - ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
 
-    if ! sha256sum ~/.local/bin/rg | grep -q 6a618aa3ae055866e99ea633079e8eff8623bdfe3209fe3bddf20bd4451b2b08; then
-        chmod -x ~/.local/bin/rg
-        echo "Corrupt or compromised rg binary detected! See ~/.local/bin/"
+    if ! sha256sum $PREFIX/rg | grep -q 6a618aa3ae055866e99ea633079e8eff8623bdfe3209fe3bddf20bd4451b2b08; then
+        chmod -x $PREFIX/rg
+        echo "Corrupt or compromised rg binary detected! See $PREFIX/"
         exit 4
     fi
 
     # FZF
     curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
-        | tar xzf - -C ~/.local/bin
+        | tar xzf - -C $PREFIX
 
-    if ! sha256sum ~/.local/bin/fzf | grep -q 8ddd8339b522fed766d45688432d74cdf4ecae384417d39be326ed24565b20ce; then
-        chmod -x ~/.local/bin/fzf
-        echo "Corrupt or compromised fzf binary detected! See ~/.local/bin/"
+    if ! sha256sum $PREFIX/fzf | grep -q 8ddd8339b522fed766d45688432d74cdf4ecae384417d39be326ed24565b20ce; then
+        chmod -x $PREFIX/fzf
+        echo "Corrupt or compromised fzf binary detected! See $PREFIX/"
         exit 4
     fi
 
     # alacritty
     curl -L https://github.com/jwilm/alacritty/releases/download/v0.2.3/Alacritty-v0.2.3-x86_64.tar.gz \
-        | tar xzf - -C ~/.local/bin
+        | tar xzf - -C $PREFIX
 
-    if ! sha256sum ~/.local/bin/alacritty | grep -q e0d913e422dce0674061ad412c0cd1dfd50eb069b436433a03cf96e85bb4720f; then
-        chmod -x ~/.local/bin/alacritty
-        echo "Corrupt or compromised alacritty binary detected! See ~/.local/bin/"
+    if ! sha256sum $PREFIX/alacritty | grep -q e0d913e422dce0674061ad412c0cd1dfd50eb069b436433a03cf96e85bb4720f; then
+        chmod -x $PREFIX/alacritty
+        echo "Corrupt or compromised alacritty binary detected! See $PREFIX/"
         exit 4
     fi
 
     # neovim (don't write directly, swap atomically so running nvim won't block)
-    curl -L https://github.com/neovim/neovim/releases/download/v0.3.1/nvim.appimage > ~/.local/bin/nvim.new
-    chmod +x ~/.local/bin/nvim.new
+    curl -L https://github.com/neovim/neovim/releases/download/v0.3.1/nvim.appimage > $PREFIX/nvim.new
+    chmod +x $PREFIX/nvim.new
 
-    if ! sha256sum ~/.local/bin/nvim.new | grep -q ade95e2e2ba025827151c322bf28814f52260dbeafba7cf185d46511eceedbe9; then
-        chmod -x ~/.local/bin/nvim.new
-        echo "Corrupt or compromised nvim binary detected! See ~/.local/bin/nvim.new"
+    if ! sha256sum $PREFIX/nvim.new | grep -q ade95e2e2ba025827151c322bf28814f52260dbeafba7cf185d46511eceedbe9; then
+        chmod -x $PREFIX/nvim.new
+        echo "Corrupt or compromised nvim binary detected! See $PREFIX/nvim.new"
         exit 4
     fi
 
-    mv ~/.local/bin/nvim.new ~/.local/bin/nvim
+    mv $PREFIX/nvim.new $PREFIX/nvim
 fi
 
 if [ $RASPBIAN ]; then
     # ripgrep
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz \
-        | tar -C ~/.local/bin --strip=1 -xzf - ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
+        | tar -C $PREFIX --strip=1 -xzf - ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
 
-    if ! sha256sum ~/.local/bin/rg | grep -q 17825561dddf366fc86bcde47e0ba35ab47b03145405174ebde697cb446e041f; then
-        chmod -x ~/.local/bin/rg
-        echo "Corrupt or compromised rg binary detected! See ~/.local/bin/"
+    if ! sha256sum $PREFIX/rg | grep -q 17825561dddf366fc86bcde47e0ba35ab47b03145405174ebde697cb446e041f; then
+        chmod -x $PREFIX/rg
+        echo "Corrupt or compromised rg binary detected! See $PREFIX/"
         exit 4
     fi
 
     # FZF
     curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz \
-        | tar -C ~/.local/bin --strip=1 -xzf - fzf
+        | tar -C $PREFIX --strip=1 -xzf - fzf
 
-    if ! sha256sum ~/.local/bin/fzf | grep -q 6113f87573163cd711e29244992b5321424f9ac8ecf57f2ae6a98d738d5361a4; then
-        chmod -x ~/.local/bin/fzf
-        echo "Corrupt or compromised fzf binary detected! See ~/.local/bin/"
+    if ! sha256sum $PREFIX/fzf | grep -q 6113f87573163cd711e29244992b5321424f9ac8ecf57f2ae6a98d738d5361a4; then
+        chmod -x $PREFIX/fzf
+        echo "Corrupt or compromised fzf binary detected! See $PREFIX/"
         exit 4
     fi
 fi
