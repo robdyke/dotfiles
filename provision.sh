@@ -40,18 +40,40 @@ else
     exit 2
 fi
 
-# where to install bare EXEs (or softare compile from src)
-PREFIX=/usr/local/bin
-
 # tmpreaper tries to do a post-install "configuration" screen to warn the user.
 export DEBIAN_FRONTEND=noninteractive
 
 # packages are installed via the stock system package manager unless a more
 # recent version is available elsewhere.
 
+# download file if it doesn't exist, then check the sha256sum matches to
+# mitigate forward-looking supply chain attacks. Exit script on fail.
+function download {
+    URL="$1"
+    SHA256SUM="$2"
+    DIR="$3"
 
-# for local installs, added to PATH with env.sh
+    FILENAME="$(echo $URL | rev | cut -d / -f 1 | rev)"
+    TARGET="${DIR}/${FILENAME}"
+
+    if [ ! -f "$TARGET" ]; then
+        curl -L "$URL" > "$TARGET"
+    fi
+
+    if ! sha256sum $TARGET | grep -q $SHA256SUM; then
+        echo "Corrupt or compromised download detected! See $TARGET"
+        exit 4
+    fi
+}
+
+
+# where to install bare EXEs (or softare compile from src)
+BIN_DIR=/usr/local/bin
+CACHE_DIR=~/.cache/dotfiles
+mkdir -p $CACHE
+# for local installs -- scripts, added to PATH with env.sh
 mkdir -p ~/.local/bin
+mkdir -p ~/.local/src
 
 if [ $MACOS_DESKTOP ]; then
     if [ ! -f /usr/local/bin/brew ]; then
@@ -88,18 +110,15 @@ if [ $UBUNTU ]; then
     sudo -E apt-get -y install language-pack-en curl
 
     # ripgrep
-    curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
-        | tar -C $PREFIX --strip=1 -xzf - ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
+    download https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
+        c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97 \
+        "$CACHE_DIR"
 
-    if ! sha256sum $PREFIX/rg | grep -q 6a618aa3ae055866e99ea633079e8eff8623bdfe3209fe3bddf20bd4451b2b08; then
-        chmod -x $PREFIX/rg
-        echo "Corrupt or compromised rg binary detected! See $PREFIX/"
-        exit 4
-    fi
+    tar -C "${PREFIX}/bin/" --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
 
     # FZF
-    curl -L https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
-        | tar xzf - -C $PREFIX
+    download https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
+        "${PREFIX}/src/" \
 
     if ! sha256sum $PREFIX/fzf | grep -q 8ddd8339b522fed766d45688432d74cdf4ecae384417d39be326ed24565b20ce; then
         chmod -x $PREFIX/fzf
