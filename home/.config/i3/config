@@ -189,7 +189,7 @@ exec --no-startup-id xsetroot -solid "#333333"
 exec naggie-sensible-terminal
 
 # lock screen after 1hr of inactivity
-exec xautolock -time 60 -locker ~/.local/bin/screen-lock &
+exec xautolock -time 60 -locker ~/.local/bin/screen-lock
 
 # turn off screen after 2h of inactivity, disabling dpms
 # note that it's also necessary to remove some annoying packages that also try
