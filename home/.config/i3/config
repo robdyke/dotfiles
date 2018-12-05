@@ -192,6 +192,8 @@ exec naggie-sensible-terminal
 exec xautolock -time 60 -locker ~/.local/bin/screen-lock &
 
 # turn off screen after 2h of inactivity, disabling dpms
+# note that it's also necessary to remove some annoying packages that also try
+# to control this. See provision.sh.
 exec xset -dpms
 exec xset s 7200 7200
 
