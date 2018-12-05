@@ -114,17 +114,15 @@ if [ $UBUNTU ]; then
         c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97 \
         "$CACHE_DIR"
 
-    tar -C "${PREFIX}/bin/" --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
+    tar -C "${BIN_DIR}" --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
 
     # FZF
     download https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
-        "${PREFIX}/src/" \
+        3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8  \
+        "$CACHE_DIR"
 
-    if ! sha256sum $PREFIX/fzf | grep -q 8ddd8339b522fed766d45688432d74cdf4ecae384417d39be326ed24565b20ce; then
-        chmod -x $PREFIX/fzf
-        echo "Corrupt or compromised fzf binary detected! See $PREFIX/"
-        exit 4
-    fi
+    tar -C "$BIN_DIR" xzf "${CACHE_DIR}/fzf-0.17.5-linux_amd64.tgz"
+
 
     # alacritty
     curl -L https://github.com/jwilm/alacritty/releases/download/v0.2.3/Alacritty-v0.2.3-x86_64.tar.gz \
