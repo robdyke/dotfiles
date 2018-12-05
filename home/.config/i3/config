@@ -191,6 +191,8 @@ exec naggie-sensible-terminal
 # lock screen after 1hr of inactivity
 exec xautolock -time 60 -locker ~/.local/bin/screen-lock
 
+exec nm-applet
+
 # turn off screen after 2h of inactivity, disabling dpms
 # note that it's also necessary to remove some annoying packages that also try
 # to control this. See provision.sh.
