@@ -44,6 +44,7 @@ bindsym $mod+Shift+q kill
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+bindsym $mod+space exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#777777' -sf '#EEEEEE' -fn 'pango:Source Code Pro, 10' -p 'dmenu >'"
 bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#777777' -sf '#EEEEEE' -fn 'pango:Source Code Pro, 10' -p 'dmenu >'"
 
 # change focus
@@ -88,7 +89,8 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# I use this for dmenu, like it is on macos
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
