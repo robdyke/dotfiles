@@ -23,7 +23,7 @@ ignore = [
     # changing into relative directories
     "^cd [^\~/]",
     # taskwarrior operations (+ alias)
-    r"^task",
+    r"^task(?! context)",
     r"^n ",
     r"^week",
     r"^day",
