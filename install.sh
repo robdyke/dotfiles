@@ -5,10 +5,6 @@ cd $(dirname $0)
 
 PLATFORM=$(uname)
 
-# task context state is stored in config file, which is about to get clobbered
-# so remember it to restore later.
-which task &>/dev/null && TASK_CONTEXT=$(task _get rc.context)
-
 test -d ~/.vim/ && rm -rf ~/.vim/
 test -d ~/.zsh/ && rm -rf ~/.zsh/
 test -d ~/.fzf/ && rm -rf ~/.fzf/
@@ -110,9 +106,6 @@ fi
 
 touch ~/.history
 chmod 600 ~/.history
-
-# restore task context (maybe)
-test $TASK_CONTEXT && task context $TASK_CONTEXT &>/dev/null
 
 # set caps lock to act as esc if possible
 test $DISPLAY && which dconf &> /dev/null && \
