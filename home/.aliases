@@ -33,12 +33,10 @@ alias a='git add'
 alias d='git diff'
 alias dt='git difftool -y'
 # task default command is "next", hence "n"
-alias n='task'
+alias task="dstask"
+alias n='dstask'
+alias t="dstask"
 alias p=pass
-alias in='task add +in'
-alias week='task end.after:today-1wk completed'
-alias day='task end.after:today completed'
-alias t="tail -n100 -f"
 alias TODO='rg TODO'
 # replace a symlink with the file it points to
 alias rewrite="sed -i ''"
