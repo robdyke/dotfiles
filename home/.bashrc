@@ -61,28 +61,6 @@ PS1="
 \[\e[36m\]\${CMD_TIMER_PROMPT}\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]
 \$ "
 
-# slow completion things in background after bashrc is executed
-function _deferred {
-	# linux / homebrew completions (package: bash-completion)
-	[ -f /etc/bash_completion ] && source /etc/bash_completion
-    [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
-	# latest git completion and PS1
-	source ~/.git-completion.sh
-	source ~/.git-prompt.sh
-    # fish/zsh already have this
-    which task > /dev/null && source ~/.task-completions.sh
-
-	# map completion for aliases that need them
-	complete -o default -o nospace -F _git g
-	complete -o default -o nospace -F _git_diff d
-	complete -o default -o nospace -F _git_log l
-	complete -o default -o nospace -F _git_status s
-	complete -o default -o nospace -F _task n
-
-	# hardcoded ssh completions (known_hosts is encrypted mostly)
-	#complete -o default -W 'example.com example.net' ssh scp ping
-}
 
 # fix backspace on some terminals
 stty erase ^?
@@ -93,13 +71,28 @@ which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
 
+# linux / homebrew completions (package: bash-completion)
+[ -f /etc/bash_completion ] && source /etc/bash_completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# latest git completion and PS1
+source ~/.git-completion.sh
+source ~/.git-prompt.sh
+# fish/zsh already have this
+which task > /dev/null && source ~/.task-completions.sh
+
+# map completion for aliases that need them
+complete -o default -o nospace -F _git g
+complete -o default -o nospace -F _git_diff d
+complete -o default -o nospace -F _git_log l
+complete -o default -o nospace -F _git_status s
+complete -o default -o nospace -F _task n
+
+# hardcoded ssh completions (known_hosts is encrypted mostly)
+#complete -o default -W 'example.com example.net' ssh scp ping
+
 source ~/.fzf/shell/completion.bash
 source ~/.fzf/shell/key-bindings.bash
-
-# run the deferred function in the background in this context after bashrc
-# http://superuser.com/questions/267771/bash-completion-makes-bash-start-slowly
-trap '_deferred 2>/dev/null; trap USR1' USR1
-{ sleep 0.1 ; builtin kill -USR1 $$ ; } & disown
 
 # clear history
 ~/.local/bin/cleanup-history ~/.history
