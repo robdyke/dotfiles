@@ -67,7 +67,6 @@ function download {
     fi
 }
 
-
 # where to install bare EXEs (or softare compile from src)
 BIN_DIR=/usr/local/bin
 CACHE_DIR=~/.cache/dotfiles
