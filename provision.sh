@@ -18,8 +18,9 @@ ORIGIN=https://github.com/naggie/dotfiles.git
 # * ripgrep
 # * FZF
 # * dstask
-# * Pass
-# * Bash/zsh
+# * pass
+# * bash/zsh
+# * gnupg2
 
 set -e
 set -x
@@ -97,6 +98,14 @@ if [ $MACOS_DESKTOP ]; then
 
     python3 -m pip install --upgrade pip
     python3 -m pip install --upgrade ansible ipython
+
+    # dstask
+    download https://github.com/naggie/dstask/releases/download/v0.4/dstask-darwin-amd64 \
+        23368590480ba587b9b8fce5af06672ddb643c606de20e9850886d474b5604c7 \
+        "${CACHE_DIR}"
+
+    mv "${CACHE_DIR}/dstask-darwin-amd64" /usr/local/bin/
+    chmod +x /usr/local/bin/dstask
 
     # correct so alias works cross platform
     ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
