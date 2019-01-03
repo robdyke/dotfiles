@@ -118,6 +118,14 @@ if [ $UBUNTU ]; then
     sudo -E apt-get -y update
     sudo -E apt-get -y install language-pack-en curl
 
+    # dstask
+    download https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-amd64 \
+        6b62fd7d1982c088f5303bc0b967197003d2c0a878017e2eccad35d8ef8cb852 \
+        "${CACHE_DIR}"
+
+    mv "${CACHE_DIR}/dstask-linux-amd64" /usr/local/bin/
+    chmod +x /usr/local/bin/dstask
+
     # ripgrep
     download https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
         c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97 \
@@ -157,6 +165,14 @@ if [ $UBUNTU ]; then
 fi
 
 if [ $RASPBIAN ]; then
+    # dstask
+    download https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-arm7 \
+        4797fb280b29111f91979e3a711de26f32170ec96713ed8d111f0957d13f49f6 \
+        "${CACHE_DIR}"
+
+    mv "${CACHE_DIR}/dstask-linux-arm7" /usr/local/bin/
+    chmod +x /usr/local/bin/dstask
+
     # ripgrep
     curl -L https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz \
         | tar -C $PREFIX --strip=1 -xzf - ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
