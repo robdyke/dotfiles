@@ -7,7 +7,7 @@
 | Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                                                                                        |
 | Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
 | SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
-| Task management        | [Taskwarrior][10]                   | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
+| Task management        | [dstask][10]                        | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
 | Security device        | [Yubikey 5][13]                     | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                                                                                |
 | Note taking            | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes. Yet another mental offload.                                                |
 | Personal cryptography  | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
@@ -24,7 +24,7 @@
 [5]: https://github.com/tmux/tmux
 [7]: https://www.gnu.org/software/bash/
 [8]: https://www.zsh.org/
-[10]: https://taskwarrior.org/
+[10]: https://callanbryant.co.uk/post/dstask-a-taskwarrior-alternative/
 [11]: https://github.com/sheerun/vim-polyglot
 [12]: https://github.com/morhetz/gruvbox
 [13]: https://www.yubico.com/product/yubikey-5-nfc/
@@ -131,30 +131,6 @@ Ubuntu 17.04 does not have curl by default.
 ```bash
 wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
 ```
-
-# Task management
-
-I've tried quite a few TODO systems including simple text files, Todoist,
-Trello, Github issues, JIRA, habitica and taskwarrior. The key is
-not to use one system for everything. I've settled on:
-
-1. Github issues for personal projects (also using the rest of github)
-2. JIRA (with kanban) for work (not by choice but works well if set up with a
-   good workflow, slow)
-3. Taskwarrior for top level tasks and work logs, with contexts for
-   home/work/inbox and detail sometimes tracked separately in (1) and (2).
-   Loosely following GTD.
-4. Text files to track ideas and proposals
-
-I rely on Taskwarrior to keep a report of what I've done. I kept a log text
-file for 3.5 years but stopped because taskwarrior can generate reports.
-
-In my opinion the key for using taskwarrior effectively is reducing noise via
-contexts, start/stop, scheduling and tagging. I keep a separate context for
-work, home, someday; I defer tasks using the wait/schedule/due attributes. Also
-I think it's important not to put tasks on the queue for the sake of it. Only
-put tasks on the queue if you need to track them.
-
 
 # Latency and speed
 
