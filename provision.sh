@@ -3,12 +3,14 @@
 
 ORIGIN=https://github.com/naggie/dotfiles.git
 
-# Installation: No PPAs.
-# Native package manager or local checksummed appimage/exe (.local/bin) (from
-# tar if necessary). No magic scripts, except homebrew.
+# Installation method preference:
 
-# Note that tar commands, reading from stdin are quite brittle. Removing or
-# adding a - prefix to the flags will break things.
+# 1. Native package manager
+# 2. Native checksummed binary (via download_to_cache_dir)
+# 3. Ad-hoc checksummed binary install from tarball
+# 4. Ad-hoc checksummed install from source
+
+# global install preferred
 
 # local or global? same for pip with install --user
 
@@ -49,7 +51,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # download file if it doesn't exist, then check the sha256sum matches to
 # mitigate forward-looking supply chain attacks. Exit script on fail.
-function download {
+function download_to_cache_dir {
     URL="$1"
     SHA256SUM="$2"
     DIR="$3"
@@ -99,10 +101,7 @@ if [ $MACOS_DESKTOP ]; then
     python3 -m pip install --upgrade ansible ipython
 
     # dstask
-    download https://github.com/naggie/dstask/releases/download/v0.4/dstask-darwin-amd64 \
-        23368590480ba587b9b8fce5af06672ddb643c606de20e9850886d474b5604c7 \
-        "${CACHE_DIR}"
-
+    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.4/dstask-darwin-amd64 23368590480ba587b9b8fce5af06672ddb643c606de20e9850886d474b5604c7
     mv "${CACHE_DIR}/dstask-darwin-amd64" /usr/local/bin/
     chmod +x /usr/local/bin/dstask
 
@@ -118,56 +117,32 @@ if [ $UBUNTU ]; then
     sudo -E apt-get -y install language-pack-en curl
 
     # dstask
-    download https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-amd64 \
-        6b62fd7d1982c088f5303bc0b967197003d2c0a878017e2eccad35d8ef8cb852 \
-        "${CACHE_DIR}"
-
+    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-amd64 6b62fd7d1982c088f5303bc0b967197003d2c0a878017e2eccad35d8ef8cb852
     mv "${CACHE_DIR}/dstask-linux-amd64" /usr/local/bin/
     chmod +x /usr/local/bin/dstask
 
     # ripgrep
-    download https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
-        c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97 \
-        "$CACHE_DIR"
-
+    download_to_cache_dir https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97
     tar -C "${BIN_DIR}" --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
 
     # FZF
-    download https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
-        3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8  \
-        "$CACHE_DIR"
-
+    download_to_cache_dir https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz 3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8
     tar -C "$BIN_DIR" xzf "${CACHE_DIR}/fzf-0.17.5-linux_amd64.tgz"
 
 
     # alacritty
-    curl -L https://github.com/jwilm/alacritty/releases/download/v0.2.3/Alacritty-v0.2.3-x86_64.tar.gz \
-        | tar xzf - -C $PREFIX
-
-    if ! sha256sum $PREFIX/alacritty | grep -q e0d913e422dce0674061ad412c0cd1dfd50eb069b436433a03cf96e85bb4720f; then
-        chmod -x $PREFIX/alacritty
-        echo "Corrupt or compromised alacritty binary detected! See $PREFIX/"
-        exit 4
-    fi
+    download_to_cache_dir https://github.com/jwilm/alacritty/releases/download/v0.2.4/Alacritty-v0.2.4-x86_64.tar.gz 1de78461e75527161f95b20406302baf4975d98ee9113af7cdf23a63aa0f05b1
+    tar -C $BIN_DIR xzf "${CACHE_DIR}/Alacritty-v0.2.4-x86_64.tar.gz"
 
     # neovim (don't write directly, swap atomically so running nvim won't block)
     curl -L https://github.com/neovim/neovim/releases/download/v0.3.1/nvim.appimage > $PREFIX/nvim.new
     chmod +x $PREFIX/nvim.new
-
-    if ! sha256sum $PREFIX/nvim.new | grep -q ade95e2e2ba025827151c322bf28814f52260dbeafba7cf185d46511eceedbe9; then
-        chmod -x $PREFIX/nvim.new
-        echo "Corrupt or compromised nvim binary detected! See $PREFIX/nvim.new"
-        exit 4
-    fi
-
     mv $PREFIX/nvim.new $PREFIX/nvim
 fi
 
 if [ $RASPBIAN ]; then
     # dstask
-    download https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-arm7 \
-        4797fb280b29111f91979e3a711de26f32170ec96713ed8d111f0957d13f49f6 \
-        "${CACHE_DIR}"
+    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-arm7 4797fb280b29111f91979e3a711de26f32170ec96713ed8d111f0957d13f49f6
 
     mv "${CACHE_DIR}/dstask-linux-arm7" /usr/local/bin/
     chmod +x /usr/local/bin/dstask
