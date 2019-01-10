@@ -54,10 +54,9 @@ export DEBIAN_FRONTEND=noninteractive
 function download_to_cache_dir {
     URL="$1"
     SHA256SUM="$2"
-    DIR="$3"
 
     FILENAME="$(echo $URL | rev | cut -d / -f 1 | rev)"
-    TARGET="${DIR}/${FILENAME}"
+    TARGET="${CACHE_DIR}/${FILENAME}"
 
     if [ ! -f "$TARGET" ] || ! sha256sum $TARGET | grep -q $SHA256SUM; then
         curl -L "$URL" > "$TARGET"
@@ -72,7 +71,7 @@ function download_to_cache_dir {
 # where to install bare EXEs (or softare compile from src)
 BIN_DIR=/usr/local/bin
 CACHE_DIR=~/.cache/dotfiles
-mkdir -p $CACHE
+mkdir -p $CACHE_DIR
 # for local installs -- scripts, added to PATH with env.sh
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/src
@@ -102,8 +101,8 @@ if [ $MACOS_DESKTOP ]; then
 
     # dstask
     download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.4/dstask-darwin-amd64 23368590480ba587b9b8fce5af06672ddb643c606de20e9850886d474b5604c7
-    mv "${CACHE_DIR}/dstask-darwin-amd64" /usr/local/bin/
-    chmod +x /usr/local/bin/dstask
+    chmod +x "${CACHE_DIR}/dstask-darwin-amd64"
+    sudo mv "${CACHE_DIR}/dstask-darwin-amd64" /usr/local/bin/dstask
 
     # correct so alias works cross platform
     ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
@@ -118,41 +117,41 @@ if [ $UBUNTU ]; then
 
     # dstask
     download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-amd64 6b62fd7d1982c088f5303bc0b967197003d2c0a878017e2eccad35d8ef8cb852
-    mv "${CACHE_DIR}/dstask-linux-amd64" /usr/local/bin/
-    chmod +x /usr/local/bin/dstask
+    chmod +x "${CACHE_DIR}/dstask-linux-amd64"
+    sudo mv "${CACHE_DIR}/dstask-linux-amd64" /usr/local/bin/dstask
 
     # ripgrep
     download_to_cache_dir https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97
-    tar -C "${BIN_DIR}" --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
+    sudo tar -C "${BIN_DIR}" --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
 
     # FZF
     download_to_cache_dir https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz 3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8
-    tar -C "$BIN_DIR" -xzf "${CACHE_DIR}/fzf-0.17.5-linux_amd64.tgz"
+    sudo tar -C "$BIN_DIR" -xzf "${CACHE_DIR}/fzf-0.17.5-linux_amd64.tgz"
 
 
     # alacritty
     download_to_cache_dir https://github.com/jwilm/alacritty/releases/download/v0.2.4/Alacritty-v0.2.4-x86_64.tar.gz 1de78461e75527161f95b20406302baf4975d98ee9113af7cdf23a63aa0f05b1
-    tar -C $BIN_DIR -xzf "${CACHE_DIR}/Alacritty-v0.2.4-x86_64.tar.gz"
+    sudo tar -C $BIN_DIR -xzf "${CACHE_DIR}/Alacritty-v0.2.4-x86_64.tar.gz"
 
     # neovim (don't write directly, swap atomically so running nvim won't block)
     download_to_cache_dir https://github.com/neovim/neovim/releases/download/v0.3.3/nvim.appimage 6c937c0a2b37e4ad99bae2f37f461ae47a590e62bddecf903b0b5bafe0eaaadb
     chmod +x "${CACHE_DIR}/nvim.appimage"
-    mv +x "${CACHE_DIR}/nvim.appimage" "${BIN_DIR}/"
+    sudo mv "${CACHE_DIR}/nvim.appimage" "${BIN_DIR}/nvim"
 fi
 
 if [ $RASPBIAN ]; then
     # dstask
     download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.4/dstask-linux-arm7 4797fb280b29111f91979e3a711de26f32170ec96713ed8d111f0957d13f49f6
-    mv "${CACHE_DIR}/dstask-linux-arm7" /usr/local/bin/
-    chmod +x /usr/local/bin/dstask
+    chmod +x "${CACHE_DIR}/dstask-linux-arm7"
+    sudo mv "${CACHE_DIR}/dstask-linux-arm7" /usr/local/bin/dstask
 
     # ripgrep
     download_to_cache_dir https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz 5909eb4246f8e4936a2d09d0b38c647733578f78f6aa5ace49027c1b7c4bf0e1
-    tar -C $BIN_DIR --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz" ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
+    sudo tar -C $BIN_DIR --strip=1 -xzf "${CACHE_DIR}/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz" ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
 
     # FZF
     download_to_cache_dir https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz
-    tar -C $BIN_DIR --strip=1 -xzf "${CACHE_DIR}/fzf-0.17.5-linux_arm5.tgz" fzf
+    sudo tar -C $BIN_DIR --strip=1 -xzf "${CACHE_DIR}/fzf-0.17.5-linux_arm5.tgz" fzf
 fi
 
 if [ $UBUNTU ] || [ $RASPBIAN ]; then
