@@ -71,25 +71,30 @@ which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
 
+source ~/.git-prompt.sh
+
 # linux / homebrew completions (package: bash-completion)
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
-# latest git completion and PS1
+# included completions
 source ~/.git-completion.sh
-source ~/.git-prompt.sh
+source ~/.fzf/shell/completion.bash
+source ~/.fzf/shell/key-bindings.bash
+source ~/.dstask-completions.sh
 
 # map completion for aliases that need them
 complete -o default -o nospace -F _git g
 complete -o default -o nospace -F _git_diff d
 complete -o default -o nospace -F _git_log l
 complete -o default -o nospace -F _git_status s
+complete -F _dstask task
+complete -F _dstask n
+complete -F _dstask t
 
 # hardcoded ssh completions (known_hosts is encrypted mostly)
 #complete -o default -W 'example.com example.net' ssh scp ping
 
-source ~/.fzf/shell/completion.bash
-source ~/.fzf/shell/key-bindings.bash
 
 # clear history
 ~/.local/bin/cleanup-history ~/.history
