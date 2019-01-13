@@ -33,6 +33,10 @@ bindkey -e
 # Completion
 autoload -U compinit && compinit
 
+source ~/.zsh/.dstask-zsh-completions.sh
+compdef t=dstask
+compdef n=dstask
+
 # Syntax highlighting
 #git@github.com:zsh-users/zsh-syntax-highlighting.git
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
