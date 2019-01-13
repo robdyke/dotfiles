@@ -71,8 +71,6 @@ which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
 
-source ~/.git-prompt.sh
-
 # linux / homebrew completions (package: bash-completion)
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion

@@ -17,7 +17,6 @@ git subtree pull -m 'update vim fetch' --squash --prefix=home/.vim/bundle/vim-fe
 
 # misc
 git subtree pull -m 'update powerline-fonts' --squash --prefix=etc/powerline-patched https://github.com/Lokaltog/powerline-fonts.git master
-git subtree pull -m 'update zsh-git-prompt' --squash --prefix=home/.zsh/zsh-git-prompt https://github.com/olivierverdier/zsh-git-prompt.git master
 git subtree pull -m 'update zsh-syntax-highlighting' --squash --prefix=home/.zsh/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git master
 git subtree pull -m 'update zsh-history-substring-search' --squash --prefix=home/.zsh/zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search.git master
 git subtree pull -m 'update FZF bindings'  --squash --prefix=home/.fzf https://github.com/junegunn/fzf.git master

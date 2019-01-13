@@ -21,11 +21,6 @@ setopt PROMPT_SUBST
 autoload -U colors && colors
 # note HISTORY_IGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 
-# git
-# git@github.com:olivierverdier/zsh-git-prompt.git
-ZSH_THEME_GIT_PROMPT_CACHE=1
-source ~/.zsh/zsh-git-prompt/zshrc.sh
-
 # zsh will use vi bindings if you have vim as the editor. I want emacs.
 # zsh does not use gnu readline, but zle
 bindkey -e

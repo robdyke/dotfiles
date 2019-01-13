@@ -7,11 +7,11 @@ function _tmux_update_env {
     eval $(tmux show-environment -s | grep 'DISPLAY\|SSH_CONNECTION\|SSH_AUTH_SOCK')
 }
 
-# Prompt functions
-# make sure the function exists, even if it wasn't included
-# this is overridden later
+# really simple git prompt, just showing branch which is all I want. Replaced
+# zsh-git-prompt as that displayed the wrong branch is some cases. I didn't
+# need the other features.
 function __git_ps1 {
-	return
+    git rev-parse --abbrev-ref HEAD 2>/dev/null || true
 }
 
 function __p4_ps1 {
