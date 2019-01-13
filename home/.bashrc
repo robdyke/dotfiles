@@ -81,14 +81,13 @@ source ~/.git-prompt.sh
 source ~/.git-completion.sh
 source ~/.fzf/shell/completion.bash
 source ~/.fzf/shell/key-bindings.bash
-source ~/.dstask-completions.sh
+source ~/.dstask-bash-completions.sh
 
 # map completion for aliases that need them
 complete -o default -o nospace -F _git g
 complete -o default -o nospace -F _git_diff d
 complete -o default -o nospace -F _git_log l
 complete -o default -o nospace -F _git_status s
-complete -F _dstask task
 complete -F _dstask n
 complete -F _dstask t
 

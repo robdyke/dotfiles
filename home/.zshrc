@@ -34,6 +34,10 @@ bindkey -e
 autoload -U compinit && compinit
 
 source ~/.zsh/.dstask-zsh-completions.sh
+compdef g=_git
+compdef d=_git_diff d
+compdef l=_git_log l
+compdef s=_git_status s
 compdef t=dstask
 compdef n=dstask
 
