@@ -5,7 +5,7 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
-_init_agents
+_update_agents
 
 # note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 export HISTCONTROL=ignoredups:ignorespace:erasedups

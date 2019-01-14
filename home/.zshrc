@@ -5,7 +5,7 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
-_init_agents
+_update_agents
 
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible

@@ -78,20 +78,13 @@ function _disable_flow_control {
     stty start undef
 }
 
-function _init_agents {
+function _update_agents {
     # take over SSH keychain (with gpg-agent soon) but only on local machine, not remote ssh machine
     # keychain used in a non-invasive way where it's up to you to add your keys to the agent.
     if [ ! "$SSH_CONNECTION" ] && which gpg-connect-agent &>/dev/null; then
 		export SSH_AUTH_SOCK=$(gpgconf --list-dirs | grep agent-ssh-socket | cut -f 2 -d :)
-        gpg-connect-agent /bye
-    fi
-}
-
-function _update_agents {
-    # guaranteed to be current thanks to _tmux_update_env
-    if [ ! "$SSH_CONNECTION" ] && which gpg-connect-agent &>/dev/null; then
+        # start GPG agent, and update TTY. For the former only, omit updatestartuptty
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
-        # incidentally, this will start an agent if none is found
         gpg-connect-agent updatestartuptty /bye > /dev/null
     fi
 }
