@@ -10,13 +10,18 @@ function _tmux_update_env {
 # really simple git prompt, just showing branch which is all I want. Replaced
 # zsh-git-prompt as that displayed the wrong branch is some cases. I didn't
 # need the other features.
-function __git_ps1 {
-    git rev-parse --abbrev-ref HEAD 2>/dev/null || true
+function __git_prompt {
+    local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
+
+    if [ "$branch" ]; then
+        echo -n " ($branch)"
+    fi
 }
 
-function __p4_ps1 {
-	[ $P4CLIENT ] || return
-	echo -n " ($P4CLIENT) "
+function __p4_prompt {
+	if [ "$P4CLIENT" ]; then
+        echo -n " ($P4CLIENT)"
+    fi
 }
 
 function __exit_warn {

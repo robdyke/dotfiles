@@ -51,7 +51,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
 PROMPT="\$(__exit_warn)
-%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)\$(__p4_ps1)%F{239} \$(date +%T)%f
+%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f%F{243}\$(__git_prompt)\$(__p4_prompt) \$(date +%T)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?

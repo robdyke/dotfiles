@@ -58,7 +58,7 @@ function preexec() {
 
 PS1="
 \$(__exit_warn)
-\[\e[36m\]\${CMD_TIMER_PROMPT}\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[90m\]\$(__git_ps1)\$(__p4_ps1) \$(date +%T)\[\e[0m\]
+\[\e[36m\]\${CMD_TIMER_PROMPT}\[\e[38;5;${PROMPT_COLOUR}m\]\u@\H:\$PWD\[\e[38;5;243m\]\$(__git_prompt)\$(__p4_prompt) \$(date +%T)\[\e[0m\]
 \$ "
 
 
