@@ -92,7 +92,7 @@ function _update_agents {
     if [ ! "$SSH_CONNECTION" ] && which gpg-connect-agent &>/dev/null; then
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
         # incidentally, this will start an agent if none is found
-        echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+        gpg-connect-agent updatestartuptty /bye > /dev/null
     fi
 }
 
