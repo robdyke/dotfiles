@@ -85,7 +85,8 @@ function _update_agents {
 		export SSH_AUTH_SOCK=$(gpgconf --list-dirs | grep agent-ssh-socket | cut -f 2 -d :)
         # start GPG agent, and update TTY. For the former only, omit updatestartuptty
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
-        gpg-connect-agent updatestartuptty /bye > /dev/null
+        # if GPG agent has locked up, kill it with the timeout
+        timeout -k 2 -v 1 gpg-connect-agent updatestartuptty /bye > /dev/null || killall gpg-agent
     fi
 }
 
