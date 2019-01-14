@@ -1,7 +1,15 @@
 #!/bin/bash
 
-if which pbcopy &>/dev/null; then
-    exec pbcopy
+if [ -f "$1" ]; then
+    if which pbcopy &>/dev/null; then
+        cat "$1" | pbcopy
+    else
+        cat "$1" | xclip -selection clipboard
+    fi
 else
-    exec xclip -selection clipboard
+    if which pbcopy &>/dev/null; then
+        exec pbcopy
+    else
+        exec xclip -selection clipboard
+    fi
 fi
