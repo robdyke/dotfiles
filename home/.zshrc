@@ -50,7 +50,8 @@ source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 [ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
 
-PROMPT="\$(__exit_warn)
+PROMPT="
+\$(__exit_warn)
 %F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f%F{243}\$(__git_prompt)\$(__p4_prompt) \$(date +%T)%f
 $ "
 
