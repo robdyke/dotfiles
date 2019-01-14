@@ -52,7 +52,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 
 PROMPT="
 \$(__exit_warn)
-%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f%F{243}\$(__git_prompt)\$(__p4_prompt) \$(date +%T)%f
+%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f%F{243}\$(__git_prompt)\$(__p4_prompt)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?
