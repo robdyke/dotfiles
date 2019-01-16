@@ -47,3 +47,5 @@ user_pref("browser.tabs.tabMinWidth", 0);
 user_pref("privacy.donottrackheader.enabled", true);
 
 user_pref("general.warnOnAboutConfig", false);
+
+user_pref("browser.download.saveLinkAsFilenameTimeout", 0);
