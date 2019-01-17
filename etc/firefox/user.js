@@ -49,3 +49,5 @@ user_pref("privacy.donottrackheader.enabled", true);
 user_pref("general.warnOnAboutConfig", false);
 
 user_pref("browser.download.saveLinkAsFilenameTimeout", 0);
+
+user_pref("browser.newtabpage.enabled", false);
