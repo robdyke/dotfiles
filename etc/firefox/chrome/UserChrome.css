@@ -13,3 +13,5 @@ a, a:active, a:focus {
 
 /* remove autohiding location bar, as I find autohiding things infuriating */
 #fullscr-toggler { display:none!important; }
+
+@-moz-document url-prefix(about:blank) {*{background-color:#000000;}}

@@ -65,6 +65,7 @@ for d in [chrome_dir, extensions_dir]:
         makedirs(d)
 
 copy(path.join(script_dir, "chrome/UserChrome.css"), chrome_dir)
+copy(path.join(script_dir, "chrome/UserContent.css"), chrome_dir)
 
 
 # copy extensions; only if they don't exist as FF manages updates to them
