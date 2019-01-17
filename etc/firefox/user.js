@@ -51,3 +51,4 @@ user_pref("general.warnOnAboutConfig", false);
 user_pref("browser.download.saveLinkAsFilenameTimeout", 0);
 
 user_pref("browser.newtabpage.enabled", false);
+user_pref("browser.startup.homepage", "about:blank");
