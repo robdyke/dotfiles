@@ -294,3 +294,6 @@ nnoremap <c-p> :FZF<cr>
 " In theory this is fixed with the correct terminfo files but in practice it
 " keeps causing lots of missing background color
 set t_ut=
+
+" disable annoying markdown list behaviour
+let g:vim_markdown_new_list_item_indent = 0
