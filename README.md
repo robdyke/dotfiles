@@ -4,7 +4,7 @@
 | ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Text editing           | [vim][16] / [neovim][1]             | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                                                                               |
 | Password management    | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15]. Mental offload as it is no longer necessary to remember dozens of passwords. |
-| Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfxf` commands in `bin/` and bindings below.                                                                                        |
+| Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfzf` commands in `scripts/` and bindings below.                                                                                        |
 | Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
 | SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
 | Task management        | [dstask][10]                        | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
