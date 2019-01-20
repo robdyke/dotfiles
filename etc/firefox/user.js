@@ -18,12 +18,14 @@ user_pref("toolkit.cosmeticAnimations.enabled", false);
 // feels sluggish when on, Mac not affected by this
 user_pref("general.smoothScroll", false);
 
+// I don't want to be a random alpha tester
 user_pref("app.shield.optoutstudies.enabled", true);
 
 // enable auto add-on installation (requires signed extension from AMO)
 // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Alternative_distribution_options/Add-ons_in_the_enterprise#Controlling_automatic_installation
 user_pref("extensions.autoDisableScopes", 0);
 
+// dark theme -- see UserContent.css and UserChrome.css for patches
 user_pref("lightweightThemes.selectedThemeID", "firefox-compact-dark@mozilla.org");
 user_pref("devtools.theme", "dark");
 
@@ -50,5 +52,6 @@ user_pref("general.warnOnAboutConfig", false);
 
 user_pref("browser.download.saveLinkAsFilenameTimeout", 0);
 
+// prevents (most) idle browsing
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.startup.homepage", "about:blank");
