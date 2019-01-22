@@ -10,6 +10,9 @@ To install, add this to .bashrc:
 """
 from sys import argv
 import re
+import tempfile
+from os import path
+from os import rename
 
 history_file = argv[1]
 
@@ -83,6 +86,11 @@ for line in reversed(lines):
 
 new_lines.reverse()
 
-with open(history_file, "w") as f:
+with tempfile.NamedTemporaryFile(dir=path.dirname(history_file), delete=False) as f:
     for line in new_lines:
         f.write(line + "\n")
+
+    tmpfname = f.name
+
+# save atomically
+rename(tmpfname, history_file)
