@@ -86,7 +86,7 @@ for line in reversed(lines):
 
 new_lines.reverse()
 
-with tempfile.NamedTemporaryFile(dir=path.dirname(history_file), delete=False) as f:
+with tempfile.NamedTemporaryFile(mode="w", dir=path.dirname(history_file), delete=False) as f:
     for line in new_lines:
         f.write(line + "\n")
 
