@@ -45,13 +45,13 @@ function precmd() {
 
     __exit_warn
     _cmd_timer_end
+    _set_term_title
 }
 
 # just before cmd is executed
 function preexec() {
     # should be first, others may change env
     _tmux_update_env
-    _set_term_title
     _update_agents
     _cmd_timer_start
 }
