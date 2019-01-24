@@ -51,7 +51,8 @@ carefully considered and tested for inclusion.
 | Disk space reclaim     | [ncdu][22] + [tmpreaper][23]               | Tools for clearing up disk space. I run the latter against /tmp/ with cron.                                           |
 | Server configuration   | [ansible][24]                              | Idempotent, agentless configuration management. Used with git.                                                        |
 | HTTP Client            | [httpie][25]                               | curl alternative with better UX. Sometimes used with jq.                                                              |
-| System backup          | [restic][26]                               | See also rclone, zsync, rsync.                                                                                        |
+| System backup          | [restic][26]                               |                                                                                                                       |
+| Cloud backup           | [rclone][39]                               |                                                                                                                       |
 | Diagramming            | [draw.io][27]                              | Diagram creation software. See also dia, graphviz, tikz.                                                              |
 | Music playback         | [cmus][28]                                 | Fast terminal music player. See also MPD, mopidy.                                                                     |
 | Audio/video conversion | [sox][29] + [ffmpeg][30] + [gstreamer][31] |                                                                                                                       |
@@ -76,6 +77,7 @@ carefully considered and tested for inclusion.
 [35]: https://pandoc.org/
 [36]: https://www.tug.org/applications/pdftex/
 [37]: https://gohugo.io/
+[38]: https://rclone.org/
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
