@@ -86,7 +86,7 @@ function _update_agents {
         # start GPG agent, and update TTY. For the former only, omit updatestartuptty
         # ssh-agent protocol can't tell gpg-agent/pinentry what tty to use, so tell it
         # if GPG agent has locked up, kill it with the timeout
-        timeout -k 2 -v 1 gpg-connect-agent updatestartuptty /bye > /dev/null || killall -KILL gpg-agent
+        timeout -k 2 1 gpg-connect-agent updatestartuptty /bye > /dev/null || killall -KILL gpg-agent
     fi
 }
 
