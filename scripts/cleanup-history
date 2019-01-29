@@ -13,8 +13,13 @@ import re
 import tempfile
 from os import path
 from os import rename
+from sys import exit
 
 history_file = argv[1]
+
+# new environments won't have the history file yet, it's not a problem
+if not path.isfile(history_file):
+    exit(0)
 
 # regexes to ignore
 # an alternative to histignore. Processing here means the history will persist
