@@ -54,7 +54,7 @@ function INSIDE {
 }
 
 function BREAKPOINT {
-	INSIDE /bin/bash
+	INSIDE /bin/bash --norc --noprofile
 }
 
 function CLEANUP_EXIT {
@@ -169,6 +169,10 @@ umount    $WORKDIR/filesystem_rw/sys
 umount -l $WORKDIR/filesystem_rw/dev
 umount    $WORKDIR/filesystem_rw/dev/pts
 umount    $WORKDIR/iso_ro
+
+# remove socket file in /etc/skel which causes the creation of the xubuntu user
+# to fail when livecd boots
+rm $WORKDIR/filesystem_rw/etc/skel/.gnupg/S.gpg-agent ||:
 
 # ASSEMBLE ISO
 chmod +w $WORKDIR/iso_rw/casper/filesystem.manifest
