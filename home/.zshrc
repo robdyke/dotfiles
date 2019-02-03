@@ -35,6 +35,7 @@ compdef l=git
 compdef s=git
 compdef t=dstask
 compdef n=dstask
+compdef gssh=ssh
 
 # Syntax highlighting
 #git@github.com:zsh-users/zsh-syntax-highlighting.git

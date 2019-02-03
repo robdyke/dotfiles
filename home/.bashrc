@@ -86,6 +86,7 @@ complete -o default -o nospace -F _git g
 complete -o default -o nospace -F _git_diff d
 complete -o default -o nospace -F _git_log l
 complete -o default -o nospace -F _git_status s
+complete -o default -o nospace -F _ssh gssh
 complete -F _dstask n
 complete -F _dstask t
 
