@@ -136,7 +136,7 @@ else
     # list fonts with fc-list
     mkdir -p ~/.fonts
     cp etc/fonts/* ~/.fonts/
-    if [ etc/fonts/SourceCodePro-Regular.otf -nt ~/.fonts/SourceCodePro-Regular.otf ]; then
+    if [ etc/fonts/Hack-Regular.ttf -nt ~/.fonts/Hack-Regular.ttf ]; then
         fc-cache -f -v
     fi
 fi
