@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+pass git pull --no-edit --commit origin master
+pass git push origin master
+dstask sync
+~/notes/sync
+
+pushd ~/dotfiles
+    git pull --no-edit --commit origin master
+    ./install-naggie.sh
+popd
