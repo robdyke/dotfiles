@@ -152,8 +152,18 @@ Vyzm
 -----END PGP PUBLIC KEY BLOCK-----
 EOF
 
-# if password store isn't there, and keys are likely available on _local_
-# yuibkey, clone it over.
-if [ ! -d ~/.password-store ] && gpg --card-status &>/dev/null; then
-    git -C ~ clone git@github.com:naggie/.password-store.git
+# local machine, and has a yubikey -- probably (hopefully) my personal
+# laptop/desktop
+if [ ! "$SSH_CONNECTION" ] && gpg --card-status &>/dev/null; then
+    if [ ! -d ~/.password-store ]; then
+        git -C ~ clone git@github.com:naggie/.password-store.git
+    fi
+
+    if [ ! -d ~/.dstask ]; then
+        git -C ~ clone git@github.com:naggie/.dstask.git
+    fi
+
+    if [ ! -d ~/notes ]; then
+        git -C ~ clone git@github.com:naggie/notes.git
+    fi
 fi
