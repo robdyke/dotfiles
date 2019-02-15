@@ -7,18 +7,26 @@ function say {
 
 set -e
 
-say "Password store"
-pass git pull --no-edit --commit origin master
-pass git push origin master
+if [ -d ~/.password-store ]; then
+    say "Password store"
+    pass git pull --no-edit --commit origin master
+    pass git push origin master
+fi
 
-say "dstask"
-dstask sync
+if [ -d ~/.dstask ]; then
+    say "dstask"
+    dstask sync
+fi
 
-say "notes.git"
-#~/notes/sync
+if [ -d ~/notes ]; then
+    say "notes.git"
+    ~/notes/sync
+fi
 
-say "dotfiles"
-pushd ~/dotfiles
-    git pull --no-edit --commit origin master
-    ./install-naggie.sh
-popd
+if [ -d ~/dotfiles ]; then
+    say "dotfiles"
+    pushd ~/dotfiles
+        git pull --no-edit --commit origin master
+        ./install-naggie.sh
+    popd
+fi
