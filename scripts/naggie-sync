@@ -1,10 +1,23 @@
 #!/bin/bash
+
+function say {
+    printf '\n\e[1;32m%s\e[m\n' "$*"
+}
+
+
 set -e
+
+say "Password store"
 pass git pull --no-edit --commit origin master
 pass git push origin master
-dstask sync
-~/notes/sync
 
+say "dstask"
+dstask sync
+
+say "notes.git"
+#~/notes/sync
+
+say "dotfiles"
 pushd ~/dotfiles
     git pull --no-edit --commit origin master
     ./install-naggie.sh
