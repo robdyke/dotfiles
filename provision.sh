@@ -100,7 +100,7 @@ if [ $MACOS_DESKTOP ]; then
     python3 -m pip install --upgrade ansible ipython
 
     # dstask
-    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.7/dstask-darwin-amd64 2f820a1fb6b30e4cc1987014316ccae761332fab08094e0e3d9717f33c05fec5
+    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.8/dstask-darwin-amd64 08239f5cd9f56053e3b0ddc09d0e2b1b40083964810edd22161c25c6e09f12b8
     chmod +x "${CACHE_DIR}/dstask-darwin-amd64"
     sudo mv "${CACHE_DIR}/dstask-darwin-amd64" /usr/local/bin/dstask
 
@@ -116,7 +116,7 @@ if [ $UBUNTU ]; then
     sudo -E apt-get -y install language-pack-en curl
 
     # dstask
-    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.7/dstask-linux-amd64 68d8eb10fd7aae5607523893d6181fb0356262edef48581ff704670f354ed017
+    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.8/dstask-linux-amd64 a8888a275ad8aa11121d45f589a22829707bd9c29ef0b19e747938c57fde313f
     chmod +x "${CACHE_DIR}/dstask-linux-amd64"
     sudo mv "${CACHE_DIR}/dstask-linux-amd64" /usr/local/bin/dstask
 
@@ -141,7 +141,7 @@ fi
 
 if [ $RASPBIAN ]; then
     # dstask
-    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.7/dstask-linux-arm5 51cc89adfe1fc358b81574a655950ab6ab7f3349a481c902d1ea8ae287a51572
+    download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.8/dstask-linux-arm5 96da57e91945c9d87c478c04fe65c32d6881c77e06ea3ffa2437d3a563246021
     chmod +x "${CACHE_DIR}/dstask-linux-arm5"
     sudo mv "${CACHE_DIR}/dstask-linux-arm5" /usr/local/bin/dstask
 
