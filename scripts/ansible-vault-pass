@@ -1,0 +1,12 @@
+#!/bin/bash
+# use with
+# --vault-id ~/.local/bin/ansible-vault-pass
+# set ANSIBLE_VAULT_PASS_NAME to be the name of the password as known by pass.
+
+if [ ! "$ANSIBLE_VAULT_PASS_NAME" ]; then
+    echo "ANSIBLE_VAULT_PASS_NAME not set. See $0 for more information" 1>&2
+    exit 2
+fi
+
+echo "Touch Yubikey..." 1>&2
+pass $ANSIBLE_VAULT_PASS_NAME
