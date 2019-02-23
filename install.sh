@@ -91,6 +91,8 @@ if [ $PLATFORM == 'Darwin' ]; then
     rm ~/.xinitrc
 elif [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
 	xrdb -merge ~/.Xresources
+    xset -dpms
+    xset s 7200 7200
 fi
 
 # generate help files (well, tags) for the vim plugins
