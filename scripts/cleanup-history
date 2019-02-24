@@ -76,7 +76,7 @@ def ignored(line):
 
 with open(history_file, "rb") as f:
     # strip lines and remove non utf-8 chars
-    lines = [line.decode("utf-8", "ignore").replace("\ufffd", "").strip() for line in f]
+    lines = [line.decode("utf-8", "ignore").strip() for line in f]
 
 
 seen = set()
@@ -91,9 +91,9 @@ for line in reversed(lines):
 
 new_lines.reverse()
 
-with tempfile.NamedTemporaryFile(mode="w", dir=path.dirname(history_file), delete=False) as f:
+with tempfile.NamedTemporaryFile(mode="wb", dir=path.dirname(history_file), delete=False) as f:
     for line in new_lines:
-        f.write(line + "\n")
+        f.write((line + "\n").encode("utf-8"))
 
     tmpfname = f.name
 
