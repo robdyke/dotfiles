@@ -65,6 +65,14 @@ making the payload less reliable. All characters in the above payload have
 consistent scancodes across all keyboards that I am likely to encounter.
 
 
+Ansible vault decryption
+------------------------
+
+In combination with [pass](https://password-store.org), this script can allow a
+yubikey to decrypt an ansible vault password on-the-fly:
+https://github.com/naggie/dotfiles/blob/master/scripts/ansible-vault-pass
+
+
 ------------------------------------------------------------------------
 
 
