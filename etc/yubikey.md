@@ -1,3 +1,6 @@
+Uses:
+
+
 Multi-factor authentication
 ---------------------------
 
@@ -7,7 +10,7 @@ still needs u2f to be enabled in about:config.
 SSH key storage
 ---------------
 
-It\'s possible to use a Yubikey to hold an SSH key by using GPG-agent as
+It's possible to use a Yubikey to hold an SSH key by using GPG-agent as
 the SSH-agent and storing the key as a GPG key with authentication
 capabilities. This makes your SSH ID more secure, and portable between
 machines with some configuration.
@@ -73,15 +76,41 @@ yubikey to decrypt an ansible vault password on-the-fly:
 https://github.com/naggie/dotfiles/blob/master/scripts/ansible-vault-pass
 
 
+LUKS volume decryption 2FA
+--------------------------
+
+Yubikeys can be used with LUKS to enable unlocking of encrypted volumes,
+including the boot volume for FDE. See
+https://github.com/cornelinux/yubikey-luks and
+https://wiki.archlinux.org/index.php/YubiKey#YubiKey_and_LUKS_encrypted_partition/disk
+
+
 ------------------------------------------------------------------------
+
+Yubikey initialisation guide
+============================
+
+1. Disable OTP mode (unless you like injecting random OTP passwords into chat
+   or the terminal all the time). `ykpersonalise` can do this, but can become
+   locked out as it relies on OTP mode. To disable OTP mode: `ykman mode
+   FIDO+CCID`
+1. Set OpenPGP card user and admin PIN (6 and 8 digits respectively)
+    1. `gpg2 --card-edit <email>`
+    1. `admin`
+    1. `passwd` -- change PIN and admin PIN as prompted
+1. Move S, E, A keys to card (see next section)
+1. Enable touch flags as appropriate
+    1. `ykman openpgp touch enc on`
+    1. `ykman openpgp touch aut on`
+    1. `ykman openpgp touch sig on`
 
 
 GPG Set up guide
 ================
 
 There are many guides available on the internet but the process is
-subject to a lot of caveats and confusing behaviour. Here\'s a guide
-using some scripts I\'ve made to make things reliable and secure:
+subject to a lot of caveats and confusing behaviour. Here's a guide
+using some scripts I've made to make things reliable and secure:
 
 1.  Make sure you\'ve got GPG2 installed. Note that Debian/Ubuntu may
     have GPG1 by default -- you will have to alias the **gpg2** binary
@@ -139,7 +168,7 @@ you must trust the remote host to do this; anyone with sudo access can
 assume your SSH identity,]{style="color: rgb(255,0,0);"} which is why it
 is recommended to enable touch-to-authenticate as above.
 
-Note that GPG can injest regular SSH keys into its own store with
+Note that GPG can ingest regular SSH keys into its own store with
 **ssh-add**. However, these keys won\'t end up on the Yubikey.
 
 Code signing
@@ -167,26 +196,30 @@ guide](https://wiki.gnupg.org/AgentForwarding) suggests 2 methods,
 depending on wether your version of OpenSSH supports unix socket
 forwarding or not. *Both methods are flawed:*
 
-1.  The first method (recommended for OpenSSH \< 6.7) suggests using
-    netcat to forward the unix socket over a TCP socket. [This is
-    insecure, ]{style="color: rgb(255,0,0);"}[because anyone else on the
-    remote host could connect to the forwarded TCP port and use your
-    forwarded agent..]{style="color: rgb(51,51,51);"}
-2.  [OpenSSH 6.7 and above can forward unix sockets, so the next
-    recommendation is to do so natively. However, the location of the
-    local and remote sockets is dependent on the version of
-    ]{style="color: rgb(51,51,51);"}GPG, your OS, and your username. As
-    such, you would have to investigate for every remote host and add an
-    entry for every remote host. It also requires server configuration
-    to delete the stale socket automatically.
+1.  The first method (recommended for OpenSSH older than 6.7) suggests using
+    netcat to forward the unix socket over a TCP socket. This is insecure,
+    because anyone else on the remote host could connect to the forwarded TCP
+    port and use your forwarded agent...
+2.  OpenSSH 6.7 and above can forward unix sockets, so the next recommendation
+    is to do so natively. However, the location of the local and remote sockets
+    is dependent on the version of GPG, your OS, and your username. As such,
+    you would have to investigate for every remote host and add an entry for
+    every remote host. It also requires server configuration to delete the
+    stale socket automatically.
 
 I recommend you use my [gssh
 wrapper](https://github.com/naggie/dotfiles/blob/master/home/.functions.sh#L119)
-which probes the remote host for the GPG socket location and kills any
-remote GPG agent before connecting after deleting any stale socket.
-Being separate from the normal **ssh** command, it allow allows you to
-be mindful about when you forward your agent -- forwarding your GPG
-agent carries similar risks to forwarding your SSH agent -- [an
-administrator on the remote host could use your local GPG
-agent;]{style="color: rgb(255,0,0);"} to further mitigate the risk,
-enable touch settings on your yubikey as above.
+which probes the remote host for the GPG socket location and kills any remote
+GPG agent before connecting after deleting any stale socket.  Being separate
+from the normal **ssh** command, it allow allows you to be mindful about when
+you forward your agent -- forwarding your GPG agent carries similar risks to
+forwarding your SSH agent -- an administrator on the remote host could use your
+local GPG agent to further mitigate the risk, enable touch settings on your
+yubikey as above.
+
+
+----
+
+
+See also: https://wiki.archlinux.org/index.php/YubiKey -- this is the best and
+most complete Yubikey guide.
