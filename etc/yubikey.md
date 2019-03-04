@@ -112,6 +112,7 @@ There are many guides available on the internet but the process is
 subject to a lot of caveats and confusing behaviour. Here's a guide
 using some scripts I've made to make things reliable and secure:
 
+0.  Boot a livecd session
 1.  Make sure you\'ve got GPG2 installed. Note that Debian/Ubuntu may
     have GPG1 by default -- you will have to alias the **gpg2** binary
     to **gpg.**
@@ -131,7 +132,7 @@ using some scripts I've made to make things reliable and secure:
 5.  Install a [hardened
     gpg.conf](https://github.com/naggie/dotfiles/blob/master/home/.gnupg/gpg.conf)
     that selects the strongest ciphers and long key IDs.
-6.  Change the default Yubikey PIN and admin PIN using the official
+6.  Change the default Yubikey PIN and admin PIN using the above
     instructions.
 7.  Use **gpg \--edit-key \<email\>**
     1.  **toggle**
@@ -139,9 +140,12 @@ using some scripts I've made to make things reliable and secure:
         a time with the **key \<n\>** command (1,2,3 respectively)
     3.  When a key is selected, run **keytocard** to copy the key to the
         correct slot on the yuibkey (there are 3, one each for S,E,A)
-8.   Especially if you have a Nano-type yubikey, I recommend that you
+    4.  `save` then exit. If you don't save, the private keys will persist
+        locally which defeats the purpose of using the yubikey.
+8.  Especially if you have a Nano-type yubikey, I recommend that you
     enable touch-to-sign, touch-to-encrypt, and touch-to-authenticate.
-    You can do this with the official Yubikey **ykman** program.
+    You can do this with the official Yubikey **ykman** program as detailed
+    above.
 
 SSH
 ---
