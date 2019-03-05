@@ -134,7 +134,8 @@ if [ $UBUNTU ]; then
     # neovim (don't write directly, swap atomically so running nvim won't block)
     download_to_cache_dir https://github.com/neovim/neovim/releases/download/v0.3.3/nvim.appimage 6c937c0a2b37e4ad99bae2f37f461ae47a590e62bddecf903b0b5bafe0eaaadb
     chmod +x "${CACHE_DIR}/nvim.appimage"
-    sudo mv "${CACHE_DIR}/nvim.appimage" "${BIN_DIR}/nvim"
+    # copy to preserve cache
+    sudo cp "${CACHE_DIR}/nvim.appimage" "${BIN_DIR}/nvim"
 fi
 
 if [ $RASPBIAN ]; then
