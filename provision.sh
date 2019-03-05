@@ -190,6 +190,8 @@ if [ $UBUNTU_DESKTOP ]; then
     unzip -p "${CACHE_DIR}/browserpass-linux64.zip" browserpass-linux64 | sudo dd of=$BIN_DIR/browserpass.tmp
     sudo chmod +x $BIN_DIR/browserpass.tmp
     sudo mv $BIN_DIR/browserpass.tmp $BIN_DIR/browserpass
+    mkdir -p ~/.mozilla/native-messaging-hosts
+    cp etc/firefox/com.dannyvankooten.browserpass.json ~/.mozilla/native-messaging-hosts/
 fi
 
 
