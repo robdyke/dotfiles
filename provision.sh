@@ -185,6 +185,11 @@ if [ $UBUNTU_DESKTOP ]; then
     download_to_cache_dir https://github.com/jwilm/alacritty/releases/download/v0.2.4/Alacritty-v0.2.4-x86_64.tar.gz 1de78461e75527161f95b20406302baf4975d98ee9113af7cdf23a63aa0f05b1
     sudo tar -C $BIN_DIR -xzf "${CACHE_DIR}/Alacritty-v0.2.4-x86_64.tar.gz"
 
+    # browserpass host
+    download_to_cache_dir https://github.com/browserpass/browserpass/releases/download/2.0.22/browserpass-linux64.zip 1753e1ca37045eb2eaa3b3b1a5d7a6ecdc1746e301c275bbc38e9617f50ccb39
+    unzip -p "${CACHE_DIR}/browserpass-linux64.zip" browserpass-linux64 | sudo dd of=$BIN_DIR/browserpass.tmp
+    sudo chmod +x $BIN_DIR/browserpass.tmp
+    sudo mv $BIN_DIR/browserpass.tmp $BIN_DIR/browserpass
 fi
 
 
