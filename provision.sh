@@ -131,11 +131,6 @@ if [ $UBUNTU ]; then
     download_to_cache_dir https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz 3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8
     sudo tar -C "$BIN_DIR" -xzf "${CACHE_DIR}/fzf-0.17.5-linux_amd64.tgz"
 
-
-    # alacritty
-    download_to_cache_dir https://github.com/jwilm/alacritty/releases/download/v0.2.4/Alacritty-v0.2.4-x86_64.tar.gz 1de78461e75527161f95b20406302baf4975d98ee9113af7cdf23a63aa0f05b1
-    sudo tar -C $BIN_DIR -xzf "${CACHE_DIR}/Alacritty-v0.2.4-x86_64.tar.gz"
-
     # neovim (don't write directly, swap atomically so running nvim won't block)
     download_to_cache_dir https://github.com/neovim/neovim/releases/download/v0.3.3/nvim.appimage 6c937c0a2b37e4ad99bae2f37f461ae47a590e62bddecf903b0b5bafe0eaaadb
     chmod +x "${CACHE_DIR}/nvim.appimage"
@@ -185,6 +180,11 @@ if [ $UBUNTU_DESKTOP ]; then
     sudo -E apt-get -y install firefox i3 i3status dmenu xautolock yubikey-manager
     # stop default screensaver (xubuntu) -- note xsettings are also required
     sudo -E apt-get -y purge light-locker xfce4-power-manager
+
+    # alacritty
+    download_to_cache_dir https://github.com/jwilm/alacritty/releases/download/v0.2.4/Alacritty-v0.2.4-x86_64.tar.gz 1de78461e75527161f95b20406302baf4975d98ee9113af7cdf23a63aa0f05b1
+    sudo tar -C $BIN_DIR -xzf "${CACHE_DIR}/Alacritty-v0.2.4-x86_64.tar.gz"
+
 fi
 
 
