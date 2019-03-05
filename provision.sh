@@ -91,7 +91,7 @@ if [ $MACOS_DESKTOP ]; then
 
     # Upgrade or install (logic necessary)
     packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget htop gnupg2 bash-completion keychain iproute2mac tmpreaper \
-        coreutils sox ffmpeg httrack python ripgrep python go nvim fzf pinentry-mac)
+        coreutils sox ffmpeg httrack python ripgrep python go nvim fzf pinentry-mac ykman)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
@@ -179,7 +179,7 @@ fi
 
 if [ $UBUNTU_DESKTOP ]; then
     # note i3-gaps may be used in future
-    sudo -E apt-get -y install firefox i3 i3status dmenu xautolock
+    sudo -E apt-get -y install firefox i3 i3status dmenu xautolock yubikey-manager
     # stop default screensaver (xubuntu) -- note xsettings are also required
     sudo -E apt-get -y purge light-locker xfce4-power-manager
 fi
