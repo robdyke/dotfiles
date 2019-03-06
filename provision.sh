@@ -178,7 +178,7 @@ fi
 
 if [ $UBUNTU_DESKTOP ]; then
     # note i3-gaps may be used in future
-    sudo -E apt-get -y install firefox i3 i3status dmenu xautolock yubikey-manager
+    sudo -E apt-get -y install firefox i3 i3status dmenu xautolock yubikey-manager powertop
     # stop default screensaver (xubuntu) -- note xsettings are also required
     sudo -E apt-get -y purge light-locker xfce4-power-manager
 
