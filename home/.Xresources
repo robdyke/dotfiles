@@ -27,13 +27,5 @@ xterm*background:      #000000
 *color4:               #5555FF
 *color12:              #5555FF
 
-! bold fonts look terrible
-XTerm*boldMode:        false
-URxvt*boldFont:
-
-
-! fonts (installed to ~/.fonts)
-!xterm*faceName:Source Code Pro:antialias=True:pixelsize=12
-! Patched powerline font
-xterm*faceName:        Source Code Pro:antialias=True:pixelsize=12
-URxvt.font:            xft:Source Code Pro:size=12
+xterm*faceName:        Hack:antialias=True:pixelsize=10
+URxvt.font:            xft:Hack:size=10
