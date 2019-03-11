@@ -1,0 +1,46 @@
+# This file defines what to install on every possible machine,
+# architecture independent and OS independent with exceptions.
+
+# install on everything, generally CLI things
+common:
+  - vim
+  - git
+  - httpie
+  - tree
+  - tmux
+  - dstask
+  - pass
+  - bash
+  - bash-completion
+  - zsh
+  - gnupg2
+  - openssh
+  - ncdu
+  - tmpreaper
+  - nvim
+  - ripgrep
+  - fzf
+  - go
+  - python3
+  - ykman
+  - ansible
+  - httrack
+  - ffmpeg
+  - curl
+
+# all non-server machines (mac, desktop ubuntu, desktop arch etc)
+workstation:
+  - firefox
+  - browserpass
+
+# non-server mac
+mac_workstation:
+  - spectacle
+  - alacritty
+  - iproute2mac
+  - pinentry-mac
+
+# non-server ubuntu, arch etc (not raspbian)
+linux_workstation:
+  - i3
+  - sway

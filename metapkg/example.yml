@@ -1,0 +1,6 @@
+handler: apt
+dependencies:
+  - foo
+  - bar
+post_install:
+  - ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
