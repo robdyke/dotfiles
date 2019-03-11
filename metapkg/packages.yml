@@ -1,5 +1,6 @@
 # This file defines what to install on every possible machine,
-# architecture independent and OS independent with exceptions.
+# architecture independent, OS independent (with exceptions) and package
+# manager independent. This simplifies cross-platform package installation.
 
 # install on everything, generally CLI things
 common:
@@ -27,6 +28,7 @@ common:
   - httrack
   - ffmpeg
   - curl
+  - jq
 
 # all non-server machines (mac, desktop ubuntu, desktop arch etc)
 workstation:
@@ -34,13 +36,27 @@ workstation:
   - browserpass
 
 # non-server mac
-mac_workstation:
+mac:
   - spectacle
   - alacritty
   - iproute2mac
   - pinentry-mac
 
+linux:
+  - scdaemon
+  - pcscd
+  - powertop
+
 # non-server ubuntu, arch etc (not raspbian)
 linux_workstation:
-  - i3
+  - i3 # to be replaced with sway, transition in progress
+  - xautolock
+  - i3status
+  - dmenu
   - sway
+  - rxvt-unicode-256color
+
+# remove if name matches on default or custom handler
+purge:
+  - light-locker
+  - xfce4-power-manager
