@@ -1,6 +1,8 @@
 #!/bin/bash
-source ./install.sh
+# runs configure.sh and then applies changes that are specific to my
+# identity using only publicly publishable data
 
+source ./configure.sh
 
 if git remote -v | grep -q https; then
     # git+ssh for push access

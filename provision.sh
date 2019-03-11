@@ -1,5 +1,6 @@
 #!/bin/bash
-# This script installs global dependencies and executables required by dotfiles, and then the configuration files with ./install.sh
+# This script installs global dependencies and executables required by
+# dotfiles. For convenience it then runs ./configure.sh or ./configure-naggie.sh
 
 ORIGIN=https://github.com/naggie/dotfiles.git
 
@@ -207,9 +208,9 @@ git pull --ff-only $ORIGIN master || true
 # make sure the upstream for local master is remote master
 git branch --set-upstream-to=origin/master master
 
-# install dotfiles configuration
+# dotfiles configuration
 if [[ $(whoami) == naggie ]]; then
-    ./install-naggie.sh
+    ./configure-naggie.sh
 else
-    ./install.sh
+    ./configure.sh
 fi
