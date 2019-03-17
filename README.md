@@ -10,7 +10,7 @@ carefully considered and tested for inclusion.
 | ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Text editing           | [vim][16] / [neovim][1]             | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                                                                               |
 | Password management    | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15]. Mental offload as it is no longer necessary to remember dozens of passwords. |
-| Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfzf` commands in `scripts/` and bindings below.                                                                                        |
+| Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfzf` commands in `scripts/` and bindings below.                                                                                    |
 | Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
 | SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
 | Task management        | [dstask][10]                        | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
@@ -19,8 +19,8 @@ carefully considered and tested for inclusion.
 | Personal cryptography  | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
 | Shell                  | [bash][7]/[zsh][8]                  | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain.                                                             |
 | Terminal multiplexing  | [tmux][5]                           | Bindings adjusted to match vim                                                                                                                         |
-| Terminal               | [Alacritty][18]                     | GPU accelerated and minimal. Used with Adobe Source code pro. I also use `kitty.`                                                                      |
-| Terminal Font          | [Adobe Source Code Pro][38]         |                                                                                                                                                        |
+| Terminal               | [Alacritty][18]                     | GPU accelerated and minimal. I also use `uxterm.`                                                                                                      |
+| Terminal Font          | [Hack][38]                          | Switched from Adobe Source Code Pro as 0 and 8 were too similar                                                                                        |
 | Window management      | [i3wm][19]                          | Much faster than Unity, Gnome 3 etc as there are no animations. See openbox if you don't like tiling window managers.                                  |
 
 [1]: https://neovim.io/
@@ -40,7 +40,7 @@ carefully considered and tested for inclusion.
 [18]: https://github.com/jwilm/alacritty
 [33]: https://en.wikipedia.org/wiki/Getting_Things_Done
 [34]: https://github.com/naggie/dotfiles/blob/master/etc/yubikey.md
-[38]: https://github.com/adobe-fonts/source-code-pro
+[38]: https://sourcefoundry.org/hack/
 
 # Specific tools
 
