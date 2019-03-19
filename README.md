@@ -113,9 +113,10 @@ more handy shortcuts/wrappers/bindings.
 
 AKA the OSes I actively use.
 
-* Ubuntu 16.04 LTS (x86_64)
-* Ubuntu 18.04 LTS (x86_64)
-* Current MacOS
+* Ubuntu 16.04 LTS Server (x86_64)
+* Ubuntu 18.04 LTS Server (x86_64)
+* Xubuntu 18.04 LTS Desktop (x86_64)
+* MacOS Mojave
 * Raspbian Stretch (armv7)
 * ~~Raspbian Jessie~~
 * ~~RHEL5~~
