@@ -21,6 +21,9 @@ history_file = argv[1]
 if not path.isfile(history_file):
     exit(0)
 
+
+SENSITIVE_FRAGMENTS = ['API', 'TOKEN', 'KEY', 'SECRET', 'PASS']
+
 # regexes to ignore
 # an alternative to histignore. Processing here means the history will persist
 # until the next session ends, which is handy for correcting otherwise ignored
@@ -74,6 +77,14 @@ def ignored(line):
     return False
 
 
+def sensitive(line):
+    for fragement in SENSITIVE_FRAGMENTS:
+        if fragement.lower() in line.lower():
+            return True
+
+    return False
+
+
 with open(history_file, "rb") as f:
     # strip lines and remove non utf-8 chars
     lines = [line.decode("utf-8", "ignore").strip() for line in f]
@@ -85,7 +96,9 @@ new_lines = list()
 # note that reversed() does not copy lines, just results in reversed iteration
 for line in reversed(lines):
     line = " ".join(line.split())  # remove multiple whitespace
-    if not ignored(line) and line not in seen:
+    if not ignored(line) \
+            and line not in seen \
+            and not sensitive(line):
         new_lines.append(line)
         seen.add(line)
 
