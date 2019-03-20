@@ -98,9 +98,6 @@ if [ $MACOS_DESKTOP ]; then
         brew upgrade $package || brew install $package
     done
 
-    python3 -m pip install --upgrade pip
-    python3 -m pip install --upgrade ansible ipython
-
     # dstask
     download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.8/dstask-darwin-amd64 08239f5cd9f56053e3b0ddc09d0e2b1b40083964810edd22161c25c6e09f12b8
     chmod +x "${CACHE_DIR}/dstask-darwin-amd64"
@@ -157,11 +154,8 @@ fi
 if [ $UBUNTU ] || [ $RASPBIAN ]; then
     sudo -E apt-get -y update
     sudo -E apt-get -y install tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl keychain tmpreaper bash-completion \
-        jq sox ffmpeg httrack python python3 golang libffi-dev python-pip python3-pip python-dev python3-dev libssl-dev dconf-cli scdaemon \
+        jq sox ffmpeg httrack python python3 golang python-pip python3-pip libssl-dev dconf-cli scdaemon \
         pcscd rxvt-unicode-256color
-
-    python3 -m pip install --user --upgrade pip
-    python3 -m pip install --user --upgrade ansible ipython
 
     sudo -E ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
