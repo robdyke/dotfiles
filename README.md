@@ -146,7 +146,8 @@ wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && b
 The UI latency of modern computers has gotten progressively worse in the last
 30 years despite advancement in clock speed and computing power. Worse yet, a
 lot of user interfaces actually needlessly add latency by introducing pointless
-animations. See <https://danluu.com/input-lag/> for an in-depth investigation.
+animations. See <https://danluu.com/input-lag/> for an in-depth investigation,
+and <https://news.ycombinator.com/item?id=19443076> for insightful discussion.
 
 The lowest possible latency is a target for my workflow and code in this
 repository.  Too many user interfaces waste time on stupid animations or are
