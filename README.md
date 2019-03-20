@@ -9,7 +9,7 @@ carefully considered and tested for inclusion.
 | Purpose                | Tool(s)                             | Comments                                                                                                                                               |
 | ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Text editing           | [vim][16] / [neovim][1]             | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                                                                               |
-| Password management    | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15]. Mental offload as it is no longer necessary to remember dozens of passwords. |
+| Password management    | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15]. Mental offload as it is no longer necessary to remember dozens of passwords. [Browserpass][40] used for Firefox integration. |
 | Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfzf` commands in `scripts/` and bindings below.                                                                                    |
 | Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
 | SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
@@ -41,6 +41,7 @@ carefully considered and tested for inclusion.
 [33]: https://en.wikipedia.org/wiki/Getting_Things_Done
 [34]: https://github.com/naggie/dotfiles/blob/master/etc/yubikey.md
 [38]: https://sourcefoundry.org/hack/
+[40]: https://github.com/browserpass/browserpass
 
 # Specific tools
 
