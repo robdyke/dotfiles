@@ -207,3 +207,15 @@ On an ubuntu host, run `remaster-livecd.sh` with an xubuntu ISO to produce a
 remastered xubuntu LiveCD with dotfiles preinstalled. I use this preconfigured
 with `./install-naggie.sh` to allow me to start using new or foreign PCs immediately.
 
+
+# Mode of operation
+
+Dotfiles can provision a fresh install of an OS, or build a live/install CD.
+
+1. `bootstrap` -- Installs git and ensures the repository exists. Detects platform and executes all of the next steps:
+1. `install-dependencies` -- Installs dependencies for the given platform
+1. `system-configuration` -- Configures global system settings for all users for the given platform
+1. `user-configuration` -- Installs generic user-specific configuration. No root required from now on.
+1. `user-configuration-naggie` -- Patches user configuration with configuration specific to my identity
+
+If building a live/install CD, the script with enter a chroot environment and then begin this process.
