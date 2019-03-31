@@ -128,7 +128,7 @@ INSIDE ln -s /bin/true /sbin/initctl || true
 #git clone . $WORKDIR/filesystem_rw/root/dotfiles
 rsync -r --delete --exclude=build --exclude='*iso' . $WORKDIR/filesystem_rw/etc/skel/dotfiles/
 
-INSIDE /etc/skel/dotfiles/provision.sh
+INSIDE /etc/skel/dotfiles/bootstrap.sh
 
 # If you're me, just run this in the live session rather than producing separate ISOs
 #INSIDE /etc/skel/dotfiles/install-naggie.sh
