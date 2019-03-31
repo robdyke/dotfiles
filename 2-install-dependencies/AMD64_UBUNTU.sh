@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo -E apt-add-repository multiverse
 sudo -E apt-get -y update
 sudo -E apt-get -y install language-pack-en curl

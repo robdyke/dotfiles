@@ -1,3 +1,4 @@
+#!/bin/bash
 # dstask
 download_to_cache_dir https://github.com/naggie/dstask/releases/download/v0.8/dstask-linux-arm5 96da57e91945c9d87c478c04fe65c32d6881c77e06ea3ffa2437d3a563246021
 chmod +x "${CACHE_DIR}/dstask-linux-arm5"
