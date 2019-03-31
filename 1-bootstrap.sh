@@ -60,10 +60,14 @@ git pull --ff-only $ORIGIN master || true
 git branch --set-upstream-to=origin/master master
 
 # 2-install-dependencies
-2-install-dependencies/${PLATFORM}.sh
+pushd 2-install-dependencies
+    ./${PLATFORM}.sh
+popd
 
 # 3-system-configuration
-3-system-configuration/${PLATFORM}.sh
+pushd 3-system-configuration
+    ./${PLATFORM}.sh
+popd
 
 # 4-user-configuration
 if [[ $(whoami) == naggie ]]; then

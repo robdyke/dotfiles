@@ -217,7 +217,7 @@ the install process has been changed to the following:
 
 1. `bootstrap` -- Installs git and ensures the repository exists. Can operate independently from this repository. Uses sudo Detects platform and executes all of the next steps:
 1. `install-dependencies` -- Installs dependencies for the given platform
-1. `system-configuration` -- Configures global system settings for all users for the given platform
+1. `system-configuration` -- Configures global system settings for all users for the given platform, eg keyboard layout. A UK keyboard and timezone is assumed.
 1. `user-configuration` -- Installs generic user-specific configuration. No root required from now on.
 1. `user-configuration-naggie` -- Patches user configuration with configuration specific to my identity
 
