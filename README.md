@@ -119,6 +119,7 @@ AKA the OSes I actively use.
 * Xubuntu 18.04 LTS Desktop (x86_64)
 * MacOS Mojave
 * Raspbian Stretch (armv7)
+* Arch linux
 * ~~Raspbian Jessie~~
 * ~~RHEL5~~
 * ~~RHEL6~~
@@ -210,9 +211,11 @@ with `./install-naggie.sh` to allow me to start using new or foreign PCs immedia
 
 # Mode of operation
 
-Dotfiles can provision a fresh install of an OS, or build a live/install CD.
+Dotfiles can provision a fresh install of an OS, or build a live/install CD. In
+order to manage the combinatorial complexity of supporting so many platforms,
+the install process has been changed to the following:
 
-1. `bootstrap` -- Installs git and ensures the repository exists. Detects platform and executes all of the next steps:
+1. `bootstrap` -- Installs git and ensures the repository exists. Can operate independently from this repository. Uses sudo Detects platform and executes all of the next steps:
 1. `install-dependencies` -- Installs dependencies for the given platform
 1. `system-configuration` -- Configures global system settings for all users for the given platform
 1. `user-configuration` -- Installs generic user-specific configuration. No root required from now on.
