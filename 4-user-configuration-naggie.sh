@@ -1,5 +1,5 @@
 #!/bin/bash
-# runs configure.sh and then applies changes that are specific to my
+# runs 4-user-configuration.sh and then applies changes that are specific to my
 # identity using only publicly publishable data
 
 source ./4-user-configuration.sh

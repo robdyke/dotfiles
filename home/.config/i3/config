@@ -197,7 +197,7 @@ exec nm-applet
 
 # turn off screen after 2h of inactivity, disabling dpms
 # note that it's also necessary to remove some annoying packages that also try
-# to control this. See provision.sh.
+# to control this. See 1-bootstrap.sh.
 exec xset -dpms
 exec xset s 7200 7200
 

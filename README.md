@@ -134,13 +134,13 @@ Obviously inspect the script to see what it does before you run it. Note that it
 will clobber your settings files.
 
 ```bash
-curl -sL https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
+curl -sL https://github.com/naggie/dotfiles/raw/master/1-bootstrap.sh | bash && bash
 ```
 
 Ubuntu 17.04 does not have curl by default.
 
 ```bash
-wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
+wget -O - https://github.com/naggie/dotfiles/raw/master/1-bootstrap.sh | bash && bash
 ```
 
 # Latency and speed

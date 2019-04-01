@@ -73,5 +73,5 @@ popd
 if [[ $(whoami) == naggie ]]; then
     ./4-user-configuration-naggie.sh
 else
-    ./4-user-configure.sh
+    ./4-user-configuration.sh
 fi
