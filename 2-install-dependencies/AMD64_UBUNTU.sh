@@ -25,6 +25,7 @@ TARGZ="$(
         https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
         c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97
 )"
+[ -f /usr/local/bin/rg ] && rm /usr/local/bin/rg
 sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
 
 # FZF
@@ -33,6 +34,7 @@ TARGZ="$(
         https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
         3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8
 )"
+[ -f /usr/local/bin/fzf ] && rm /usr/local/bin/fzf
 sudo tar -C /usr/local/bin -xzf "$TARGZ"
 
 # neovim (don't write directly, swap atomically so running nvim won't block)
@@ -65,7 +67,7 @@ if dpkg -l | grep -vq landscape; then
             https://github.com/browserpass/browserpass/releases/download/2.0.22/browserpass-linux64.zip \
             1753e1ca37045eb2eaa3b3b1a5d7a6ecdc1746e301c275bbc38e9617f50ccb39
     )"
-    unzip -p "$ZIP" browserpass-linux64 | sudo dd of=/usr/local/bin/browserpass.tmp
-    sudo chmod +x /usr/local/bin/browserpass.tmp
-    sudo mv /usr/local/bin/browserpass.tmp /usr/local/bin/browserpass
+    unzip -p "$ZIP" browserpass-linux64 | sudo dd of=/usr/local/bin/browserpass.new
+    sudo chmod +x /usr/local/bin/browserpass.new
+    sudo mv /usr/local/bin/{browserpass.new,browserpass}
 fi

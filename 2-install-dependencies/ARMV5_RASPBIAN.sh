@@ -7,6 +7,7 @@ TARGZ="$(
         https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz \
         5909eb4246f8e4936a2d09d0b38c647733578f78f6aa5ace49027c1b7c4bf0e1
 )"
+[ -f /usr/local/bin/rg ] && rm /usr/local/bin/rg
 sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
 
 # FZF
@@ -15,6 +16,7 @@ TARGZ="$(
         https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz \
         aa5f46c21fb765a20494fdcb00b86b6bde3b29538f25d49398f3b423f8e1e394
 )"
+[ -f /usr/local/bin/fzf ] && rm /usr/local/bin/fzf
 sudo tar -C /usr/local/bin/ -xzf "$TARGZ"
 
 sudo -E apt-get -y update
