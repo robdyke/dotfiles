@@ -67,8 +67,4 @@ if dpkg -l | grep -vq landscape; then
     unzip -p "$ZIP" browserpass-linux64 | sudo dd of=/usr/local/bin/browserpass.tmp
     sudo chmod +x /usr/local/bin/browserpass.tmp
     sudo mv /usr/local/bin/browserpass.tmp /usr/local/bin/browserpass
-
-    # TODO move to user configuration
-    mkdir -p ~/.mozilla/native-messaging-hosts
-    cp etc/firefox/com.dannyvankooten.browserpass.json ~/.mozilla/native-messaging-hosts/
 fi

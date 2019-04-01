@@ -147,3 +147,7 @@ fi
 
 # now is a good time to associate the yubikey GPG private keys if it is connected
 gpg --card-status &> /dev/null || true
+
+# browserpass config
+mkdir -p ~/.mozilla/native-messaging-hosts
+cp etc/firefox/com.dannyvankooten.browserpass.json ~/.mozilla/native-messaging-hosts/
