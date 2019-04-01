@@ -15,7 +15,7 @@ AMD64_UBUNTU=AMD64_UBUNTU
 ARMV5_RASPBIAN=ARMV5_RASPBIAN
 
 
-get_platform() {
+function get_platform() {
     if uname | grep -q Linux; then
         if grep -q Arch /etc/issue && getconf LONG_BIT | grep -q 64; then
             echo $AMD64_ARCH

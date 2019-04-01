@@ -1,2 +1,4 @@
 #!/bin/bash
-sudo pacman -S 
+source include/util.sh
+
+sudo pacman -S

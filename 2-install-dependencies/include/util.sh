@@ -2,7 +2,7 @@ CACHE_DIR=~/.cache/dotfiles/
 
 # download file if it doesn't exist, then check the sha256sum matches to
 # mitigate forward-looking supply chain attacks. Exit script on fail.
-function download_to_cache_dir {
+function obtain {
     URL="$1"
     SHA256SUM="$2"
     TARGET="${CACHE_DIR}/${SHA256SUM}.bin"
