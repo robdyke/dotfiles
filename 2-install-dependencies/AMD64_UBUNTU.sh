@@ -1,6 +1,13 @@
 #!/bin/bash
 source include/util.sh
 
+# TODO yubikey 18.04 only
+
+sudo -E apt-add-repository multiverse
+sudo -E apt-get -y update
+sudo -E apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \
+    jq sox ffmpeg httrack python python3 golang python-pip python3-pip libssl-dev dconf-cli scdaemon pcscd
+
 # dstask
 EXE="$(
     obtain \
@@ -36,11 +43,6 @@ BIN="$(
 sudo rm /usr/local/bin/nvim
 sudo cp "${EXE}" /usr/local/bin/nvim
 sudo chmod +x /usr/local/bin/nvim
-
-sudo -E apt-add-repository multiverse
-sudo -E apt-get -y update
-sudo -E apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \
-    jq sox ffmpeg httrack python python3 golang python-pip python3-pip libssl-dev dconf-cli scdaemon pcscd
 
 # ubuntu desktop specific (soon to be removed in favor of arch)
 if dpkg -l | grep -vq landscape; then
