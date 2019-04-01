@@ -15,9 +15,9 @@ EXE="$(
         https://github.com/naggie/dstask/releases/download/v0.8/dstask-linux-amd64 \
         a8888a275ad8aa11121d45f589a22829707bd9c29ef0b19e747938c57fde313f
 )"
-sudo rm /usr/local/bin/dstask
-sudo cp "${EXE}" /usr/local/bin/dstask
-sudo chmod +x /usr/local/bin/dstask
+sudo cp "${EXE}" /usr/local/bin/dstask.new
+sudo chmod +x /usr/local/bin/dstask.new
+sudo mv /usr/local/bin/{dstask.new,dstask}
 
 # ripgrep
 TARGZ="$(
@@ -41,9 +41,9 @@ BIN="$(
         https://github.com/neovim/neovim/releases/download/v0.3.3/nvim.appimage \
         6c937c0a2b37e4ad99bae2f37f461ae47a590e62bddecf903b0b5bafe0eaaadb
 )"
-sudo rm /usr/local/bin/nvim
-sudo cp "${EXE}" /usr/local/bin/nvim
-sudo chmod +x /usr/local/bin/nvim
+sudo cp "${EXE}" /usr/local/bin/nvim.new
+sudo chmod +x /usr/local/bin/nvim.new
+sudo mv /usr/local/bin/{nvim.new,nvim}
 
 # ubuntu desktop specific (soon to be removed in favor of arch)
 if dpkg -l | grep -vq landscape; then
