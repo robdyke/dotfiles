@@ -7,6 +7,11 @@ function obtain {
     SHA256SUM="$2"
     TARGET="${CACHE_DIR}/${SHA256SUM}.bin"
 
+    if ! echo $SHA256SUM | grep -Eq '^[a-f0-9]{64}$'; then
+        >&2 echo "Invalid or missing sha256sum specified for $URL"
+        exit 4
+    fi
+
     mkdir -p "${CACHE_DIR}"
 
     # download if does not exist or corrupt

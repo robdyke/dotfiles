@@ -62,7 +62,7 @@ if dpkg -l | grep -vq landscape; then
     # browserpass host
     ZIP="$(
         obtain \
-            https://github.com/browserpass/browserpass/releases/download/2.0.22/browserpass-linux64.zip
+            https://github.com/browserpass/browserpass/releases/download/2.0.22/browserpass-linux64.zip \
             1753e1ca37045eb2eaa3b3b1a5d7a6ecdc1746e301c275bbc38e9617f50ccb39
     )"
     unzip -p "$ZIP" browserpass-linux64 | sudo dd of=/usr/local/bin/browserpass.tmp
