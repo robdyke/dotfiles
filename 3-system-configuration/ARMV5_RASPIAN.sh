@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 sudo -E ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
 # set keyboard layout (with caps lock as esc)

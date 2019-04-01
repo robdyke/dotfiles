@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 source include/util.sh
 
 if [ ! -f /usr/local/bin/brew ]; then

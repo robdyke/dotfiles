@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 source include/util.sh
 
 # TODO yubikey 18.04 only
