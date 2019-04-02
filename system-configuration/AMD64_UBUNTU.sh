@@ -1,7 +1,7 @@
-ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
 # set keyboard layout (with caps lock as esc)
-cat <<- EOF > /etc/default/keyboard
+cat <<- EOF | sudo tee /etc/default/keyboard
     XKBMODEL="pc104"
     XKBLAYOUT="gb"
     XKBVARIANT=""

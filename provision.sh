@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script should be run as the target user. It uses sudo where appropriate.
+
 # See README.md for "Mode of operation" for an explanation of what this script does.
 ORIGIN=https://github.com/naggie/dotfiles.git
 set -ex
@@ -35,10 +37,10 @@ function get_platform() {
 
 PLATFORM=$(get_platform)
 
-# make sure git is installed
+# make sure git/sudo is installed
 case $PLATFORM in
     $AMD64_ARCH)
-        sudo pacman -S git
+        sudo pacman -S git sudo
         ;;
     $AMD64_MACOS)
         # triggers install of xcode cli tools or effectively does nothing
@@ -58,17 +60,14 @@ cd ~/dotfiles
 git pull --ff-only $ORIGIN master || true
 git branch --set-upstream-to=origin/master master
 
+# contains utilities for downloading and installation
+source etc/util.sh
+
 # system-dependencies (run by root)
-sudo bash -ex -c "
-    source etc/util.sh
-    source system-dependencies/${PLATFORM}.sh
-"
+source system-dependencies/${PLATFORM}.sh
 
 # system-configuration (run by root)
-sudo bash -ex -c "
-    source etc/util.sh
-    source system-configuration/${PLATFORM}.sh
-"
+source system-configuration/${PLATFORM}.sh
 
 # user-configuration (run by current user)
 if [[ $(whoami) == naggie ]]; then
