@@ -6,7 +6,7 @@ EXE="$(
 )"
 sudo cp "${EXE}" /usr/local/bin/dstask.new
 sudo chmod +x /usr/local/bin/dstask.new
-sudo mv /usr/local/bin/{dstask.new,dstask}
+sudo mv -f /usr/local/bin/{dstask.new,dstask}
 
 sudo pacman -S git tmux vim tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion jq sox ffmpeg httrack python \
     python3 golang

@@ -11,7 +11,7 @@ EXE="$(
 )"
 sudo cp "${EXE}" /usr/local/bin/dstask.new
 sudo chmod +x /usr/local/bin/dstask.new
-sudo mv /usr/local/bin/{dstask.new,dstask}
+sudo mv -f /usr/local/bin/{dstask.new,dstask}
 
 # ripgrep
 TARGZ="$(
@@ -39,7 +39,7 @@ BIN="$(
 )"
 sudo cp "${EXE}" /usr/local/bin/nvim.new
 sudo chmod +x /usr/local/bin/nvim.new
-sudo mv /usr/local/bin/{nvim.new,nvim}
+sudo mv -f /usr/local/bin/{nvim.new,nvim}
 
 # ubuntu desktop specific (soon to be removed in favor of arch)
 if dpkg -l | grep -vq landscape; then
@@ -68,5 +68,5 @@ if dpkg -l | grep -vq landscape; then
     )"
     unzip -p "$ZIP" browserpass-linux64 | sudo dd of=/usr/local/bin/browserpass.new
     sudo chmod +x /usr/local/bin/browserpass.new
-    sudo mv /usr/local/bin/{browserpass.new,browserpass}
+    sudo mv -f /usr/local/bin/{browserpass.new,browserpass}
 fi

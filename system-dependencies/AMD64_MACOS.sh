@@ -11,9 +11,12 @@ brew cask install spectacle firefox alacritty
 
 # flux is no longer required -- night shift!
 
+# resolve possible coreutils conflict
+brew unlink md5sha1sum
+
 # Upgrade or install (logic necessary)
 packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget htop gnupg2 bash-completion iproute2mac tmpreaper coreutils sox \
-    ffmpeg httrack python ripgrep python go nvim fzf pinentry-mac ykman browserpass)
+    ffmpeg httrack ripgrep nvim fzf pinentry-mac ykman browserpass)
 for package in "${packages[@]}"; do
     brew upgrade $package || brew install $package
 done
@@ -26,4 +29,4 @@ EXE="$(
 )"
 cp "${EXE}" /usr/local/bin/dstask.new
 chmod +x /usr/local/bin/dstask.new
-mv /usr/local/bin/{dstask.new,dstask}
+mv -f /usr/local/bin/{dstask.new,dstask}
