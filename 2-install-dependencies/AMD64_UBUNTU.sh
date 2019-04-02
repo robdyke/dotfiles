@@ -2,8 +2,6 @@
 set -ex
 source include/util.sh
 
-# TODO yubikey 18.04 only
-
 sudo -E apt-add-repository multiverse
 sudo -E apt-get -y update
 sudo -E apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \
@@ -49,9 +47,13 @@ sudo mv /usr/local/bin/{nvim.new,nvim}
 
 # ubuntu desktop specific (soon to be removed in favor of arch)
 if dpkg -l | grep -vq landscape; then
-    sudo -E apt-get -y install firefox i3 i3status dmenu xautolock yubikey-manager powertop
+    sudo -E apt-get -y install firefox i3 i3status dmenu xautolock powertop
+
     # stop default screensaver (xubuntu) -- note xsettings are also required
     sudo -E apt-get -y purge light-locker xfce4-power-manager
+
+    # ykman only available in later versions of ubuntu. Install if available.
+    sudo -E apt-get -y install yubikey-manager || true
 
     # alacritty
     TARGZ="$(
