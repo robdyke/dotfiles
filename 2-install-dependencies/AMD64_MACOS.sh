@@ -1,6 +1,7 @@
 #!/bin/bash
 set -ex
 source include/util.sh
+assert_root()
 
 if [ ! -f /usr/local/bin/brew ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -28,6 +29,6 @@ EXE="$(
         https://github.com/naggie/dstask/releases/download/v0.8/dstask-darwin-amd64 \
         08239f5cd9f56053e3b0ddc09d0e2b1b40083964810edd22161c25c6e09f12b8
 )"
-sudo cp "${EXE}" /usr/local/bin/dstask.new
-sudo chmod +x /usr/local/bin/dstask.new
-sudo mv /usr/local/bin/{dstask.new,dstask}
+cp "${EXE}" /usr/local/bin/dstask.new
+chmod +x /usr/local/bin/dstask.new
+mv /usr/local/bin/{dstask.new,dstask}

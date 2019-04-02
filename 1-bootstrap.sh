@@ -61,12 +61,12 @@ git branch --set-upstream-to=origin/master master
 
 # 2-install-dependencies
 pushd 2-install-dependencies
-    ./${PLATFORM}.sh
+    sudo ./${PLATFORM}.sh
 popd
 
 # 3-system-configuration
 pushd 3-system-configuration
-    ./${PLATFORM}.sh
+    sudo ./${PLATFORM}.sh
 popd
 
 # 4-user-configuration

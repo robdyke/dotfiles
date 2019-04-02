@@ -1,10 +1,12 @@
 #!/bin/bash
 set -ex
+source include/util.sh
+assert_root()
 
-sudo -E ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
 # set keyboard layout (with caps lock as esc)
-cat <<- EOF | sudo tee /etc/default/keyboard
+cat <<- EOF > /etc/default/keyboard
     XKBMODEL="pc104"
     XKBLAYOUT="gb"
     XKBVARIANT=""
