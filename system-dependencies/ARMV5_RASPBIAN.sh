@@ -1,8 +1,3 @@
-#!/bin/bash
-set -ex
-source include/util.sh
-assert_root()
-
 # ripgrep
 TARGZ="$(
     obtain \

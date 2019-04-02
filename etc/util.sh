@@ -31,10 +31,3 @@ function obtain {
 
     echo $TARGET
 }
-
-function assert_root() {
-    if [ $(id -u) != 0 ]; then
-        >&2 echo "This script requires root"
-        exit 1
-    fi
-}

@@ -1,8 +1,3 @@
-#!/bin/bash
-set -ex
-source include/util.sh
-assert_root()
-
 apt-add-repository multiverse
 apt-get -y update
 apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \

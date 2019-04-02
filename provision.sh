@@ -2,8 +2,7 @@
 
 # See README.md for "Mode of operation" for an explanation of what this script does.
 ORIGIN=https://github.com/naggie/dotfiles.git
-set -e
-set -x
+set -ex
 
 
 # Supportted platforms. For more specific stuff, such as extra packages for
@@ -59,17 +58,19 @@ cd ~/dotfiles
 git pull --ff-only $ORIGIN master || true
 git branch --set-upstream-to=origin/master master
 
-# system-dependencies
-pushd system-dependencies
-    sudo ./${PLATFORM}.sh
-popd
+# system-dependencies (run by root)
+sudo bash -ex -c "
+    source etc/util.sh
+    source system-dependencies/${PLATFORM}.sh
+"
 
-# system-configuration
-pushd system-configuration
-    sudo ./${PLATFORM}.sh
-popd
+# system-configuration (run by root)
+sudo bash -ex -c "
+    source etc/util.sh
+    source system-configuration/${PLATFORM}.sh
+"
 
-# user-configuration
+# user-configuration (run by current user)
 if [[ $(whoami) == naggie ]]; then
     ./user-configuration-naggie.sh
 else

@@ -1,8 +1,3 @@
-#!/bin/bash
-set -ex
-source include/util.sh
-assert_root()
-
 if [ ! -f /usr/local/bin/brew ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
