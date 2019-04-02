@@ -1,7 +1,11 @@
 #!/bin/bash
 # This script configures the user account by copying dotfiles and running
 # commands that result in persistent configuration changes.
-# sudo is not required.
+
+if [ $SUDO_USER ]; then
+    >&2 echo "This script must not be run via sudo (to avoid home directory file permission issues)"
+    exit 1
+fi
 
 cd $(dirname $0)
 
