@@ -40,7 +40,7 @@ PLATFORM=$(get_platform)
 # make sure git/sudo is installed
 case $PLATFORM in
     $AMD64_ARCH)
-        sudo pacman -S git sudo
+        sudo pacman -Sy --noconfirm git sudo
         ;;
     $AMD64_MACOS)
         # triggers install of xcode cli tools or effectively does nothing
