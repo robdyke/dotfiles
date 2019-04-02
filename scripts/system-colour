@@ -51,7 +51,7 @@ x256_colours = [
 
 def deterministic_x256(*args):
     """Produces a weighted deterministic colour"""
-    seed = unicode(args)
+    seed = "".join(args).encode()
 
     m = md5()
     m.update(seed)
