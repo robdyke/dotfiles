@@ -59,19 +59,19 @@ cd ~/dotfiles
 git pull --ff-only $ORIGIN master || true
 git branch --set-upstream-to=origin/master master
 
-# 2-install-dependencies
-pushd 2-install-dependencies
+# system-dependencies
+pushd system-dependencies
     sudo ./${PLATFORM}.sh
 popd
 
-# 3-system-configuration
-pushd 3-system-configuration
+# system-configuration
+pushd system-configuration
     sudo ./${PLATFORM}.sh
 popd
 
-# 4-user-configuration
+# user-configuration
 if [[ $(whoami) == naggie ]]; then
-    ./4-user-configuration-naggie.sh
+    ./user-configuration-naggie.sh
 else
-    ./4-user-configuration.sh
+    ./user-configuration.sh
 fi

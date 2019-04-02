@@ -1,8 +1,8 @@
 #!/bin/bash
-# runs 4-user-configuration.sh and then applies changes that are specific to my
+# runs user-configuration.sh and then applies changes that are specific to my
 # identity using only publicly publishable data
 
-source ./4-user-configuration.sh
+source ./user-configuration.sh
 
 if git remote -v | grep -q https; then
     # git+ssh for push access
