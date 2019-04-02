@@ -4,3 +4,5 @@ These scripts perform platform specific configuration only. They may may use of
 These scripts are sourced automatically by `/provision.sh`.  To run them
 manually, first source `/etc/util.sh` before sourcing the applicable script as
 the current user. Sudo may be used,
+
+Script should be idempotent and not result in lost configuration.
