@@ -1,5 +1,7 @@
 CACHE_DIR=~/.cache/dotfiles/
 
+# requires curl, sha256sum
+
 # download file if it doesn't exist, then check the sha256sum matches to
 # mitigate forward-looking supply chain attacks. Exit script on fail.
 function obtain {

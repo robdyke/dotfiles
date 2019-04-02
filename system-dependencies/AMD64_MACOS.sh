@@ -21,6 +21,9 @@ for package in "${packages[@]}"; do
     brew upgrade $package || brew install $package
 done
 
+# create alias for gsha256sum
+ln -sf /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+
 # dstask
 EXE="$(
     obtain \
