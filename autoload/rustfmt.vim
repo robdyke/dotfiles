@@ -1,5 +1,7 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rust') == -1
-  
+if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'rust') != -1
+  finish
+endif
+
 " Author: Stephen Sugden <stephen@stephensugden.com>
 "
 " Adapted from https://github.com/fatih/vim-go
@@ -232,6 +234,9 @@ function! rustfmt#Cmd()
 endfunction
 
 function! rustfmt#PreWrite()
+    if !filereadable(expand("%@"))
+        return
+    endif
     if rust#GetConfigVar('rustfmt_autosave_if_config_present', 0)
         if findfile('rustfmt.toml', '.;') !=# '' || findfile('.rustfmt.toml', '.;') !=# ''
             let b:rustfmt_autosave = 1
@@ -248,5 +253,3 @@ endfunction
 
 
 " vim: set et sw=4 sts=4 ts=8:
-
-endif
