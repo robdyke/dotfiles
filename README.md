@@ -31,7 +31,7 @@ new or re-installed PC.
 [5]: https://github.com/tmux/tmux
 [7]: https://www.gnu.org/software/bash/
 [8]: https://www.zsh.org/
-[10]: https://callanbryant.co.uk/post/dstask-a-taskwarrior-alternative/
+[10]: https://github.com/naggie/dstask
 [11]: https://github.com/sheerun/vim-polyglot
 [12]: https://github.com/morhetz/gruvbox
 [13]: https://www.yubico.com/product/yubikey-5-nfc/
