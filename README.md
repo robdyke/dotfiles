@@ -1,7 +1,8 @@
 This repository contains scripts that I use to provision my new
-computers/servers that I use day-to-day. Everything you see here has been
-carefully considered and tested for inclusion.
+computers/servers that I use day-to-day.
 
+I maintain it so that I can be productive within 10 minutes of encountering a
+new or re-installed PC.
 
 
 # General Tools
