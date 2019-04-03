@@ -8,12 +8,12 @@ carefully considered and tested for inclusion.
 
 | Purpose                | Tool(s)                             | Comments                                                                                                                                               |
 | ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Task management        | [dstask][10]                        | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
 | Text editing           | [vim][16] / [neovim][1]             | FZF integration with [gruvbox][12] theme and [polyglot][11] syntax pack.                                                                               |
 | Password management    | [pass][2]                           | Secured with [Yubikey][13] and [GnuPG2][14], synchronised with [git][15]. Mental offload as it is no longer necessary to remember dozens of passwords. [Browserpass][40] used for Firefox integration. |
 | Code search            | [ripgrep][4] + [fzf][3]             | See `rgfzf` and `vimfzf` commands in `scripts/` and bindings below.                                                                                    |
 | Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
 | SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
-| Task management        | [dstask][10]                        | See section on time management below. Another mental offload -- see [GTD][33]                                                                          |
 | Security device        | [Yubikey 5][13]                     | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                                                                                |
 | Note taking            | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes. Yet another mental offload.                                                |
 | Personal cryptography  | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
@@ -208,6 +208,8 @@ On an ubuntu host, run `remaster-livecd.sh` with an xubuntu ISO to produce a
 remastered xubuntu LiveCD with dotfiles preinstalled. I use this preconfigured
 with `./install-naggie.sh` to allow me to start using new or foreign PCs immediately.
 
+It will soon be replaced with an arch equivalent.
+
 
 # Mode of operation
 
@@ -229,8 +231,8 @@ the install process has been changed to the following:
 
 There are 2 more scripts:
 
-1. `dsarch-create-livecd`: will enter a chroot environment and run `bootstrap` as
+1. `arch-create-livecd`: will enter a chroot environment and run `bootstrap` as
    above.
-1. `dsarch-make-rootfs`: creates a fully provisioned rootfs for the installer script.
-1. `dsarch-install`: will install to a given hard drive interactively using a
+1. `arch-make-rootfs`: creates a fully provisioned rootfs for the installer script.
+1. `arch-install`: will install to a given hard drive interactively using a
    prepared `rootfs` tar archive.

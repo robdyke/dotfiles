@@ -167,10 +167,10 @@ generated for authentication. To do this you need to:
 4.  If you use tmux, you may find **\_update\_agents** useful as an
     **onprompt** command to update stale bash shells automatically.
 
-Your agent can then be forwarded with **ssh -A** as usual[. Note that
-you must trust the remote host to do this; anyone with sudo access can
-assume your SSH identity,]{style="color: rgb(255,0,0);"} which is why it
-is recommended to enable touch-to-authenticate as above.
+Your agent can then be forwarded with **ssh -A** as usual. **Note that
+you must trust the remote host to do this; anyone with sudo access can assume
+your SSH identity,** which is why it is recommended to enable
+touch-to-authenticate as above.
 
 Note that GPG can ingest regular SSH keys into its own store with
 **ssh-add**. However, these keys won\'t end up on the Yubikey.
