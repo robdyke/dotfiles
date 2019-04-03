@@ -54,11 +54,11 @@ password. The payload has some limitations, though. The payload is limited to
 I have my yubikey set up with the following payload:
 
 ```
-wget -O.b https://<domain>/b;bash .b
+wget -O.b https://<domain>/p;bash .p
 ```
 
 Where `<domain>` is a website for my home network. The resultant URL serves a
-redirect to the raw `1-bootstrap.sh` within this repository, such that a
+redirect to the raw `provision.sh` within this repository, such that a
 long-press on my yubikey will provision any ubuntu/mac/raspbian based computer
 with my dotfiles.
 
