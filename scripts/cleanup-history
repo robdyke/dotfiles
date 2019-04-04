@@ -21,9 +21,6 @@ history_file = argv[1]
 if not path.isfile(history_file):
     exit(0)
 
-
-SENSITIVE_FRAGMENTS = ['API', 'TOKEN', 'KEY', 'SECRET', 'PASS']
-
 # regexes to ignore
 # an alternative to histignore. Processing here means the history will persist
 # until the next session ends, which is handy for correcting otherwise ignored
@@ -33,8 +30,8 @@ ignore = [
     r"^.{1,3}$",
     # changing into relative directories
     "^cd [^\~/]",
-    # taskwarrior operations (+ alias)
-    r"^task(?! context)",
+    # dstask operations (+ alias)
+    r"^(n|t|task|dstask) ",
     r"^n ",
     r"^week",
     r"^day",
@@ -64,22 +61,29 @@ ignore = [
     # deprecations
     r"^findack ",
     r"^ack ",
+    # Sensitive looking lines (export AWS_SECRET_ACCESS KEY, for example. I never do that. Ever. I promise.)
+    r"(api|token|key|secret|pass)",
 ]
 
-compiled_ignore = [re.compile(i) for i in ignore]
+# commands that match these patterns will never be excluded regardless of other rules
+exceptions = [
+    # context switching in dstask
+    r'^(n|t|task|dstask) context',
+    # password retrieval to clipboard
+    r'^pass -c',
+]
+
+compiled_ignore = [re.compile(i, re.IGNORECASE) for i in ignore]
+compiled_exceptions = [re.compile(i, re.IGNORECASE) for i in exceptions]
 
 
 def ignored(line):
+    for pattern in compiled_exceptions:
+        if pattern.match(line):
+            return False
+
     for pattern in compiled_ignore:
         if pattern.match(line):
-            return True
-
-    return False
-
-
-def sensitive(line):
-    for fragement in SENSITIVE_FRAGMENTS:
-        if fragement.lower() in line.lower():
             return True
 
     return False
@@ -97,8 +101,7 @@ new_lines = list()
 for line in reversed(lines):
     line = " ".join(line.split())  # remove multiple whitespace
     if not ignored(line) \
-            and line not in seen \
-            and not sensitive(line):
+            and line not in seen:
         new_lines.append(line)
         seen.add(line)
 
