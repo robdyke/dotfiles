@@ -159,6 +159,11 @@ if [ ! "$SSH_CONNECTION" ] && gpg --card-status &>/dev/null; then
         git -C ~ clone git@github.com:naggie/.password-store.git
     fi
 
+    # GPG commit signing not necessary in this context, it just slows down
+    # add/edit operations with a touch -- so disable it for the
+    # password-store repo only
+    git -C ~/.password-store/ config --local commit.gpgsign false
+
     if [ ! -d ~/.dstask ]; then
         git -C ~ clone git@github.com:naggie/.dstask.git
     fi
