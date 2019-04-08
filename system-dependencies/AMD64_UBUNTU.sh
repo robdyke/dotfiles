@@ -3,7 +3,8 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt-add-repository multiverse
 sudo apt-get -y update
-sudo apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \
+# -E is necessary for DEBIAN_FRONTEND
+sudo -E apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \
     jq sox ffmpeg httrack python python3 golang python-pip python3-pip libssl-dev dconf-cli scdaemon pcscd
 
 # dstask
