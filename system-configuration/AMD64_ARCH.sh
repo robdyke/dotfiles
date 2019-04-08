@@ -13,7 +13,9 @@ sudo systemctl restart sshd
 # TODO keyboard layout in console
 # TODO keyboard layout in X
 # TODO keyboard layout in wayland
+# TODO map caps lock to esc on all above
 
 
 # TODO possibly elsewhere: fstab gen
 # TODO possibly elsewhere: systemd-boot install + config
+
