@@ -8,15 +8,12 @@ sudo cp system-configuration/etc/sshd_config /etc/ssh/
 /usr/sbin/sshd -t -f /etc/ssh/sshd_config
 sudo systemctl restart sshd
 
-# TODO hostname, somehow. Maybe this is set by the installer script.
-
 # TODO keyboard layout in X
 # TODO keyboard layout in wayland
 # TODO map caps lock to esc on all above
 
+# TODO keyboard repeat rates in all (super fast)
 
-# TODO possibly elsewhere: fstab gen
-# TODO possibly elsewhere: systemd-boot install + config
 
 # keyboard layout in console
 # TODO replace with custom keymap

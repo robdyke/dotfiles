@@ -40,7 +40,17 @@ PLATFORM=$(get_platform)
 # make sure git/sudo is installed
 case $PLATFORM in
     $AMD64_ARCH)
-        sudo pacman -Sy --noconfirm git sudo
+        # try to install sudo if necessary and possible
+        if ! which sudo; then
+            if [ $(id -u) = 0 ]; then
+                pacman -Sy --noconfirm sudo
+            else
+                >&2 echo "Could not bootstrap, sudo command not available / not running as root"
+                exit 1
+            fi
+        fi
+
+        sudo pacman -Sy --noconfirm git
         ;;
     $AMD64_MACOS)
         # triggers install of xcode cli tools or effectively does nothing
