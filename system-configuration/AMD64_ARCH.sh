@@ -10,9 +10,29 @@ sudo systemctl restart sshd
 
 # TODO keyboard layout in X
 # TODO keyboard layout in wayland
+# TODO keyboard repeat in X
+# TODO keyboard repeat in wayland
 # TODO map caps lock to esc on all above
 
-# TODO keyboard repeat rates in all (super fast)
+# keyboard repeat rates console
+cat <<- EOF | sudo tee /etc/systemd/system/kbdrate.service
+    [Unit]
+    Description=Keyboard repeat rate in tty.
+
+    [Service]
+    Type=oneshot
+    RemainAfterExit=yes
+    StandardInput=tty
+    StandardOutput=tty
+    ExecStart=/usr/bin/kbdrate -s -d 200 -r 30
+
+    [Install]
+    WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable kbdrate.service
+sudo systemctl start kbdrate.service
 
 
 # keyboard layout in console
