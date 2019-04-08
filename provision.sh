@@ -57,10 +57,10 @@ case $PLATFORM in
         git --version
         ;;
     $AMD64_UBUNTU)
-        sudo apt-get install git
+        sudo apt-get -y install git
         ;;
     $ARMV5_RASPBIAN)
-        sudo apt-get install git
+        sudo apt-get -y install git
         ;;
 esac
 

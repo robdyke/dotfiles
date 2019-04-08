@@ -12,7 +12,9 @@ sudo systemctl restart sshd
 # TODO keyboard layout in wayland
 # TODO keyboard repeat in X
 # TODO keyboard repeat in wayland
-# TODO map caps lock to esc on all above
+# TODO map caps lock to esc in X
+# TODO map caps lock to esc in wayland
+# TODO map caps lock to esc in console
 
 # keyboard repeat rates console
 cat <<- EOF | sudo tee /etc/systemd/system/kbdrate.service
@@ -33,7 +35,6 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable kbdrate.service
 sudo systemctl start kbdrate.service
-
 
 # keyboard layout in console
 # TODO replace with custom keymap
