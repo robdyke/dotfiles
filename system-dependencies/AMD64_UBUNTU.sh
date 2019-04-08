@@ -1,3 +1,6 @@
+# tmpreaper tries to do a post-install "configuration" screen to warn the user.
+export DEBIAN_FRONTEND=noninteractive
+
 sudo apt-add-repository multiverse
 sudo apt-get -y update
 sudo apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \
