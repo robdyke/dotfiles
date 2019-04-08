@@ -10,7 +10,6 @@ sudo systemctl restart sshd
 
 # TODO hostname, somehow. Maybe this is set by the installer script.
 
-# TODO keyboard layout in console
 # TODO keyboard layout in X
 # TODO keyboard layout in wayland
 # TODO map caps lock to esc on all above
@@ -19,3 +18,7 @@ sudo systemctl restart sshd
 # TODO possibly elsewhere: fstab gen
 # TODO possibly elsewhere: systemd-boot install + config
 
+# keyboard layout in console
+# TODO replace with custom keymap
+# https://wiki.archlinux.org/index.php/Linux_console/Keyboard_configuration
+echo 'KEYMAP=uk' | sudo tee /etc/vconsole.conf
