@@ -1,7 +1,6 @@
 sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
 sudo cp system-configuration/etc/sshd_config /etc/ssh/
-/usr/sbin/sshd -t -f /etc/ssh/sshd_config
 sudo systemctl restart sshd
 
 # set keyboard layout (with caps lock as esc)
