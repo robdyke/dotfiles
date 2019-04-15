@@ -1,9 +1,7 @@
 {
-  "name": "com.dannyvankooten.browserpass",
-  "description": "Browserpass binary for the Firefox extension",
-  "path": "/usr/local/bin/browserpass",
-  "type": "stdio",
-  "allowed_extensions": [
-    "browserpass@maximbaz.com"
-  ]
+    "name": "com.github.browserpass.native",
+    "description": "Browserpass native component for the Firefox extension",
+    "path": "/usr/local/bin/browserpass",
+    "type": "stdio",
+    "allowed_extensions": ["browserpass@maximbaz.com"]
 }

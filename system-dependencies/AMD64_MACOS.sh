@@ -5,7 +5,6 @@ else
 fi
 
 # recommended, uses /Applications now.
-brew tap dustinwilson/tap   # TODO replace with checksummed binary
 brew tap caskroom/homebrew-cask
 brew cask install spectacle firefox alacritty
 
@@ -16,7 +15,7 @@ brew unlink md5sha1sum
 
 # Upgrade or install (logic necessary)
 packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget htop gnupg2 bash-completion iproute2mac tmpreaper coreutils sox \
-    ffmpeg httrack ripgrep nvim fzf pinentry-mac ykman browserpass)
+    ffmpeg httrack ripgrep nvim fzf pinentry-mac ykman)
 for package in "${packages[@]}"; do
     brew upgrade $package || brew install $package
 done
@@ -33,3 +32,13 @@ EXE="$(
 cp "${EXE}" /usr/local/bin/dstask.new
 chmod +x /usr/local/bin/dstask.new
 mv -f /usr/local/bin/{dstask.new,dstask}
+
+# browserpass host
+ZIP="$(
+    obtain \
+        https://github.com/browserpass/browserpass-native/releases/download/3.0.6/browserpass-darwin64-3.0.6.tar.gz \
+        422bc6dd1270a877af6ac7801a75b4c4b57171d675c071470f31bc24196701e3
+)"
+unzip -p "$ZIP" browserpass-darwin64 | sudo dd of=/usr/local/bin/browserpass.new
+sudo chmod +x /usr/local/bin/browserpass.new
+sudo mv -f /usr/local/bin/{browserpass.new,browserpass}
