@@ -26,11 +26,13 @@ function get_platform() {
             echo $ARMV5_RASPBIAN
         else
             >&2 echo "Unsupported OS"
+            exit 1
         fi
     elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
         echo $AMD64_MACOS
     else
         >&2 echo "Unsupported OS"
+        exit 1
     fi
 }
 
