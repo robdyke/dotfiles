@@ -56,14 +56,14 @@ arch-chroot $root hwclock --systohc
 # note that as sudo is used, there's no root password to be set.
 arch-chroot $root useradd \
 	--create-home \
-	--groups wheel \
+	--groups wheel,adm,games,http,log,rfkill,sys,users,uucp \
 	--shell /bin/bash $username
 
 echo -n "${password}" | arch-chroot $root passwd --stdin $username
 
-# bootloader
+# TODO bootloader
 
-# microcode updates
+# TODO microcode updates
 
 # copy dotfiles
 cp -a ../dotfiles/ ${root}/home/${username}
