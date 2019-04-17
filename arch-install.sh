@@ -62,11 +62,11 @@ arch-chroot $root useradd \
 
 echo -n "${password}" | arch-chroot $root passwd --stdin $username
 
-# Grub EFI bootloader
+# Install Grub EFI bootloader, generate config to load existing kernel and
+# early microcode
 grub-install --target=x86_64-efi --efi-directory=$boot --bootloader-id=GRUB
+arch-chroot $root pacman --noconfirm -Sy intel-ucode amd-ucode
 arch-chroot $root grub-mkconfig -o /boot/grub/grub.cfg
-
-# TODO microcode updates
 
 # copy dotfiles
 cp -a ../dotfiles/ ${root}/home/${username}
