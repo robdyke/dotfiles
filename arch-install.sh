@@ -24,6 +24,14 @@ loadkeys uk
 # TODO commands piped into fdisk or sfdisk which is a scripted fdisk
 # https://superuser.com/questions/332252/how-to-create-and-format-a-partition-using-a-bash-script
 # https://en.wikipedia.org/wiki/Partition_type
+#cat /sys/block/sda/queue/hw_sector_size
+cat <- EOF | sfdisk $device
+    label: gpt
+    unit: sectors
+
+    ${device}1 : start=        2048, size=     3072000, type=ef, bootable
+    ${device}2 : start=            , size=            , type=83
+EOF
 
 # format partitions
 mkfs.msdos -F32 ${device}1
