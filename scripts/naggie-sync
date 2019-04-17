@@ -7,6 +7,15 @@ function say {
 
 set -e
 
+# always do dotfiles first, as this may create the below repositories
+if [ -d ~/dotfiles ]; then
+    say "dotfiles"
+    pushd ~/dotfiles
+        git pull --no-edit --commit origin master
+        ./user-configuration-naggie.sh
+    popd
+fi
+
 if [ -d ~/.password-store ]; then
     say "Password store"
     pass git pull --no-edit --commit origin master
@@ -21,12 +30,4 @@ fi
 if [ -d ~/notes ]; then
     say "notes.git"
     ~/notes/sync
-fi
-
-if [ -d ~/dotfiles ]; then
-    say "dotfiles"
-    pushd ~/dotfiles
-        git pull --no-edit --commit origin master
-        ./user-configuration-naggie.sh
-    popd
 fi
