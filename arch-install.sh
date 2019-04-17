@@ -2,6 +2,7 @@
 # TODO decide if this requires root or uses sudo
 # TODO FDE
 # TODO encrypted swap suitable for hibernation support
+# TODO check for EFI
 
 read -e -p "Target device: " device
 
@@ -61,7 +62,9 @@ arch-chroot $root useradd \
 
 echo -n "${password}" | arch-chroot $root passwd --stdin $username
 
-# TODO bootloader
+# Grub EFI bootloader
+grub-install --target=x86_64-efi --efi-directory=$boot --bootloader-id=GRUB
+arch-chroot $root grub-mkconfig -o /boot/grub/grub.cfg
 
 # TODO microcode updates
 
