@@ -4,7 +4,7 @@ sudo cp system-configuration/etc/sshd_config /etc/ssh/
 sudo systemctl restart sshd
 
 # set keyboard layout (with caps lock as esc)
-cat <<- EOF | sudo tee /etc/default/keyboard
+cat <<-EOF | sudo tee /etc/default/keyboard
     XKBMODEL="pc104"
     XKBLAYOUT="gb"
     XKBVARIANT=""

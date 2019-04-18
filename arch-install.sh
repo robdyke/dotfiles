@@ -51,7 +51,7 @@ genfstab -U $root >> /mnt/etc/fstab
 # set hostname
 echo $hostname > ${root}/etc/hostname
 echo $hostname > ${root}/etc/hostname
-cat <- EOF > ${root}/etc/hosts
+cat <<-EOF > ${root}/etc/hosts
     127.0.0.1 localhost
     ::1       localhost
     127.0.1.1 $hostname
