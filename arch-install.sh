@@ -1,7 +1,4 @@
 #!/bin/bash
-
-set -ex
-
 # TODO decide if this requires root or uses sudo
 # TODO FDE
 # TODO encrypted swap suitable for hibernation support
@@ -18,6 +15,7 @@ read -e -p "Hostname: " hostname
 read -e -p "Username: " username
 read -e -s -p "User / FDE Password: " passwd
 
+set -ex
 # housekeeping
 timedatectl set-ntp true
 loadkeys uk
