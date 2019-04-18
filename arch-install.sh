@@ -27,7 +27,7 @@ loadkeys uk
 # https://en.wikipedia.org/wiki/Partition_type
 #cat /sys/block/sda/queue/hw_sector_size
 # TODO UUIDs?
-cat <- EOF | sfdisk $device
+cat <<- EOF | sfdisk $device
     label: gpt
     unit: sectors
 
