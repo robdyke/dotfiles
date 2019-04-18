@@ -13,6 +13,7 @@ sudo pacman --noconfirm -Sy git tmux vim tig zsh openssh pass httpie ncdu tree w
 
 # TODO yubikey stuff
 # TODO tmpreaper
+# TODO Nvidia, AMD, Intel display drivers
 
 # browserpass host
 ZIP="$(

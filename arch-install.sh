@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -ex
+
 # TODO decide if this requires root or uses sudo
 # TODO FDE
 # TODO encrypted swap suitable for hibernation support
@@ -25,11 +28,12 @@ loadkeys uk
 # https://superuser.com/questions/332252/how-to-create-and-format-a-partition-using-a-bash-script
 # https://en.wikipedia.org/wiki/Partition_type
 #cat /sys/block/sda/queue/hw_sector_size
+# TODO UUIDs?
 cat <- EOF | sfdisk $device
     label: gpt
     unit: sectors
 
-    ${device}1 : start=        2048, size=     3072000, type=ef, bootable
+    ${device}1 : start=        2048, size=     3072000, type=ef
     ${device}2 : start=            , size=            , type=83
 EOF
 
