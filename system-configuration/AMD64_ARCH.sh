@@ -38,3 +38,7 @@ sudo systemctl start kbdrate.service
 # TODO replace with custom keymap
 # https://wiki.archlinux.org/index.php/Linux_console/Keyboard_configuration
 echo 'KEYMAP=uk' | sudo tee /etc/vconsole.conf
+
+# browserpass config
+sudo mkdir -p /usr/lib/mozilla/native-messaging-hosts/
+sudo cp etc/firefox/com.github.browserpass.native.json /usr/lib/mozilla/native-messaging-hosts/
