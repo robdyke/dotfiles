@@ -7,6 +7,9 @@ if [ $SUDO_USER ] && [ $HOME != /etc/skel ]; then
     exit 1
 fi
 
+# exit on error, print statements
+set -Eeuxo pipefail
+
 cd $(dirname $0)
 
 PLATFORM=$(uname)
