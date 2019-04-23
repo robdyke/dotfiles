@@ -4,8 +4,9 @@
 
 # See README.md for "Mode of operation" for an explanation of what this script does.
 ORIGIN=https://github.com/naggie/dotfiles.git
-set -ex
 
+# exit on error, print statements
+set -Eeuxo pipefail
 
 # Supportted platforms. For more specific stuff, such as extra packages for
 # desktop vs server or version specific stuff, put that logic in the platform
