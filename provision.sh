@@ -6,7 +6,7 @@
 ORIGIN=https://github.com/naggie/dotfiles.git
 
 # exit on error, print statements
-set -Eeuxo pipefail
+set -Eexo pipefail
 
 # Supportted platforms. For more specific stuff, such as extra packages for
 # desktop vs server or version specific stuff, put that logic in the platform

@@ -8,7 +8,7 @@ if [ $SUDO_USER ] && [ $HOME != /etc/skel ]; then
 fi
 
 # exit on error, print statements
-set -Eeuxo pipefail
+set -Eexo pipefail
 
 cd $(dirname $0)
 
@@ -36,7 +36,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
 EOF
 
 # copy dotfiles separately , normal glob does not match
-cp -r home/.??* ~ 2> /dev/null
+cp -r home/.??* ~
 cp -a etc ~
 cp -a scripts/* ~/.local/bin/
 
@@ -104,13 +104,6 @@ elif [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
     xset s 7200 7200
 fi
 
-# generate help files (well, tags) for the vim plugins
-if which vim &>/dev/null; then
-	# -e : ex mode, -s : silent batch mode, -n : no swap
-	# must source vimrc in this mode.
-	echo 'source ~/.vimrc | call pathogen#helptags()' | vim -es -n -s
-fi
-
 if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
     cp ~/.bash_history ~/.history
 fi
@@ -133,7 +126,7 @@ systemctl --user daemon-reload &>/dev/null || true
 
 # if GPG agent is running but doesn't yet know about the extra socket, restart
 # it. This can happen with system-managed gpg-agents. This should happen on local machine only.
-if [ ! -S $(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) ] && [ ! "$SSH_CONNECTION" ]; then
+if [ ! -S $(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) ] && [ -z "$SSH_CONNECTION" ]; then
     gpgconf --kill gpg-agent
     gpg-connect-agent /bye
 fi
