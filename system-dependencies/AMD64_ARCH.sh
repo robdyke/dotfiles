@@ -16,11 +16,11 @@ sudo pacman --noconfirm -Sy git tmux vim tig zsh openssh pass httpie ncdu tree w
 # TODO Nvidia, AMD, Intel display drivers
 
 # browserpass host
-ZIP="$(
+TARGZ="$(
     obtain \
         https://github.com/browserpass/browserpass-native/releases/download/3.0.6/browserpass-linux64-3.0.6.tar.gz \
         f63047cbde5611c629b9b8e2acf6e8732dd4d9d64eba102c2cf2a3bb612b3360
 )"
-unzip -p "$ZIP" browserpass-linux64 | sudo dd of=/usr/local/bin/browserpass.new
-sudo chmod +x /usr/local/bin/browserpass.new
-sudo mv -f /usr/local/bin/{browserpass.new,browserpass}
+[ -f /usr/local/bin/browserpass ] && sudo rm -f /usr/local/bin/browserpass
+sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" browserpass-linux64-3.0.6/browserpass-46xunil
+sudo mv /usr/local/bin/browserpass-linux64 /usr/local/bin/browserpass

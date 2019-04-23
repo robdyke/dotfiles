@@ -34,11 +34,11 @@ chmod +x /usr/local/bin/dstask.new
 mv -f /usr/local/bin/{dstask.new,dstask}
 
 # browserpass host
-ZIP="$(
+TARGZ="$(
     obtain \
         https://github.com/browserpass/browserpass-native/releases/download/3.0.6/browserpass-darwin64-3.0.6.tar.gz \
         422bc6dd1270a877af6ac7801a75b4c4b57171d675c071470f31bc24196701e3
 )"
-unzip -p "$ZIP" browserpass-darwin64 | sudo dd of=/usr/local/bin/browserpass.new
-sudo chmod +x /usr/local/bin/browserpass.new
-sudo mv -f /usr/local/bin/{browserpass.new,browserpass}
+[ -f /usr/local/bin/browserpass ] && sudo rm -f /usr/local/bin/browserpass
+sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" browserpass-darwin64-3.0.6/browserpass-darwin64
+sudo mv /usr/local/bin/browserpass-darwin64 /usr/local/bin/browserpass
