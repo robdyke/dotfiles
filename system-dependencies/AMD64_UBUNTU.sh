@@ -45,8 +45,8 @@ sudo cp "${EXE}" /usr/local/bin/nvim.new
 sudo chmod +x /usr/local/bin/nvim.new
 sudo mv -f /usr/local/bin/{nvim.new,nvim}
 
-# ubuntu desktop specific (soon to be removed in favor of arch)
-if dpkg -l | grep -vq landscape; then
+# ubuntu desktop specific (desktop image does not have landscape package installed by default)
+if ! dpkg -l landscape 2> /dev/null; then
     sudo apt-get -y install firefox i3 i3status dmenu xautolock powertop
 
     # stop default screensaver (xubuntu) -- note xsettings are also required
@@ -70,6 +70,6 @@ if dpkg -l | grep -vq landscape; then
             f63047cbde5611c629b9b8e2acf6e8732dd4d9d64eba102c2cf2a3bb612b3360
     )"
     [ -f /usr/local/bin/browserpass ] && sudo rm -f /usr/local/bin/browserpass
-    sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" browserpass-linux64-3.0.6/browserpass-46xunil
+    sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" browserpass-linux64-3.0.6/browserpass-linux64
     sudo mv /usr/local/bin/browserpass-linux64 /usr/local/bin/browserpass
 fi

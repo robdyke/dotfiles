@@ -22,5 +22,5 @@ TARGZ="$(
         f63047cbde5611c629b9b8e2acf6e8732dd4d9d64eba102c2cf2a3bb612b3360
 )"
 [ -f /usr/local/bin/browserpass ] && sudo rm -f /usr/local/bin/browserpass
-sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" browserpass-linux64-3.0.6/browserpass-46xunil
+sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" browserpass-linux64-3.0.6/browserpass-linux64
 sudo mv /usr/local/bin/browserpass-linux64 /usr/local/bin/browserpass
