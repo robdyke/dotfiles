@@ -45,8 +45,8 @@ sudo cp "${EXE}" /usr/local/bin/nvim.new
 sudo chmod +x /usr/local/bin/nvim.new
 sudo mv -f /usr/local/bin/{nvim.new,nvim}
 
-# ubuntu desktop specific (desktop image does not have landscape package installed by default)
-if ! dpkg -l landscape 2> /dev/null; then
+# ubuntu desktop specific
+if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
     sudo apt-get -y install firefox i3 i3status dmenu xautolock powertop
 
     # stop default screensaver (xubuntu) -- note xsettings are also required
