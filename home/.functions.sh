@@ -128,7 +128,8 @@ function gssh {
     remote_socket=$(cat <<'EOF' | command ssh -T "$@" bash
         set -e
         socket=$(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
-        gpgconf --kill gpg-agent
+        # killing agent works over socket, which might be dangling, so time it out.
+        timeout -k 2 1 gpgconf --kill gpg-agent
         test -S $socket && rm $socket
         echo $socket
 EOF
