@@ -61,6 +61,7 @@ new or re-installed PC.
 | Web crawling           | [httrack][32]                              | Better than wget for crawling (i.e. it works)                                                                         |
 | Document conversion    | [pandoc][35]                               | See also [pdflatex][36], which I use for formal reports.                                                              |
 | Static blog            | [hugo][37]                                 | Chosen in an attempt to make myself stop writing blog engines and write articles instead.                             |
+| Git history viewer     | tig                                        |                                                                                                                       |
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
