@@ -7,6 +7,13 @@ To install, add this to .bashrc:
 
     trap "~/.local/bin/cleanup-history ~/.bash_history" EXIT
 
+Advantages:
+ * History only cleaned on shell exit, meaning history isn't immediately lost which can be annoying sometimes
+ * De-duplication is global rather than sequential items only
+ * More-powerful regexes can be used
+ * Whitespace is normalised
+ * Can be used with bash and zsh at the same time with coherent behavior
+
 """
 from sys import argv
 import re
@@ -77,16 +84,16 @@ compiled_ignore = [re.compile(i, re.IGNORECASE) for i in ignore]
 compiled_exceptions = [re.compile(i, re.IGNORECASE) for i in exceptions]
 
 
-def ignored(line):
+def is_valid(line):
     for pattern in compiled_exceptions:
-        if pattern.match(line):
-            return False
-
-    for pattern in compiled_ignore:
-        if pattern.match(line):
+        if pattern.search(line):
             return True
 
-    return False
+    for pattern in compiled_ignore:
+        if pattern.search(line):
+            return False
+
+    return True
 
 
 with open(history_file, "rb") as f:
@@ -100,8 +107,7 @@ new_lines = list()
 # note that reversed() does not copy lines, just results in reversed iteration
 for line in reversed(lines):
     line = " ".join(line.split())  # remove multiple whitespace
-    if not ignored(line) \
-            and line not in seen:
+    if is_valid(line) and line not in seen:
         new_lines.append(line)
         seen.add(line)
 
