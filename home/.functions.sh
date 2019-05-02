@@ -129,7 +129,7 @@ function gssh {
         set -e
         socket=$(gpgconf --list-dirs | grep agent-socket | cut -f 2 -d :)
         # killing agent works over socket, which might be dangling, so time it out.
-        timeout -k 2 1 gpgconf --kill gpg-agent
+        timeout -k 2 1 gpgconf --kill gpg-agent || true
         test -S $socket && rm $socket
         echo $socket
 EOF
