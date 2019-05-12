@@ -55,3 +55,7 @@ user_pref("browser.download.saveLinkAsFilenameTimeout", 0);
 // prevents (most) idle browsing
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.startup.homepage", "about:blank");
+
+// do not offer to save passwords, nor allow the user to enable the feature
+user_pref("signon.rememberSignons", false);
+user_pref("signon.rememberSignons.visibilityToggle", false);
