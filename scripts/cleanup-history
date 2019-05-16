@@ -78,6 +78,7 @@ exceptions = [
     r'^(n|t|task|dstask) context',
     # password retrieval to clipboard
     r'^pass -c',
+    r'--vault-password-file',
 ]
 
 compiled_ignore = [re.compile(i, re.IGNORECASE) for i in ignore]
