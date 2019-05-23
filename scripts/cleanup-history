@@ -79,6 +79,8 @@ exceptions = [
     # password retrieval to clipboard
     r'^pass -c',
     r'--vault-password-file',
+    # I have likely used pass to lookup secrets, so none on cmd line, probably
+    r'=\$\(pass',
 ]
 
 compiled_ignore = [re.compile(i, re.IGNORECASE) for i in ignore]
