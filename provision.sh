@@ -14,16 +14,21 @@ set -Eexo pipefail
 AMD64_ARCH=AMD64_ARCH
 AMD64_MACOS=AMD64_MACOS
 AMD64_UBUNTU=AMD64_UBUNTU
+AMD64_FEDORA=AMD64_FEDORA
 ARMV5_RASPBIAN=ARMV5_RASPBIAN
 
 
 function get_platform() {
     if uname | grep -q Linux; then
-        if grep -q Arch /etc/issue && getconf LONG_BIT | grep -q 64; then
+        HOSTNAMECTL=$(hostnamectl)
+        LONG_BIT=$(getconf LONG_BIT)
+        if [[ $HOSTNAMECTL == *"Arch "* ]] && [[ $LONG_BIT == 64 ]]; then
             echo $AMD64_ARCH
-        elif grep -q Ubuntu /etc/issue && getconf LONG_BIT | grep -q 64; then
+        elif [[ $HOSTNAMECTL == *Ubuntu* ]] && [[ $LONG_BIT == 64 ]]; then
             echo $AMD64_UBUNTU
-        elif grep -q Raspbian /etc/issue && getconf LONG_BIT | grep -q 32; then
+        elif [[ $HOSTNAMECTL == *Fedora* ]] && [[ $LONG_BIT == 64 ]]; then
+            echo $AMD64_FEDORA
+        elif [[ $HOSTNAMECTL == *Rasbian* ]] && [[ $LONG_BIT == 64 ]]; then
             echo $ARMV5_RASPBIAN
         else
             >&2 echo "Unsupported OS"
@@ -61,6 +66,9 @@ case $PLATFORM in
         ;;
     $AMD64_UBUNTU)
         sudo apt-get -y install git
+        ;;
+    $AMD64_FEDORA)
+        sudo dnf -y install git
         ;;
     $ARMV5_RASPBIAN)
         sudo apt-get -y install git
