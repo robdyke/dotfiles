@@ -21,11 +21,6 @@ test -d ~/.fzf/ && rm -rf ~/.fzf/
 mkdir -p ~/.local/bin
 mkdir -p ~/.ssh
 mkdir -p ~/.gnupg
-chmod 700 ~/.ssh
-
-touch ~/.ssh/known_hosts
-chmod 600 ~/.ssh/known_hosts
-chmod 0700 ~/.gnupg
 
 # Ubuntu creates some annoying empty directories. Delete if empty.
 rmdir Documents/ Pictures/ Public/ Videos/ &>/dev/null || true
@@ -108,8 +103,15 @@ if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
     cp ~/.bash_history ~/.history
 fi
 
+# set important permissions
 touch ~/.history
+touch ~/.ssh/known_hosts
+touch ~/.ssh/authorized_keys
 chmod 600 ~/.history
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/known_hosts
+chmod 600 ~/.ssh/authorized_keys
+chmod 0700 ~/.gnupg
 
 # set caps lock to act as esc if possible
 test $DISPLAY && which dconf &> /dev/null && \
