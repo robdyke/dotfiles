@@ -9,7 +9,7 @@ In general they install:
 * fzf
 * ripgrep
 * Programming languages
-* A desktop environment, Firefox etc (non-server only)
+* A desktop environment, Firefox, Alacritty etc (some non-server distros only)
 
 
 These scripts are sourced automatically by `/provision.sh`.  To run them
