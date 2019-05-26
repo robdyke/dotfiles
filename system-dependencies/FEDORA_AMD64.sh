@@ -2,7 +2,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # -E is necessary for DEBIAN_FRONTEND
-sudo -E dnf -y install tmux vim git tig zsh pass httpie ncdu tree wget htop gnupg2 curl bash-completion jq sox httrack python python3 golang python-pip python3-pip libssl-dev fzf ripgrep neovim
+sudo -E dnf -y install tmux vim git tig zsh pass httpie ncdu tree wget htop gnupg2 curl bash-completion jq sox httrack python python3 golang python-pip python3-pip fzf ripgrep neovim
 
 # dstask
 EXE="$(
