@@ -11,26 +11,31 @@ set -Eexo pipefail
 # Supportted platforms. For more specific stuff, such as extra packages for
 # desktop vs server or version specific stuff, put that logic in the platform
 # specific install-dependencies script.
-AMD64_ARCH=AMD64_ARCH
-AMD64_MACOS=AMD64_MACOS
-AMD64_UBUNTU=AMD64_UBUNTU
-ARMV5_RASPBIAN=ARMV5_RASPBIAN
+ARCH_AMD64=ARCH_AMD64
+MACOS_AMD64=MACOS_AMD64
+UBUNTU_AMD64=UBUNTU_AMD64
+FEDORA_AMD64=FEDORA_AMD64
+RASPBIAN_ARMV5=RASPBIAN_ARMV5
 
 
 function get_platform() {
     if uname | grep -q Linux; then
-        if grep -q Arch /etc/issue && getconf LONG_BIT | grep -q 64; then
-            echo $AMD64_ARCH
-        elif grep -q Ubuntu /etc/issue && getconf LONG_BIT | grep -q 64; then
-            echo $AMD64_UBUNTU
-        elif grep -q Raspbian /etc/issue && getconf LONG_BIT | grep -q 32; then
-            echo $ARMV5_RASPBIAN
+        HOSTNAMECTL=$(hostnamectl)
+        LONG_BIT=$(getconf LONG_BIT)
+        if [[ $HOSTNAMECTL == *"Arch "* ]] && [[ $LONG_BIT == 64 ]]; then
+            echo $ARCH_AMD64
+        elif [[ $HOSTNAMECTL == *Ubuntu* ]] && [[ $LONG_BIT == 64 ]]; then
+            echo $UBUNTU_AMD64
+        elif [[ $HOSTNAMECTL == *Fedora* ]] && [[ $LONG_BIT == 64 ]]; then
+            echo $FEDORA_AMD64
+        elif [[ $HOSTNAMECTL == *Rasbian* ]] && [[ $LONG_BIT == 64 ]]; then
+            echo $RASPBIAN_ARMV5
         else
             >&2 echo "Unsupported OS"
             exit 1
         fi
     elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
-        echo $AMD64_MACOS
+        echo $MACOS_AMD64
     else
         >&2 echo "Unsupported OS"
         exit 1
@@ -42,7 +47,7 @@ PLATFORM=$(get_platform)
 
 # make sure git/sudo is installed
 case $PLATFORM in
-    $AMD64_ARCH)
+    $ARCH_AMD64)
         # try to install sudo if necessary and possible
         if ! which sudo; then
             if [ $(id -u) = 0 ]; then
@@ -55,14 +60,17 @@ case $PLATFORM in
 
         sudo pacman -Sy --noconfirm git
         ;;
-    $AMD64_MACOS)
+    $MACOS_AMD64)
         # triggers install of xcode cli tools or effectively does nothing
         git --version
         ;;
-    $AMD64_UBUNTU)
+    $UBUNTU_AMD64)
         sudo apt-get -y install git
         ;;
-    $ARMV5_RASPBIAN)
+    $FEDORA_AMD64)
+        sudo dnf -y install git
+        ;;
+    $RASPBIAN_ARMV5)
         sudo apt-get -y install git
         ;;
 esac
