@@ -1,17 +1,25 @@
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
-#main-window,
-#content,
-browser[type="content-primary"],
-browser[type="content"],
-browser[type="content"] > html {
-  background: #16171d !important;
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@-moz-document url(chrome://browser/content/browser.xul)
+{
+
+    #main-window,
+    browser[type="content-primary"],
+    browser[type="content"],
+    tabbrowser#content,
+    #content,
+    browser[type="content"] > html
+    {
+        background: #000000 !important;
+    }
+
 }
 
 a, a:active, a:focus {
-   outline: none !important;
+    outline: none !important;
 }
 
 /* remove autohiding location bar, as I find autohiding things infuriating */
 #fullscr-toggler { display:none!important; }
 
-@-moz-document url-prefix(about:blank) {*{background-color:#000000;}}
+/* white flash */
+.browserContainer { background-color: #000000 !important; }
