@@ -111,6 +111,7 @@ chmod 600 ~/.history
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/known_hosts
 chmod 600 ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/config
 chmod 0700 ~/.gnupg
 
 # set caps lock to act as esc if possible

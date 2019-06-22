@@ -4,6 +4,8 @@ if which /usr/local/bin/pinentry-mac &> /dev/null; then
     exec /usr/local/bin/pinentry-mac
 elif which /usr/bin/pinentry-x11 &> /dev/null; then
     exec /usr/bin/pinentry-x11
+elif which /usr/bin/pinentry-gnome3 &> /dev/null; then
+    exec /usr/bin/pinentry-gnome3
 else
     exit 2
 fi
