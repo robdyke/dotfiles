@@ -46,22 +46,23 @@ new or re-installed PC.
 
 # Specific tools
 
-| Purpose                | Tool(s)                                    | Comments                                                                                                              |
-| ---------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| Web browser            | [firefox][20]                              | Fast since Quantum. Animations disabled for speed.                                                                    |
-| VPN                    | [tinc][21]                                 | Tinc has been 100% reliable and is able to work with most firewalls.                                                  |
-| Disk space reclaim     | [ncdu][22] + [tmpreaper][23]               | Tools for clearing up disk space. I run the latter against /tmp/ with cron.                                           |
-| Server configuration   | [ansible][24]                              | Idempotent, agentless configuration management. Used with git.                                                        |
-| HTTP Client            | [httpie][25]                               | curl alternative with better UX. Sometimes used with jq.                                                              |
-| System backup          | [restic][26]                               |                                                                                                                       |
-| Cloud backup           | [rclone][39]                               |                                                                                                                       |
-| Diagramming            | [draw.io][27]                              | Diagram creation software. See also dia, graphviz, tikz.                                                              |
-| Music playback         | [cmus][28]                                 | Fast terminal music player. See also MPD, mopidy.                                                                     |
-| Audio/video conversion | [sox][29] + [ffmpeg][30] + [gstreamer][31] |                                                                                                                       |
-| Web crawling           | [httrack][32]                              | Better than wget for crawling (i.e. it works)                                                                         |
-| Document conversion    | [pandoc][35]                               | See also [pdflatex][36], which I use for formal reports.                                                              |
-| Static blog            | [hugo][37]                                 | Chosen in an attempt to make myself stop writing blog engines and write articles instead.                             |
-| Git history viewer     | tig                                        |                                                                                                                       |
+| Purpose                        | Tool(s)                                    | Comments                                                                                                              |
+| ------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| Web browser                    | [firefox][20]                              | Fast since Quantum. Animations disabled for speed.                                                                    |
+| VPN                            | [tinc][21]                                 | Tinc has been 100% reliable and is able to work with most firewalls.                                                  |
+| Disk space reclaim             | [ncdu][22] + [tmpreaper][23]               | Tools for clearing up disk space. I run the latter against /tmp/ with cron.                                           |
+| Server configuration           | [ansible][24]                              | Idempotent, agentless configuration management. Used with git.                                                        |
+| HTTP Client                    | [httpie][25]                               | curl alternative with better UX. Sometimes used with jq.                                                              |
+| System backup                  | [restic][26]                               |                                                                                                                       |
+| Cloud backup                   | [rclone][39]                               |                                                                                                                       |
+| Diagramming                    | [draw.io][27]                              | Diagram creation software. See also dia, graphviz, tikz.                                                              |
+| Music playback                 | [cmus][28]                                 | Fast terminal music player. See also MPD, mopidy.                                                                     |
+| Audio/video conversion         | [sox][29] + [ffmpeg][30] + [gstreamer][31] |                                                                                                                       |
+| Web crawling                   | [httrack][32]                              | Better than wget for crawling (i.e. it works)                                                                         |
+| Document conversion            | [pandoc][35]                               | See also [pdflatex][36], which I use for formal reports.                                                              |
+| Static blog                    | [hugo][37]                                 | Chosen in an attempt to make myself stop writing blog engines and write articles instead.                             |
+| Git history viewer             | [tig][41]                                  |                                                                                                                       |
+| Configuration version control  | [etckeeper][42]                            | Used for general purpose servers.                                                                                     |
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
@@ -81,6 +82,8 @@ new or re-installed PC.
 [36]: https://www.tug.org/applications/pdftex/
 [37]: https://gohugo.io/
 [38]: https://rclone.org/
+[41]: https://github.com/jonas/tig
+[42]: https://etckeeper.branchable.com/
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
