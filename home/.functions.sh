@@ -51,23 +51,6 @@ function _auto_tmux_attach {
         && tmux attach
 }
 
-function _set_term_title {
-    # set window pane title if inside tmux
-    # NOTE this used to apply to the primary pane only, but since git root use
-    # used it could be simplified to any pane
-    if [ $TMUX ]; then
-        # shorthand representation of git dir or current dir
-        dir="$(git rev-parse --show-toplevel 2>/dev/null)" || dir="$PWD"
-        LABEL=$(echo $dir | sed s/[^a-zA-Z0-9\.\/]/-/g | grep -oE '[^\/]+$')
-        tmux rename-window "$LABEL"
-    fi
-
-    # reset terminal title if this terminal is local
-    if [ ! "$SSH_CONNECTION" ]; then
-        printf "\033]0;%s\007" "$HOSTNAME"
-    fi
-}
-
 function _disable_flow_control {
     # Ctrl+S can freeze the terminal, requiring
     # Ctrl+Q to restore. It can result in an apparent hung terminal, if

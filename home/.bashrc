@@ -33,7 +33,6 @@ _bash_history_sync() {
 }
 
 _auto_tmux_attach
-_set_term_title
 
 # before prompt (which is after command)
 function precmd() {
@@ -45,7 +44,6 @@ function precmd() {
 
     __exit_warn
     _cmd_timer_end
-    _set_term_title
 }
 
 # just before cmd is executed

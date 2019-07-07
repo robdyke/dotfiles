@@ -60,7 +60,6 @@ $ "
 export SHELL=$(which zsh)
 
 _auto_tmux_attach
-_set_term_title
 
 # before prompt (which is after command)
 function precmd() {
@@ -71,7 +70,6 @@ function precmd() {
     # failed SSH) sets a strange mode
     stty sane
     _cmd_timer_end
-    _set_term_title
 }
 
 # just before cmd is executed
