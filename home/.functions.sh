@@ -159,3 +159,12 @@ function _cmd_timer_end  {
     # note unset does not work due to scope
     unset CMD_TIMER_START
 }
+
+function _tmux_prompt_rename_window {
+    # primary pane only
+    test $(tmux list-panes | wc -l) -eq 1 || return
+
+    echo -n "Enter window name: "
+    read name
+    tmux rename-window "$name"
+}

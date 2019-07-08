@@ -100,4 +100,6 @@ builtin history -c
 builtin history -r
 
 source ~/.bash-preexec.sh
+
+_tmux_prompt_rename_window
 trap "~/.local/bin/cleanup-history ~/.history" EXIT
