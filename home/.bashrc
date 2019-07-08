@@ -5,6 +5,8 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
+
+_tmux_window_name_ask
 _update_agents
 
 # note HISTIGNORE is no longer defined -- see cleanup-history for the replacement mechanism
@@ -101,5 +103,6 @@ builtin history -r
 
 source ~/.bash-preexec.sh
 
-_tmux_prompt_rename_window
+_tmux_window_name_read
+
 trap "~/.local/bin/cleanup-history ~/.history" EXIT

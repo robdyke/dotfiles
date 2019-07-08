@@ -5,6 +5,8 @@ source ~/.env.sh
 
 source ~/.functions.sh
 source ~/.aliases
+
+_tmux_window_name_ask
 _update_agents
 
 SAVEHIST=$HISTSIZE
@@ -107,6 +109,6 @@ source ~/.fzf/shell/key-bindings.zsh
 ~/.local/bin/cleanup-history ~/.history
 fc -R # reload history
 
-_tmux_prompt_rename_window
+_tmux_window_name_read
 
 trap "~/.local/bin/cleanup-history ~/.history" EXIT

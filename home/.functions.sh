@@ -160,11 +160,26 @@ function _cmd_timer_end  {
     unset CMD_TIMER_START
 }
 
-function _tmux_prompt_rename_window {
+# On a new window (not pane) ask user for window name. After trying many
+# different automatic methods of choosing a suitable name, given race
+# conditions and inaccuracy, I concluded that the best thing to do was to just
+# ask the user. In practice this turned out to be very useful and not
+# irritating.
+#
+# It is recommended that the prompt is echoed early in the shell
+# configuration. What happens is, the stdin is buffered until this function
+# can read it. Whilst the user is typing, the shell can then continue with
+# other initialisation such as loading completions. The result is the
+# latency (which is significant) is hidden whilst the user is typing. This
+# is why the tmux window rename routine is split into 2 function.
+function _tmux_window_name_ask {
     # primary pane only
     test $(tmux list-panes | wc -l) -eq 1 || return
-
     echo -n "Enter window name: "
+}
+
+function _tmux_window_name_read {
+    test $(tmux list-panes | wc -l) -eq 1 || return
     read name
     tmux rename-window "$name"
 }
