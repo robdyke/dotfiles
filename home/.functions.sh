@@ -81,23 +81,6 @@ function _update_agents {
     fi
 }
 
-# wrappers
-function ssh {
-    # last arg is probably host
-    for host; do true; done
-
-	if [ $TMUX ]; then
-        tmux rename-window "$host"
-    elif [ ! "$SSH_CONNECTION" ]; then
-        # dedicated local terminal, set title of terminal
-        printf "\033]0;%s\007" "$host"
-    fi
-
-    command ssh "$@"
-
-    # _set_term_title will reset the title now.
-}
-
 # ssh with gpg and ssh agent forwarding Use only on trusted hosts.
 function gssh {
     echo "Preparing host for forwarded GPG agent..." >&2
