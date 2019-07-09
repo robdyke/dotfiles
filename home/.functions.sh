@@ -1,7 +1,7 @@
 # should be first, others may change env
 function _tmux_update_env {
     # tmux must be running
-    [ $TMUX ] || return
+    [ "$TMUX" ] || return
 
     # update current shell to parent tmux shell (useful for new SSH connections, x forwarding, etc)
     eval $(tmux show-environment -s | grep 'DISPLAY\|SSH_CONNECTION\|SSH_AUTH_SOCK')
@@ -34,7 +34,7 @@ function __exit_warn {
 # get new or steal existing tmux
 function tm {
 	# must not already be inside tmux
-	test ! $TMUX || return
+	test ! "$TMUX" || return
 	# detach any other clients
 	# attach or make new if there isn't one
 	tmux attach -d || tmux
@@ -174,11 +174,13 @@ function _cmd_timer_end  {
 # is why the tmux window rename routine is split into 2 function.
 function _tmux_window_name_ask {
     # primary pane only
+    [ "$TMUX" ] || return
     test $(tmux list-panes | wc -l) -eq 1 || return
     echo -n "Enter window name: "
 }
 
 function _tmux_window_name_read {
+    [ "$TMUX" ] || return
     test $(tmux list-panes | wc -l) -eq 1 || return
     read name
     tmux rename-window "$name"
