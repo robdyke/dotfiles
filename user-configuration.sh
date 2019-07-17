@@ -113,6 +113,7 @@ chmod 600 ~/.ssh/known_hosts
 chmod 600 ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/config
 chmod 0700 ~/.gnupg
+chmod 0600 ~/.gnupg/*.conf
 
 # set caps lock to act as esc if possible
 test $DISPLAY && which dconf &> /dev/null && \
