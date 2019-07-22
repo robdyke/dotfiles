@@ -8,7 +8,7 @@ sudo cp "${EXE}" /usr/local/bin/dstask.new
 sudo chmod +x /usr/local/bin/dstask.new
 sudo mv -f /usr/local/bin/{dstask.new,dstask}
 
-sudo pacman --noconfirm -Sy git tmux vim tig zsh openssh pass httpie ncdu tree wget htop gnupg curl bash-completion jq sox ffmpeg httrack \
+sudo pacman --noconfirm -Syu git tmux vim tig zsh openssh pass httpie ncdu tree wget htop gnupg curl bash-completion jq sox ffmpeg httrack \
     python go fzf ripgrep neovim unzip etckeeper
 
 # TODO yubikey stuff
