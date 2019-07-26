@@ -2,6 +2,9 @@
 # turns of the computer as fast as possible, hopefully not corrupting data
 # good for livecd
 
+## for potential improvements see https://superuser.com/questions/108704/how-to-shutdown-a-computer-instantly-1-to-5-secs-without-using-a-physical-swit/108705
+#
+
 # flush rw cache
 sudo sync
 

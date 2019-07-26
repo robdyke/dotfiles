@@ -59,8 +59,8 @@ if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
     # alacritty
     TARGZ="$(
         obtain \
-            https://github.com/jwilm/alacritty/releases/download/v0.2.4/Alacritty-v0.2.4-x86_64.tar.gz \
-            1de78461e75527161f95b20406302baf4975d98ee9113af7cdf23a63aa0f05b1
+            https://github.com/jwilm/alacritty/releases/download/v0.3.3/Alacritty-v0.3.3-ubuntu_18_04_amd64.tar.gz \
+            b60856ef0d8861762465090501596b6d2cfeba34a6335ef6b718be878a39c0c0
     )"
     [ -f /usr/local/bin/alacritty ] && sudo rm -f /usr/local/bin/alacritty
     sudo tar -C /usr/local/bin/ -xzf "$TARGZ"
