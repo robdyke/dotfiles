@@ -42,3 +42,5 @@ echo 'KEYMAP=uk' | sudo tee /etc/vconsole.conf
 # browserpass config
 sudo mkdir -p /usr/lib/mozilla/native-messaging-hosts/
 sudo cp etc/firefox/com.github.browserpass.native.json /usr/lib/mozilla/native-messaging-hosts/
+
+sudo etckeeper init

@@ -11,3 +11,5 @@ EOF
 
 # apply temporarily, as above requires restart (I think)
 test $DISPLAY && setxkbmap -option "caps:escape" gb || true
+
+sudo etckeeper init
