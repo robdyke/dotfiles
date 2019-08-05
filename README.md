@@ -63,6 +63,7 @@ new or re-installed PC.
 | Static blog                    | [hugo][37]                                 | Chosen in an attempt to make myself stop writing blog engines and write articles instead.                             |
 | Git history viewer             | [tig][41]                                  |                                                                                                                       |
 | Configuration version control  | [etckeeper][42]                            | Used for general purpose servers.                                                                                     |
+| Music library curation         | [beets][43]                                | Automates curation of music library                                                                                   |
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
@@ -84,6 +85,7 @@ new or re-installed PC.
 [38]: https://rclone.org/
 [41]: https://github.com/jonas/tig
 [42]: https://etckeeper.branchable.com/
+[43]: https://beets.io/
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
