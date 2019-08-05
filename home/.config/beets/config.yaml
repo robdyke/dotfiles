@@ -2,14 +2,12 @@ library: library.db
 directory: ~/MusicLib
 
 import:
-    # delete files on import? (by default -- maybe a bad option considering this is also a cli flag)
+    # delete files on import? Not by default. If you want this use
     move: no
     # resume interrupted imports. "ask" by default.
     resume: yes
     # in -q (quiet) mode, what is the fallback -- slip/asis. Skip is default.
     quiet_fallback: skip
-    # default: no log
-    log: ~/.beets.log
     # beets uses directories to guess albums by default. Use tags instead?
     # # Useful for poory organised incoming music. No by default
     group_albums: yes
@@ -21,5 +19,18 @@ import:
 clutter: ["Thumbs.DB", ".DS_Store", "*.m3u", ".pls", "*.jpg", "*.png*", "*.nfo"]
 ignore: [".*", "*~", "System Volume Information", "lost+found"]
 
-plugins: []
+# see https://beets.readthedocs.io/en/stable/plugins/
+# there are many more useful plugins
+plugins:
+  # database of acoustic metadata such as chord key, bpm
+  - acousticbrainz
+  # guess from filename if there are no tags. User must confirm.
+  - fromfilename
+  # edit tags with $EDITOR
+  - edit
+  # identify tag-less songs with chromaprint. Dependencies
+  # - chromaprint
+  # find the chord key. acousticbrainz is probably a better
+  # source but won't have every song. Requires keyfinder.
+  #- keyfinder
 pluginpath: []
