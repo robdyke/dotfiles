@@ -28,7 +28,7 @@ function get_platform() {
             echo $UBUNTU_AMD64
         elif [[ $HOSTNAMECTL == *Fedora* ]] && [[ $LONG_BIT == 64 ]]; then
             echo $FEDORA_AMD64
-        elif [[ $HOSTNAMECTL == *Rasbian* ]] && [[ $LONG_BIT == 64 ]]; then
+        elif [[ $HOSTNAMECTL == *Raspbian* ]] && [[ $LONG_BIT == 32 ]]; then
             echo $RASPBIAN_ARMV5
         else
             >&2 echo "Unsupported OS"
