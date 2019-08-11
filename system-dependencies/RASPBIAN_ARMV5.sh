@@ -22,4 +22,22 @@ sudo tar -C /usr/local/bin/ -xzf "$TARGZ"
 sudo apt-get -y update
 sudo apt-get -y upgrade
 # -E is necessary for DEBIAN_FRONTEND
-sudo -E apt-get -y install tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion jq etckeeper
+sudo -E apt-get -y install \
+    bash-completion \
+    curl \
+    etckeeper \
+    git \
+    gnupg2 \
+    htop \
+    httpie \
+    jq \
+    ncdu \
+    pass \
+    ssh \
+    tig \
+    tmpreaper \
+    tmux \
+    tree \
+    vim \
+    wget \
+    zsh \

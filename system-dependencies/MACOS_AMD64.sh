@@ -14,8 +14,36 @@ brew cask install spectacle firefox alacritty mtmr
 brew unlink md5sha1sum
 
 # Upgrade or install (logic necessary)
-packages=(tmux vim git tig httpie ncdu tree bash pass zsh openssh jq wget htop gnupg2 bash-completion iproute2mac tmpreaper coreutils sox \
-    ffmpeg httrack ripgrep nvim fzf pinentry-mac ykman)
+packages=(
+    bash
+    bash-completion
+    coreutils
+    ffmpeg
+    fzf
+    git
+    gnupg2
+    htop
+    httpie
+    httrack
+    iproute2mac
+    jq
+    ncdu
+    nvim
+    openssh
+    pass
+    pinentry-mac
+    ripgrep
+    sox
+    tig
+    tmpreaper
+    tmux
+    tree
+    vim
+    wget
+    ykman
+    zsh
+)
+
 for package in "${packages[@]}"; do
     brew upgrade $package || brew install $package
 done

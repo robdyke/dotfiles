@@ -5,8 +5,38 @@ export DEBIAN_FRONTEND=noninteractive
 sudo -E apt-add-repository multiverse
 sudo -E apt-get -y update
 sudo -E apt-get -y upgrade
-sudo -E apt-get -y install language-pack-en tmux vim git tig zsh ssh pass httpie ncdu tree wget htop gnupg2 curl tmpreaper bash-completion \
-    jq sox ffmpeg httrack python python3 golang python-pip python3-pip libssl-dev dconf-cli scdaemon pcscd etckeeper
+sudo -E apt-get -y install \
+    bash-completion
+    curl \
+    dconf-cli \
+    etckeeper \
+    ffmpeg \
+    git \
+    gnupg2 \
+    golang \
+    htop \
+    httpie \
+    httrack \
+    jq \
+    language-pack-en \
+    libssl-dev \
+    ncdu \
+    pass \
+    pcscd \
+    python \
+    python-pip \
+    python3 \
+    python3-pip \
+    scdaemon \
+    sox \
+    ssh \
+    tig \
+    tmpreaper \
+    tmux \
+    tree \
+    vim \
+    wget \
+    zsh \
 
 # dstask
 EXE="$(

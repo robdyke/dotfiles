@@ -1,5 +1,34 @@
-sudo dnf -y upgrade --refresh
-sudo dnf -y install tmux vim git tig zsh pass httpie ncdu tree wget htop gnupg2 curl bash-completion jq sox httrack python python3 golang python-pip python3-pip fzf ripgrep neovim opensc etckeeper
+sudo dnf -y upgrade --refresh \
+    bash-completion \
+    curl \
+    dnf \
+    etckeeper \
+    fzf \
+    git \
+    gnupg2 \
+    golang \
+    htop \
+    httpie \
+    httrack \
+    install \
+    jq \
+    ncdu \
+    neovim \
+    opensc \
+    pass \
+    python \
+    python-pip \
+    python3 \
+    python3-pip \
+    ripgrep \
+    sox \
+    sudo \
+    tig \
+    tmux \
+    tree \
+    vim \
+    wget \
+    zsh \
 
 # dstask
 EXE="$(
