@@ -20,7 +20,7 @@ RASPBIAN_ARMV5=RASPBIAN_ARMV5
 
 function get_platform() {
     if uname | grep -q Linux; then
-        HOSTNAMECTL=$(hostnamectl)
+        HOSTNAMECTL=$(sudo hostnamectl)
         LONG_BIT=$(getconf LONG_BIT)
         if [[ $HOSTNAMECTL == *"Arch "* ]] && [[ $LONG_BIT == 64 ]]; then
             echo $ARCH_AMD64
