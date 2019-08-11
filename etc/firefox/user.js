@@ -59,3 +59,6 @@ user_pref("browser.startup.homepage", "about:blank");
 // do not offer to save passwords, nor allow the user to enable the feature
 user_pref("signon.rememberSignons", false);
 user_pref("signon.rememberSignons.visibilityToggle", false);
+
+// canary deployments of new features
+user_pref("app.normandy.enabled" false);
