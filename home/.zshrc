@@ -51,7 +51,7 @@ source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 # case insensitive completion
 # http://stackoverflow.com/questions/24226685/have-zsh-return-case-insensitive-auto-complete-matches-but-prefer-exact-matches
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-[ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
+[ $TMUX ] && tmux set -g status-left-style bg=colour${SYSTEM_COLOUR} &>/dev/null
 
 PROMPT="
 \$(__exit_warn)

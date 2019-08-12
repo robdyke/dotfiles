@@ -14,7 +14,7 @@ export HISTCONTROL=ignoredups:ignorespace:erasedups
 # if you call a different shell, this does not happen automatically. WTF?
 export SHELL=$(which bash)
 
-[ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
+[ $TMUX ] && tmux set -g status-left-style bg=colour${SYSTEM_COLOUR} &>/dev/null
 
 
 # update the values of LINES and COLUMNS. Automatically
