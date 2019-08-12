@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Edits history to deduplicate, leaving the last occurrence of each command.
 Filters useless entries. Also normalises whitespace.

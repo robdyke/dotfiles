@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Opens nvim if available, else vim.
 # Adds -p flag to open files in tabs.
 # Set $EDITOR to vim-wrapper

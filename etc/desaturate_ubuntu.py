@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''
 Programatically desaturates all SVG, + PNG icons/wallpapers/themes and updates
 cache.
