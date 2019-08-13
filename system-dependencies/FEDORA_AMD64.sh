@@ -1,4 +1,5 @@
-sudo dnf -y upgrade --refresh \
+sudo dnf upgrade -y
+sudo dnf install -y \
     bash-completion \
     curl \
     dnf \
@@ -10,7 +11,6 @@ sudo dnf -y upgrade --refresh \
     htop \
     httpie \
     httrack \
-    install \
     jq \
     ncdu \
     neovim \
