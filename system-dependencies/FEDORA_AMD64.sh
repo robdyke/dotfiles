@@ -3,7 +3,6 @@ sudo dnf -y upgrade --refresh \
     curl \
     dnf \
     etckeeper \
-    etckeeper \
     fzf \
     git \
     gnupg2 \
