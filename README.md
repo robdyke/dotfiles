@@ -16,7 +16,7 @@ new or re-installed PC.
 | Version control        | [git][15]                           | GnuPG2 used for code signing. GPG agent forwarded to remote hosts with `gssh`                                                                          |
 | SSH Agent              | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
 | Security device        | [Yubikey 5][13]                     | Used with [GnuPG2][14] to hold GPG keys and SSH key. Also used for 2FA.                                                                                |
-| Note taking            | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes. Yet another mental offload.                                                |
+| Note taking/minutes    | [git][15] + [vim][16] / [neovim][1] | I use a git repository of markdown files to organise ideas and other notes. Yet another mental offload.                                                |
 | Personal cryptography  | [GnuPG2][14]                        | Used with a Yubikey. See my [set up guide.][34]                                                                                                        |
 | Shell                  | [bash][7]/[zsh][8]                  | I used to use fish but it's incompatible with bourne shell which makes maintenance a pain.                                                             |
 | Terminal multiplexing  | [tmux][5]                           | Bindings adjusted to match vim                                                                                                                         |

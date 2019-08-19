@@ -6,7 +6,7 @@ sudo -E apt-add-repository multiverse
 sudo -E apt-get -y update
 sudo -E apt-get -y upgrade
 sudo -E apt-get -y install \
-    bash-completion
+    bash-completion \
     curl \
     dconf-cli \
     etckeeper \
