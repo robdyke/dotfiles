@@ -94,16 +94,28 @@ execute 'syn match rstSubstitutionDefinition contained' .
       \ ' /|.*|\_s\+/ nextgroup=@rstDirectives'
 
 function! s:DefineOneInlineMarkup(name, start, middle, end, char_left, char_right)
+  " Only escape the first char of a multichar delimiter (e.g. \* inside **)
+  if a:start[0] == '\'
+    let first = a:start[0:1]
+  else
+    let first = a:start[0]
+  endif
+
+  execute 'syn match rstEscape'.a:name.' +\\\\\|\\'.first.'+'.' contained'
+
   execute 'syn region rst' . a:name .
         \ ' start=+' . a:char_left . '\zs' . a:start .
         \ '\ze[^[:space:]' . a:char_right . a:start[strlen(a:start) - 1] . ']+' .
         \ a:middle .
-        \ ' end=+\S' . a:end . '\ze\%($\|\s\|[''"’)\]}>/:.,;!?\\-]\)+'
+        \ ' end=+' . a:end . '\ze\%($\|\s\|[''"’)\]}>/:.,;!?\\-]\)+' .
+        \ ' contains=rstEscape' . a:name
+
+  execute 'hi def link rstEscape'.a:name.' Special'
 endfunction
 
 function! s:DefineInlineMarkup(name, start, middle, end)
   let middle = a:middle != "" ?
-        \ (' skip=+\\\\\|\\' . a:middle . '+') :
+        \ (' skip=+\\\\\|\\' . a:middle . '\|\s' . a:middle . '+') :
         \ ""
 
   call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, "'", "'")
@@ -165,7 +177,7 @@ syn match   rstStandaloneHyperlink  contains=@NoSpell
       \ "\<\%(\%(\%(https\=\|file\|ftp\|gopher\)://\|\%(mailto\|news\):\)[^[:space:]'\"<>]\+\|www[[:alnum:]_-]*\.[[:alnum:]_-]\+\.[^[:space:]'\"<>]\+\)[[:alnum:]/]"
 
 syn region rstCodeBlock contained matchgroup=rstDirective
-      \ start=+\%(sourcecode\|code\%(-block\)\=\)::\s\+.*\_s*\n\ze\z(\s\+\)+
+      \ start=+\%(sourcecode\|code\%(-block\)\=\)::\s*\n\%(\s*:.*:\s*.*\s*\n\)*\n\ze\z(\s\+\)+
       \ skip=+^$+
       \ end=+^\z1\@!+
       \ contains=@NoSpell
