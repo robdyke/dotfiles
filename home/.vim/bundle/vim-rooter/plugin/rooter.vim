@@ -10,7 +10,7 @@ let g:loaded_rooter = 1
 
 let s:nomodeline = (v:version > 703 || (v:version == 703 && has('patch442'))) ? '<nomodeline>' : ''
 
-if exists('+autochdir') && &autochdir && !exists('g:rooter_manual_only')
+if exists('+autochdir') && &autochdir && (!exists('g:rooter_manual_only') || !g:rooter_manual_only)
   set noautochdir
 endif
 
@@ -189,11 +189,11 @@ endfunction
 
 command! Rooter :call <SID>ChangeToRootDirectory()
 
-if !exists('g:rooter_manual_only')
+if !exists('g:rooter_manual_only') || !g:rooter_manual_only
   augroup rooter
     autocmd!
-    autocmd VimEnter,BufEnter * :Rooter
-    autocmd BufWritePost * :call setbufvar('%', 'rootDir', '') | :Rooter
+    autocmd VimEnter,BufEnter * nested :Rooter
+    autocmd BufWritePost * nested :call setbufvar('%', 'rootDir', '') | :Rooter
   augroup END
 endif
 
