@@ -118,7 +118,7 @@ function! go#config#ListAutoclose() abort
 endfunction
 
 function! go#config#InfoMode() abort
-  return get(g:, 'go_info_mode', 'gocode')
+  return get(g:, 'go_info_mode', 'gopls')
 endfunction
 
 function! go#config#GuruScope() abort
@@ -178,12 +178,15 @@ function! go#config#DocUrl() abort
   return godoc_url
 endfunction
 
+function! go#config#DocPopupWindow() abort
+  return get(g:, 'go_doc_popup_window', 0)
+endfunction
 function! go#config#DefReuseBuffer() abort
   return get(g:, 'go_def_reuse_buffer', 0)
 endfunction
 
 function! go#config#DefMode() abort
-  return get(g:, 'go_def_mode', 'guru')
+  return get(g:, 'go_def_mode', 'gopls')
 endfunction
 
 function! go#config#DeclsIncludes() abort
@@ -270,10 +273,6 @@ function! go#config#MetalinterEnabled() abort
   endif
 
   return get(g:, "go_metalinter_enabled", default_enabled)
-endfunction
-
-function! go#config#MetalinterDisabled() abort
-  return get(g:, "go_metalinter_disabled", [])
 endfunction
 
 function! go#config#GolintBin() abort
@@ -468,6 +467,10 @@ endfunction
 
 function! go#config#EchoGoInfo() abort
   return get(g:, "go_echo_go_info", 1)
+endfunction
+
+function! go#config#CodeCompletionEnabled() abort
+  return get(g:, "go_code_completion_enabled", 1)
 endfunction
 
 " Set the default value. A value of "1" is a shortcut for this, for
