@@ -40,7 +40,7 @@ alias p=pass
 alias TODO='rg TODO'
 # replace a symlink with the file it points to
 alias rewrite="sed -i ''"
-alias webserver='python -m SimpleHTTPServer'
+alias webserver='python3 -m http.server'
 alias grep='grep --color=auto'
 alias openssl-get-expiry='openssl x509 -enddate -noout -in'
 # --files lists all files including binary. --files-with-matches and an empty string match effectively lists all text files.
