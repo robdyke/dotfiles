@@ -28,9 +28,13 @@ cat <<EOF >> ~/.gitconfig
 	gpgsign = true
 EOF
 
-cat <<EOF > ~/.ssh/authorized_keys
+# append ssh pubkey if it does not already exist (could factor into python
+# script if multiple key insertions are required)
+if ! grep -q openpgp:0x41951879 ~/.ssh/authorized_keys; then
+cat <<EOF >> ~/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDAXULLvOM87voBLNUibrDWdhGD9sFLBt98bAl1Vl6Xc0sXwJOMMxtTdItlakVsLMM93SJLwoloyd/OTmv50/1bjNhUA0ySZviKsc0jKrTo8z8+xbcJobWbbNcWlbUupd5b2HbUu88n9Ry4Mb+07e4w+IP8SbP2xe/nq0b484Q2NhxJ57PmLH2tEApXl5w1xdc8BIqZmQC2EgBl2ZzdokforJuCXgyyLqFWo0i3xdFPxQXwlA0FUN/MdMlnuxwhPBqf/jO1M+l5p7k64tqGGycj3ennpu/UA+6rphu+tg9khFG4P7pxmAICNAsFbhrZofZ/BslSPsGb/u4cDHQxC5aQ0IFDEImYESIymzjeSSrb5rJ+ojJdOXpl754K2I1zFwgv4JP0mw03gGd7leeMi5zDobsQL+i9xK/NWhF/19Z5lpI4QLZhvg1ykOa3TStvGIQsKYU0H6Hn52tqKr1dFbXdmeNiY5EwinVbI8Su2hysJUp2/mYrOO+6r/XwrPCcIOApYm4gyf9znmZNiF9POv10cejhpywCcAjyHIvCrfEal+yA8sNfjA+aNg+GRjQ4he59jFhQvj6j2ez4iyw6E6eoo7gwgKmIBtwv+b44LLi7zjXYP1ihhYXJkUdBZJpHbTt3K23p3Hk3H3+Wm5ZVj5I/GQ+kSdzjbBMGQUEA6YpjnQ== openpgp:0x41951879
 EOF
+fi
 
 cat <<EOF >> ~/.gnupg/gpg.conf
 trusted-key 9D37503A7DA6F9B6
