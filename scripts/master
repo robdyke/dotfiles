@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-
 git fetch --all
 git stash
 git checkout master
