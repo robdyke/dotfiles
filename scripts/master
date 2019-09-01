@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+git fetch --all
+git stash
 git checkout master
-git pull --ff-only origin master
-git submodule update --init
+git pull --ff-only origin master && \
+    git submodule update --init
