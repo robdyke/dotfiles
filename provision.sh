@@ -85,6 +85,7 @@ esac
 test ! -d ~/dotfiles && git clone $ORIGIN ~/dotfiles
 cd ~/dotfiles
 git pull --ff-only $ORIGIN master || true
+git fetch --all
 git branch --set-upstream-to=origin/master master
 
 # contains utilities for downloading and installation
