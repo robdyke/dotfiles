@@ -1,5 +1,6 @@
 sudo dnf upgrade -y
 sudo dnf install -y \
+    @development-tools \
     bash-completion \
     curl \
     dnf \
