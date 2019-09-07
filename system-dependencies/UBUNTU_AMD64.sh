@@ -13,7 +13,6 @@ sudo -E apt-get -y install \
     ffmpeg \
     git \
     gnupg2 \
-    golang \
     htop \
     httpie \
     httrack \

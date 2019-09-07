@@ -7,7 +7,6 @@ sudo dnf install -y \
     fzf \
     git \
     gnupg2 \
-    golang \
     htop \
     httpie \
     httrack \
