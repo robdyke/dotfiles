@@ -10,6 +10,8 @@ export GCC_COLORS=1
 export FZF_DEFAULT_COMMAND="rg --smart-case --files --hidden --ignore-file=$HOME/.rgignore"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+export GO111MODULE=on
+
 # Sometimes not set or fully qualified; simple name preferred.
 export HOSTNAME=$(hostname -s)
 export SYSTEM_COLOUR=$($HOME/.local/bin/system-colour $HOSTNAME)
