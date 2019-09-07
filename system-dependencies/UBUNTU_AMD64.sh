@@ -75,6 +75,14 @@ sudo cp "${EXE}" /usr/local/bin/nvim.new
 sudo chmod +x /usr/local/bin/nvim.new
 sudo mv -f /usr/local/bin/{nvim.new,nvim}
 
+# golang with go mod support
+TARGZ="$(
+    obtain \
+        https://dl.google.com/go/go1.13.linux-amd64.tar.gz \
+        68a2297eb099d1a76097905a2ce334e3155004ec08cdea85f24527be3c48e856
+)"
+sudo tar -C /usr/local -xzf "$TARGZ"
+
 # ubuntu desktop specific
 if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
     sudo apt-get -y install firefox i3 i3status dmenu xautolock powertop
