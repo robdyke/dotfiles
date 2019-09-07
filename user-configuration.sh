@@ -149,5 +149,10 @@ else
     fi
 fi
 
+if which gsettings &>/dev/null; then
+    gsettings set org.gnome.desktop.session idle-delay 3600
+    gsettings set org.gnome.desktop.screensaver lock-delay 60
+fi
+
 # now is a good time to associate the yubikey GPG private keys if it is connected
 gpg --card-status &> /dev/null || true
