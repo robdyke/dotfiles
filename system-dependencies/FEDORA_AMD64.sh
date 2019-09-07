@@ -10,6 +10,7 @@ sudo dnf install -y \
     htop \
     httpie \
     httrack \
+    hub \
     jq \
     ncdu \
     neovim \

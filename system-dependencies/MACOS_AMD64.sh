@@ -25,6 +25,7 @@ packages=(
     htop
     httpie
     httrack
+    hub
     iproute2mac
     jq
     ncdu
