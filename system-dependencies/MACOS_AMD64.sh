@@ -38,6 +38,7 @@ packages=(
     tmpreaper
     tmux
     tree
+    upx
     vim
     wget
     ykman

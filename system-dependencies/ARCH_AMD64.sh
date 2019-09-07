@@ -32,6 +32,7 @@ sudo pacman --noconfirm -Syu \
     tmux \
     tree \
     unzip \
+    upx \
     vim \
     wget \
     zsh \

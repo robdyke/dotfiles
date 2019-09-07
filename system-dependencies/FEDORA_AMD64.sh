@@ -25,6 +25,7 @@ sudo dnf install -y \
     tig \
     tmux \
     tree \
+    upx \
     vim \
     wget \
     zsh \

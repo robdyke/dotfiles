@@ -33,6 +33,7 @@ sudo -E apt-get -y install \
     tmpreaper \
     tmux \
     tree \
+    upx \
     vim \
     wget \
     zsh \
