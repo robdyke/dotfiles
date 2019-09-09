@@ -22,11 +22,19 @@ As the Yubikey can act as an OpenPGP card, it\'s possible to store
 signing keys on the device that can be used to sign git commits. This
 can even happen on a remote machine with GPG agent forwarding.
 
-Encryption and signing
-----------------------
+GPG Encryption and signing
+--------------------------
 
 GPG can be used for encrypting and signing things for transfer over
 untrusted networks.
+
+
+Microsoft Authenticode signing
+------------------------------
+
+When used with osslsigncode, the Yubikey can sign windows executables with
+Authenticode -- on Linux as well as Windows.
+
 
 PAM / Windows Hello
 -------------------
@@ -41,6 +49,12 @@ It\'s possible to use a Yubikey to securely perform x.509 operations with
 private keys hidden inside. This may be useful to create a secure Private CA,
 make client authentication easier or for physical access control. May be
 investigated later.
+
+A usbkill/silk-guardian device
+------------------------------
+
+The yubikey can be set to power off the machine immediately when removed:
+https://github.com/hephaest0s/usbkill https://github.com/NateBrune/silk-guardian
 
 Payload bootstrapper
 --------------------
