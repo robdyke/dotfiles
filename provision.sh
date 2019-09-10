@@ -17,6 +17,14 @@ UBUNTU_AMD64=UBUNTU_AMD64
 FEDORA_AMD64=FEDORA_AMD64
 RASPBIAN_ARMV5=RASPBIAN_ARMV5
 
+# authorise sudo early on
+echo "Please enter sudo password. Sudo session will be kept alive until this script exits."
+sudo -v
+
+# sudo keepalive. This will keep the sudo watchdog fed until this script exits.
+# This works buy poking the parent process to see if it's still alive.
+while true; do sudo -n true; sleep 15; kill -0 "$$" || exit; done 2>/dev/null &
+
 
 function get_platform() {
     if uname | grep -q Linux; then
