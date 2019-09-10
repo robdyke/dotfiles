@@ -1,7 +1,4 @@
-if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'rust') != -1
-  finish
-endif
-
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rust') == -1
 " Language:     Rust
 " Description:  Vim ftplugin for Rust
 " Maintainer:   Chris Morgan <me@chrismorgan.info>
@@ -39,7 +36,7 @@ if get(g:, 'rust_bang_comment_leader', 0)
     " leaders. I'm fairly sure that's a Vim bug.
     setlocal comments=s1:/*,mb:*,ex:*/,s0:/*,mb:\ ,ex:*/,:///,://!,://
 else
-    setlocal comments=s0:/*!,m:\ ,ex:*/,s1:/*,mb:*,ex:*/,:///,://!,://
+    setlocal comments=s0:/*!,ex:*/,s1:/*,mb:*,ex:*/,:///,://!,://
 endif
 setlocal commentstring=//%s
 setlocal formatoptions-=t formatoptions+=croqnl
@@ -195,7 +192,7 @@ augroup END
 
 setlocal matchpairs+=<:>
 " For matchit.vim (rustArrow stops `Fn() -> X` messing things up)
-let b:match_skip = 's:comment\|string\|rustArrow'
+let b:match_skip = 's:comment\|string\|rustCharacter\|rustArrow'
 
 " vint: -ProhibitAbbreviationOption
 let &cpo = s:save_cpo
@@ -203,3 +200,4 @@ unlet s:save_cpo
 " vint: +ProhibitAbbreviationOption
 
 " vim: set et sw=4 sts=4 ts=8:
+endif

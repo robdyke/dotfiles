@@ -1,7 +1,4 @@
-if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'rust') != -1
-  finish
-endif
-
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rust') == -1
 " Vim compiler file
 " Compiler:         Rust Compiler
 " Maintainer:       Chris Morgan <me@chrismorgan.info>
@@ -25,7 +22,11 @@ endif
 if get(g:, 'rustc_makeprg_no_percent', 0)
     CompilerSet makeprg=rustc
 else
-    CompilerSet makeprg=rustc\ \%
+    if has('patch-7.4.191')
+      CompilerSet makeprg=rustc\ \%:S
+    else
+      CompilerSet makeprg=rustc\ \%
+    endif
 endif
 
 " New errorformat (after nightly 2016/08/10)
@@ -55,3 +56,4 @@ unlet s:save_cpo
 " vint: +ProhibitAbbreviationOption
 
 " vim: set et sw=4 sts=4 ts=8:
+endif

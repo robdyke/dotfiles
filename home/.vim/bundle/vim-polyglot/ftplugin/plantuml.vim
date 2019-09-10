@@ -1,7 +1,4 @@
-if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'plantuml') != -1
-  finish
-endif
-
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'plantuml') == -1
 scriptencoding utf-8
 " Vim filetype plugin file
 " Language:     PlantUML
@@ -28,7 +25,9 @@ if exists('loaded_matchit')
         \ ',\<hnote\>:\<endhnote\>' .
         \ ',\<title\>:\<endtitle\>' .
         \ ',\<\while\>:\<endwhile\>' .
-        \ ',@startuml:@enduml'
+        \ ',@startuml:@enduml' .
+        \ ',@startwbs:@endwbs' .
+        \ ',@startmindmap:@endmindmap'
 endif
 
 if get(g:, 'plantuml_set_makeprg', 1)
@@ -44,3 +43,4 @@ let b:endwise_syngroups = 'plantumlKeyword'
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
+endif

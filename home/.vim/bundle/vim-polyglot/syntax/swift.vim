@@ -1,7 +1,4 @@
-if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'swift') != -1
-  finish
-endif
-
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'swift') == -1
 " File: swift.vim
 " Author: Keith Smiley
 " Description: Runtime files for Swift
@@ -158,6 +155,7 @@ syntax keyword swiftKeywords
       \ return
       \ self
       \ set
+      \ some
       \ static
       \ subscript
       \ super
@@ -186,6 +184,9 @@ syntax match swiftMultiwordKeywords "indirect enum"
 syntax region swiftEscapedReservedWord start="`" end="`" oneline
 
 syntax keyword swiftAttributes
+      \ @_exported
+      \ @_functionBuilder
+      \ @_silgen_name
       \ @assignment
       \ @autoclosure
       \ @available
@@ -193,6 +194,7 @@ syntax keyword swiftAttributes
       \ @discardableResult
       \ @escaping
       \ @exported
+      \ @frozen
       \ @IBAction
       \ @IBDesignable
       \ @IBInspectable
@@ -205,6 +207,7 @@ syntax keyword swiftAttributes
       \ @NSCopying
       \ @NSManaged
       \ @objc
+      \ @propertyWrapper
       \ @testable
       \ @UIApplicationMain
       \ @usableFromInline
@@ -300,3 +303,4 @@ highlight default link swiftLineDirective PreProc
 syn sync minlines=100
 
 let b:current_syntax = "swift"
+endif
