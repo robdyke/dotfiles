@@ -7,6 +7,7 @@ sudo dnf install -y \
     etckeeper \
     fzf \
     git \
+    git-subtree \
     gnupg2 \
     htop \
     httpie \
