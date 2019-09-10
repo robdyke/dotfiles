@@ -1,7 +1,4 @@
-if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'handlebars') != -1
-  finish
-endif
-
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'handlebars') == -1
 if exists('b:loaded_mustache_handlebars')
   finish
 endif
@@ -24,6 +21,9 @@ if exists("loaded_matchit") && exists("b:match_words")
   \ . ':'
   \ . '\%({{\)\@<=/\s*\1\s*}}'
 endif
+
+" Set template for comment
+setlocal commentstring={{!--\ %s\ --}}
 
 if exists("g:mustache_abbreviations")
   inoremap <buffer> {{{ {{{}}}<left><left><left>
@@ -122,3 +122,4 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " vim: nofoldenable
+endif

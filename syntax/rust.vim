@@ -1,7 +1,4 @@
-if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'rust') != -1
-  finish
-endif
-
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rust') == -1
 " Vim syntax file
 " Language:     Rust
 " Maintainer:   Patrick Walton <pcwalton@mozilla.com>
@@ -30,7 +27,7 @@ syn match rustExistentialContextual /\<existential\_s\+type/ transparent contain
 
 syn match     rustAssert      "\<assert\(\w\)*!" contained
 syn match     rustPanic       "\<panic\(\w\)*!" contained
-syn match     rustKeyword     "\<async\%(\s\|\n\)\@="
+syn match     rustAsync       "\<async\%(\s\|\n\)\@="
 syn keyword   rustKeyword     break
 syn keyword   rustKeyword     box nextgroup=rustBoxPlacement skipwhite skipempty
 syn keyword   rustKeyword     continue
@@ -49,7 +46,8 @@ syn keyword   rustKeyword     use nextgroup=rustModPath skipwhite skipempty
 " FIXME: Scoped impl's name is also fallen in this category
 syn keyword   rustKeyword     mod trait nextgroup=rustIdentifier skipwhite skipempty
 syn keyword   rustStorage     move mut ref static const
-syn match rustDefault /\<default\ze\_s\+\(impl\|fn\|type\|const\)\>/
+syn match     rustDefault     /\<default\ze\_s\+\(impl\|fn\|type\|const\)\>/
+syn keyword   rustAwait       await
 
 syn keyword rustPubScopeCrate crate contained
 syn match rustPubScopeDelim /[()]/ contained
@@ -348,6 +346,8 @@ hi def link rustExternCrate   rustKeyword
 hi def link rustObsoleteExternMod Error
 hi def link rustBoxPlacementParens Delimiter
 hi def link rustQuestionMark  Special
+hi def link rustAsync         rustKeyword
+hi def link rustAwait         rustKeyword
 
 " Other Suggestions:
 " hi rustAttribute ctermfg=cyan
@@ -362,3 +362,4 @@ syn sync maxlines=500
 let b:current_syntax = "rust"
 
 " vim: set et sw=4 sts=4 ts=8:
+endif

@@ -1,7 +1,4 @@
-if exists('g:polyglot_disabled') && index(g:polyglot_disabled, 'ruby') != -1
-  finish
-endif
-
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ruby') == -1
 " Vim filetype plugin
 " Language:		Ruby
 " Maintainer:		Tim Pope <vimNOSPAM@tpope.org>
@@ -90,7 +87,7 @@ endfunction
 
 function! s:build_path(path) abort
   let path = join(map(copy(a:path), 'v:val ==# "." ? "" : v:val'), ',')
-  if &g:path !~# '\v^\.%(,/%(usr|emx)/include)=,,$'
+  if &g:path !~# '\v^%(\.,)=%(/%(usr|emx)/include,)=,$'
     let path = substitute(&g:path,',,$',',','') . ',' . path
   endif
   return path
@@ -436,3 +433,4 @@ endfunction
 "
 
 " vim: nowrap sw=2 sts=2 ts=8:
+endif
