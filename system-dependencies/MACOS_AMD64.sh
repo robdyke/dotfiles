@@ -11,7 +11,7 @@ brew cask install spectacle firefox alacritty mtmr
 # flux is no longer required -- night shift!
 
 # resolve possible coreutils conflict
-brew unlink md5sha1sum
+brew unlink md5sha1sum || true
 
 # Upgrade or install (logic necessary)
 packages=(
