@@ -149,7 +149,7 @@ else
     fi
 fi
 
-if which gsettings &>/dev/null; then
+if [[ $XDG_CURRENT_DESKTOP == GNOME ]]; then
     gsettings set org.gnome.desktop.session idle-delay 3600
     gsettings set org.gnome.desktop.screensaver lock-delay 60
 fi
