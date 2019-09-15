@@ -46,6 +46,8 @@ alias openssl-get-expiry='openssl x509 -enddate -noout -in'
 # --files lists all files including binary. --files-with-matches and an empty string match effectively lists all text files.
 alias sed-recursive="rg --files-with-matches --hidden --ignore-file=$HOME/.rgignore '' | xargs sed -i '' -E -e"
 alias r="rgfzf"
+# used to work around "too many authentication errors" to bootstrap a fix
+alias pssh="ssh -o IdentitiesOnly=yes"
 
 # MISC FIXES
 # make bash/zsh aliases work with sudo
