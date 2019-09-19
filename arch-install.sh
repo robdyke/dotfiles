@@ -15,7 +15,7 @@ read -e -p "Hostname: " hostname
 read -e -p "Username: " username
 read -e -s -p "User / FDE Password: " passwd
 
-set -ex
+set -e
 # housekeeping
 timedatectl set-ntp true
 loadkeys uk

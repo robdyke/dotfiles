@@ -77,9 +77,6 @@ function CLEANUP_EXIT {
 
 trap CLEANUP_EXIT EXIT
 
-# echo commands to aid debugging
-set -x
-
 # exit on error? NEEDS TRAP TO CLEANUP_EXIT
 # use || true to skip exit-on-fail for single commands if inconsequential
 # This is useful on an incremental build
