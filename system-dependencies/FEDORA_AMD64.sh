@@ -31,6 +31,7 @@ sudo dnf install -y \
     upx \
     vim \
     wget \
+    yubikey-manager \
     zsh \
 
 # dstask
