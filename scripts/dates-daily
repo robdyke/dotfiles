@@ -1,14 +1,9 @@
 #!/usr/bin/python
 import datetime
-
-
-# run from vim in diary: :r! dates
-
+# run from vim in diary: :r! dates-weekly
 
 today = datetime.date.today()
-
 
 for i in range(20):
     date = today + datetime.timedelta(days=i)
     print date.strftime('# %a %d %b %Y')
-

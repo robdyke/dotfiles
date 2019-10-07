@@ -1,4 +1,5 @@
 if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'puppet') == -1
+
 " Vim indent file
 " Language: Puppet
 " Maintainer:   Todd Zullinger <tmz@pobox.com>
@@ -13,7 +14,10 @@ let b:did_indent = 1
 setlocal autoindent smartindent
 setlocal indentexpr=GetPuppetIndent()
 setlocal indentkeys+=0],0)
-setlocal formatexpr=puppet#format#Format()
+
+let b:undo_indent = "
+    \ setlocal autoindent< smartindent< indentexpr< indentkeys<
+    \"
 
 if exists("*GetPuppetIndent")
     finish
@@ -135,4 +139,5 @@ function! GetPuppetIndent(...)
 
     return ind
 endfunction
+
 endif

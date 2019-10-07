@@ -1,4 +1,5 @@
 if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'dart') == -1
+
 " Vim syntax file " Language: Dart
 " Copyright (c) 2012, the Dart project authors.  Please see the AUTHORS file
 " for details. All rights reserved. Use of this source code is governed by a
@@ -51,6 +52,11 @@ syntax match   dartMetadata      "@\([_$a-zA-Z][_$a-zA-Z0-9]*\.\)*[_$a-zA-Z][_$a
 
 " Numbers
 syntax match dartNumber         "\<\d\+\(\.\d\+\)\=\>"
+
+" User Types
+if !exists('dart_highlight_types') || dart_highlight_types
+  syntax match dartTypeName   "\<[A-Z]\w*\>\|\<_[A-Z]\w*\>"
+endif
 
 " Core libraries
 if !exists('dart_corelib_highlight') || dart_corelib_highlight
@@ -117,6 +123,7 @@ highlight default link dartTypedef         Typedef
 highlight default link dartTodo            Todo
 highlight default link dartKeyword         Keyword
 highlight default link dartType            Type
+highlight default link dartTypeName        Type
 highlight default link dartInterpolation   PreProc
 highlight default link dartDocLink         SpecialComment
 highlight default link dartSpecialChar     SpecialChar
@@ -134,4 +141,5 @@ let b:spell_options = "contained"
 if g:main_syntax is# 'dart'
   unlet g:main_syntax
 endif
+
 endif

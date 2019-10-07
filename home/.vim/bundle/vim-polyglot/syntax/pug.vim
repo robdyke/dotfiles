@@ -1,4 +1,5 @@
 if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'pug') == -1
+
 " Vim syntax file
 " Language: Pug
 " Maintainer: Joshua Borton
@@ -28,7 +29,8 @@ syn region  javascriptParenthesisBlock start="(" end=")" contains=@htmlJavascrip
 syn cluster htmlJavascript add=javascriptParenthesisBlock
 
 syn region  pugJavascript matchgroup=pugJavascriptOutputChar start="[!&]\==\|\~" skip=",\s*$" end="$" contained contains=@htmlJavascript keepend
-syn region  pugJavascript matchgroup=pugJavascriptChar start="-" skip=",\s*$" end="$" contained contains=@htmlJavascript keepend
+syn region  pugJavascript matchgroup=pugJavascriptChar start="\(^\|\s\)\@<=-" skip=",\s*$" end="$" contained contains=@htmlJavascript keepend
+
 syn cluster pugTop contains=pugBegin,pugComment,pugHtmlComment,pugJavascript
 syn match   pugBegin "^\s*\%([<>]\|&[^=~ ]\)\@!" nextgroup=pugTag,pugClassChar,pugIdChar,pugPlainChar,pugJavascript,pugScriptConditional,pugScriptStatement,pugPipedText
 syn match   pugTag "+\?[[:alnum:]_-]\+\%(:\w\+\)\=" contained contains=htmlTagName,htmlSpecialTagName,pugJavascript nextgroup=@pugComponent
@@ -112,4 +114,5 @@ let b:current_syntax = "pug"
 if main_syntax == "pug"
   unlet main_syntax
 endif
+
 endif
