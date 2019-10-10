@@ -79,7 +79,7 @@ _disable_flow_control
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # included completions
-source ~/.git-completion.sh
+source ~/.git-completion.bash
 source ~/.fzf/shell/completion.bash
 source ~/.fzf/shell/key-bindings.bash
 source ~/.dstask-bash-completions.sh
