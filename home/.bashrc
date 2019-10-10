@@ -71,12 +71,20 @@ which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
 
-# linux completions (package: bash-completion)
-[ -f /etc/bash_completion ] && source /etc/bash_completion
-
-# homebrew completions (package: bash-completions@2) -- @2 is important see
-# https://superuser.com/questions/311056/why-is-bash-completion-being-loaded-so-slow-on-os-x
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+# Source bash completions
+# see https://discourse.brew.sh/t/bash-completion-2-vs-brews-auto-installed-bash-completions/2391/4
+# for discussion. Mac requires brew packages bash and bash-completion@2
+if [[ -e "/usr/local/share/bash-completion/bash_completion" ]]; then
+    # mac os
+	export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+	source "/usr/local/share/bash-completion/bash_completion"
+elif [[ -e "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
+    # mac os
+	source "/usr/local/etc/profile.d/bash_completion.sh"
+elif [[ -e "/etc/bash_completion" ]]; then
+    # standard on linux systems, sources from /etc/bash_completion.d/
+	source "/etc/bash_completion"
+fi
 
 # included completions
 source ~/.git-completion.bash
