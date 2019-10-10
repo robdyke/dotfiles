@@ -71,9 +71,12 @@ which dircolors &>/dev/null &&  eval $(dircolors ~/.dir_colors)
 
 _disable_flow_control
 
-# linux / homebrew completions (package: bash-completion)
+# linux completions (package: bash-completion)
 [ -f /etc/bash_completion ] && source /etc/bash_completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# homebrew completions (package: bash-completions@2) -- @2 is important see
+# https://superuser.com/questions/311056/why-is-bash-completion-being-loaded-so-slow-on-os-x
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # included completions
 source ~/.git-completion.sh
