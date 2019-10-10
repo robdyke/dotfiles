@@ -87,7 +87,6 @@ elif [[ -e "/etc/bash_completion" ]]; then
 fi
 
 # included completions
-source ~/.git-completion.bash
 source ~/.fzf/shell/completion.bash
 source ~/.fzf/shell/key-bindings.bash
 source ~/.dstask-bash-completions.sh
