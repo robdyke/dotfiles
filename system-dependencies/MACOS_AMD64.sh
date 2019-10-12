@@ -16,7 +16,7 @@ brew unlink md5sha1sum || true
 # Upgrade or install (logic necessary)
 packages=(
     bash
-    bash-completion
+    bash-completion@2
     coreutils
     ffmpeg
     fzf
