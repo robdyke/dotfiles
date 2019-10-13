@@ -41,8 +41,8 @@ sudo -E apt-get -y install \
 # dstask
 EXE="$(
     obtain \
-        https://github.com/naggie/dstask/releases/download/v0.8/dstask-linux-amd64 \
-        a8888a275ad8aa11121d45f589a22829707bd9c29ef0b19e747938c57fde313f
+        https://github.com/naggie/dstask/releases/download/v0.14/dstask-linux-amd64 \
+        03ecaf42a662e14a564d2e5fed94b64852ea45da0b0235049ba4d35596e3272b
 )"
 sudo cp "${EXE}" /usr/local/bin/dstask.new
 sudo chmod +x /usr/local/bin/dstask.new

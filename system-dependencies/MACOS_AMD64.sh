@@ -56,8 +56,8 @@ ln -sf /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 # dstask
 EXE="$(
     obtain \
-        https://github.com/naggie/dstask/releases/download/v0.8/dstask-darwin-amd64 \
-        08239f5cd9f56053e3b0ddc09d0e2b1b40083964810edd22161c25c6e09f12b8
+        https://github.com/naggie/dstask/releases/download/v0.14/dstask-darwin-amd64 \
+        268df0e67fcecdcf410cf079b00955143b0d21466fc9e8facdd925d371828c86
 )"
 cp "${EXE}" /usr/local/bin/dstask.new
 chmod +x /usr/local/bin/dstask.new
