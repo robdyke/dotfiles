@@ -49,7 +49,7 @@ new or re-installed PC.
 | Purpose                        | Tool(s)                                    | Comments                                                                                                              |
 | ------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
 | Web browser                    | [firefox][20]                              | Fast since Quantum. Animations disabled for speed.                                                                    |
-| VPN                            | [tinc][21]                                 | Tinc has been 100% reliable and is able to work with most firewalls.                                                  |
+| VPN                            | [wireguard][21]                            | Wireguard is simple, fast and reliable. It will become the standard VPN.                                              |
 | Disk space reclaim             | [ncdu][22] + [tmpreaper][23]               | Tools for clearing up disk space. I run the latter against /tmp/ with cron.                                           |
 | Server configuration           | [ansible][24]                              | Idempotent, agentless configuration management. Used with git.                                                        |
 | HTTP Client                    | [httpie][25]                               | curl alternative with better UX. Sometimes used with jq.                                                              |
@@ -67,7 +67,7 @@ new or re-installed PC.
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
-[21]: https://www.tinc-vpn.org/
+[21]: https://www.wireguard.com/
 [22]: https://dev.yorhel.nl/ncdu
 [23]: http://manpages.ubuntu.com/manpages/bionic/man8/tmpreaper.8.html
 [24]: https://www.ansible.com/
