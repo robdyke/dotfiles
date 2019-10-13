@@ -5,7 +5,7 @@ else
 fi
 
 # recommended, uses /Applications now.
-brew tap caskroom/homebrew-cask
+brew tap homebrew/cask
 brew cask install spectacle firefox alacritty mtmr
 
 # flux is no longer required -- night shift!
