@@ -4,7 +4,7 @@ echo 'en_GB.UTF-8 UTF-8' | sudo tee /etc/locale.gen
 sudo locale-gen
 
 # replace ssh config if password authentication is enabled (on by default)
-if ! grep -q 'PasswordAuthentication no' /etc/ssh/sshd_config; then
+if ! sudo grep -q 'PasswordAuthentication no' /etc/ssh/sshd_config; then
     sudo cp system-configuration/etc/sshd_config /etc/ssh/
     sudo systemctl restart sshd
 fi
