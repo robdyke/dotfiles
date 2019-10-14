@@ -64,6 +64,7 @@ new or re-installed PC.
 | Git history viewer             | [tig][41]                                  |                                                                                                                       |
 | Configuration version control  | [etckeeper][42]                            | Used for general purpose servers.                                                                                     |
 | Music library curation         | [beets][43]                                | Automates curation of music library                                                                                   |
+| CLI Benchmarking               | [hyperfine][44]                            |                                                                                                                       |
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
@@ -86,6 +87,7 @@ new or re-installed PC.
 [41]: https://github.com/jonas/tig
 [42]: https://etckeeper.branchable.com/
 [43]: https://beets.io/
+[44]: https://github.com/sharkdp/hyperfine
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
