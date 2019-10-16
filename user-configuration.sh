@@ -25,23 +25,15 @@ mkdir -p ~/.gnupg
 # Ubuntu creates some annoying empty directories. Delete if empty.
 rmdir Documents/ Pictures/ Public/ Videos/ &>/dev/null || true
 
-# trust github pubkey
-grep -q github.com ~/.ssh/known_hosts || cat <<EOF >> ~/.ssh/known_hosts
-github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
-EOF
-
 # copy dotfiles separately , normal glob does not match
 cp -r home/.??* ~
 cp -a etc ~
 cp -a scripts/* ~/.local/bin/
 
-
 # pinentry program and gpg agent socket needs absolute path and can't expand ~,
 # so do it here.
 echo pinentry-program ~/.local/bin/pinentry-sane >> ~/.gnupg/gpg-agent.conf
 echo extra-socket $(gpgconf --list-dirs | grep agent-extra-socket | cut -f 2 -d :) >> ~/.gnupg/gpg-agent.conf
-
-
 
 if [ $PLATFORM == 'Darwin' ]; then
     cp -r home/Library ~
@@ -114,6 +106,11 @@ chmod 600 ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/config
 chmod 0700 ~/.gnupg
 chmod 0600 ~/.gnupg/*.conf
+
+# trust github pubkey
+grep -q github.com ~/.ssh/known_hosts || cat <<EOF >> ~/.ssh/known_hosts
+github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+EOF
 
 # set caps lock to act as esc if possible
 test $DISPLAY && which dconf &> /dev/null && \
