@@ -19,7 +19,8 @@ RASPBIAN_ARMV5=RASPBIAN_ARMV5
 
 # authorise sudo early on
 echo "Please enter sudo password. Sudo session will be kept alive until this script exits."
-sudo -v
+# sudo -v is technically correct but asks for a non-existent password on fresh AWS Ubuntu AMIs
+sudo echo -n
 
 # sudo keepalive. This will keep the sudo watchdog fed until this script exits.
 # This works buy poking the parent process to see if it's still alive.
