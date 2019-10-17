@@ -48,6 +48,7 @@ alias sed-recursive="rg --files-with-matches --hidden --ignore-file=$HOME/.rgign
 alias r="rgfzf"
 # used to work around "too many authentication errors" to bootstrap a fix
 alias pssh="ssh -o IdentitiesOnly=yes"
+alias pscp="scp -o IdentitiesOnly=yes"
 
 # MISC FIXES
 # make bash/zsh aliases work with sudo
