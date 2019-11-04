@@ -1,4 +1,6 @@
 #!/bin/bash
+# I do all these steps manually, quite a lot
 echo -e '#!/bin/bash\n' > $1
 chmod +x $1
 vim "+ normal G $" $1
+git add $1 2> /dev/null
