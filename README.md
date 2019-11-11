@@ -54,7 +54,8 @@ new or re-installed PC.
 | Server configuration           | [ansible][24]                              | Idempotent, agentless configuration management. Used with git.                                                        |
 | HTTP Client                    | [httpie][25]                               | curl alternative with better UX. Sometimes used with jq.                                                              |
 | System backup                  | [restic][26]                               |                                                                                                                       |
-| Cloud backup                   | [rclone][39]                               |                                                                                                                       |
+| Cloud backup                   | [rclone][38]                               |                                                                                                                       |
+| CAD                            | [OpenSCAD][45]                             | Limited but powerful if you plan ahead                                                                                |
 | Diagramming                    | [draw.io][27]                              | Diagram creation software. See also dia, graphviz, tikz.                                                              |
 | Music playback                 | [cmus][28]                                 | Fast terminal music player. See also MPD, mopidy.                                                                     |
 | Audio/video conversion         | [sox][29] + [ffmpeg][30] + [gstreamer][31] |                                                                                                                       |
@@ -88,6 +89,7 @@ new or re-installed PC.
 [42]: https://etckeeper.branchable.com/
 [43]: https://beets.io/
 [44]: https://github.com/sharkdp/hyperfine
+[45]: https://www.openscad.org/
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
