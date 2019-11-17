@@ -62,3 +62,6 @@ user_pref("signon.rememberSignons.visibilityToggle", false);
 
 // canary deployments of new features
 user_pref("app.normandy.enabled" false);
+
+// stop automatically prepending www when request fails
+user_pref("browser.fixup.alternate.enabled", false);
