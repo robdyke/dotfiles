@@ -48,6 +48,10 @@ au BufNewFile,BufRead Jenkinsfile          set filetype=groovy
 au BufNewFile,BufRead /etc/nginx/sites-*/* set filetype=nginx
 au BufNewFile,BufRead /etc/nginx/conf.d/*  set filetype=nginx
 au BufNewFile,BufRead *nginx*.conf         set filetype=nginx
+" Arduino
+au BufNewFile,BufRead platform{,.local}.txt    set filetype=dosini
+au BufNewFile,BufRead boards{,.local}.txt      set filetype=dosini
+au BufNewFile,BufRead programmers{,.local}.txt set filetype=dosini
 
 " It's not the 70's anymore. Use git or something.
 set noswapfile
