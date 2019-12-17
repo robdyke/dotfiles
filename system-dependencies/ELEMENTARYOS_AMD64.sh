@@ -27,6 +27,7 @@ sudo -E apt-get -y install \
     python3 \
     python3-pip \
     scdaemon \
+    software-properties-common \
     sox \
     ssh \
     tig \
