@@ -86,10 +86,7 @@ sudo tar -C /usr/local -xzf "$TARGZ"
 
 # ubuntu desktop specific
 if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
-    sudo apt-get -y install firefox i3 i3status dmenu xautolock powertop
-
-    # stop default screensaver (xubuntu) -- note xsettings are also required
-    sudo apt-get -y purge light-locker xfce4-power-manager
+    sudo apt-get -y install firefox powertop
 
     # ykman only available in later versions of ubuntu. Install if available.
     sudo apt-get -y install yubikey-manager || true
