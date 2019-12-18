@@ -7,6 +7,7 @@ from os import path
 from os import getenv
 from os import listdir
 from os import environ
+from os import unlink
 import sys
 from subprocess import call
 
@@ -22,8 +23,6 @@ profile_search_paths = [
     path.expanduser("~/Library/Mozilla/Firefox/Profiles/"),
 ]
 
-profile_name = "default"
-
 # in case we're on os x
 environ["PATH"] = environ["PATH"] + ":/Applications/Firefox.app/Contents/MacOS/"
 
@@ -33,51 +32,50 @@ def find_profiles():
         if path.isdir(_path):
             for d in listdir(_path):
                 profile = path.join(_path, d)
-                if path.isdir(profile) and profile.endswith("." + profile_name):
+                # polluted namespace, for sure. For now this works.
+                if path.isdir(profile) and "." in profile:
                     yield profile
 
 
-def create_default_profile():
-    call(["firefox", "-no-remote", "-CreateProfile", profile_name, "-headless"])
+def create_initial_profile():
+    # unfortunate;y this is the only way of creating an initial profile that
+    # firefox will use on first start nowadays. Screenshot is captured so the browser exits.
+    call(["firefox", "-no-remote", "--screenshot"])
+    unlink("screenshot.png")
 
 
 profiles = list(find_profiles())
 
+# firefox is not running, and has never been run
 if len(profiles) == 0:
-    create_default_profile()
+    create_initial_profile()
     profiles = list(find_profiles())
 
 if len(profiles) == 0:
     print("Firefox profile could not be found or created")
     sys.exit(1)
 
-# we only expect to match the default profile for the current user
-assert len(profiles) == 1
+# apply to all matching profiles
+for profile in profiles:
+    print("Installing to " + profile)
+    chrome_dir = path.join(profile, "chrome")
+    extensions_dir = path.join(profile, "extensions")
 
-profile = profiles[0]
-chrome_dir = path.join(profile, "chrome")
-extensions_dir = path.join(profile, "extensions")
+    copy(path.join(script_dir, "user.js"), profile)
 
-copy(path.join(script_dir, "user.js"), profile)
+    for d in [chrome_dir, extensions_dir]:
+        if not path.isdir(d):
+            makedirs(d)
 
-for d in [chrome_dir, extensions_dir]:
-    if not path.isdir(d):
-        makedirs(d)
-
-copy(path.join(script_dir, "chrome/UserChrome.css"), chrome_dir)
-copy(path.join(script_dir, "chrome/UserContent.css"), chrome_dir)
+    copy(path.join(script_dir, "chrome/UserChrome.css"), chrome_dir)
+    copy(path.join(script_dir, "chrome/UserContent.css"), chrome_dir)
 
 
-# copy extensions; only if they don't exist as FF manages updates to them
-# automatically. Note they must be signed unless Firefox ESR is used and
-# configured correctly. Using unsigned extensions is not recommended.
-for e in listdir(path.join(script_dir, "extensions")):
-    source = path.join(script_dir, "extensions", e)
-    target = path.join(extensions_dir, e)
-    if not path.isfile(target):
-        copy(source, target)
-
-# copy('{99b7c416-82dc-4f9f-9909-ebc038fddefc}.xpi', 'build/core/distribution/extensions/')
-# ; https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Alternative_distribution_options/Sideloading_add-ons#Installation_using_the_standard_extension_folders
-# FileCreateDir, %A_AppData%\Mozilla\Extensions\{ec8030f7-c20a-464f-9b0e-13a3a9e97384}
-# FileCopy, distribution\extensions\*, %A_AppData%\Mozilla\Extensions\{ec8030f7-c20a-464f-9b0e-13a3a9e97384}\, 1
+    # copy extensions; only if they don't exist as FF manages updates to them
+    # automatically. Note they must be signed unless Firefox ESR is used and
+    # configured correctly. Using unsigned extensions is not recommended.
+    for e in listdir(path.join(script_dir, "extensions")):
+        source = path.join(script_dir, "extensions", e)
+        target = path.join(extensions_dir, e)
+        if e.endswith('.xpi') and not path.isfile(target):
+            copy(source, target)
