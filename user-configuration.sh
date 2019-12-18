@@ -27,7 +27,6 @@ rmdir Documents/ Pictures/ Public/ Videos/ &>/dev/null || true
 
 # copy dotfiles separately , normal glob does not match
 cp -r home/.??* ~
-cp -a etc ~
 cp -a scripts/* ~/.local/bin/
 
 # pinentry program and gpg agent socket needs absolute path and can't expand ~,
