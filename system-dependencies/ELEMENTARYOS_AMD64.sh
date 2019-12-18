@@ -2,8 +2,8 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # -E is necessary for DEBIAN_FRONTEND
-sudo -E apt-add-repository multiverse
-sudo -E add-apt-repository ppa:openscad/releases
+sudo -E apt-add-repository --yes multiverse
+sudo -E add-apt-repository --yes ppa:openscad/releases
 sudo -E apt-get -y update
 sudo -E apt-get -y upgrade
 sudo -E apt-get -y install \
