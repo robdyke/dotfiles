@@ -33,7 +33,7 @@ def find_profiles():
             for d in listdir(_path):
                 profile = path.join(_path, d)
                 # polluted namespace, for sure. For now this works.
-                if path.isdir(profile) and "." in profile:
+                if path.isdir(profile) and "." in path.basename(profile):
                     yield profile
 
 
