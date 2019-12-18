@@ -3,7 +3,6 @@ export DEBIAN_FRONTEND=noninteractive
 
 # -E is necessary for DEBIAN_FRONTEND
 sudo -E apt-add-repository --yes multiverse
-sudo -E add-apt-repository --yes ppa:openscad/releases
 sudo -E apt-get -y update
 sudo -E apt-get -y upgrade
 sudo -E apt-get -y install \
@@ -21,7 +20,6 @@ sudo -E apt-get -y install \
     language-pack-en \
     libssl-dev \
     ncdu \
-    openscad \
     pass \
     pcscd \
     python \
@@ -111,4 +109,13 @@ if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
     [ -f /usr/local/bin/browserpass ] && sudo rm -f /usr/local/bin/browserpass
     sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" browserpass-linux64-3.0.6/browserpass-linux64
     sudo mv /usr/local/bin/browserpass-linux64 /usr/local/bin/browserpass
+
+    EXE="$(
+        obtain \
+            https://files.openscad.org/snapshots/OpenSCAD-2019.11.20.ai3988-eedfcc4-x86_64.AppImage \
+            2f5cfe1224708bdb8c5e434876564b4767a48731c201a86655ec35b76dbe5426
+    )"
+    sudo cp "${EXE}" /usr/local/bin/openscad.new
+    sudo chmod +x /usr/local/bin/openscad.new
+    sudo mv -f /usr/local/bin/{openscad.new,openscad}
 fi
