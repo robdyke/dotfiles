@@ -155,6 +155,7 @@ EOF
 
 # local machine, and has a yubikey -- probably (hopefully) my personal
 # laptop/desktop
+# TODO set up agent for initial run
 if [ ! "$SSH_CONNECTION" ] && gpg --card-status &>/dev/null; then
     if [ ! -d ~/.password-store ]; then
         git -C ~ clone git@github.com:naggie/.password-store.git

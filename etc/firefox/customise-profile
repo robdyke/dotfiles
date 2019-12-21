@@ -41,7 +41,9 @@ def create_initial_profile():
     # unfortunate;y this is the only way of creating an initial profile that
     # firefox will use on first start nowadays. Screenshot is captured so the browser exits.
     call(["firefox", "-no-remote", "--screenshot"])
-    unlink("screenshot.png")
+    # will not create first run
+    if path.isfile("screenshot.png"):
+        unlink("screenshot.png")
 
 
 profiles = list(find_profiles())
