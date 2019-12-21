@@ -1,6 +1,8 @@
 # tmpreaper tries to do a post-install "configuration" screen to warn the user.
 export DEBIAN_FRONTEND=noninteractive
 
+sudo -E apt-get -y update
+sudo -E apt-get install -y software-properties-common
 # -E is necessary for DEBIAN_FRONTEND
 sudo -E apt-add-repository --yes multiverse
 sudo -E apt-get -y update
@@ -28,7 +30,6 @@ sudo -E apt-get -y install \
     python3 \
     python3-pip \
     scdaemon \
-    software-properties-common \
     sox \
     ssh \
     tig \
