@@ -17,6 +17,7 @@ brew unlink md5sha1sum || true
 packages=(
     bash
     bash-completion@2
+    brightness
     coreutils
     ffmpeg
     fzf
