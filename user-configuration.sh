@@ -150,5 +150,10 @@ if [[ $XDG_CURRENT_DESKTOP == GNOME ]]; then
     gsettings set org.gnome.desktop.screensaver lock-delay 60
 fi
 
+if [[ $XDG_CURRENT_DESKTOP == Pantheon ]]; then
+    gsettings set io.elementary.terminal.settings background '#000000000000'
+    gsettings set io.elementary.terminal.settings foreground '#ffffffffffff'
+fi
+
 # now is a good time to associate the yubikey GPG private keys if it is connected
 gpg --card-status &> /dev/null || true
