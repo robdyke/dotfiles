@@ -13,6 +13,7 @@ sudo -E apt-get -y install \
     dconf-cli \
     etckeeper \
     ffmpeg \
+    firefox \
     git \
     gnupg2 \
     htop \
@@ -46,14 +47,12 @@ adhoc_fzf_linux_amd64
 adhoc_neovim_linux_amd64
 adhoc_golang_linux_amd64
 
-# ubuntu desktop specific
-if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
-    sudo apt-get -y install firefox powertop
+# ykman only available in later versions of ubuntu. Install if available.
+sudo apt-get -y install yubikey-manager || true
 
-    # ykman only available in later versions of ubuntu. Install if available.
-    sudo apt-get -y install yubikey-manager || true
+# ykman only available in later versions of ubuntu. Install if available.
+sudo apt-get -y install yubikey-manager || true
 
-    adhoc_alacritty_linux_amd64
-    adhoc_browserpass_linux_amd64
-    adhoc_openscad_linux_amd64
-fi
+adhoc_alacritty_linux_amd64
+adhoc_browserpass_linux_amd64
+adhoc_openscad_linux_amd64
