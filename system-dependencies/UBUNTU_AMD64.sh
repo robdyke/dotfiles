@@ -23,6 +23,7 @@ sudo -E apt-get -y install \
     libssl-dev \
     ncdu \
     openscad \
+    parallel \
     pass \
     pcscd \
     python \

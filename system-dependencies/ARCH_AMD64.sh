@@ -14,6 +14,7 @@ sudo pacman --noconfirm -Syu \
     ncdu \
     neovim \
     openssh \
+    parallel \
     pass \
     python \
     ripgrep \

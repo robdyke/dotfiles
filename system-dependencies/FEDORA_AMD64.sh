@@ -18,6 +18,7 @@ sudo dnf install -y \
     neovim \
     opensc \
     openscad \
+    parallel \
     pass \
     python \
     python-pip \

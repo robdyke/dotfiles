@@ -32,6 +32,7 @@ packages=(
     ncdu
     nvim
     openssh
+    parallel
     pass
     pinentry-mac
     ripgrep

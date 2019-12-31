@@ -23,6 +23,7 @@ sudo -E apt-get -y install \
     language-pack-en \
     libssl-dev \
     ncdu \
+    parallel \
     pass \
     pcscd \
     python \
