@@ -103,7 +103,7 @@ git pull --ff-only $ORIGIN master || true
 git branch --set-upstream-to=origin/master master
 
 # contains utilities for downloading and installation
-source etc/util.sh
+source system-dependencies/include/util.sh
 
 # system-dependencies (run by root)
 source system-dependencies/${PLATFORM}.sh
