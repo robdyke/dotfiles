@@ -153,6 +153,8 @@ fi
 if [[ $XDG_CURRENT_DESKTOP == Pantheon ]]; then
     dbus-launch gsettings set io.elementary.terminal.settings background '#000000000000'
     dbus-launch gsettings set io.elementary.terminal.settings foreground '#ffffffffffff'
+    dbus-launch gsettings set io.elementary.terminal.settings natural-copy-paste false
+    dbus-launch gsettings set io.elementary.terminal.settings unsafe-paste-alert false
 fi
 
 # now is a good time to associate the yubikey GPG private keys if it is connected
