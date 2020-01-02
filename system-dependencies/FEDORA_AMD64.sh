@@ -43,4 +43,5 @@ adhoc_golang_linux_amd64
 if hostnamectl | grep -q Workstation; then
     adhoc_alacritty_linux_amd64
     adhoc_browserpass_linux_amd64
+    adhoc_cura_linux_amd64
 fi

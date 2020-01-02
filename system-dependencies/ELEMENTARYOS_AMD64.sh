@@ -57,3 +57,4 @@ sudo apt-get -y install yubikey-manager || true
 adhoc_alacritty_linux_amd64
 adhoc_browserpass_linux_amd64
 adhoc_openscad_linux_amd64
+adhoc_cura_linux_amd64

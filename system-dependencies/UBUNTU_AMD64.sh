@@ -58,4 +58,5 @@ if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
     adhoc_alacritty_linux_amd64
     adhoc_browserpass_linux_amd64
     adhoc_openscad_linux_amd64
+    adhoc_cura_linux_amd64
 fi
