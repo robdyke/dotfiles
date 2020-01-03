@@ -2,6 +2,7 @@ if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'meson') == -1
 
 " Vim syntax file
 " Language:	Meson
+" License:	VIM License
 " Maintainer:	Nirbheek Chauhan <nirbheek.chauhan@gmail.com>
 " Last Change:	2016 Dec 7
 " Credits:	Zvezdan Petkovic <zpetkovic@acm.org>
@@ -29,7 +30,7 @@ endif
 " We need nocompatible mode in order to continue lines with backslashes.
 " Original setting will be restored.
 let s:cpo_save = &cpo
-setlocal cpo&vim
+set cpo&vim
 
 " http://mesonbuild.com/Syntax.html
 syn keyword mesonConditional	elif else if endif
@@ -118,6 +119,7 @@ syn keyword mesonBuiltin
   \ subdir
   \ subdir_done
   \ subproject
+  \ summary
   \ target_machine
   \ test
   \ vcs_tag

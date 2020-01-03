@@ -10,7 +10,7 @@ A collection of language packs for Vim.
 > One to rule them all, one to find them, one to bring them all and in the darkness bind them.
 
 - It **won't affect your startup time**, as scripts are loaded only on demand\*.
-- It **installs and updates 120+ times faster** than the <!--Package Count-->146<!--/Package Count--> packages it consists of.
+- It **installs and updates 120+ times faster** than the <!--Package Count-->147<!--/Package Count--> packages it consists of.
 - Solid syntax and indentation support (other features skipped). Only the best language packs.
 - All unnecessary files are ignored (like enormous documentation from php support).
 - No support for esoteric languages, only most popular ones (modern too, like `slim`).
@@ -119,7 +119,7 @@ If you need full functionality of any plugin, please use it directly with your p
 - [log](https://github.com/MTDL9/vim-log-highlighting) (syntax)
 - [lua](https://github.com/tbastos/vim-lua) (syntax, indent)
 - [mako](https://github.com/sophacles/vim-bundle-mako) (syntax, indent, ftplugin)
-- [markdown](https://github.com/plasticboy/vim-markdown) (syntax, indent)
+- [markdown](https://github.com/plasticboy/vim-markdown) (syntax, indent, ftplugin)
 - [mathematica](https://github.com/voldikss/vim-mma) (syntax, ftplugin)
 - [mdx](https://github.com/jxnblk/vim-mdx-js) (syntax)
 - [meson](https://github.com/mesonbuild/meson) (syntax, indent, ftplugin)
@@ -129,7 +129,7 @@ If you need full functionality of any plugin, please use it directly with your p
 - [nix](https://github.com/LnL7/vim-nix) (syntax, indent, compiler, ftplugin)
 - [objc](https://github.com/b4winckler/vim-objc) (ftplugin, syntax, indent)
 - [ocaml](https://github.com/rgrinberg/vim-ocaml) (syntax, indent, compiler, ftplugin)
-- [octave](https://github.com/vim-scripts/octave.vim--) (syntax)
+- [octave](https://github.com/McSinyx/vim-octave) (syntax, indent)
 - [opencl](https://github.com/petRUShka/vim-opencl) (syntax, indent, ftplugin)
 - [perl](https://github.com/vim-perl/vim-perl) (syntax, indent, ftplugin)
 - [pgsql](https://github.com/lifepillar/pgsql.vim) (syntax, indent)
@@ -152,7 +152,7 @@ If you need full functionality of any plugin, please use it directly with your p
 - [raml](https://github.com/IN3D/vim-raml) (syntax, ftplugin)
 - [reason](https://github.com/reasonml-editor/vim-reason-plus) (syntax, indent)
 - [rspec](https://github.com/sheerun/rspec.vim) (syntax)
-- [rst](https://github.com/marshallward/vim-restructuredtext) (syntax, autoload, ftplugin)
+- [rst](https://github.com/marshallward/vim-restructuredtext) (syntax, indent, autoload, ftplugin)
 - [ruby](https://github.com/vim-ruby/vim-ruby) (syntax, indent, compiler, autoload, ftplugin)
 - [rust](https://github.com/rust-lang/rust.vim) (syntax, indent, compiler, autoload, ftplugin)
 - [sbt](https://github.com/derekwyatt/vim-sbt) (syntax)
@@ -178,7 +178,8 @@ If you need full functionality of any plugin, please use it directly with your p
 - [tptp](https://github.com/c-cube/vim-tptp) (syntax)
 - [twig](https://github.com/lumiliet/vim-twig) (syntax, indent, ftplugin)
 - [typescript](https://github.com/HerringtonDarkholme/yats.vim) (syntax, indent, compiler, ftplugin)
-- [vala](https://github.com/arrufat/vala.vim) (syntax, indent)
+- [v](https://github.com/ollykel/v-vim) (syntax, indent, ftplugin)
+- [vala](https://github.com/arrufat/vala.vim) (syntax, indent, ftplugin)
 - [vbnet](https://github.com/vim-scripts/vbnet.vim) (syntax)
 - [vcl](https://github.com/smerrill/vcl-vim-plugin) (syntax)
 - [vifm](https://github.com/vifm/vifm.vim) (syntax, autoload, ftplugin)
@@ -204,7 +205,7 @@ Please make sure you have `syntax on` in your `.vimrc`, otherwise syntax files a
 Individual language packs can be disabled by setting `g:polyglot_disabled` as follows:
 
 ```viml
-" ~/.vimrc
+" ~/.vimrc, declare this variable before polyglot is loaded
 let g:polyglot_disabled = ['css']
 ```
 
