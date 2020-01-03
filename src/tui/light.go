@@ -345,6 +345,14 @@ func (r *LightRenderer) GetChar() Event {
 		return Event{BSpace, 0, nil}
 	case 0:
 		return Event{CtrlSpace, 0, nil}
+	case 28:
+		return Event{CtrlBackSlash, 0, nil}
+	case 29:
+		return Event{CtrlRightBracket, 0, nil}
+	case 30:
+		return Event{CtrlCaret, 0, nil}
+	case 31:
+		return Event{CtrlSlash, 0, nil}
 	case ESC:
 		ev := r.escSequence(&sz)
 		// Second chance
@@ -658,7 +666,7 @@ func (r *LightRenderer) DoesAutoWrap() bool {
 	return false
 }
 
-func (r *LightRenderer) NewWindow(top int, left int, width int, height int, borderStyle BorderStyle) Window {
+func (r *LightRenderer) NewWindow(top int, left int, width int, height int, preview bool, borderStyle BorderStyle) Window {
 	w := &LightWindow{
 		renderer: r,
 		colored:  r.theme != nil,
@@ -671,8 +679,13 @@ func (r *LightRenderer) NewWindow(top int, left int, width int, height int, bord
 		fg:       colDefault,
 		bg:       colDefault}
 	if r.theme != nil {
-		w.fg = r.theme.Fg
-		w.bg = r.theme.Bg
+		if preview {
+			w.fg = r.theme.PreviewFg
+			w.bg = r.theme.PreviewBg
+		} else {
+			w.fg = r.theme.Fg
+			w.bg = r.theme.Bg
+		}
 	}
 	w.drawBorder()
 	return w
@@ -696,25 +709,21 @@ func (w *LightWindow) drawBorderHorizontal() {
 
 func (w *LightWindow) drawBorderAround() {
 	w.Move(0, 0)
-	w.CPrint(ColBorder, AttrRegular,
+	w.CPrint(ColPreviewBorder, AttrRegular,
 		string(w.border.topLeft)+repeat(w.border.horizontal, w.width-2)+string(w.border.topRight))
 	for y := 1; y < w.height-1; y++ {
 		w.Move(y, 0)
-		w.CPrint(ColBorder, AttrRegular, string(w.border.vertical))
-		w.cprint2(colDefault, w.bg, AttrRegular, repeat(' ', w.width-2))
-		w.CPrint(ColBorder, AttrRegular, string(w.border.vertical))
+		w.CPrint(ColPreviewBorder, AttrRegular, string(w.border.vertical))
+		w.CPrint(ColPreviewBorder, AttrRegular, repeat(' ', w.width-2))
+		w.CPrint(ColPreviewBorder, AttrRegular, string(w.border.vertical))
 	}
 	w.Move(w.height-1, 0)
-	w.CPrint(ColBorder, AttrRegular,
+	w.CPrint(ColPreviewBorder, AttrRegular,
 		string(w.border.bottomLeft)+repeat(w.border.horizontal, w.width-2)+string(w.border.bottomRight))
 }
 
 func (w *LightWindow) csi(code string) {
 	w.renderer.csi(code)
-}
-
-func (w *LightWindow) stderr(str string) {
-	w.renderer.stderr(str)
 }
 
 func (w *LightWindow) stderrInternal(str string, allowNLCR bool) {
