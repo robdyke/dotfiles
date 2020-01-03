@@ -59,7 +59,6 @@ if len(profiles) == 0:
 
 # apply to all matching profiles
 for profile in profiles:
-    print("Installing to " + profile)
     chrome_dir = path.join(profile, "chrome")
     extensions_dir = path.join(profile, "extensions")
 
