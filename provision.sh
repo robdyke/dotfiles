@@ -105,6 +105,9 @@ git branch --set-upstream-to=origin/master master
 # contains utilities for downloading and installation
 source system-dependencies/include/util.sh
 
+# adhoc program installers
+source system-dependencies/include/adhoc.sh
+
 # system-dependencies (run by root)
 source system-dependencies/${PLATFORM}.sh
 
