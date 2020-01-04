@@ -42,6 +42,7 @@ function adhoc_neovim_linux_amd64 {
     sudo cp "${EXE}" /usr/local/bin/nvim.new
     sudo chmod +x /usr/local/bin/nvim.new
     sudo mv -f /usr/local/bin/{nvim.new,nvim}
+}
 
 function adhoc_golang_linux_amd64 {
     TARGZ="$(
