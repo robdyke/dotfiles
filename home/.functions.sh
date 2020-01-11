@@ -189,5 +189,5 @@ function _tmux_window_name_read {
 # start application and disown to unlink from current terminal -- including
 # stdio
 function start {
-    $1 2>/dev/null >/dev/null </dev/null & disown $!
+    "$@" 2>/dev/null >/dev/null </dev/null & disown $!
 }
