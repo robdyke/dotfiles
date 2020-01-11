@@ -157,6 +157,10 @@ EOF
 # laptop/desktop
 # TODO set up agent for initial run
 if [ ! "$SSH_CONNECTION" ] && gpg --card-status &>/dev/null; then
+    # need to be able to use keys
+    source home/.functions.sh
+    _update_agents
+
     if [ ! -d ~/.password-store ]; then
         git -C ~ clone git@github.com:naggie/.password-store.git
     fi
