@@ -57,7 +57,6 @@ if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
 
     # only available in later versions of ubuntu. Install if available.
     sudo apt-get -y install yubikey-manager || true
-    sudo apt-get -y install openscad || true
     sudo apt-get -y install kicad-demo || true
 
     adhoc_alacritty_linux_amd64
