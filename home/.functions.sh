@@ -185,3 +185,9 @@ function _tmux_window_name_read {
     read name
     tmux rename-window "$name"
 }
+
+# start application and disown to unlink from current terminal -- including
+# stdio
+function start {
+    $1 & disown $!
+}
