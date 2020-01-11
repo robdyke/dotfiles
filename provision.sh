@@ -14,6 +14,7 @@ set -Eeo pipefail
 ARCH_AMD64=ARCH_AMD64
 MACOS_AMD64=MACOS_AMD64
 UBUNTU_AMD64=UBUNTU_AMD64
+KUBUNTU_AMD64=KUBUNTU_AMD64
 ELEMENTARYOS_AMD64=ELEMENTARYOS_AMD64
 FEDORA_AMD64=FEDORA_AMD64
 RASPBIAN_ARMV5=RASPBIAN_ARMV5
@@ -42,6 +43,8 @@ function get_platform() {
             echo $ARCH_AMD64
         elif [[ $HOSTNAMECTL == *Ubuntu* ]] && [[ $LONG_BIT == 64 ]]; then
             echo $UBUNTU_AMD64
+        elif [[ $HOSTNAMECTL == *Kubuntu* ]] && [[ $LONG_BIT == 64 ]]; then
+            echo $KUBUNTU_AMD64
         elif [[ $HOSTNAMECTL == *elementary* ]] && [[ $LONG_BIT == 64 ]]; then
             echo $ELEMENTARYOS_AMD64
         elif [[ $HOSTNAMECTL == *Fedora* ]] && [[ $LONG_BIT == 64 ]]; then
