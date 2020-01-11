@@ -14,6 +14,8 @@ sudo dnf install -y \
     httrack \
     hub \
     jq \
+    kicad \
+    kicad-packages3d \
     ncdu \
     neovim \
     opensc \
