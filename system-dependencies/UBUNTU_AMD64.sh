@@ -53,11 +53,12 @@ adhoc_golang_linux_amd64
 if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
     sudo -E add-apt-repository --yes ppa:js-reynaud/kicad-5.1
     sudo -E apt-get -y update
-    sudo apt-get -y install firefox powertop kicad kicad-demo
+    sudo apt-get -y install firefox powertop kicad
 
     # only available in later versions of ubuntu. Install if available.
     sudo apt-get -y install yubikey-manager || true
     sudo apt-get -y install openscad || true
+    sudo apt-get -y install kicad-demo || true
 
     adhoc_alacritty_linux_amd64
     adhoc_browserpass_linux_amd64
