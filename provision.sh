@@ -123,3 +123,5 @@ if [[ $(whoami) == naggie ]]; then
 else
     ./user-configuration.sh
 fi
+
+echo PROVISIONING SUCCESSFUL
