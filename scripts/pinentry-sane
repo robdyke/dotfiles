@@ -6,6 +6,8 @@ elif which /usr/bin/pinentry-x11 &> /dev/null; then
     exec /usr/bin/pinentry-x11
 elif which /usr/bin/pinentry-gnome3 &> /dev/null; then
     exec /usr/bin/pinentry-gnome3
+elif which /usr/bin/pinentry-qt4 &> /dev/null; then
+    exec /usr/bin/pinentry-qt4
 else
     exit 2
 fi
