@@ -5,9 +5,11 @@ sudo -E apt-get -y update
 sudo -E apt-get install -y software-properties-common
 # -E is necessary for DEBIAN_FRONTEND
 sudo -E apt-add-repository --yes multiverse
+sudo -E add-apt-repository --yes ppa:js-reynaud/kicad-5.1
+
 sudo -E apt-get -y update
 sudo -E apt-get -y upgrade
-sudo -E apt-get -y install \
+sudo -E apt-get -y install --install-recommends \
     bash-completion \
     curl \
     dconf-cli \
@@ -19,6 +21,8 @@ sudo -E apt-get -y install \
     httpie \
     httrack \
     jq \
+    kicad \
+    kicad-demo \
     language-pack-en \
     libssl-dev \
     ncdu \
