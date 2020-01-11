@@ -51,7 +51,7 @@ adhoc_golang_linux_amd64
 
 # GUI if applicable
 if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
-    sudo -E apt-add-repository --yes multiverse
+    sudo -E add-apt-repository --yes ppa:js-reynaud/kicad-5.1
     sudo -E apt-get -y update
     sudo apt-get -y install firefox powertop kicad kicad-demo
 
