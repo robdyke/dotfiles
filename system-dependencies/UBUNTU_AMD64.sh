@@ -1,14 +1,14 @@
 # tmpreaper tries to do a post-install "configuration" screen to warn the user.
 export DEBIAN_FRONTEND=noninteractive
 
+# -E is necessary for DEBIAN_FRONTEND
 sudo -E apt-get -y update
 sudo -E apt-get install -y software-properties-common
-# -E is necessary for DEBIAN_FRONTEND
 sudo -E apt-add-repository --yes multiverse
-sudo -E add-apt-repository --yes ppa:js-reynaud/kicad-5.1
-
 sudo -E apt-get -y update
 sudo -E apt-get -y upgrade
+
+# CLI only
 sudo -E apt-get -y install --install-recommends \
     bash-completion \
     curl \
@@ -21,12 +21,9 @@ sudo -E apt-get -y install --install-recommends \
     httpie \
     httrack \
     jq \
-    kicad \
-    kicad-demo \
     language-pack-en \
     libssl-dev \
     ncdu \
-    openscad \
     parallel \
     pass \
     pcscd \
@@ -52,12 +49,15 @@ adhoc_fzf_linux_amd64
 adhoc_neovim_linux_amd64
 adhoc_golang_linux_amd64
 
-# ubuntu desktop specific
+# GUI if applicable
 if [ -d /usr/share/xsessions ] && [ ! -z "$(ls /usr/share/xsessions/)" ]; then
-    sudo apt-get -y install firefox powertop
+    sudo -E apt-add-repository --yes multiverse
+    sudo -E apt-get -y update
+    sudo apt-get -y install firefox powertop kicad kicad-demo
 
-    # ykman only available in later versions of ubuntu. Install if available.
+    # only available in later versions of ubuntu. Install if available.
     sudo apt-get -y install yubikey-manager || true
+    sudo apt-get -y install openscad || true
 
     adhoc_alacritty_linux_amd64
     adhoc_browserpass_linux_amd64
