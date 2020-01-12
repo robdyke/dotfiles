@@ -14,12 +14,9 @@ sudo dnf install -y \
     httrack \
     hub \
     jq \
-    kicad \
-    kicad-packages3d \
     ncdu \
     neovim \
     opensc \
-    openscad \
     parallel \
     pass \
     python \
@@ -46,4 +43,9 @@ if hostnamectl | grep -q Workstation; then
     adhoc_alacritty_linux_amd64
     adhoc_browserpass_linux_amd64
     adhoc_cura_linux_amd64
+
+    sudo dnf install -y \
+        kicad \
+        kicad-packages3d \
+        openscad \
 fi
