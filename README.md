@@ -121,22 +121,15 @@ new or re-installed PC.
 See `home/.aliases`, `bin/`, `home/.functions.sh` and `home/.tmux.conf` for
 more handy shortcuts/wrappers/bindings.
 
-# Supported OSes
+# OSes with automatic provisioning.
 
-AKA the OSes I actively use.
+`./provision.sh` will set up a fresh install with all of my regular
+applications, system configuration and my user configuration.
 
-* Ubuntu 16.04 LTS Server (x86_64)
-* Ubuntu 18.04 LTS Desktop/Server (x86_64)
-* MacOS Mojave
-* Raspbian Stretch (armv7)
-* Arch linux (Desktop)
-* ~~Raspbian Jessie~~
-* ~~RHEL5~~
-* ~~RHEL6~~
-* ~~Ubuntu 11.10~~
-* ~~Ubuntu 12.04 LTS~~
-* ~~Ubuntu 14.04 LTS~~
-
+Check the OSes specified in `./provision.sh` for an up-to-date list of OSes
+that have automatic provisioning. Note that the automatic provisioning may be
+in various different states of stability depending on what I'm currently using
+and if newer OS versions have been released.
 
 # One liners
 
