@@ -6,6 +6,9 @@ if ! sudo grep -q 'PasswordAuthentication no' /etc/ssh/sshd_config; then
     sudo systemctl restart sshd
 fi
 
+sudo systemctl enable sshd
+sudo systemctl restart sshd
+
 # TODO caps lock as esc
 
 localectl set-keymap gb
