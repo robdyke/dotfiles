@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# start application and disown to unlink from current terminal -- including
+# stdio
+if uname | grep -q Linux; then
+    "$@" 2>/dev/null >/dev/null </dev/null & disown $!
+elif uname | grep -q Darwin ; then
+    open -a "$@"
+else
+    echo "Unsupported platform"
+fi

@@ -185,15 +185,3 @@ function _tmux_window_name_read {
     read name
     tmux rename-window "$name"
 }
-
-# start application and disown to unlink from current terminal -- including
-# stdio
-function start {
-    if uname | grep -q Linux; then
-        "$@" 2>/dev/null >/dev/null </dev/null & disown $!
-    elif uname | grep -q Darwin ; then
-        open -a "$@"
-    else
-        echo "Unsupported platform"
-    fi
-}
