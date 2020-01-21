@@ -30,7 +30,7 @@ alias o='git log'
 alias g=git
 alias s='git status'
 alias a='git add'
-alias d='git diff --color-moved'
+alias d='git diff --color'
 alias dt='git difftool -y'
 # task default command is "next", hence "n"
 alias task="dstask"
