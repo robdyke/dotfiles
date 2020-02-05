@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# git subtree add --squash --prefix {target dir} {repo} {branch}
+
 # vim
 git subtree pull -m 'update gruvbox' --squash --prefix=home/.vim/bundle/gruvbox https://github.com/morhetz/gruvbox.git master
 git subtree pull -m 'update supertab' --squash --prefix=home/.vim/bundle/supertab https://github.com/ervandew/supertab.git master
@@ -14,6 +16,7 @@ git subtree pull -m 'update vim-openscad' --squash --prefix=home/.vim/bundle/ope
 git subtree pull -m 'update vim-uci' --squash --prefix=home/.vim/bundle/vim-uci https://github.com/cmcaine/vim-uci.git master
 git subtree pull -m 'update vim requirements.txt' --squash --prefix=home/.vim/bundle/requirements.txt.vim https://github.com/raimon49/requirements.txt.vim.git master
 git subtree pull -m 'update vim fetch' --squash --prefix=home/.vim/bundle/vim-fetch https://github.com/wsdjeg/vim-fetch.git master
+git subtree pull -m 'update vim easy-align' --squash --prefix=home/.vim/bundle/vim-easy-align https://github.com/junegunn/vim-easy-align.git master
 
 # misc
 git subtree pull -m 'update zsh-syntax-highlighting' --squash --prefix=home/.zsh/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git master
