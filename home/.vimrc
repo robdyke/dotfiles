@@ -301,3 +301,9 @@ set t_ut=
 
 " disable annoying markdown list behaviour
 let g:vim_markdown_new_list_item_indent = 0
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
