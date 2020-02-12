@@ -138,3 +138,13 @@ function adhoc_cura_linux_amd64 {
     sudo chmod +x /usr/local/bin/cura.new
     sudo mv -f /usr/local/bin/{cura.new,cura}
 }
+
+function adhoc_hugo_linux_amd64 {
+    TARGZ="$(
+        obtain \
+            https://github.com/gohugoio/hugo/releases/download/v0.64.1/hugo_0.64.1_Linux-64bit.tar.gz \
+            5c5573be0bf4113b280c4674eba0aff62224c4b076c9ef7c2e626cbd29f5b439
+    )"
+    [ -f /usr/local/bin/hugo ] && sudo rm -f /usr/local/bin/hugo
+    sudo tar -C /usr/local/bin/ -xzf "$TARGZ" hugo
+}

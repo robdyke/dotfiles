@@ -37,6 +37,7 @@ sudo dnf install -y \
 
 adhoc_dstask_linux_amd64
 adhoc_golang_linux_amd64
+adhoc_hugo_linux_amd64
 
 # desktop only
 if hostnamectl | grep -q Workstation; then
@@ -47,5 +48,5 @@ if hostnamectl | grep -q Workstation; then
     sudo dnf install -y \
         kicad \
         kicad-packages3d \
-        openscad \
+        openscad
 fi
