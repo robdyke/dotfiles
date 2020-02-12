@@ -4,6 +4,9 @@ computers/servers that I use day-to-day.
 I maintain it so that I can be productive within 10 minutes of encountering a
 new or re-installed PC.
 
+The focus is on functionality. Features are only added, in minimal form, if I
+use them regularly.
+
 
 # General Tools
 
