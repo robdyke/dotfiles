@@ -43,6 +43,8 @@ sudo -E apt-get -y install --install-recommends \
     wget \
     zsh \
 
+sudo -E apt-get -y remove command-not-found
+
 adhoc_dstask_linux_amd64
 adhoc_ripgrep_linux_amd64
 adhoc_fzf_linux_amd64

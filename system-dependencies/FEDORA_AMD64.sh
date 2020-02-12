@@ -35,6 +35,9 @@ sudo dnf install -y \
     yubikey-manager \
     zsh \
 
+# stop typos from causing annoying install prompt
+sudo dnf remove -y PackageKit-command-not-found
+
 adhoc_dstask_linux_amd64
 adhoc_golang_linux_amd64
 adhoc_hugo_linux_amd64
