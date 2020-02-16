@@ -223,22 +223,14 @@ Dotfiles can provision a fresh install of an OS, or build a live/install CD. In
 order to manage the combinatorial complexity of supporting so many platforms,
 the install process has been changed to the following:
 
-1. `bootstrap` -- Installs git and ensures the repository exists. Can operate
+1. `provision.sh` -- Installs git and ensures the repository exists. Can operate
    independently from this repository. Uses sudo Detects platform and executes
    all of the next steps:
-1. `install-dependencies` -- Installs dependencies for the given platform
-1. `system-configuration` -- Configures global system settings for all users
+1. `install-dependencies/*` -- Installs dependencies for the given platform
+1. `system-configuration/*` -- Configures global system settings for all users
    for the given platform, eg keyboard layout. A UK keyboard and timezone is
    assumed.
-1. `user-configuration` -- Installs generic user-specific configuration. No
+1. `user-configuration.sh` -- Installs generic user-specific configuration. No
    root required from now on.
-1. `user-configuration-naggie` -- Patches user configuration with configuration
+1. `user-configuration-naggie.sh` -- Patches user configuration with configuration
    specific to my identity
-
-There are 2 more scripts:
-
-1. `arch-create-livecd`: will enter a chroot environment and run `bootstrap` as
-   above.
-1. `arch-make-rootfs`: creates a fully provisioned rootfs for the installer script.
-1. `arch-install`: will install to a given hard drive interactively using a
-   prepared `rootfs` tar archive.

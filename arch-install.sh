@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Note -- this is not working or in use.
+
 # TODO decide if this requires root or uses sudo
 # TODO FDE
 # TODO encrypted swap suitable for hibernation support
