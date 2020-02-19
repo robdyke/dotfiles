@@ -69,6 +69,7 @@ use them regularly.
 | Configuration version control  | [etckeeper][42]                            | Used for general purpose servers.                                                                                     |
 | Music library curation         | [beets][43]                                | Automates curation of music library                                                                                   |
 | CLI Benchmarking               | [hyperfine][44]                            |                                                                                                                       |
+| Secure file sending            | [ffsend][46]                               | Terminal client for [Firefox send][47]                                                                                |
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
@@ -93,6 +94,8 @@ use them regularly.
 [43]: https://beets.io/
 [44]: https://github.com/sharkdp/hyperfine
 [45]: https://www.openscad.org/
+[46]: https://github.com/timvisee/ffsend/
+[47]: https://github.com/mozilla/send
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
