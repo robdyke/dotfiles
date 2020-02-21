@@ -19,6 +19,7 @@ sudo dnf install -y \
     opensc \
     parallel \
     pass \
+    picocom \
     python \
     python-pip \
     python3 \

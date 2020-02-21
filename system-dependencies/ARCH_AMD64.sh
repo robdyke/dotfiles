@@ -16,6 +16,7 @@ sudo pacman --noconfirm -Syu \
     openssh \
     parallel \
     pass \
+    picocom \
     python \
     ripgrep \
     sox \

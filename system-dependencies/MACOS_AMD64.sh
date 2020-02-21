@@ -35,6 +35,7 @@ packages=(
     openssh
     parallel
     pass
+    picocom
     pinentry-mac
     ripgrep
     sox
