@@ -35,3 +35,4 @@ sudo pacman --noconfirm -Syu \
 adhoc_dstask_linux_amd64
 adhoc_browserpass_linux_amd64
 adhoc_hugo_linux_amd64
+adhoc_ffsend_linux_amd64
