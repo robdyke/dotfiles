@@ -138,39 +138,18 @@ page][windows-wiki].
 
 ### As Vim plugin
 
-Once you have fzf installed, you can enable it inside Vim simply by adding the
-directory to `&runtimepath` in your Vim configuration file. The path may
-differ depending on the package manager.
+If you use
+[vim-plug](https://github.com/junegunn/vim-plug), add this line to your Vim
+configuration file:
 
 ```vim
-" If installed using Homebrew
-set rtp+=/usr/local/opt/fzf
-
-" If installed using git
-set rtp+=~/.fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 ```
 
-If you use [vim-plug](https://github.com/junegunn/vim-plug), the same can be
-written as:
+`fzf#install()` makes sure that you have the latest binary, but it's optional,
+so you can omit it if you use a plugin manager that doesn't support hooks.
 
-```vim
-" If installed using Homebrew
-Plug '/usr/local/opt/fzf'
-
-" If installed using git
-Plug '~/.fzf'
-```
-
-But instead of separately installing fzf on your system (using Homebrew or
-"git clone") and enabling it on Vim (adding it to `&runtimepath`), you can use
-vim-plug to do both.
-
-```vim
-" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  " Both options are optional. You don't have to install fzf in ~/.fzf
-  " and you don't have to run the install script if you use fzf only in Vim.
-```
+For more installation options, see [README-VIM.md](README-VIM.md).
 
 Upgrading fzf
 -------------
@@ -423,6 +402,21 @@ _fzf_compgen_path() {
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# (EXPERIMENTAL) Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    export|unset) fzf "$@" --preview "eval 'echo \$'{}" "$@" ;;
+    ssh)          fzf "$@" --preview 'dig {}' ;;
+    *)            fzf "$@" ;;
+  esac
 }
 ```
 

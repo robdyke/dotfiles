@@ -1,6 +1,50 @@
 FZF Vim integration
 ===================
 
+Installation
+------------
+
+Once you have fzf installed, you can enable it inside Vim simply by adding the
+directory to `&runtimepath` in your Vim configuration file. The path may
+differ depending on the package manager.
+
+```vim
+" If installed using Homebrew
+set rtp+=/usr/local/opt/fzf
+
+" If installed using git
+set rtp+=~/.fzf
+```
+
+If you use [vim-plug](https://github.com/junegunn/vim-plug), the same can be
+written as:
+
+```vim
+" If installed using Homebrew
+Plug '/usr/local/opt/fzf'
+
+" If installed using git
+Plug '~/.fzf'
+```
+
+But if you want the latest Vim plugin file from GitHub rather than the one
+included in the package, write:
+
+```vim
+Plug 'junegunn/fzf'
+```
+
+The Vim plugin will pick up fzf binary available on the system. If fzf is not
+found on `$PATH`, it will ask you if it should download the latest binary for
+you.
+
+To make sure that you have the latest version of the binary, set up
+post-update hook like so:
+
+```vim
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+```
+
 Summary
 -------
 
@@ -198,11 +242,14 @@ When `window` entry is a dictionary, fzf will start in a popup window. The
 following options are allowed:
 
 - Required:
-    - `width` [float]
-    - `height` [float]
+    - `width` [float range [0 ~ 1]]
+    - `height` [float range [0 ~ 1]]
 - Optional:
+    - `yoffset` [float default 0.5 range [0 ~ 1]]
+    - `xoffset` [float default 0.5 range [0 ~ 1]]
     - `highlight` [string default `'Comment'`]: Highlight group for border
-    - `rounded` [boolean default `v:true`]: Use rounded border
+    - `border` [string default `rounded`]: Border style
+        - `rounded` / `sharp` / `horizontal` / `vertical` / `top` / `bottom` / `left` / `right`
 
 `fzf#wrap`
 ----------
@@ -291,12 +338,15 @@ The latest versions of Vim and Neovim include builtin terminal emulator
 
 ```vim
 " Required:
-" - width [float]
-" - height [float]
+" - width [float range [0 ~ 1]]
+" - height [float range [0 ~ 1]]
 "
 " Optional:
+" - xoffset [float default 0.5 range [0 ~ 1]]
+" - yoffset [float default 0.5 range [0 ~ 1]]
 " - highlight [string default 'Comment']: Highlight group for border
-" - rounded [boolean default v:true]: Use rounded border
+" - border [string default 'rounded']: Border style
+"   - 'rounded' / 'sharp' / 'horizontal' / 'vertical' / 'top' / 'bottom' / 'left' / 'right'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 ```
 
