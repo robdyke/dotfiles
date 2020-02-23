@@ -115,7 +115,7 @@ class Tmux
   end
 
   def paste(str)
-    `tmux setb '#{str.gsub("'", "'\\''")}' \\; pasteb -t #{win} \\; send-keys -t #{win} Enter`
+    system('tmux', 'setb', str, ';', 'pasteb', '-t', win, ';', 'send-keys', '-t', win, 'Enter')
   end
 
   def capture(pane = 0)
@@ -491,7 +491,7 @@ class TestGoFZF < TestBase
   end
 
   def test_query_unicode
-    tmux.paste "(echo abc; echo 가나다) | #{fzf :query, '가다'}"
+    tmux.paste "(echo abc; echo $'\\352\\260\\200\\353\\202\\230\\353\\213\\244') | #{fzf :query, "$'\\352\\260\\200\\353\\213\\244'"}"
     tmux.until { |lines| lines[-2].include? '1/2' }
     tmux.send_keys :Enter
     assert_equal ['가나다'], readonce.split($INPUT_RECORD_SEPARATOR)
@@ -1407,6 +1407,39 @@ class TestGoFZF < TestBase
     assert_equal '3', readonce.chomp
   end
 
+  def test_pointer
+    pointer = '>>'
+    tmux.send_keys "seq 10 | #{fzf "--pointer '#{pointer}'"}", :Enter
+    tmux.until { |lines| lines[-2] == '  10/10' }
+    lines = tmux.capture
+    # Assert that specified pointer is displayed
+    assert_equal "#{pointer} 1", lines[-3]
+  end
+
+  def test_pointer_with_jump
+    pointer = '>>'
+    tmux.send_keys "seq 10 | #{fzf "--multi --jump-labels 12345 --bind 'ctrl-j:jump' --pointer '#{pointer}'"}", :Enter
+    tmux.until { |lines| lines[-2] == '  10/10' }
+    tmux.send_keys 'C-j'
+    # Correctly padded jump label should appear
+    tmux.until { |lines| lines[-7] == '5  5' }
+    tmux.until { |lines| lines[-8] == '   6' }
+    tmux.send_keys '5'
+    lines = tmux.capture
+    # Assert that specified pointer is displayed
+    assert_equal "#{pointer} 5", lines[-7]
+  end
+
+  def test_marker
+    marker = '>>'
+    tmux.send_keys "seq 10 | #{fzf "--multi --marker '#{marker}'"}", :Enter
+    tmux.until { |lines| lines[-2] == '  10/10' }
+    tmux.send_keys :BTab
+    lines = tmux.capture
+    # Assert that specified marker is displayed
+    assert_equal " #{marker}1", lines[-3]
+  end
+
   def test_preview
     tmux.send_keys %(seq 1000 | sed s/^2$// | #{FZF} -m --preview 'sleep 0.2; echo {{}-{+}}' --bind ?:toggle-preview), :Enter
     tmux.until { |lines| lines[1].include?(' {1-1}') }
@@ -1741,7 +1774,7 @@ module TestShell
     tmux.until { |lines| lines.select_count == 2 }
 
     tmux.send_keys :Enter
-    tmux.until { |lines| lines.any_include?(/echo.*fzf-unicode.*1.*fzf-unicode.*2/) }
+    tmux.until { |lines| lines.join.match(/echo.*fzf-unicode.*1.*fzf-unicode.*2/) }
     tmux.send_keys :Enter
     tmux.until { |lines| lines.any_include?(/^fzf-unicode.*1.*fzf-unicode.*2/) }
   end
@@ -1958,7 +1991,7 @@ module CompletionTest
 
   def test_file_completion_unicode
     FileUtils.mkdir_p '/tmp/fzf-test'
-    tmux.paste 'cd /tmp/fzf-test; echo -n test3 > "fzf-unicode 테스트1"; echo -n test4 > "fzf-unicode 테스트2"'
+    tmux.paste "cd /tmp/fzf-test; echo -n test3 > $'fzf-unicode \\355\\205\\214\\354\\212\\244\\355\\212\\2701'; echo -n test4 > $'fzf-unicode \\355\\205\\214\\354\\212\\244\\355\\212\\2702'"
     tmux.prepare
     tmux.send_keys 'cat fzf-unicode**', :Tab
     tmux.until { |lines| lines.match_count == 2 }

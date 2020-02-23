@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ..
-.TH fzf 1 "Dec 2019" "fzf 0.20.0" "fzf - a command-line fuzzy finder"
+.TH fzf 1 "Feb 2020" "fzf 0.21.0" "fzf - a command-line fuzzy finder"
 
 .SH NAME
 fzf - a command-line fuzzy finder
@@ -230,6 +230,12 @@ A synonym for \fB--info=hidden\fB
 .TP
 .BI "--prompt=" "STR"
 Input prompt (default: '> ')
+.TP
+.BI "--pointer=" "STR"
+Pointer to the current line (default: '>')
+.TP
+.BI "--marker=" "STR"
+Multi-select marker (default: '>')
 .TP
 .BI "--header=" "STR"
 The given string will be printed as the sticky header. The lines are displayed
@@ -593,6 +599,8 @@ e.g.
 \fIhome\fR
 .br
 \fIend\fR
+.br
+\fIinsert\fR
 .br
 \fIpgup\fR        (\fIpage-up\fR)
 .br
