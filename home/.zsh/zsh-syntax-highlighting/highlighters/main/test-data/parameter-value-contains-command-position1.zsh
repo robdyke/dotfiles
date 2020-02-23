@@ -28,15 +28,11 @@
 # vim: ft=zsh sw=2 ts=2 et
 # -------------------------------------------------------------------------------------------------
 
-# See also alias-precommand-option-argument1.zsh
-local -a sudo_u; sudo_u=(sudo -u)
-sudo(){}
+local foobar='x=$(ls)'
 
-BUFFER='$sudo_u phy1729 echo foo'
+BUFFER=$'$foobar'
 
 expected_region_highlight=(
-  '1 7 precommand' # $sudo_u
-  '9 15 default' # phy1729
-  '18 20 command "issue #540"' # echo (not builtin)
-  '22 24 default' # foo
+  # Used to highlight the "ba" as 'command' because the 'ls' showed through; issues #670 and #674
+  '1 7 unknown-token' # $foobar (not an assignment)
 )

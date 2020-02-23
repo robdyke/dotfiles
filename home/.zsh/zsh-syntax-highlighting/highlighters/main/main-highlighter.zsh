@@ -77,6 +77,16 @@ _zsh_highlight_main_add_region_highlight() {
     [[ $1 == unknown-token ]] && alias_style=unknown-token
     return
   fi
+  if (( in_param )); then
+    if [[ $1 == unknown-token ]]; then
+      param_style=unknown-token
+    fi
+    if [[ -n $param_style ]]; then
+      return
+    fi
+    param_style=$1
+    return
+  fi
 
   # The calculation was relative to $buf but region_highlight is relative to $BUFFER.
   (( start += buf_offset ))
@@ -327,7 +337,15 @@ _zsh_highlight_highlighter_main_paint()
     # suckless-tools v44
     # Argumentless flags that can't be followed by a command: -v
     'tabbed' gnprtTuU:cdfhs
+
+    # moreutils 0.62-1
+    'chronic' :ev
+    'ifne' :n
+
   )
+  # Commands that would need to skip one positional argument:
+  #    flock
+  #    ssh
 
   if [[ $zsyh_user_options[ignorebraces] == on || ${zsyh_user_options[ignoreclosebraces]:-off} == on ]]; then
     local right_brace_is_recognised_everywhere=false
@@ -398,11 +416,13 @@ _zsh_highlight_main_highlighter_highlight_list()
   # alias_style is the style to apply to an alias once in_alias=0
   #     Usually 'alias' but set to 'unknown-token' if any word expanded from
   #     the alias would be highlighted as unknown-token
-  local alias_style arg buf=$4 highlight_glob=true style
+  # param_style is analogous for parameter expansions
+  local alias_style param_style arg buf=$4 highlight_glob=true style
   local in_array_assignment=false # true between 'a=(' and the matching ')'
   # in_alias is equal to the number of shifts needed until arg=args[1] pops an
   #     arg from BUFFER and not added by an alias.
-  integer in_alias=0 len=$#buf
+  # in_param is analogous for parameter expansions
+  integer in_alias=0 in_param=0 len=$#buf
   local -a match mbegin mend list_highlights
   # seen_alias is a map of aliases already seen to avoid loops like alias a=b b=a
   local -A seen_alias
@@ -481,6 +501,14 @@ _zsh_highlight_main_highlighter_highlight_list()
         _zsh_highlight_main_add_region_highlight $start_pos $end_pos $alias_style
       fi
     fi
+    if (( in_param )); then
+      (( in_param-- ))
+      if (( in_param == 0 )); then
+        # start_pos and end_pos are of the '$foo' word (previous $arg) here
+        _zsh_highlight_main_add_region_highlight $start_pos $end_pos $param_style
+        param_style=""
+      fi
+    fi
 
     # Initialize this_word and next_word.
     if (( in_redirection == 0 )); then
@@ -505,7 +533,7 @@ _zsh_highlight_main_highlighter_highlight_list()
       fi
     fi
 
-    if (( in_alias == 0 )); then
+    if (( in_alias == 0 && in_param == 0 )); then
       # Compute the new $start_pos and $end_pos, skipping over whitespace in $buf.
       [[ "$proc_buf" = (#b)(#s)(([ $'\t']|\\$'\n')#)* ]]
       # The first, outer parenthesis
@@ -618,6 +646,7 @@ _zsh_highlight_main_highlighter_highlight_list()
       local -a match mbegin mend
       local MATCH; integer MBEGIN MEND
       local parameter_name
+      local -a words
       if [[ $arg[1] == '$' ]] && [[ ${arg[2]} == '{' ]] && [[ ${arg[-1]} == '}' ]]; then
         parameter_name=${${arg:2}%?}
       elif [[ $arg[1] == '$' ]]; then
@@ -630,14 +659,16 @@ _zsh_highlight_main_highlighter_highlight_list()
         # Set $arg.
         case ${(tP)MATCH} in
           (*array*|*assoc*)
-            local -a words; words=( ${(P)MATCH} )
-            arg=${words[1]}
+            words=( ${(P)MATCH} )
             ;;
           (*)
             # scalar, presumably
-            arg=${(P)MATCH}
+            words=( ${(P)MATCH} )
             ;;
         esac
+        (( in_param = 1 + $#words ))
+        args=( $words $args )
+        arg=$args[1]
         _zsh_highlight_main__type "$arg" 0
         res=$REPLY
       fi
@@ -809,7 +840,7 @@ _zsh_highlight_main_highlighter_highlight_list()
         function)       style=function;;
         command)        style=command;;
         hashed)         style=hashed-command;;
-        none)           if _zsh_highlight_main_highlighter_check_assign; then
+        none)           if (( ! in_param )) && _zsh_highlight_main_highlighter_check_assign; then
                           _zsh_highlight_main_add_region_highlight $start_pos $end_pos assign
                           local i=$(( arg[(i)=] + 1 ))
                           if [[ $arg[i] == '(' ]]; then
@@ -830,11 +861,14 @@ _zsh_highlight_main_highlighter_highlight_list()
                             fi
                           fi
                           continue
-                        elif [[ $arg[0,1] = $histchars[0,1] ]] && (( $#arg[0,2] == 2 )); then
+                        elif (( ! in_param )) &&
+                             [[ $arg[0,1] = $histchars[0,1] ]] && (( $#arg[0,2] == 2 )); then
                           style=history-expansion
-                        elif [[ $arg[0,1] == $histchars[2,2] ]]; then
+                        elif (( ! in_param )) &&
+                             [[ $arg[0,1] == $histchars[2,2] ]]; then
                           style=history-expansion
-                        elif [[ $arg[1,2] == '((' ]]; then
+                        elif (( ! in_param )) &&
+                             [[ $arg[1,2] == '((' ]]; then
                           # Arithmetic evaluation.
                           #
                           # Note: prior to zsh-5.1.1-52-g4bed2cf (workers/36669), the ${(z)...}
@@ -849,14 +883,17 @@ _zsh_highlight_main_highlighter_highlight_list()
                             _zsh_highlight_main_add_region_highlight $((end_pos - 2)) $end_pos reserved-word
                           fi
                           continue
-                        elif [[ $arg == '()' ]]; then
+                        elif (( ! in_param )) &&
+                             [[ $arg == '()' ]]; then
                           # anonymous function
                           style=reserved-word
-                        elif [[ $arg == $'\x28' ]]; then
+                        elif (( ! in_param )) &&
+                             [[ $arg == $'\x28' ]]; then
                           # subshell
                           style=reserved-word
                           braces_stack='R'"$braces_stack"
-                        elif [[ $arg == $'\x29' ]]; then
+                        elif (( ! in_param )) &&
+                             [[ $arg == $'\x29' ]]; then
                           # end of subshell or command substitution
                           if _zsh_highlight_main__stack_pop 'S'; then
                             REPLY=$start_pos
@@ -938,6 +975,7 @@ _zsh_highlight_main_highlighter_highlight_list()
     _zsh_highlight_main_add_region_highlight $start_pos $end_pos $style
   done
   (( in_alias == 1 )) && in_alias=0 _zsh_highlight_main_add_region_highlight $start_pos $end_pos $alias_style
+  (( in_param == 1 )) && in_param=0 _zsh_highlight_main_add_region_highlight $start_pos $end_pos $param_style
   [[ "$proc_buf" = (#b)(#s)(([[:space:]]|\\$'\n')#) ]]
   REPLY=$(( end_pos + ${#match[1]} - 1 ))
   reply=($list_highlights)
