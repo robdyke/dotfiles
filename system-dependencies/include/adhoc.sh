@@ -131,8 +131,8 @@ function adhoc_fzf_linux_armv5 {
 function adhoc_cura_linux_amd64 {
     EXE="$(
         obtain \
-            https://github.com/Ultimaker/Cura/releases/download/v4.4.1/Cura-4.4.1.AppImage \
-            2c01e9296181b084b6c2316aa25a310990a3c6b96690bfb87ccd00538d0196dc
+            https://github.com/Ultimaker/Cura/releases/download/4.5.0/Ultimaker_Cura-4.5.0.AppImage \
+            de20f13db7d1e4dea382e1c8ee6f31532cec072576b4fa508ccf00030aeb09b3
     )"
     sudo cp "${EXE}" /usr/local/bin/cura.new
     sudo chmod +x /usr/local/bin/cura.new
@@ -142,8 +142,8 @@ function adhoc_cura_linux_amd64 {
 function adhoc_hugo_linux_amd64 {
     TARGZ="$(
         obtain \
-            https://github.com/gohugoio/hugo/releases/download/v0.64.1/hugo_0.64.1_Linux-64bit.tar.gz \
-            5c5573be0bf4113b280c4674eba0aff62224c4b076c9ef7c2e626cbd29f5b439
+            https://github.com/gohugoio/hugo/releases/download/v0.65.3/hugo_0.65.3_Linux-64bit.tar.gz \
+            3d720188e575fb3afffefe33df769dc1832d3a843c02119a01e30febd15c9dae
     )"
     [ -f /usr/local/bin/hugo ] && sudo rm -f /usr/local/bin/hugo
     sudo tar -C /usr/local/bin/ -xzf "$TARGZ" hugo
