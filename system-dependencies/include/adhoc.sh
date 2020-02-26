@@ -4,12 +4,23 @@
 function adhoc_dstask_linux_amd64 {
     EXE="$(
         obtain \
-            https://github.com/naggie/dstask/releases/download/v0.14/dstask-linux-amd64 \
-            03ecaf42a662e14a564d2e5fed94b64852ea45da0b0235049ba4d35596e3272b
+            https://github.com/naggie/dstask/releases/download/v0.16/dstask-linux-amd64 \
+            adb285194aa23542ed05a3dde44b459d529255e5dda6f3e934ec2730891d5ca6
     )"
     sudo cp "${EXE}" /usr/local/bin/dstask.new
     sudo chmod +x /usr/local/bin/dstask.new
     sudo mv -f /usr/local/bin/{dstask.new,dstask}
+}
+
+function adhoc_dstask_macos_amd64 {
+    EXE="$(
+        obtain \
+            https://github.com/naggie/dstask/releases/download/v0.16/dstask-darwin-amd64 \
+            b2b1ea73271362a8d46c522032f7f4c056f90a40271b0306ed78f1072dc178cd
+    )"
+    cp "${EXE}" /usr/local/bin/dstask.new
+    chmod +x /usr/local/bin/dstask.new
+    mv -f /usr/local/bin/{dstask.new,dstask}
 }
 
 function adhoc_ripgrep_linux_amd64 {
@@ -83,18 +94,6 @@ function adhoc_openscad_linux_amd64 {
     sudo cp "${EXE}" /usr/local/bin/openscad.new
     sudo chmod +x /usr/local/bin/openscad.new
     sudo mv -f /usr/local/bin/{openscad.new,openscad}
-}
-
-
-function adhoc_dstask_macos_amd64 {
-    EXE="$(
-        obtain \
-            https://github.com/naggie/dstask/releases/download/v0.14/dstask-darwin-amd64 \
-            268df0e67fcecdcf410cf079b00955143b0d21466fc9e8facdd925d371828c86
-    )"
-    cp "${EXE}" /usr/local/bin/dstask.new
-    chmod +x /usr/local/bin/dstask.new
-    mv -f /usr/local/bin/{dstask.new,dstask}
 }
 
 function adhoc_browserpass_macos_amd64 {
