@@ -64,8 +64,11 @@ function get_platform() {
     fi
 }
 
-
 PLATFORM=$(get_platform)
+
+function say {
+    printf '\n\e[1;32m%s\e[m\n' "$*"
+}
 
 # make sure git/sudo is installed
 case $PLATFORM in
@@ -125,4 +128,4 @@ else
     ./user-configuration.sh
 fi
 
-echo PROVISIONING SUCCESSFUL
+say PROVISIONING SUCCESSFUL
