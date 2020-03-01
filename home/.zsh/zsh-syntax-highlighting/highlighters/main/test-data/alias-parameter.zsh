@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # -------------------------------------------------------------------------------------------------
-# Copyright (c) 2018 zsh-syntax-highlighting contributors
+# Copyright (c) 2020 zsh-syntax-highlighting contributors
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -28,18 +28,11 @@
 # vim: ft=zsh sw=2 ts=2 et
 # -------------------------------------------------------------------------------------------------
 
-BUFFER=$'{ noglob echo * } always { echo * }'
+alias '$foo'='echo alias'
+local foo; foo=(echo param)
+
+BUFFER='$foo'
 
 expected_region_highlight=(
-  '1 1 reserved-word' # {
-  '3 8 precommand' # noglob
-  '10 13 builtin' # echo
-  '15 15 default' # *
-  '17 17 reserved-word' # }
-  '19 24 reserved-word' # always
-  '26 26 reserved-word' # {
-  '28 31 builtin' # echo
-  '33 33 default' # *
-  '33 33 globbing' # *
-  '35 35 reserved-word' # }
+  '1 4 alias' # $foo
 )
