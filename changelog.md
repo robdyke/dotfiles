@@ -1,6 +1,8 @@
-# Changes in version 0.7.0
+# Changes in version 0.7.1
 
-**Version 0.7.0 has not been released.  This changelog is a work in progress.**
+- Remove out-of-date information from the 0.7.0 changelog.
+
+# Changes in version 0.7.0
 
 This is a stable bugfix and feature release.  Major new features and changes include:
 
@@ -70,13 +72,6 @@ Known issues include:
   before a newline will incorrectly be highlighted as an error.  See issue #677
   for examples and workarounds.
   [#677]
-
-- Use of a simple parameter expansion (`${foo}` with nothing but a parameter
-  name inside the braces) in command position, when the value of the parameter
-  looks like an assignment (such as after `foo='bar=$(ls)'`), may result in
-  incorrect highlighting and "BUG" messages.  As a workaround, the expansion
-  may be nested (`${${foo}}`).
-  [#670]
 
 
 # Changes in version 0.6.0

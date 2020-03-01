@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------------------------------------
-# Copyright (c) 2010-2019 zsh-syntax-highlighting contributors
+# Copyright (c) 2010-2020 zsh-syntax-highlighting contributors
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -56,7 +56,7 @@
 : ${ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]:=fg=cyan}
 : ${ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]:=fg=cyan}
 : ${ZSH_HIGHLIGHT_STYLES[assign]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[redirection]:=none}
+: ${ZSH_HIGHLIGHT_STYLES[redirection]:=fg=yellow}
 : ${ZSH_HIGHLIGHT_STYLES[comment]:=fg=black,bold}
 : ${ZSH_HIGHLIGHT_STYLES[named-fd]:=none}
 : ${ZSH_HIGHLIGHT_STYLES[arg0]:=fg=green}
@@ -744,7 +744,8 @@ _zsh_highlight_main_highlighter_highlight_list()
    elif ! (( in_redirection)) && [[ $this_word == *':always:'* && $arg == 'always' ]]; then
      # try-always construct
      style=reserved-word # de facto a reserved word, although not de jure
-     next_word=':start:' # only left brace is allowed, apparently
+     highlight_glob=true
+     next_word=':start::start_of_pipeline:' # only left brace is allowed, apparently
    elif ! (( in_redirection)) && [[ $this_word == *':start:'* ]]; then # $arg is the command word
      if (( ${+precommand_options[$arg]} )) && _zsh_highlight_main__is_runnable $arg; then
       style=precommand
