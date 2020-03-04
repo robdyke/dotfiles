@@ -26,6 +26,7 @@ configuration here, here are some other things that _may_ help reduce latency:
 * Use a keyboard with a fast polling rate and minimal debounce time. A lot of
   gaming keyboards such as the Corsair K70 are optimised for this. MX Speed
   switches may also help.
+* Use (Mosh shell)[https://mosh.org/]
 
 
 [17]: https://www.bufferbloat.net/projects/bloat/wiki/What_can_I_do_about_Bufferbloat/
