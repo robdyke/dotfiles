@@ -154,8 +154,8 @@ function adhoc_ffsend_linux_amd64 {
             https://github.com/timvisee/ffsend/releases/download/v0.2.58/ffsend-v0.2.58-linux-x64-static \
             fb7c918b583197be3e553af5931816a885c1934a0adc16f2f03dfeed21b8ec0e
     )"
-    sudo cp "${EXE}" /usr/local/bin/cura.new
-    sudo chmod +x /usr/local/bin/cura.new
-    sudo mv -f /usr/local/bin/{cura.new,cura}
+    sudo cp "${EXE}" /usr/local/bin/ffsend.new
+    sudo chmod +x /usr/local/bin/ffsend.new
+    sudo mv -f /usr/local/bin/{ffsend.new,ffsend}
 }
 
