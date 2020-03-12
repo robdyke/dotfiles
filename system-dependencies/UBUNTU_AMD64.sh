@@ -27,7 +27,7 @@ sudo -E apt-get -y install --install-recommends \
     parallel \
     pass \
     pcscd \
-    picocom |
+    picocom \
     python \
     python3 \
     python3-pip \
