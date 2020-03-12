@@ -21,7 +21,6 @@ sudo dnf install -y \
     pass \
     picocom \
     python \
-    python-pip \
     python3 \
     python3-pip \
     ripgrep \

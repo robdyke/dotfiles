@@ -29,7 +29,6 @@ sudo -E apt-get -y install --install-recommends \
     pcscd \
     picocom |
     python \
-    python-pip \
     python3 \
     python3-pip \
     scdaemon \
