@@ -1,0 +1,91 @@
+#!/bin/bash
+# reference https://github.com/aguslr/multibootusb https://wiki.archlinux.org/index.php/Multiboot_USB_drive
+if [ -b "$1" ]; then
+    echo "Usage $0 <block device>"
+fi
+
+if [ "$EUID" -ne 0 ];then
+    echo "Run as root"
+    exit
+fi
+
+function checkcmds {
+    for cmd in "$@"; do
+        if ! which "$cmd" >/dev/null; then
+            echo "Missing cmd: $cmd"
+        fi
+    done
+}
+
+function unmountall {
+    if mount | grep $1 > /dev/null; then
+        echo "Unmounting" ${1}?*
+        ls ${1}?* | xargs -n1 umount -l || true
+    fi
+}
+
+# if a command fails, exit and clean up
+function cleanup {
+    unmountall
+}
+set -e
+trap cleanup EXIT
+
+unmountall
+
+checkcmds \
+    sgdisk \
+    grub2-install \
+    wipefs \
+    mkfs.vfat \
+
+
+# create GPT partition table with 1MB MBR and 50MB EFI partitions
+sgdisk --zap-all "$1"
+sgdisk --mbrtogpt "$1"
+sgdisk --new 1::+1M --typecode 1:ef02 \
+        --change-name 1:"BIOS boot partition" "$1"
+sgdisk --new 2::+50M --typecode 2:ef00 \
+        --change-name 2:"EFI System" "$1"
+
+sgdisk --new 3::: --typecode 3:0700 \
+        --change-name 3:"Microsoft basic data" "$1"
+
+# Hybrid MBR
+sgdisk --hybrid 1:2:3 "$1"
+
+# make data partition bootable
+sgdisk --attributes 3:set:2 "$1"
+
+# zero bios boot partition
+wipefs -af "${1}1"
+
+# wipe + format EFI partition
+wipefs -af "${1}2"
+mkfs.vfat -v -F 32 "${1}2"
+
+# wipe+format data partition
+wipefs -af "${1}3"
+mkfs.vfat -v -F 32 "${1}3"
+
+# make tmp mount points
+efi_mnt=$(mktemp -d efi.XXXX)
+data_mnt=$(mktemp -d data.XXXX)
+
+# mount efi/data
+mount "${1}2" "$efi_mnt"
+mount "${1}3" "$data_mnt"
+
+
+# install EFI grub
+grub2-install --target=x86_64-efi --efi-directory="$efi_mnt" \
+        --boot-directory="${data_mnt}/boot" --removable --recheck
+
+# install MBR grub
+grub2-install --force --target=i386-pc \
+        --boot-directory="${data_mnt}/boot" --recheck "$1"
+
+# create isos directory
+mkdir -p "${data_mnt}/data/isos"
+
+unmountall
