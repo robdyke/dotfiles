@@ -38,6 +38,7 @@ checkcmds \
     grub2-install \
     wipefs \
     mkfs.vfat \
+    syslinux \
 
 
 # create GPT partition table with 1MB MBR and 50MB EFI partitions
@@ -88,4 +89,7 @@ grub2-install --force --target=i386-pc \
 # create isos directory
 mkdir -p "${data_mnt}/data/isos"
 
-unmountall
+
+# TODO check memdisk, see multibootusb/docs/howto.md for explanation for how to
+# allocate enough memory for large disks
+cp /usr/share/syslinux/memdisk ${data_mnt}/boot/grub/
