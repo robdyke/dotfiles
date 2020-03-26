@@ -1,11 +1,21 @@
 #!/bin/bash
+# Works on fedora 31.
+# needs grub2-efi-x64
 # reference https://github.com/aguslr/multibootusb https://wiki.archlinux.org/index.php/Multiboot_USB_drive
-if [ -b "$1" ]; then
+if [ ! -b "$1" ]; then
     echo "Usage $0 <block device>"
+    exit
 fi
+
+dev=${1}
 
 if [ "$EUID" -ne 0 ];then
     echo "Run as root"
+    exit
+fi
+
+if [ ! -d /usr/lib/grub/x86_64-efi/ ]; then
+    echo "package grub2-efi-x64-modules missing"
     exit
 fi
 
@@ -18,9 +28,9 @@ function checkcmds {
 }
 
 function unmountall {
-    if mount | grep $1 > /dev/null; then
-        echo "Unmounting" ${1}?*
-        ls ${1}?* | xargs -n1 umount -l || true
+    if mount | grep -q "${dev}"; then
+        echo "Unmounting" ${dev}?*
+        ls ${dev}?* | xargs -n1 umount -l || true
     fi
 }
 
@@ -42,40 +52,40 @@ checkcmds \
 
 
 # create GPT partition table with 1MB MBR and 50MB EFI partitions
-sgdisk --zap-all "$1"
-sgdisk --mbrtogpt "$1"
+sgdisk --zap-all "${dev}"
+sgdisk --mbrtogpt "${dev}"
 sgdisk --new 1::+1M --typecode 1:ef02 \
-        --change-name 1:"BIOS boot partition" "$1"
+        --change-name 1:"BIOS boot partition" "${dev}"
 sgdisk --new 2::+50M --typecode 2:ef00 \
-        --change-name 2:"EFI System" "$1"
+        --change-name 2:"EFI System" "${dev}"
 
 sgdisk --new 3::: --typecode 3:0700 \
-        --change-name 3:"Microsoft basic data" "$1"
+        --change-name 3:"Microsoft basic data" "${dev}"
 
 # Hybrid MBR
-sgdisk --hybrid 1:2:3 "$1"
+sgdisk --hybrid 1:2:3 "${dev}"
 
 # make data partition bootable
-sgdisk --attributes 3:set:2 "$1"
+sgdisk --attributes 3:set:2 "${dev}"
 
 # zero bios boot partition
-wipefs -af "${1}1"
+wipefs -af "${dev}1"
 
 # wipe + format EFI partition
-wipefs -af "${1}2"
-mkfs.vfat -v -F 32 "${1}2"
+wipefs -af "${dev}2"
+mkfs.vfat -v -F 32 "${dev}2"
 
 # wipe+format data partition
-wipefs -af "${1}3"
-mkfs.vfat -v -F 32 "${1}3"
+wipefs -af "${dev}3"
+mkfs.vfat -v -F 32 "${dev}3"
 
 # make tmp mount points
 efi_mnt=$(mktemp -d efi.XXXX)
 data_mnt=$(mktemp -d data.XXXX)
 
 # mount efi/data
-mount "${1}2" "$efi_mnt"
-mount "${1}3" "$data_mnt"
+mount "${dev}2" "$efi_mnt"
+mount "${dev}3" "$data_mnt"
 
 
 # install EFI grub
@@ -84,7 +94,7 @@ grub2-install --target=x86_64-efi --efi-directory="$efi_mnt" \
 
 # install MBR grub
 grub2-install --force --target=i386-pc \
-        --boot-directory="${data_mnt}/boot" --recheck "$1"
+        --boot-directory="${data_mnt}/boot" --recheck "${dev}"
 
 # create isos directory
 mkdir -p "${data_mnt}/data/isos"
