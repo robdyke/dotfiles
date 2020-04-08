@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # -------------------------------------------------------------------------------------------------
-# Copyright (c) 2016 zsh-syntax-highlighting contributors
+# Copyright (c) 2017 zsh-syntax-highlighting contributors
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -28,12 +28,13 @@
 # vim: ft=zsh sw=2 ts=2 et
 # -------------------------------------------------------------------------------------------------
 
-# see alias-comment1.zsh
-setopt interactivecomments
-BUFFER=$'# foo\ntrue'
+BUFFER=$'foo=bar [[ -n foo ]]'
 
 expected_region_highlight=(
-  '1 5 comment' # # foo
-  '6 6 commandseparator' # \n
-  '7 10 builtin' # true
+  '1 7 assign' # foo=bar
+  '5 7 default' # bar
+  '9 10 unknown-token' # [[
+  '12 13 single-hyphen-option' # -n
+  '15 17 default' # foo
+  '19 20 reserved-word' # ]]
 )
