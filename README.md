@@ -47,6 +47,7 @@ Table of Contents
       * [Environment variables / Aliases](#environment-variables--aliases)
       * [Settings](#settings)
       * [Supported commands](#supported-commands)
+      * [Custom fuzzy completion](#custom-fuzzy-completion)
    * [Vim plugin](#vim-plugin)
    * [Advanced topics](#advanced-topics)
       * [Performance](#performance)
@@ -280,8 +281,10 @@ own as well.
 [fzf-tmux](bin/fzf-tmux) is a bash script that opens fzf in a tmux pane.
 
 ```sh
-# usage: fzf-tmux [-u|-d [HEIGHT[%]]] [-l|-r [WIDTH[%]]] [--] [FZF OPTIONS]
-#        (-[udlr]: up/down/left/right)
+# usage: fzf-tmux [LAYOUT OPTIONS] [--] [FZF OPTIONS]
+
+# See available options
+fzf-tmux --help
 
 # select git branches in horizontal split below (15 lines)
 git branch | fzf-tmux -d 15
@@ -290,7 +293,7 @@ git branch | fzf-tmux -d 15
 cat /usr/share/dict/words | fzf-tmux -l 20% --multi --reverse
 ```
 
-It will still work even when you're not on tmux, silently ignoring `-[udlr]`
+It will still work even when you're not on tmux, silently ignoring `-[pudlr]`
 options, so you can invariably use `fzf-tmux` in your scripts.
 
 Alternatively, you can use `--height HEIGHT[%]` option not to start fzf in
@@ -317,9 +320,9 @@ fish.
     - Set `FZF_ALT_C_COMMAND` to override the default command
     - Set `FZF_ALT_C_OPTS` to pass additional options
 
-If you're on a tmux session, you can start fzf in a split pane by setting
-`FZF_TMUX` to 1, and change the height of the pane with `FZF_TMUX_HEIGHT`
-(e.g. `20`, `50%`).
+If you're on a tmux session, you can start fzf in a tmux split pane or in
+a tmux popup window by setting `FZF_TMUX_OPTS` (e.g. `-d 40%`).
+See `fzf-tmux --help` for available options.
 
 More tips can be found on [the wiki page](https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings).
 
@@ -414,7 +417,7 @@ _fzf_comprun() {
 
   case "$command" in
     cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
-    export|unset) fzf "$@" --preview "eval 'echo \$'{}" "$@" ;;
+    export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
     ssh)          fzf "$@" --preview 'dig {}' ;;
     *)            fzf "$@" ;;
   esac
@@ -431,6 +434,56 @@ commands as well by using `_fzf_setup_completion` helper function.
 # usage: _fzf_setup_completion path|dir|var|alias|host COMMANDS...
 _fzf_setup_completion path ag git kubectl
 _fzf_setup_completion dir tree
+```
+
+#### Custom fuzzy completion
+
+_**(Custom completion API is experimental and subject to change)**_
+
+For a command named _"COMMAND"_, define `_fzf_complete_COMMAND` function using
+`_fzf_complete` helper.
+
+```sh
+# Custom fuzzy completion for "doge" command
+#   e.g. doge **<TAB>
+_fzf_complete_doge() {
+  _fzf_complete --multi --reverse --prompt="doge> " -- "$@" < <(
+    echo very
+    echo wow
+    echo such
+    echo doge
+  )
+}
+```
+
+- The arguments before `--` are the options to fzf.
+- After `--`, simply pass the original completion arguments unchanged (`"$@"`).
+- Then write a set of commands that generates the completion candidates and
+  feed its output to the function using process substitution (`< <(...)`).
+
+zsh will automatically pick up the function using the naming convention but in
+bash you have to manually associate the function with the command using
+`complete` command.
+
+```sh
+[ -n "$BASH" ] && complete -F _fzf_complete_doge -o default -o bashdefault doge
+```
+
+If you need to post-process the output from fzf, define
+`_fzf_complete_COMMAND_post` as follows.
+
+```sh
+_fzf_complete_foo() {
+  _fzf_complete --multi --reverse --header-lines=3 -- "$@" < <(
+    ls -al
+  )
+}
+
+_fzf_complete_foo_post() {
+  awk '{print $NF}'
+}
+
+[ -n "$BASH" ] && complete -F _fzf_complete_foo -o default -o bashdefault foo
 ```
 
 Vim plugin
