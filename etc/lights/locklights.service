@@ -1,0 +1,8 @@
+[Unit]
+Description=Turn lights off on lockscreen
+[Service]
+Type=simple
+TimeoutStartSec=0
+ExecStart=/home/naggie/dotfiles/etc/lights/locklights
+[Install]
+WantedBy=default.target

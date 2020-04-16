@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+DBUS_LOCK="interface='org.gnome.ScreenSaver',member='ActiveChanged'"
+LOCK_SIGNAL="true"
+UNLOCK_SIGNAL="false"
+
+function lights {
+    http --ignore-stdin --form PUT http://garage-bench-lamp-left.lan/api/relay/0 apikey=notsecret value=$1
+    http --ignore-stdin --form PUT http://garage-bench-lamp-right.lan/api/relay/0 apikey=notsecret value=$1
+}
+
+dbus-monitor --session "type='signal',$DBUS_LOCK" | while read; do
+    # pause on lock
+    if echo "$REPLY" | grep "$LOCK_SIGNAL" &> /dev/null; then
+        lights 0
+    elif echo "$REPLY" | grep "$UNLOCK_SIGNAL" &> /dev/null; then
+        lights 1
+    fi
+done
