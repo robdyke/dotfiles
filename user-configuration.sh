@@ -148,8 +148,8 @@ fi
 if [[ $XDG_CURRENT_DESKTOP == *GNOME* ]]; then
     # lock after an hour
     gsettings set org.gnome.desktop.session idle-delay 3600
-    # screensaver for a minute before locking
-    gsettings set org.gnome.desktop.screensaver lock-delay 60
+    # ubuntu provides ample warning by fading the screen
+    gsettings set org.gnome.desktop.screensaver lock-delay 0
     gsettings set org.gnome.desktop.screensaver lock-enabled true
 fi
 
