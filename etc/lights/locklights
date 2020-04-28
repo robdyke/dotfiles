@@ -4,7 +4,6 @@ LOCK_SIGNAL="true"
 UNLOCK_SIGNAL="false"
 
 function lights {
-    http --ignore-stdin --form PUT http://garage-bench-lamp-left.lan/api/relay/0 apikey=notsecret value=$1
     http --ignore-stdin --form PUT http://garage-bench-lamp-right.lan/api/relay/0 apikey=notsecret value=$1
 }
 
