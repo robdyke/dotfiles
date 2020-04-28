@@ -1,6 +1,8 @@
 #!/bin/bash
 # http://ubuntuhandbook.org/index.php/2017/04/custom-screen-resolution-ubuntu-desktop/
 
+# run on login using "startup applications" in ubuntu
+
 # show displays, available/current modes
 #xrandr
 # calculate video timings
