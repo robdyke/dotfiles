@@ -86,8 +86,6 @@ if [ $PLATFORM == 'Darwin' ]; then
     rm ~/.xinitrc
 elif [ -n "$DISPLAY" ] && which xrdb &>/dev/null; then
 	xrdb -merge ~/.Xresources
-    xset -dpms
-    xset s 7200 7200
 fi
 
 if [ -f ~/.bash_history ] && [ ! -f ~/.history ]; then
@@ -148,8 +146,7 @@ fi
 if [[ $XDG_CURRENT_DESKTOP == *GNOME* ]]; then
     # lock after an hour
     gsettings set org.gnome.desktop.session idle-delay 3600
-    # ubuntu provides ample warning by fading the screen
-    gsettings set org.gnome.desktop.screensaver lock-delay 0
+    gsettings set org.gnome.desktop.screensaver lock-delay 10
     gsettings set org.gnome.desktop.screensaver lock-enabled true
 fi
 

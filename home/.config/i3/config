@@ -195,11 +195,11 @@ exec xautolock -time 60 -locker ~/.local/bin/screen-lock
 
 exec nm-applet
 
-# turn off screen after 2h of inactivity, disabling dpms
+# turn off screen after 1h10s of inactivity, disabling dpms
 # note that it's also necessary to remove some annoying packages that also try
 # to control this. See 1-bootstrap.sh.
-exec xset -dpms
-exec xset s 7200 7200
+exec xset -dpms    # disable energy-star dpms
+exec xset 0 0 3610 # enable and set standby/suspend disabled and off after 1h10s
 
 # remove window titles on new windows (titles are unnecessary as content is obvious
 new_window pixel 1
