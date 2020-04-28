@@ -150,8 +150,7 @@ if [[ $XDG_CURRENT_DESKTOP == *GNOME* ]]; then
     gsettings set org.gnome.desktop.session idle-delay 3600
     # screensaver for a minute before locking
     gsettings set org.gnome.desktop.screensaver lock-delay 60
-    # lock-enabled must be false, or screens do not sleep! (false is default)
-    gsettings set org.gnome.desktop.screensaver lock-enabled false
+    gsettings set org.gnome.desktop.screensaver lock-enabled true
 fi
 
 if [[ $XDG_CURRENT_DESKTOP == Pantheon ]]; then
