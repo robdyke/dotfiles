@@ -148,6 +148,11 @@ if [[ $XDG_CURRENT_DESKTOP == *GNOME* ]]; then
     gsettings set org.gnome.desktop.session idle-delay 3600
     gsettings set org.gnome.desktop.screensaver lock-delay 10
     gsettings set org.gnome.desktop.screensaver lock-enabled true
+
+    # load gnome terminal conf
+    # made with dconf dump /org/gnome/terminal/legacy/profiles:/
+    # b1dcc9dd-5262-4d8d-a863-c897e6d979b9 is the default profile choice identifier for everyone
+    dconf load /org/gnome/terminal/legacy/profiles:/ < etc/gnome-terminal-profiles.dconf
 fi
 
 if [[ $XDG_CURRENT_DESKTOP == Pantheon ]]; then
