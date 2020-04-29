@@ -4,7 +4,7 @@ LOCK_SIGNAL="true"
 UNLOCK_SIGNAL="false"
 
 function lights {
-    http --ignore-stdin --form PUT http://garage-bench-lamp-right.lan/api/relay/0 apikey=notsecret value=$1
+    http --ignore-stdin --form PUT http://10.171.10.204/api/relay/0 apikey=notsecret value=$1
 }
 
 dbus-monitor --session "type='signal',$DBUS_LOCK" | while read; do
