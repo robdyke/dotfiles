@@ -1,40 +1,46 @@
-if !exists('g:markdown_enable_spell_checking')
-  let g:markdown_enable_spell_checking = 0
-end
+function! s:SetDefault(name, value)
+  if !exists(a:name)
+    let {a:name} = a:value
+  endif
+endfunction
 
-if !exists('g:markdown_enable_input_abbreviations')
-  let g:markdown_enable_input_abbreviations = 0
-end
-
-if !exists('g:markdown_enable_mappings')
-  let g:markdown_enable_mappings = 0
-end
+call s:SetDefault('g:markdown_enable_spell_checking', 0)
+call s:SetDefault('g:markdown_enable_input_abbreviations', 0)
+call s:SetDefault('g:markdown_enable_mappings', 0)
 
 " Enable jsx syntax by default
-if !exists('g:jsx_ext_required')
-  let g:jsx_ext_required = 0
-endif
+call s:SetDefault('g:jsx_ext_required', 0)
 
 " Make csv loading faster
-if !exists('g:csv_start')
-  let g:csv_start = 1
-endif
-if !exists('g:csv_end')
-  let g:csv_end = 2
-endif
+call s:SetDefault('g:csv_start', 1)
+call s:SetDefault('g:csv_end', 2)
 
 " Disable json concealing by default
-if !exists('g:vim_json_syntax_conceal')
-  let g:vim_json_syntax_conceal = 0
-endif
+call s:SetDefault('g:vim_json_syntax_conceal', 0)
 
-let g:filetype_euphoria = 'elixir'
+call s:SetDefault('g:filetype_euphoria', 'elixir')
+
+call s:SetDefault('g:python_highlight_builtins', 1)
+call s:SetDefault('g:python_highlight_builtin_objs', 1)
+call s:SetDefault('g:python_highlight_builtin_types', 1)
+call s:SetDefault('g:python_highlight_builtin_funcs', 1)
+call s:SetDefault('g:python_highlight_builtin_funcs_kwarg', 1)
+call s:SetDefault('g:python_highlight_exceptions', 1)
+call s:SetDefault('g:python_highlight_string_formatting', 1)
+call s:SetDefault('g:python_highlight_string_format', 1)
+call s:SetDefault('g:python_highlight_string_templates', 1)
+call s:SetDefault('g:python_highlight_indent_errors', 1)
+call s:SetDefault('g:python_highlight_space_errors', 1)
+call s:SetDefault('g:python_highlight_doctests', 1)
+call s:SetDefault('g:python_highlight_func_calls', 1)
+call s:SetDefault('g:python_highlight_class_vars', 1)
+call s:SetDefault('g:python_highlight_operators', 1)
+call s:SetDefault('g:python_highlight_file_headers_as_comments', 1)
+call s:SetDefault('g:python_slow_sync', 1)
 
 augroup filetypedetect
   autocmd BufNewFile,BufReadPost *.vb setlocal filetype=vbnet
 augroup END
-
-let g:python_highlight_all = 1
 
 augroup filetypedetect
   if v:version < 704
@@ -197,6 +203,17 @@ if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'blade') == -1
   augroup filetypedetect
   " blade, from blade.vim in jwalton512/vim-blade
 autocmd BufNewFile,BufRead *.blade.php set filetype=blade
+  augroup end
+endif
+
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'brewfile') == -1
+  augroup filetypedetect
+  " brewfile, from brewfile.vim in bfontaine/Brewfile.vim
+" Vim filetype plugin
+" Language:  Brewfile
+" Mantainer: Baptiste Fontaine <b@ptistefontaine.fr>
+" URL:       https://github.com/bfontaine/Brewfile.vim
+au BufNewFile,BufRead Brewfile,.Brewfile set filetype=ruby syntax=brewfile
   augroup end
 endif
 
@@ -382,8 +399,8 @@ endif
 
 if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'elm') == -1
   augroup filetypedetect
-  " elm, from elm.vim in ElmCast/elm-vim
-" detection for Elm (http://elm-lang.org/)
+  " elm, from elm.vim in andys8/vim-elm-syntax
+" detection for Elm (https://elm-lang.org)
 
 au BufRead,BufNewFile *.elm set filetype=elm
   augroup end
@@ -455,9 +472,24 @@ endif
 
 if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'fsharp') == -1
   augroup filetypedetect
-  " fsharp, from fsharp.vim in fsharp/vim-fsharp:_BASIC
+  " fsharp, from fsharp.vim in ionide/Ionide-vim:_BASIC
 " F#, fsharp
 autocmd BufNewFile,BufRead *.fs,*.fsi,*.fsx set filetype=fsharp
+autocmd BufNewFile,BufRead *.fsproj         set filetype=fsharp_project
+  augroup end
+endif
+
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'gdscript') == -1
+  augroup filetypedetect
+  " gdscript, from gdscript3.vim in calviken/vim-gdscript3
+autocmd BufRead,BufNewFile *.gd set filetype=gdscript3
+  augroup end
+endif
+
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'gdscript') == -1
+  augroup filetypedetect
+  " gdscript, from gsl.vim in calviken/vim-gdscript3
+autocmd BufRead,BufNewFile *.shader set filetype=gsl
   augroup end
 endif
 
@@ -1200,6 +1232,17 @@ au BufNewFile,BufRead .merlin       set ft=merlin
   augroup end
 endif
 
+if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rego') == -1
+  augroup filetypedetect
+  " rego, from rego.vim in tsandall/vim-rego
+autocmd BufRead,BufNewFile *.rego set filetype=rego
+
+" Use # as a comment prefix
+setlocal comments=b:#,fb:-
+setlocal commentstring=#\ %s
+  augroup end
+endif
+
 if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ruby') == -1
   augroup filetypedetect
   " ruby, from ruby.vim in vim-ruby/vim-ruby
@@ -1596,6 +1639,7 @@ if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'zig') == -1
   augroup filetypedetect
   " zig, from zig.vim in ziglang/zig.vim
 au BufRead,BufNewFile *.zig set filetype=zig
+au BufRead,BufNewFile *.zir set filetype=zir
   augroup end
 endif
 
