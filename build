@@ -171,6 +171,7 @@ PACKS="
   asciidoc:asciidoc/vim-asciidoc
   autohotkey:hnamikaw/vim-autohotkey
   blade:jwalton512/vim-blade
+  brewfile:bfontaine/Brewfile.vim
   c++11:octol/vim-cpp-enhanced-highlight
   c/c++:vim-jp/vim-cpp
   caddyfile:isobit/vim-caddyfile
@@ -190,14 +191,15 @@ PACKS="
   dlang:JesseKPhillips/d.vim
   dockerfile:ekalinin/Dockerfile.vim
   elixir:elixir-lang/vim-elixir
-  elm:ElmCast/elm-vim
+  elm:andys8/vim-elm-syntax
   emberscript:yalesov/vim-ember-script
   emblem:yalesov/vim-emblem
   erlang:vim-erlang/vim-erlang-runtime
   ferm:vim-scripts/ferm.vim
   fish:georgewitteman/vim-fish
   flatbuffers:dcharbon/vim-flatbuffers
-  fsharp:fsharp/vim-fsharp:_BASIC
+  fsharp:ionide/Ionide-vim:_BASIC
+  gdscript:calviken/vim-gdscript3
   git:tpope/vim-git
   glsl:tikhomirov/vim-glsl:_NOAFTER
   gmpl:maelvalais/gmpl.vim
@@ -226,7 +228,7 @@ PACKS="
   jsx:MaxMEllon/vim-jsx-pretty:_ALL
   julia:JuliaEditorSupport/julia-vim
   kotlin:udalov/kotlin-vim
-  latex:LaTeX-Box-Team/LaTeX-Box
+  latex:lervag/vimtex
   less:groenewege/vim-less:_NOAFTER
   lilypond:anowlcalledjosh/vim-lilypond
   livescript:gkz/vim-ls
@@ -267,6 +269,7 @@ PACKS="
   raml:IN3D/vim-raml
   razor:adamclerk/vim-razor
   reason:reasonml-editor/vim-reason-plus
+  rego:tsandall/vim-rego
   rspec:keith/rspec.vim
   rst:marshallward/vim-restructuredtext
   ruby:vim-ruby/vim-ruby
