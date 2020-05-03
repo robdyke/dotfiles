@@ -1,0 +1,8 @@
+[Unit]
+Description=Turn light on for webcam
+[Service]
+Type=simple
+TimeoutStartSec=0
+ExecStart=/home/naggie/dotfiles/etc/lights/camlight
+[Install]
+WantedBy=default.target

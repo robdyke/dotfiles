@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+function lights {
+    http --ignore-stdin --form PUT http://10.171.10.139/api/relay/0 apikey=notsecret value=$1
+}
+
+while sleep 1; do
+    if fuser /dev/video0 &> /dev/null; then
+        lights 1
+    else
+        lights 0
+    fi
+done
