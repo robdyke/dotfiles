@@ -3,10 +3,13 @@ function lights {
     http --ignore-stdin --form PUT http://10.171.10.139/api/relay/0 apikey=notsecret value=$1
 }
 
+function streaming {
+    fuser /dev/video0 &> /dev/null
+}
+
 while sleep 1; do
-    if fuser /dev/video0 &> /dev/null; then
-        lights 1
-    else
-        lights 0
-    fi
+    while ! streaming; do sleep 1; done
+    lights 1
+    while streaming; do sleep 1; done
+    lights 0
 done
