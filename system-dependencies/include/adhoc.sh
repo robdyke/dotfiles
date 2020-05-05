@@ -141,8 +141,8 @@ function adhoc_cura_linux_amd64 {
 function adhoc_hugo_linux_amd64 {
     TARGZ="$(
         obtain \
-            https://github.com/gohugoio/hugo/releases/download/v0.65.3/hugo_0.65.3_Linux-64bit.tar.gz \
-            3d720188e575fb3afffefe33df769dc1832d3a843c02119a01e30febd15c9dae
+            https://github.com/gohugoio/hugo/releases/download/v0.69.2/hugo_0.69.2_Linux-64bit.tar.gz \
+            167d8fb2db1728c0b24914030bab498e38d8ae1dcb01f792672b8a0085903ddf
     )"
     [ -f /usr/local/bin/hugo ] && sudo rm -f /usr/local/bin/hugo
     sudo tar -C /usr/local/bin/ -xzf "$TARGZ" hugo
