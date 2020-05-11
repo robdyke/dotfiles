@@ -26,11 +26,11 @@ function adhoc_dstask_macos_amd64 {
 function adhoc_ripgrep_linux_amd64 {
     TARGZ="$(
         obtain \
-            https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz \
-            c76080aa807a339b44139885d77d15ad60ab8cdd2c2fdaf345d0985625bc0f97
+            https://github.com/BurntSushi/ripgrep/releases/download/12.1.0/ripgrep-12.1.0-x86_64-unknown-linux-musl.tar.gz \
+            c6bba6d643b1a1f18994683e26d4d2b998b41a7a7360e63cb8ec9db8ffbf793c
     )"
     [ -f /usr/local/bin/rg ] && sudo rm -f /usr/local/bin/rg
-    sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" ripgrep-0.10.0-x86_64-unknown-linux-musl/rg
+    sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" ripgrep-12.1.0-x86_64-unknown-linux-musl/rg
 }
 
 function adhoc_fzf_linux_amd64 {
@@ -110,11 +110,11 @@ function adhoc_browserpass_macos_amd64 {
 function adhoc_ripgrep_linux_armv5 {
     TARGZ="$(
         obtain \
-            https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-arm-unknown-linux-gnueabihf.tar.gz \
-            5909eb4246f8e4936a2d09d0b38c647733578f78f6aa5ace49027c1b7c4bf0e1
+            https://github.com/BurntSushi/ripgrep/releases/download/12.1.0/ripgrep-12.1.0-arm-unknown-linux-gnueabihf.tar.gz \
+            9be3763d0215ad06fd6e0f6603c8b2680c9d7be5024811b82ae17d1ed823df70
     )"
     [ -f /usr/local/bin/rg ] && sudo rm -f /usr/local/bin/rg
-    sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" ripgrep-0.10.0-arm-unknown-linux-gnueabihf/rg
+    sudo tar -C /usr/local/bin/ --strip=1 -xzf "$TARGZ" ripgrep-12.1.0-arm-unknown-linux-gnueabihf/rg
 }
 
 function adhoc_fzf_linux_armv5 {
