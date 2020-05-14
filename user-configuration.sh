@@ -109,10 +109,6 @@ grep -q github.com ~/.ssh/known_hosts || cat <<EOF >> ~/.ssh/known_hosts
 github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
 EOF
 
-# set caps lock to act as esc if possible
-test $DISPLAY && which dconf &> /dev/null && \
-    dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
-
 if PATH="$PATH:/Applications/Firefox.app/Contents/MacOS/" which firefox &> /dev/null; then
     etc/firefox/customise-profile
 fi
@@ -153,6 +149,13 @@ if [[ $XDG_CURRENT_DESKTOP == *GNOME* ]]; then
     # made with dconf dump /org/gnome/terminal/legacy/profiles:/
     # b1dcc9dd-5262-4d8d-a863-c897e6d979b9 is the default profile choice identifier for everyone
     dconf load /org/gnome/terminal/legacy/profiles:/ < etc/gnome-terminal-profiles.dconf
+
+    # set caps lock to act as esc if possible
+    dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
+
+    # disable lock screen notifications which, if present, keep my 5 screens on which use 200W all night...
+    dconf write /org/gnome/desktop/notifications/show-in-lock-screen false
+
 fi
 
 if [[ $XDG_CURRENT_DESKTOP == Pantheon ]]; then
