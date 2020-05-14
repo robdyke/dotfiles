@@ -99,6 +99,7 @@ complete -o default -o nospace -F _git_status s
 complete -o default -o nospace -F _ssh gssh
 complete -F _dstask n
 complete -F _dstask t
+complete -cf start
 
 # hardcoded ssh completions (known_hosts is encrypted mostly)
 #complete -o default -W 'example.com example.net' ssh scp ping
