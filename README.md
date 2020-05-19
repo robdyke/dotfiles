@@ -51,8 +51,8 @@ use them regularly.
 
 | Purpose                        | Tool(s)                                    | Comments                                                                                                              |
 | ------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| VPN                            | [wireguard][21] managed with [dsnet][48]   | Wireguard is simple, fast and reliable. It will become the standard VPN.                                              |
 | Web browser                    | [firefox][20]                              | Fast since Quantum. Animations disabled for speed.                                                                    |
-| VPN                            | [wireguard][21]                            | Wireguard is simple, fast and reliable. It will become the standard VPN.                                              |
 | Disk space reclaim             | [ncdu][22] + [tmpreaper][23]               | Tools for clearing up disk space. I run the latter against /tmp/ with cron.                                           |
 | Server configuration           | [ansible][24]                              | Idempotent, agentless configuration management. Used with git.                                                        |
 | HTTP Client                    | [httpie][25]                               | curl alternative with better UX. Sometimes used with jq.                                                              |
@@ -96,6 +96,7 @@ use them regularly.
 [45]: https://www.openscad.org/
 [46]: https://github.com/timvisee/ffsend/
 [47]: https://github.com/mozilla/send
+[48]: https://github.com/naggie/dsnet
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
