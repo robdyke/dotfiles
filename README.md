@@ -164,6 +164,10 @@ See [my notes on latency](https://github.com/naggie/dotfiles/blob/master/etc/lat
    `r!pbpaste`.
 1. Keep useful local environment variables in ~/.env-local.sh
 
+
+An excellent guide and background to a lot of the tools used here is the [MIT
+missing semester](https://missing.csail.mit.edu/).
+
 # Operational security
 With major services being compromised more and more, good OPSEC is important. I use:
 
