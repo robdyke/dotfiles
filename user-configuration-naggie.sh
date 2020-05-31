@@ -178,18 +178,3 @@ if [ ! "$SSH_CONNECTION" ] && gpg --card-status &>/dev/null; then
         git -C ~ clone git@github.com:naggie/notes.git
     fi
 fi
-
-# just some checks
-if [ ! -f ~/.netrc ]; then
-    echo
-    printf '\n\e[1;33m%s\e[m\n' " no ~/.netrc found, required for github private access for golang"
-    echo "format: machine github.com login naggie password API_KEY"
-    echo
-fi
-
-if [ ! -f ~/.env-local.sh ]; then
-    echo
-    printf '\n\e[1;33m%s\e[m\n' " no ~/.env-local.sh found. Suggested for machine specific things."
-    echo "format: machine github.com login naggie password API_KEY"
-    echo
-fi

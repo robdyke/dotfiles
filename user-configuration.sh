@@ -167,3 +167,18 @@ fi
 
 # now is a good time to associate the yubikey GPG private keys if it is connected
 gpg --card-status &> /dev/null || true
+
+# just some checks
+if [ ! -f ~/.netrc ]; then
+    echo
+    printf '\n\e[1;33m%s\e[m\n' "No ~/.netrc found, required for github private access for golang"
+    echo "format: machine github.com login naggie password API_KEY"
+    echo
+fi
+
+if [ ! -f ~/.env-local.sh ]; then
+    echo
+    printf '\n\e[1;33m%s\e[m\n' "No ~/.env-local.sh found. Suggested for machine specific things."
+    echo "format: machine github.com login naggie password API_KEY"
+    echo
+fi
