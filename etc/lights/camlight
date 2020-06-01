@@ -7,9 +7,13 @@ function streaming {
     fuser /dev/video0 &> /dev/null
 }
 
+export DSPA_SERVER_HOST=localhost
+
 while sleep 1; do
     while ! streaming; do sleep 1; done
+    /home/naggie/dspa7/dist/dspa-announce Cal has joined a meeting
     lights 1
     while streaming; do sleep 1; done
+    /home/naggie/dspa7/dist/dspa-announce "Cal's meeting has finished"
     lights 0
 done
