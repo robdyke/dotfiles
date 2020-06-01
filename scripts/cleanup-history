@@ -77,7 +77,7 @@ exceptions = [
     # context switching in dstask
     r'^(n|t|task|dstask) context',
     # password retrieval to clipboard
-    r'^pass -c',
+    r'^pass ',
     r'--vault-password-file',
     # I have likely used pass to lookup secrets, so none on cmd line, probably
     r'=\$\(pass',
