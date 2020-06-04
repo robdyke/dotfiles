@@ -13,6 +13,7 @@ while sleep 1; do
     while ! streaming; do sleep 1; done
     /home/naggie/dspa7/dist/dspa-announce Cal has joined a meeting
     lights 1
+    sleep 600  # stop video testing causing many messages
     while streaming; do sleep 1; done
     /home/naggie/dspa7/dist/dspa-announce "Cal's meeting has finished"
     lights 0
