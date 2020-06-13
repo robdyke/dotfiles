@@ -1,0 +1,34 @@
+#!/bin/bash
+# This script rsyncs the git repository over (without .git) to a remote host
+# and executes the command given via args. Useful as an alternative to ansible
+# for small home deployments. ~/.rjob is used at remote host.
+
+set -e
+
+if [ $# -lt 2 ]; then
+      echo "Usage: <host> <command....>"
+      exit
+fi
+
+# host
+HOST="$1"; shift
+
+# get repo root
+ROOT="$(git rev-parse --show-toplevel)"
+
+# get repo name
+NAME="$(basename $ROOT)"
+
+# get path relative to repo
+WORK_DIR="$(realpath --relative-to="$ROOT" "$(pwd)")"
+
+REMOTE_ROOT=".rjob/${NAME}/"
+
+# make remote rjob dir
+ssh $HOST mkdir -p "${REMOTE_ROOT}"
+
+# rsync to remote host
+rsync -rz --exclude .git/ "${ROOT}/" "${HOST}:${REMOTE_ROOT}"
+
+# run command in similar context on remote host
+ssh -t $HOST bash -c "cd "${REMOTE_ROOT}/${WORK_DIR}" && $@"
