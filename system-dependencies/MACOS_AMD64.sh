@@ -21,6 +21,7 @@ packages=(
     coreutils
     ffmpeg
     fzf
+    entr
     git
     gnupg2
     htop

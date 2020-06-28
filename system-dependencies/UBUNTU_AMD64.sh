@@ -13,6 +13,7 @@ sudo -E apt-get -y install --install-recommends \
     bash-completion \
     curl \
     dconf-cli \
+    entr \
     etckeeper \
     ffmpeg \
     git \

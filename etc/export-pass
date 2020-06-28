@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+from subprocess import check_call
+from contextlib import contextmanager
+
+# exports select passwords from the standard unix password manager to 1password
+# so passwords can be easily consumed on another device.
+
+# 1password personal accounts use the "my" subdomain; my.1password.com
+# $(op signin my.1password.com callan.bryant@gmail.com)
+
+# TODO sign in/out here by extracting 1password secrets from password-store
+
+@contextmanager
+open_decryption():
+    try:
+        # disable touch to decrypt
+        check_call(["ykman", "openpgp", "touch", "enc", "off"])
+        yield
+    finally:
+        # re-enable touch to decrypt
+        check_call(["ykman", "openpgp", "touch", "enc", "on"])
+
+
+def export(passwords):
+    with open_decryption():
+        # does it exist?
+
+        check_call(["op", "create", "username=%" % username, "password=%" % password])

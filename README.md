@@ -70,6 +70,7 @@ use them regularly.
 | Music library curation         | [beets][43]                                | Automates curation of music library                                                                                   |
 | CLI Benchmarking               | [hyperfine][44]                            |                                                                                                                       |
 | Secure file sending            | [ffsend][46]                               | Terminal client for [Firefox send][47]                                                                                |
+| File watching                  | [entr][51]                                 | Simpler than inotify-tools                                                                                            |
 
 [19]: https://i3wm.org/
 [20]: https://www.mozilla.org/en-GB/firefox/
@@ -97,6 +98,7 @@ use them regularly.
 [46]: https://github.com/timvisee/ffsend/
 [47]: https://github.com/mozilla/send
 [48]: https://github.com/naggie/dsnet
+[51]: https://github.com/eradman/entr/
 
 # Notable features
 * Workflows and application configuration profiled for speed. See section on
