@@ -152,7 +152,7 @@ function _cmd_timer_end  {
     DURATION=$(($CMD_TIMER_STOP - $CMD_TIMER_START))
     (( $DURATION < 60 )) && return
 
-    CMD_TIMER_PROMPT="Duration: $(~/.local/bin/human-time $CMD_TIMER_START) \($(date)\)
+    CMD_TIMER_PROMPT="Duration: $(~/.local/bin/human-time $CMD_TIMER_START), ended $(date)
 "
 
     # precmd is not run if there is no cmd, so don't keep the timer running
