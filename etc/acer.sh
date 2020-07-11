@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# copy to /usr/local/bin
+# chown root /usr/local/bin/acer.sh
+# chmod 2775 /usr/local/bin/acer.sh to set setuid bit
+# then set as startup script on gnome 3
+
 # http://ubuntuhandbook.org/index.php/2017/04/custom-screen-resolution-ubuntu-desktop/
 
 # run on login using "startup applications" in ubuntu
@@ -11,10 +17,10 @@
 # Modeline "1440x900_60.00"  106.50  1440 1528 1672 1904  900 903 909 934 -hsync +vsync
 
 # create new mode
-sudo xrandr --newmode "1440x900_60.00"  106.50  1440 1528 1672 1904  900 903 909 934 -hsync +vsync
+xrandr --newmode "1440x900_60.00"  106.50  1440 1528 1672 1904  900 903 909 934 -hsync +vsync
 
 # add to port
-sudo xrandr --addmode DP-1-3 1440x900_60.00
+xrandr --addmode DP-1-3 1440x900_60.00
 
 # new set the resolution from settings, or
-sudo xrandr --output DP-1-3 --mode 1440x900_60.00
+xrandr --output DP-1-3 --mode 1440x900_60.00
