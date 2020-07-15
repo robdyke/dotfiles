@@ -307,3 +307,7 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" workaround for neovim <Paste> bug
+" https://github.com/neovim/neovim/issues/7994#issuecomment-388296360
+au InsertLeave * set nopaste
