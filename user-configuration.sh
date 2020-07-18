@@ -140,8 +140,8 @@ else
 fi
 
 if [[ $XDG_CURRENT_DESKTOP == *GNOME* ]]; then
-    # lock after an hour
-    gsettings set org.gnome.desktop.session idle-delay 3600
+    # lock after half an hour
+    gsettings set org.gnome.desktop.session idle-delay 1800
     gsettings set org.gnome.desktop.screensaver lock-delay 10
     gsettings set org.gnome.desktop.screensaver lock-enabled true
 
