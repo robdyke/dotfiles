@@ -93,15 +93,18 @@ case $PLATFORM in
         git --version
         ;;
     $UBUNTU_AMD64)
+        sudo apt-get -y update
         sudo apt-get -y install git
         ;;
     $ELEMENTARYOS_AMD64)
+        sudo apt-get -y update
         sudo apt-get -y install git
         ;;
     $FEDORA_AMD64)
         sudo dnf -y install git
         ;;
     $RASPBIAN_ARMV5)
+        sudo apt-get -y update
         sudo apt-get -y install git
         ;;
 esac
