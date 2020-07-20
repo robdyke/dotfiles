@@ -153,6 +153,9 @@ if [[ $XDG_CURRENT_DESKTOP == *GNOME* ]]; then
     # set caps lock to act as esc if possible
     dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
 
+    # prevent auto sleep on battery power
+    dconf write /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type '"nothing"'
+
     # disable lock screen notifications which, if present, keep my 5 screens on which use 200W all night...
     dconf write /org/gnome/desktop/notifications/show-in-lock-screen false
 
