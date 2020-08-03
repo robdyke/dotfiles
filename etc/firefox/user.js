@@ -65,3 +65,6 @@ user_pref("app.normandy.enabled" false);
 
 // stop automatically prepending www when request fails
 user_pref("browser.fixup.alternate.enabled", false);
+
+// stop tab tearing from happening accidentally (very annoying, happened a dozen times a day)
+user_pref("browser.tabs.allowTabDetach", false);
