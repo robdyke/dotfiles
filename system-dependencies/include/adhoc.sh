@@ -130,8 +130,8 @@ function adhoc_fzf_linux_armv5 {
 function adhoc_cura_linux_amd64 {
     EXE="$(
         obtain \
-            https://github.com/Ultimaker/Cura/releases/download/4.6.1/Cura-4.6.1.AppImage \
-            eecd9f10667807f4dc21250526b18cd3ff4afddbccfa8860bac29be3aa7010cc
+            https://github.com/Ultimaker/Cura/releases/download/4.7.0/Ultimaker_Cura-4.7.0.AppImage \
+            209ba51d11c65d115454ad128104c8de3369ef340cfb9102afa866f93a9ffa42
     )"
     sudo cp "${EXE}" /usr/local/bin/cura.new
     sudo chmod +x /usr/local/bin/cura.new
