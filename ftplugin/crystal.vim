@@ -5,34 +5,6 @@ if exists('b:did_ftplugin')
 endif
 let b:did_ftplugin = 1
 
-" This file is loaded on 'ecrystal' filetype
-if &filetype !=# 'crystal'
-  finish
-endif
-
-let s:save_cpo = &cpo
-set cpo&vim
-
-if exists('loaded_matchit') && !exists('b:match_words')
-  let b:match_ignorecase = 0
-
-  let b:match_words =
-        \ '\<\%(if\|unless\|case\|while\|until\|for\|do\|class\|module\|struct\|lib\|macro\|ifdef\|def\|fun\|begin\|enum\)\>=\@!' .
-        \ ':' .
-        \ '\<\%(else\|elsif\|ensure\|when\|rescue\|break\|redo\|next\|retry\)\>' .
-        \ ':' .
-        \ '\<end\>' .
-        \ ',{:},\[:\],(:)'
-
-  let b:match_skip =
-        \ "synIDattr(synID(line('.'),col('.'),0),'name') =~ '" .
-        \ "\\<crystal\\%(String\\|StringDelimiter\\|ASCIICode\\|Escape\\|" .
-        \ "Interpolation\\|NoInterpolation\\|Comment\\|Documentation\\|" .
-        \ "ConditionalModifier\\|RepeatModifier\\|OptionalDo\\|" .
-        \ "Function\\|BlockArgument\\|KeywordAsMethod\\|ClassVariable\\|" .
-        \ "InstanceVariable\\|GlobalVariable\\|Symbol\\)\\>'"
-endif
-
 setlocal comments=:#
 setlocal commentstring=#\ %s
 setlocal suffixesadd=.cr
@@ -66,7 +38,8 @@ nnoremap <buffer><Plug>(crystal-spec-run-current)   :<C-u>CrystalSpecRunCurrent<
 nnoremap <buffer><Plug>(crystal-format)             :<C-u>CrystalFormat<CR>
 
 augroup plugin-ft-crystal
-  autocmd BufWritePre <buffer> if g:crystal_auto_format | call crystal_lang#format('', 1) | endif
+  autocmd!
+  autocmd BufWritePre <buffer> if g:crystal_auto_format && &filetype ==# 'crystal' | call crystal_lang#format('', 1) | endif
 augroup END
 
 if get(g:, 'crystal_define_mappings', 1)
@@ -81,13 +54,32 @@ if &l:ofu ==# ''
   setlocal omnifunc=crystal_lang#complete
 endif
 
-if exists('AutoPairsLoaded')
+" Options for vim-matchit
+if exists('g:loaded_matchit') && !exists('b:match_words')
+  let b:match_ignorecase = 0
+
+  let b:match_words =
+        \ '\<\%(if\|unless\|case\|while\|until\|for\|do\|class\|module\|struct\|lib\|macro\|ifdef\|def\|begin\|enum\|annotation\)\>=\@!' .
+        \ ':' .
+        \ '\<\%(else\|elsif\|ensure\|when\|in\|rescue\|break\|next\)\>' .
+        \ ':' .
+        \ '\<end\>' .
+        \ ',{:},\[:\],(:)'
+
+  let b:match_skip =
+        \ 'synIDattr(synID(line("."), col("."), 0), "name") =~# ''' .
+        \ '\<crystal\%(String\|StringDelimiter\|ASCIICode\|Escape\|' .
+        \ 'Interpolation\|NoInterpolation\|Comment\|Documentation\|' .
+        \ 'ConditionalModifier\|' .
+        \ 'Function\|BlockArgument\|KeywordAsMethod\|ClassVariable\|' .
+        \ 'InstanceVariable\|GlobalVariable\|Symbol\)\>'''
+endif
+
+" Options for jiangmiao/auto-pairs
+if exists('g:AutoPairsLoaded')
   let b:AutoPairs = { '{%': '%}' }
   call extend(b:AutoPairs, g:AutoPairs, 'force')
 endif
-
-let &cpo = s:save_cpo
-unlet s:save_cpo
 
 " vim: sw=2 sts=2 et:
 

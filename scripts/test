@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+vim --clean -N --cmd "
+  filetype plugin indent on
+  syntax enable
+  let &rtp='$PWD,'.&rtp
+  source ftdetect/polyglot.vim
+  source scripts/test_extensions.vim
+  source scripts/test_filetypes.vim
+  exec ':q!'
+"
