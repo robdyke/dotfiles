@@ -135,3 +135,6 @@ _build
 
 # go
 vendor
+
+# libreoffice lock files
+.~lock.*
