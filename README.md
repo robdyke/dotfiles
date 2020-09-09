@@ -60,7 +60,7 @@ use them regularly.
 | Cloud backup                   | [rclone][38]                               |                                                                                                                       |
 | CAD                            | [OpenSCAD][45]                             | Limited but powerful if you plan ahead                                                                                |
 | Diagramming                    | [draw.io][27]                              | Diagram creation software. See also dia, graphviz, tikz.                                                              |
-| Music playback                 | [cmus][28]                                 | Fast terminal music player. See also MPD, mopidy.                                                                     |
+| SVG optimisation               | [svgo][28]                                 | Useful for inlining SVGs in a web page                                                                                |
 | Audio/video conversion         | [sox][29] + [ffmpeg][30] + [gstreamer][31] |                                                                                                                       |
 | Web crawling                   | [httrack][32]                              | Better than wget for crawling (i.e. it works)                                                                         |
 | Document conversion            | [pandoc][35]                               | See also [pdflatex][36], which I use for formal reports.                                                              |
@@ -81,7 +81,7 @@ use them regularly.
 [25]: https://httpie.org/
 [26]: https://restic.net/
 [27]: https://github.com/jgraph/drawio
-[28]: https://cmus.github.io/
+[28]: https://github.com/svg/svgo
 [29]: http://sox.sourceforge.net/sox.html
 [30]: https://www.ffmpeg.org/
 [31]: https://gstreamer.freedesktop.org/
