@@ -802,7 +802,7 @@ CTRL-t
     You can define a constant value instead of the default field based value.
     For example the following command will add ``valid:"1"`` to all fields.
 >
-      :GoAddTags valid=1
+      :GoAddTags valid:1
 <
                                                                *:GoRemoveTags*
 :[range]GoRemoveTags [key],[option] [key1],[option1] ...
@@ -1719,6 +1719,13 @@ Applicable to Neovim and Vim with `terminal` feature only.
 >
   let g:go_term_mode = "vsplit"
 <
+                                                          *'g:go_term_reuse'*
+
+Reuse the terminal window when |'g:go_term_enabled'| is set. By default it's
+disabled.
+>
+  let g:go_term_reuse = 0
+<
                                                           *'g:go_term_height'*
                                                            *'g:go_term_width'*
 
@@ -1869,6 +1876,24 @@ is `v:null`.
   let g:go_gopls_local = v:null
 <
 
+                                                       *'g:go_gopls_gofumpt'*
+
+Specifies whether `gopls` should use `gofumpt` for formatting. When it is
+`v:null`, `gopls`' default will be used.  By default it is `v:null`.
+>
+  let g:go_gopls_gofumpt = v:null
+<
+
+                                                      *'g:go_gopls_settings'*
+
+Specifies `gopls` workspace settings for `gopls` that are not yet officially
+supported by vim-go. Any value in the dictionary will be overridden by values
+provided in the specific options supported by vim-go (e.g.
+g:go_gopls_staticcheck) or settings statically configured by vim-go to ensure
+expected behavior. By default it is `v:null`.
+>
+  let g:go_gopls_settings = v:null
+<
                                                  *'g:go_diagnostics_enabled'*
 
 Specifies whether `gopls` diagnostics are enabled. Only the diagnostics for
@@ -2242,6 +2267,8 @@ The program will halt on the breakpoint, at which point you can inspect the
 program state. You can go to the next line with |:GoDebugNext| (<F10>) or step
 in with |:GoDebugStep| (<F11>).
 
+The program can also be halted with `:GoDebugHalt` (<F6>).
+
 The variable window in the bottom left (`GODEBUG_VARIABLES`) will display all
 local variables. Struct values are displayed as `{...}`, array/slices as
 `[4]`. Use <CR> on the variable name to expand the values.
@@ -2258,10 +2285,21 @@ the `dlv` process, or |:GoDebugRestart| to recompile the code.
                                                            *go-debug-commands*
 DEBUGGER COMMANDS~
 
-Only |:GoDebugStart|, `:GoDebugTest`, and |:GoDebugBreakpoint| are available
-by default. `:GoDebugContinue` becomes available after running `:GoDebugStart`
-or `:GoDebugTest`. The rest of the commands and mappings become available
-after executing `:GoDebugContinue`.
+Only |:GoDebugAttach|, |:GoDebugStart|, |:GoDebugTest|, and
+|:GoDebugBreakpoint| are available by default. |:GoDebugContinue| becomes
+available after running |:GoDebugAttach|, |:GoDebugStart| or |:GoDebugTest|.
+The rest of the commands and mappings become available after executing
+|:GoDebugContinue|.
+
+                                                             *:GoDebugAttach*
+:GoDebugAttach pid
+
+    Start the debug mode for pid; this does several things:
+
+      * Setup the debug windows according to |'g:go_debug_windows'|.
+      * Make the `:GoDebug*` commands and `(go-debug-*)` mappings available.
+
+    Use |:GoDebugStop| to stop `dlv` and exit debugging mode.
 
                                                                *:GoDebugStart*
 :GoDebugStart [pkg] [program-args]
@@ -2290,6 +2328,14 @@ after executing `:GoDebugContinue`.
 
     Stop the program (if running) and restart `dlv` to recompile the package.
     The current window layout and breakpoints will be left intact.
+
+                                                                *:GoDebugHalt*
+                                                             *(go-debug-halt)*
+:GoDebugHalt
+
+    Halt the program.
+
+    Mapped to <F6> by default.
 
                                                                 *:GoDebugStop*
                                                              *(go-debug-stop)*

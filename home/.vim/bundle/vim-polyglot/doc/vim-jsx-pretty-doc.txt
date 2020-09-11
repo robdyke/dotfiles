@@ -1,4 +1,4 @@
-if !exists('g:polyglot_disabled') || !(index(g:polyglot_disabled, 'typescript') != -1 || index(g:polyglot_disabled, 'typescript') != -1 || index(g:polyglot_disabled, 'jsx') != -1)
+if !exists('g:polyglot_disabled') || (index(g:polyglot_disabled, 'javascript') == -1 && index(g:polyglot_disabled, 'jsx') == -1)
 
 vim-jsx-pretty is syntax highlight for JSX (React.js).
 (https://github.com/MaxMEllon/vim-jsx-pretty)
@@ -46,6 +46,7 @@ CONFIG                                                  *vim-jsx-pretty-config*
   |---------------------------------------|---------|----------------------|
   | g:vim_jsx_pretty_enable_jsx_highlight |    1    | jsx highlight flag   |
   | g:vim_jsx_pretty_colorful_config      |    0    | colorful config flag |
+  | g:vim_jsx_pretty_disable_js           |    0    | js toggle flag       |
 <
 
 - *g:vim_jsx_pretty_enable_jsx_highlight*
