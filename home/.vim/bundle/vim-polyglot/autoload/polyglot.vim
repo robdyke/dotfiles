@@ -2,11 +2,11 @@
 let s:cpo_save = &cpo
 set cpo&vim
 
-func! polyglot#Heuristics()
+func! polyglot#Shebang()
   " Try to detect filetype from shebang
-  let l:filetype = polyglot#Shebang()
-  if l:filetype != ""
-    exec "setf " . l:filetype
+  let ft = polyglot#ShebangFiletype()
+  if ft != ""
+    let &ft = ft
     return 1
   endif
 
@@ -44,6 +44,8 @@ let s:interpreters = {
   \ 'cperl': 'perl',
   \ 'perl': 'perl',
   \ 'php': 'php',
+  \ 'swipl': 'prolog',
+  \ 'yap': 'prolog',
   \ 'pwsh': 'ps1',
   \ 'python': 'python',
   \ 'python2': 'python',
@@ -87,7 +89,7 @@ let s:r_hashbang = '^#!\s*\(\S\+\)\s*\(.*\)\s*'
 let s:r_envflag = '%(\S\+=\S\+\|-[iS]\|--ignore-environment\|--split-string\)'
 let s:r_env = '^\%(\' . s:r_envflag . '\s\+\)*\(\S\+\)'
 
-func! polyglot#Shebang()
+func! polyglot#ShebangFiletype()
   let l:line1 = getline(1)
 
   if l:line1 !~# "^#!"
@@ -125,36 +127,36 @@ func! polyglot#Shebang()
 endfunc
 
 func! polyglot#DetectInpFiletype()
-  let line = getline(1)
+  let line = getline(nextnonblank(1))
   if line =~# '^\*'
-    setf abaqus | return
+    set ft=abaqus | return
   endif
   for lnum in range(1, min([line("$"), 500]))
     let line = getline(lnum)
     if line =~? '^header surface data'
-      setf trasys | return
+      set ft=trasys | return
     endif
   endfor
 endfunc
 
 func! polyglot#DetectAsaFiletype()
   if exists("g:filetype_asa")
-    exe "setf " . g:filetype_asa | return
+    let &ft = g:filetype_asa | return
   endif
-  setf aspvbs | return
+  set ft=aspvbs | return
 endfunc
 
 func! polyglot#DetectAspFiletype()
   if exists("g:filetype_asp")
-    exe "setf " . g:filetype_asp | return
+    let &ft = g:filetype_asp | return
   endif
   for lnum in range(1, min([line("$"), 3]))
     let line = getline(lnum)
     if line =~? 'perlscript'
-      setf aspperl | return
+      set ft=aspperl | return
     endif
   endfor
-  setf aspvbs | return
+  set ft=aspvbs | return
 endfunc
 
 func! polyglot#DetectHFiletype()
@@ -162,18 +164,18 @@ func! polyglot#DetectHFiletype()
     let line = getline(lnum)
     if line =~# '^\s*\(@\(interface\|class\|protocol\|property\|end\|synchronised\|selector\|implementation\)\(\<\|\>\)\|#import\s\+.\+\.h[">]\)'
       if exists("g:c_syntax_for_h")
-        setf objc | return
+        set ft=objc | return
       endif
-      setf objcpp | return
+      set ft=objcpp | return
     endif
   endfor
   if exists("g:c_syntax_for_h")
-    setf c | return
+    set ft=c | return
   endif
   if exists("g:ch_syntax_for_h")
-    setf ch | return
+    set ft=ch | return
   endif
-  setf cpp | return
+  set ft=cpp | return
 endfunc
 
 func! polyglot#DetectMFiletype()
@@ -184,53 +186,53 @@ func! polyglot#DetectMFiletype()
       let saw_comment = 1
     endif
     if line =~# '^\s*\(@\(interface\|class\|protocol\|property\|end\|synchronised\|selector\|implementation\)\(\<\|\>\)\|#import\s\+.\+\.h[">]\)'
-      setf objc | return
+      set ft=objc | return
     endif
     if line =~# '^\s*%'
-      setf octave | return
+      set ft=octave | return
     endif
     if line =~# '^\s*(\*'
-      setf mma | return
+      set ft=mma | return
     endif
     if line =~? '^\s*\(\(type\|var\)\(\<\|\>\)\|--\)'
-      setf murphi | return
+      set ft=murphi | return
     endif
   endfor
   if saw_comment
-    setf objc | return
+    set ft=objc | return
   endif
   if exists("g:filetype_m")
-    exe "setf " . g:filetype_m | return
+    let &ft = g:filetype_m | return
   endif
-  setf octave | return
+  set ft=octave | return
 endfunc
 
 func! polyglot#DetectFsFiletype()
   for lnum in range(1, min([line("$"), 50]))
     let line = getline(lnum)
     if line =~# '^\(: \|new-device\)'
-      setf forth | return
+      set ft=forth | return
     endif
     if line =~# '^\s*\(#light\|import\|let\|module\|namespace\|open\|type\)'
-      setf fsharp | return
+      set ft=fsharp | return
     endif
     if line =~# '\s*\(#version\|precision\|uniform\|varying\|vec[234]\)'
-      setf glsl | return
+      set ft=glsl | return
     endif
   endfor
   if exists("g:filetype_fs")
-    exe "setf " . g:filetype_fs | return
+    let &ft = g:filetype_fs | return
   endif
-  setf forth | return
+  set ft=forth | return
 endfunc
 
 func! polyglot#DetectReFiletype()
   for lnum in range(1, min([line("$"), 50]))
     let line = getline(lnum)
     if line =~# '^\s*#\%(\%(if\|ifdef\|define\|pragma\)\s\+\w\|\s*include\s\+[<"]\|template\s*<\)'
-      setf cpp | return
+      set ft=cpp | return
     endif
-    setf reason | return
+    set ft=reason | return
   endfor
 endfunc
 
@@ -238,54 +240,137 @@ func! polyglot#DetectIdrFiletype()
   for lnum in range(1, min([line("$"), 5]))
     let line = getline(lnum)
     if line =~# '^\s*--.*[Ii]dris \=1'
-      setf idris | return
+      set ft=idris | return
     endif
     if line =~# '^\s*--.*[Ii]dris \=2'
-      setf idris2 | return
+      set ft=idris2 | return
     endif
   endfor
   for lnum in range(1, min([line("$"), 30]))
     let line = getline(lnum)
     if line =~# '^pkgs =.*'
-      setf idris | return
+      set ft=idris | return
     endif
     if line =~# '^depends =.*'
-      setf idris2 | return
+      set ft=idris2 | return
     endif
     if line =~# '^%language \(TypeProviders\|ElabReflection\)'
-      setf idris | return
+      set ft=idris | return
     endif
     if line =~# '^%language PostfixProjections'
-      setf idris2 | return
+      set ft=idris2 | return
     endif
     if line =~# '^%access .*'
-      setf idris | return
-    endif
-    if exists("g:filetype_idr")
-      exe "setf " . g:filetype_idr | return
+      set ft=idris | return
     endif
   endfor
-  setf idris2 | return
+  if exists("g:filetype_idr")
+    let &ft = g:filetype_idr | return
+  endif
+  set ft=idris2 | return
 endfunc
 
 func! polyglot#DetectLidrFiletype()
   for lnum in range(1, min([line("$"), 200]))
     let line = getline(lnum)
     if line =~# '^>\s*--.*[Ii]dris \=1'
-      setf lidris | return
+      set ft=lidris | return
     endif
   endfor
-  setf lidris2 | return
+  set ft=lidris2 | return
 endfunc
 
 func! polyglot#DetectBasFiletype()
   for lnum in range(1, min([line("$"), 5]))
     let line = getline(lnum)
     if line =~? 'VB_Name\|Begin VB\.\(Form\|MDIForm\|UserControl\)'
-      setf vb | return
+      set ft=vb | return
     endif
   endfor
-  setf basic | return
+  set ft=basic | return
+endfunc
+
+func! polyglot#DetectPmFiletype()
+  let line = getline(nextnonblank(1))
+  if line =~# 'XPM2'
+    set ft=xpm2 | return
+  endif
+  if line =~# 'XPM'
+    set ft=xpm | return
+  endif
+  for lnum in range(1, min([line("$"), 50]))
+    let line = getline(lnum)
+    if line =~# '^\s*\%(use\s\+v6\(\<\|\>\)\|\(\<\|\>\)module\(\<\|\>\)\|\(\<\|\>\)\%(my\s\+\)\=class\(\<\|\>\)\)'
+      set ft=raku | return
+    endif
+    if line =~# '\(\<\|\>\)use\s\+\%(strict\(\<\|\>\)\|v\=5\.\)'
+      set ft=perl | return
+    endif
+  endfor
+  if exists("g:filetype_pm")
+    let &ft = g:filetype_pm | return
+  endif
+  set ft=perl | return
+endfunc
+
+func! polyglot#DetectPlFiletype()
+  let line = getline(nextnonblank(1))
+  if line =~# '^[^#]*:-' || line =~# '^\s*\%(%\|/\*\)' || line =~# '\.\s*$'
+    set ft=prolog | return
+  endif
+  for lnum in range(1, min([line("$"), 50]))
+    let line = getline(lnum)
+    if line =~# '^\s*\%(use\s\+v6\(\<\|\>\)\|\(\<\|\>\)module\(\<\|\>\)\|\(\<\|\>\)\%(my\s\+\)\=class\(\<\|\>\)\)'
+      set ft=raku | return
+    endif
+    if line =~# '\(\<\|\>\)use\s\+\%(strict\(\<\|\>\)\|v\=5\.\)'
+      set ft=perl | return
+    endif
+  endfor
+  if exists("g:filetype_pl")
+    let &ft = g:filetype_pl | return
+  endif
+  set ft=perl | return
+endfunc
+
+func! polyglot#DetectTFiletype()
+  for lnum in range(1, min([line("$"), 5]))
+    let line = getline(lnum)
+    if line =~# '^\.'
+      set ft=nroff | return
+    endif
+  endfor
+  for lnum in range(1, min([line("$"), 50]))
+    let line = getline(lnum)
+    if line =~# '^\s*\%(use\s\+v6\(\<\|\>\)\|\(\<\|\>\)module\(\<\|\>\)\|\(\<\|\>\)\%(my\s\+\)\=class\(\<\|\>\)\)'
+      set ft=raku | return
+    endif
+    if line =~# '\(\<\|\>\)use\s\+\%(strict\(\<\|\>\)\|v\=5\.\)'
+      set ft=perl | return
+    endif
+  endfor
+  if exists("g:filetype_t")
+    let &ft = g:filetype_t | return
+  endif
+  set ft=perl | return
+endfunc
+
+func! polyglot#DetectTt2Filetype()
+  for lnum in range(1, min([line("$"), 3]))
+    let line = getline(lnum)
+    if line =~? '<\%(!DOCTYPE HTML\|[%?]\|html\)'
+      set ft=tt2html | return
+    endif
+  endfor
+  set ft=tt2 | return
+endfunc
+
+func! polyglot#DetectHtmlFiletype()
+  let line = getline(nextnonblank(1))
+  if line =~# '^\(%\|<[%&].*>\)'
+    set ft=mason | return
+  endif
+  set ft=html | return
 endfunc
 
 " Restore 'cpoptions'
