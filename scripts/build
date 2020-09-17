@@ -29,15 +29,8 @@ def load_data()
 
   deps = Hash.new { |h, k| h[k] = [] }
 
-  for package in packages.values
-    for name in [package.fetch("after", [])].flatten
-      packages[name] or raise "#{package["name"]} depends on unknown package: #{name}"
-      deps[name] << package["name"]
-    end
-  end
-
   each_node = lambda {|&b| packages.keys.each(&b) }
-  each_child = lambda {|n, &b| deps[n].each(&b) }
+  each_child = lambda {|n, &b| [packages[n]["after"] || []].flatten.each(&b) }
 
   languages = load_languages
 
@@ -135,8 +128,15 @@ def transform_patterns(heuristics)
 end
 
 def load_languages
-  url = "#{BASE_URL}/lib/linguist/languages.yml"
-  data = URI.open(url) { |io| YAML.load(io.read) }
+  file = 'tmp/languages.yml'
+
+  unless File.exist?(file)
+    url = "#{BASE_URL}/lib/linguist/languages.yml"
+    data = URI.open(url) { |io| io.read }
+    File.write(file, data)
+  end
+
+  YAML.load(File.read(file))
 end
 
 def parse_remote(remote)
@@ -257,13 +257,15 @@ def rules_to_code(rules)
   end
 
   output << rule_to_code(rules)
+
+  output
 end
 
 def rule_to_code(rule)
   if rule.has_key?("lines")
     if rule["lines"] == 1
       return <<~EOS
-        let line = getline(1)
+        let line = getline(nextnonblank(1))
 
         #{indent(rule_to_code(except(rule, "lines")), 0)}
       EOS
@@ -287,7 +289,9 @@ def rule_to_code(rule)
   end
 
   if rule.has_key?("rules")
-    return rule["rules"].map { |r| indent(rule_to_code(r), 0) }.join("\n")
+    return rule["rules"].map do |r|
+      indent(rule_to_code({ "extensions" => rule["extensions"], **r }), 0)
+    end.join("\n")
   end
 
   if rule.has_key?("if_set")
@@ -313,20 +317,29 @@ def rule_to_code(rule)
     EOS
   end
 
-  if (rule.keys - ["filetype", "override", "set"]).size > 0
+  if (rule.keys - ["filetype", "override", "set", "extensions"]).size > 0
     raise "Unknown rule: #{JSON.generate(rule)}"
   end
   
   if rule.has_key?("override")
+    variable = "g:filetype_#{rule["extensions"].first}"
     return <<~EOS
-      if exists("#{rule["override"]}")
-        exe "setf " . #{rule["override"]} | return
+      if exists("#{variable}")
+        let &ft = #{variable} | return
       endif
     EOS
   end
 
   if rule.has_key?("filetype")
-    return "setf #{rule["filetype"]} | return"
+    return "set ft=#{rule["filetype"]} | return"
+  end
+
+  if rule.has_key?("filetype")
+    return "set ft=#{rule["filetype"]} | return"
+  end
+
+  if rule.has_key?("extensions")
+    return ""
   end
 
   return ""
@@ -343,8 +356,7 @@ def extract(packages)
   FileUtils.rm_rf(all_dirs)
 
   output = []
-  # We need to reverse packages so they are included in proper order
-  packages.reverse.map do |package|
+  packages.map do |package|
     repo, branch, path, dir = parse_remote(package["remote"])
     dirs = package.fetch("dirs", default_dirs)
     ignored_dirs = package.fetch("ignored_dirs", [])
@@ -424,6 +436,7 @@ def generate_ftdetect(packages, heuristics)
   expected_filetypes = expected_filetypes.select { |e| filetype_names.include?(e["name"]) }
 
   native_extensions = Set.new(native_filetypes.flat_map { |f| f["extensions"] || [] })
+  native_filenames = Set.new(native_filetypes.flat_map { |f| f["filenames"] || [] })
 
   for package in packages
     name = package.fetch("name")
@@ -434,6 +447,12 @@ def generate_ftdetect(packages, heuristics)
       for extension in filetype["extensions"]
         if native_extensions.include?(extension)
           to_disable << "*." + extension
+        end
+      end
+
+      for filename in filetype["filenames"]
+        if native_filenames.include?(filename)
+          to_disable << filename
         end
       end
     end
@@ -455,10 +474,10 @@ def generate_ftdetect(packages, heuristics)
       name = filetype.fetch("name")
       syntax = filetype["syntax"] ? " | set syntax=#{filetype["syntax"]}" : ""
 
-      set_command = "setf #{name}"
+      set_command = "set ft=#{name}"
 
       if filetype["syntax"]
-        set_command = "if !did_filetype() | set ft=#{name} syntax=#{filetype["syntax"]} | endif"
+        set_command = "set ft=#{name} syntax=#{filetype["syntax"]}"
       end
 
       if filetype["custom_set"]
@@ -537,11 +556,11 @@ def generate_ftdetect(packages, heuristics)
     let s:cpo_save = &cpo
     set cpo&vim
 
-    func! polyglot#Heuristics()
+    func! polyglot#Shebang()
       " Try to detect filetype from shebang
-      let l:filetype = polyglot#Shebang()
-      if l:filetype != ""
-        exec "setf " . l:filetype
+      let ft = polyglot#ShebangFiletype()
+      if ft != ""
+        let &ft = ft
         return 1
       endif
 
@@ -564,7 +583,7 @@ def generate_ftdetect(packages, heuristics)
     let s:r_envflag = '%(\\S\\+=\\S\\+\\|-[iS]\\|--ignore-environment\\|--split-string\\)'
     let s:r_env = '^\\%(\\' . s:r_envflag . '\\s\\+\\)*\\(\\S\\+\\)'
 
-    func! polyglot#Shebang()
+    func! polyglot#ShebangFiletype()
       let l:line1 = getline(1)
 
       if l:line1 !~# "^#!"
@@ -758,6 +777,8 @@ if __FILE__ == $0
   if !ENV["DEV"]
     FileUtils.rm_rf("tmp")
   end
+
+  Dir.mkdir('tmp') unless File.exists?('tmp')
 
   packages, heuristics = load_data()
   download(packages)
