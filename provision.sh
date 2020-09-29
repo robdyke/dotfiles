@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script should be run as the target user. It uses sudo where appropriate.
 
@@ -77,8 +77,8 @@ function say {
 case $PLATFORM in
     $ARCH_AMD64)
         # try to install sudo if necessary and possible
-        if ! which sudo; then
-            if [ $(id -u) = 0 ]; then
+        if ! command -v sudo > /dev/null; then
+            if [ "$(id -u)" = 0 ]; then
                 pacman -Sy --noconfirm sudo
             else
                 >&2 echo "Could not bootstrap, sudo command not available / not running as root"
@@ -122,10 +122,12 @@ source system-dependencies/include/util.sh
 source system-dependencies/include/adhoc.sh
 
 # system-dependencies (run by root)
-source system-dependencies/${PLATFORM}.sh
+# shellcheck disable=SC1090
+source system-dependencies/"${PLATFORM}".sh
 
 # system-configuration (run by root)
-source system-configuration/${PLATFORM}.sh
+# shellcheck disable=SC1090
+source system-configuration/"${PLATFORM}".sh
 
 # user-configuration (run by current user)
 if [[ $(whoami) == naggie ]]; then
