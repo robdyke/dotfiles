@@ -1,7 +1,12 @@
+#!/usr/bin/env bash
 # Split off from provision.sh which is pure borne shell as FreeBSD does not
 # come with bash. Everything from here on is bash.
 
+# exit on error
+set -Eeo pipefail
+
 if [ ! "$PLATFORM" ]; then
+    # shellcheck disable=SC2016
     echo '$PLATFORM required'
     exit 1
 fi
