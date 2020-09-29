@@ -136,10 +136,10 @@ more handy shortcuts/wrappers/bindings.
 
 # OSes with automatic provisioning.
 
-`./provision.sh` will set up a fresh install with all of my regular
+`./.sh` will set up a fresh install with all of my regular
 applications, system configuration and my user configuration.
 
-Check the OSes specified in `./provision.sh` for an up-to-date list of OSes
+Check the OSes specified in `./bootstrap.sh` for an up-to-date list of OSes
 that have automatic provisioning. Note that the automatic provisioning may be
 in various different states of stability depending on what I'm currently using
 and if newer OS versions have been released.
@@ -152,20 +152,20 @@ will clobber your settings files.
 MacOS:
 
 ```bash
-curl -sL https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
+curl -sL https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
 ```
 
 Ubuntu:
 
 ```bash
-wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
+wget -O - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
 ```
 
 FreeBSD (supported soon):
 
 ```bash
 pkg install bash
-fetch -qo - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
+fetch -qo - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
 ```
 
 # Latency and speed
@@ -215,9 +215,10 @@ Dotfiles can provision a fresh install of an OS, or build a live/install CD. In
 order to manage the combinatorial complexity of supporting so many platforms,
 the install process has been changed to the following:
 
-1. `provision.sh` -- Installs git and ensures the repository exists. Can operate
+1. `bootstrap.sh` -- Installs git and ensures the repository exists. Can operate
    independently from this repository. Uses sudo Detects platform and executes
    all of the next steps:
+1. `provision.sh` -- Runs the following scripts after sourcing utils.
 1. `install-dependencies/*` -- Installs dependencies for the given platform
 1. `system-configuration/*` -- Configures global system settings for all users
    for the given platform, eg keyboard layout. A UK keyboard and timezone is
