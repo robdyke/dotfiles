@@ -164,7 +164,7 @@ wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && b
 FreeBSD (supported soon):
 
 ```bash
-pkg install bash sudo
+pkg install bash
 fetch -qo - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
 ```
 

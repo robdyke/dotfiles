@@ -110,6 +110,19 @@ case $PLATFORM in
         sudo apt-get -y update
         sudo apt-get -y install git
         ;;
+    $FREEBSD_AMD64)
+        # try to install sudo if necessary and possible
+        if ! command -v sudo > /dev/null; then
+            if [ "$(id -u)" = 0 ]; then
+                pkg install -y sudo
+            else
+                >&2 echo "Could not bootstrap, sudo command not available / not running as root"
+                exit 1
+            fi
+        fi
+
+        sudo pkg install -y git
+        ;;
 esac
 
 # clone main repository to home and change to it
