@@ -164,7 +164,6 @@ wget -O - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && b
 FreeBSD (supported soon):
 
 ```bash
-pkg install bash
 fetch -qo - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
 ```
 

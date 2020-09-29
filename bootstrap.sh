@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
+
+# Note (only) this script is borne-shell compatible so it can bootstrap FreeBSD
 
 # This script should be run as the target user. It uses sudo where appropriate.
 
@@ -6,7 +8,7 @@
 ORIGIN=https://github.com/naggie/dotfiles.git
 
 # exit on error
-set -Eeo pipefail
+set -e
 
 # Supportted platforms. For more specific stuff, such as extra packages for
 # desktop vs server or version specific stuff, put that logic in the platform
@@ -32,45 +34,40 @@ fi
 # This works buy poking the parent process to see if it's still alive.
 while true; do sudo -n true; sleep 15; kill -0 "$$" || exit; done 2>/dev/null &
 
-function get_platform() {
-    if uname | grep -q Linux; then
-        HOSTNAMECTL=$(sudo hostnamectl)
+if uname | grep -q Linux; then
+    if ! command -v hostnamectl >/dev/null; then
+        >&2 echo "Could not determine OS"
+        exit 1
+    fi
 
-        if [ -z "$HOSTNAMECTL" ]; then
-            >&2 echo "Could not determine OS"
-            exit 1
-        fi
-
-        LONG_BIT=$(getconf LONG_BIT)
-        if [[ $HOSTNAMECTL == *"Arch "* ]] && [[ $LONG_BIT == 64 ]]; then
-            echo $ARCH_AMD64
-        elif [[ $HOSTNAMECTL == *Ubuntu* ]] && [[ $LONG_BIT == 64 ]]; then
-            echo $UBUNTU_AMD64
-        elif [[ $HOSTNAMECTL == *Pop!_OS* ]] && [[ $LONG_BIT == 64 ]]; then
-            echo $POPOS_AMD64
-        elif [[ $HOSTNAMECTL == *Kubuntu* ]] && [[ $LONG_BIT == 64 ]]; then
-            echo $KUBUNTU_AMD64
-        elif [[ $HOSTNAMECTL == *elementary* ]] && [[ $LONG_BIT == 64 ]]; then
-            echo $ELEMENTARYOS_AMD64
-        elif [[ $HOSTNAMECTL == *Fedora* ]] && [[ $LONG_BIT == 64 ]]; then
-            echo $FEDORA_AMD64
-        elif [[ $HOSTNAMECTL == *Raspbian* ]] && [[ $LONG_BIT == 32 ]]; then
-            echo $RASPBIAN_ARMV5
-        else
-            >&2 echo "Unsupported OS"
-            exit 1
-        fi
-    elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
-        echo $MACOS_AMD64
-    elif command -v freebsd-version && getconf LONG_BIT | grep -q 64; then
-        echo $FREEBSD_AMD64
+    if sudo hostnamectl | grep -q  "Arch " && getconf LONG_BIT | grep -q 64; then
+        PLATFORM=$ARCH_AMD64
+    elif sudo hostnamectl | grep -q "Ubuntu" && getconf LONG_BIT | grep -q 64; then
+        PLATFORM=$UBUNTU_AMD64
+    elif sudo hostnamectl | grep -q "Pop!_OS" && getconf LONG_BIT | grep -q 64; then
+        PLATFORM=$POPOS_AMD64
+    elif sudo hostnamectl | grep -q "Kubuntu" && getconf LONG_BIT | grep -q 64; then
+        PLATFORM=$KUBUNTU_AMD64
+    elif sudo hostnamectl | grep -q "elementary" && getconf LONG_BIT | grep -q 64; then
+        PLATFORM=$ELEMENTARYOS_AMD64
+    elif sudo hostnamectl | grep -q "Fedora" && getconf LONG_BIT | grep -q 64; then
+        PLATFORM=$FEDORA_AMD64
+    elif sudo hostnamectl | grep -q "Raspbian" && getconf LONG_BIT | grep -q 64; then
+        PLATFORM=$RASPBIAN_ARMV5
     else
         >&2 echo "Unsupported OS"
         exit 1
     fi
-}
+elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
+    echo $MACOS_AMD64
+elif command -v freebsd-version && getconf LONG_BIT | grep -q 64; then
+    echo $FREEBSD_AMD64
+else
+    >&2 echo "Unsupported OS"
+    exit 1
+fi
 
-export PLATFORM=$(get_platform)
+export PLATFORM
 
 # make sure git/sudo is installed
 case $PLATFORM in
