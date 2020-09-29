@@ -19,6 +19,7 @@ KUBUNTU_AMD64=KUBUNTU_AMD64
 ELEMENTARYOS_AMD64=ELEMENTARYOS_AMD64
 FEDORA_AMD64=FEDORA_AMD64
 RASPBIAN_ARMV5=RASPBIAN_ARMV5
+FREEBSD_AMD64=FREEBSD_AMD64
 
 # authorise sudo early on
 if ! sudo -n echo 2>/dev/null; then
@@ -61,6 +62,8 @@ function get_platform() {
         fi
     elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
         echo $MACOS_AMD64
+    elif command -v freebsd-version && getconf LONG_BIT | grep -q 64; then
+        echo $FREEBSD_AMD64
     else
         >&2 echo "Unsupported OS"
         exit 1

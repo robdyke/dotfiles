@@ -149,14 +149,23 @@ and if newer OS versions have been released.
 Obviously inspect the script to see what it does before you run it. Note that it
 will clobber your settings files.
 
+MacOS:
+
 ```bash
 curl -sL https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
 ```
 
-Ubuntu 17.04 does not have curl by default.
+Ubuntu:
 
 ```bash
 wget -O - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
+```
+
+FreeBSD (supported soon):
+
+```bash
+pkg install bash sudo
+fetch -qo - https://github.com/naggie/dotfiles/raw/master/provision.sh | bash && bash
 ```
 
 # Latency and speed
