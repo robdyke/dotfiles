@@ -7,6 +7,10 @@ new or re-installed PC.
 The focus is on functionality. Features are only added, in minimal form, if I
 use them regularly.
 
+<p align="center">
+<a href="https://cloud.drone.io/naggie/dotfiles"><img src="https://cloud.drone.io/api/badges/naggie/dotfiles/status.svg" /></a>
+</p>
+
 
 # General Tools
 
