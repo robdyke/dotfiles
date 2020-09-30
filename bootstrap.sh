@@ -67,8 +67,6 @@ else
     exit 1
 fi
 
-export PLATFORM
-
 # make sure git/sudo is installed
 case $PLATFORM in
     $ARCH_AMD64)
@@ -124,5 +122,4 @@ cd ~/dotfiles
 git pull --ff-only $ORIGIN master || true
 git branch --set-upstream-to=origin/master master
 
-
-bash provision.sh  # requires $PLATFORM
+bash provision.sh $PLATFORM

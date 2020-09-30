@@ -5,9 +5,9 @@
 # exit on error
 set -Eeo pipefail
 
-if [ ! "$PLATFORM" ]; then
-    # shellcheck disable=SC2016
-    echo '$PLATFORM required'
+if [ ! "$1" ]; then
+    echo "usage: $0 <platform>"
+    echo "tee system-dependencies/ for platforms"
     exit 1
 fi
 
