@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # GnuPG 2.2+ required for new non-interactive commands
 

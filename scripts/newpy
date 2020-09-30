@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # I do all these steps manually, quite a lot
 echo -e '#!/usr/bin/env python3\n' > $1
 chmod +x $1

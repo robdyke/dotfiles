@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Works on fedora 31.
 # needs grub2-efi-x64
 # reference https://github.com/aguslr/multibootusb https://wiki.archlinux.org/index.php/Multiboot_USB_drive

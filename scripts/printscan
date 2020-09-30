@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Makes a (single page) PDF look like it was printed and scanned
 # see https://news.ycombinator.com/item?id=23157408
 # requires imagemagick

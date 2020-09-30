@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script rsyncs the git repository over (without .git) to a remote host
 # and executes the command given via args. Useful as an alternative to ansible
 # for small home deployments. ~/.rjob is used at remote host.
