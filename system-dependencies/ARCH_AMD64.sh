@@ -4,6 +4,7 @@ sudo pacman --noconfirm -Syu \
     ffmpeg \
     fzf \
     git \
+    git-crypt \
     gnupg \
     go \
     htop \

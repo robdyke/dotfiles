@@ -3,6 +3,7 @@ sudo pkg install -y \
     curl \
     fzf \
     git \
+    git-crypt \
     gnupg \
     htop \
     ncdu \

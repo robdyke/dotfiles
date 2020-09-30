@@ -11,6 +11,7 @@ sudo -E apt-get -y install \
     bash-completion \
     curl \
     git \
+    git-crypt \
     gnupg2 \
     htop \
     httpie \

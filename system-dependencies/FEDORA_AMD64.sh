@@ -1,11 +1,12 @@
 sudo dnf upgrade -y
 sudo dnf install -y \
-    @development-tools \
     bash-completion \
     curl \
+    @development-tools \
     dnf \
     fzf \
     git \
+    git-crypt \
     git-subtree \
     gnupg2 \
     htop \

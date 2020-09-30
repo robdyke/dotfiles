@@ -16,6 +16,7 @@ sudo -E apt-get -y install --install-recommends \
     entr \
     ffmpeg \
     git \
+    git-crypt \
     gnupg2 \
     htop \
     httpie \

@@ -23,6 +23,7 @@ packages=(
     fzf
     entr
     git
+    git-crypt
     gnupg2
     htop
     httpie
