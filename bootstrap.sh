@@ -59,9 +59,9 @@ if uname | grep -q Linux; then
         exit 1
     fi
 elif uname | grep -q Darwin && getconf LONG_BIT | grep -q 64; then
-    echo $MACOS_AMD64
+    PLATFORM=$MACOS_AMD64
 elif command -v freebsd-version && getconf LONG_BIT | grep -q 64; then
-    echo $FREEBSD_AMD64
+    PLATFORM=$FREEBSD_AMD64
 else
     >&2 echo "Unsupported OS"
     exit 1
