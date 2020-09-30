@@ -1,5 +1,5 @@
 sudo pkg install -y \
-    bash-completion
+    bash-completion \
     curl \
     fzf \
     git \
