@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script configures the user account by copying dotfiles and running
 # commands that result in persistent configuration changes.
 

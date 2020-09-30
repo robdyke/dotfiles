@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # runs user-configuration.sh and then applies changes that are specific to my
 # identity using only publicly publishable data
 
