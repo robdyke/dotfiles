@@ -3,7 +3,7 @@ sudo pkg install -y \
     curl \
     fzf \
     git \
-    gnupg2 \
+    gnupg \
     htop \
     ncdu \
     ncdu \
