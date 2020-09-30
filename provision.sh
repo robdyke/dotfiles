@@ -11,6 +11,8 @@ if [ ! "$1" ]; then
     exit 1
 fi
 
+PLATFORM="$1"
+
 # contains utilities for downloading and installation
 source system-dependencies/include/util.sh
 
