@@ -7,6 +7,7 @@ sudo pkg install -y \
     htop \
     ncdu \
     ncdu \
+    python3 \
     ripgrep \
     sudo \
     tmpreaper \

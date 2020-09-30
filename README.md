@@ -161,7 +161,7 @@ Ubuntu:
 wget -O - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
 ```
 
-FreeBSD (supported soon):
+FreeBSD:
 
 ```bash
 fetch -qo - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
