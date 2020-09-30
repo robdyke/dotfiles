@@ -10,7 +10,6 @@ sudo apt-get -y upgrade
 sudo -E apt-get -y install \
     bash-completion \
     curl \
-    etckeeper \
     git \
     gnupg2 \
     htop \

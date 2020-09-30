@@ -10,8 +10,6 @@ fi
 sudo mkdir -p /usr/lib/mozilla/native-messaging-hosts/
 sudo cp etc/firefox/com.github.browserpass.native.json /usr/lib/mozilla/native-messaging-hosts/
 
-sudo etckeeper init
-
 # workaround for long running bug where system always suspends regardless of settings
 # obviously not good for a laptop, but at the moment I have elementary on a desktop only.
 # See https://elementaryos.stackexchange.com/questions/16519/elementary-os-ignoring-suspend-disable

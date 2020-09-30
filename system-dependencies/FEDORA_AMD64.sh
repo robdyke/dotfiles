@@ -4,7 +4,6 @@ sudo dnf install -y \
     bash-completion \
     curl \
     dnf \
-    etckeeper \
     fzf \
     git \
     git-subtree \

@@ -70,7 +70,7 @@ use them regularly.
 | Document conversion            | [pandoc][35]                               | See also [pdflatex][36], which I use for formal reports.                                                              |
 | Static blog                    | [hugo][37]                                 | Chosen in an attempt to make myself stop writing blog engines and write articles instead.                             |
 | Git history viewer             | [tig][41]                                  |                                                                                                                       |
-| Configuration version control  | [etckeeper][42]                            | Used for general purpose servers.                                                                                     |
+| Secret management              | [git-crypt][42]                            | Used API secrets mainly.                                                                                              |
 | Music library curation         | [beets][43]                                | Automates curation of music library                                                                                   |
 | CLI Benchmarking               | [hyperfine][44]                            |                                                                                                                       |
 | Secure file sending            | [ffsend][46]                               | Terminal client for [Firefox send][47]                                                                                |
@@ -95,7 +95,7 @@ use them regularly.
 [37]: https://gohugo.io/
 [38]: https://rclone.org/
 [41]: https://github.com/jonas/tig
-[42]: https://etckeeper.branchable.com/
+[42]: https://github.com/AGWA/git-crypt
 [43]: https://beets.io/
 [44]: https://github.com/sharkdp/hyperfine
 [45]: https://www.openscad.org/

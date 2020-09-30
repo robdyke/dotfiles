@@ -14,7 +14,6 @@ sudo -E apt-get -y install --install-recommends \
     curl \
     dconf-cli \
     entr \
-    etckeeper \
     ffmpeg \
     git \
     gnupg2 \

@@ -1,7 +1,6 @@
 sudo pacman --noconfirm -Syu \
     bash-completion \
     curl \
-    etckeeper \
     ffmpeg \
     fzf \
     git \
