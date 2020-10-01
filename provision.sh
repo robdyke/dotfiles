@@ -13,20 +13,27 @@ fi
 
 PLATFORM="$1"
 
+function say {
+    printf '\n\e[1;32m%s\e[m\n' "$*"
+}
+
 # contains utilities for downloading and installation
 source system-dependencies/include/util.sh
 
 # adhoc program installers
 source system-dependencies/include/adhoc.sh
 
+say "System dependencies..."
 # system-dependencies (run by root)
 # shellcheck disable=SC1090
 source system-dependencies/"${PLATFORM}".sh
 
+say "System configuration..."
 # system-configuration (run by root)
 # shellcheck disable=SC1090
 source system-configuration/"${PLATFORM}".sh
 
+say "User configuration..."
 # user-configuration (run by current user)
 if [[ $(whoami) == naggie ]]; then
     ./user-configuration-naggie.sh
@@ -34,4 +41,4 @@ else
     ./user-configuration.sh
 fi
 
-printf '\n\e[1;32m%s\e[m\n' "PROVISIONING SUCCESSFUL"
+say "PROVISIONING SUCCESSFUL"
