@@ -41,4 +41,4 @@ else
     ./user-configuration.sh
 fi
 
-say "PROVISIONING SUCCESSFUL"
+say "Provisioning successful."

@@ -40,7 +40,7 @@ sudo systemctl start kbdrate.service
 # keyboard layout in console
 # TODO replace with custom keymap
 # https://wiki.archlinux.org/index.php/Linux_console/Keyboard_configuration
-echo 'KEYMAP=uk' | sudo tee /etc/vconsole.conf
+echo 'KEYMAP=uk' | sudo tee /etc/vconsole.conf > /dev/null
 
 # browserpass config
 sudo mkdir -p /usr/lib/mozilla/native-messaging-hosts/

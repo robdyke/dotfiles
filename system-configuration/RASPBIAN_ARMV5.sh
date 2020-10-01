@@ -7,7 +7,7 @@ if ! sudo grep -q 'PasswordAuthentication no' /etc/ssh/sshd_config; then
 fi
 
 # set keyboard layout (with caps lock as esc)
-cat <<-EOF | sudo tee /etc/default/keyboard
+cat <<-EOF | sudo tee /etc/default/keyboard > /dev/null
     XKBMODEL="pc104"
     XKBLAYOUT="gb"
     XKBVARIANT=""
