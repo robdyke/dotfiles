@@ -34,6 +34,8 @@ fi
 # This works buy poking the parent process to see if it's still alive.
 while true; do sudo -n true; sleep 15; kill -0 "$$" || exit; done 2>/dev/null &
 
+printf '\n\e[1;32m%s\e[m\n' "OS detection..."
+
 if uname | grep -q Linux; then
     if ! command -v hostnamectl >/dev/null; then
         >&2 echo "Could not determine OS"
@@ -66,6 +68,10 @@ else
     >&2 echo "Unsupported OS"
     exit 1
 fi
+
+echo $PLATFORM
+
+printf '\n\e[1;32m%s\e[m\n' "Bootstrapping..."
 
 # make sure git/sudo is installed
 case $PLATFORM in
