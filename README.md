@@ -152,19 +152,19 @@ will clobber your settings files.
 MacOS:
 
 ```bash
-curl -sL https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
+curl -sL https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | sh && zsh
 ```
 
 Ubuntu:
 
 ```bash
-wget -O - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
+wget -O - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | sh && zsh
 ```
 
 FreeBSD:
 
 ```bash
-fetch -qo - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | bash && bash
+fetch -qo - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | sh && zsh
 ```
 
 # Latency and speed
