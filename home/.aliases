@@ -50,6 +50,7 @@ alias r="rgfzf"
 alias pssh="ssh -o IdentitiesOnly=yes"
 alias pscp="scp -o IdentitiesOnly=yes"
 alias disks="sudo lsblk -e7 -d -o name,model,serial,size,serial"
+alias wine-shell="wine explorer /desktop=shell"
 
 # MISC FIXES
 # make bash/zsh aliases work with sudo
