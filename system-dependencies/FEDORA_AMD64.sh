@@ -57,6 +57,7 @@ if [ -d /usr/share/cockpit ]; then
     git clone https://github.com/optimans/cockpit-zfs-manager.git $DIR
     sudo cp -r $DIR/zfs /usr/share/cockpit
     rm -rf $DIR
+    sudo systemctl restart cockpit
 fi
 
 
