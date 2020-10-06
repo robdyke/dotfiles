@@ -155,7 +155,7 @@ MacOS:
 curl -sL https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | sh && zsh
 ```
 
-Ubuntu:
+Ubuntu/Fedora:
 
 ```bash
 wget -O - https://github.com/naggie/dotfiles/raw/master/bootstrap.sh | sh && zsh

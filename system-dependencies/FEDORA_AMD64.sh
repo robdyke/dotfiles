@@ -32,6 +32,7 @@ sudo dnf install -y \
     upx \
     vim \
     wget \
+    wireguard-tools \
     yubikey-manager \
     zsh \
 
@@ -42,6 +43,22 @@ adhoc_dstask_linux_amd64
 adhoc_golang_linux_amd64
 adhoc_hugo_linux_amd64
 adhoc_ffsend_linux_amd64
+
+
+# ZFS
+sudo dnf install -y http://download.zfsonlinux.org/fedora/zfs-release$(rpm -E %dist).noarch.rpm
+sudo dnf install -y kernel-devel zfs
+
+# ZFS cockpit manager
+# Consider also, cockpit. Can be installed by enabling the "headless" option in
+# the fedora installer.
+if [ -d /usr/share/cockpit ]; then
+    DIR=$(mktemp -d)
+    git clone https://github.com/optimans/cockpit-zfs-manager.git $DIR
+    sudo cp -r $DIR/zfs /usr/share/cockpit
+    rm -rf $DIR
+fi
+
 
 # desktop only
 if hostnamectl | grep -q Workstation; then
