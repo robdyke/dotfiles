@@ -130,9 +130,6 @@ ca Wqa  wqa
 ca WQa  wqa
 ca WQA  wqa
 
-" if I want to quit all, I'm sure about it
-ca qa qa!
-
 " gf opens the file under cursor, which is great for navigating a hierarchy of files.
 " Change gF to open file under cursor in new tab, not new pane, like CTRL+W gF
 nnoremap gF <C-w>gf
