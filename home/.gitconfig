@@ -6,6 +6,7 @@
 	ui = auto
 [core]
 	excludesfile = ~/.gitignore_global
+	attributesfile = /home/naggie/.gitattributes_global
 [help]
 	autocorrect = 1
 [include]
