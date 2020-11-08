@@ -4,8 +4,8 @@
 function adhoc_dstask_linux_amd64 {
     EXE="$(
         obtain \
-            https://github.com/naggie/dstask/releases/download/v0.18/dstask-linux-amd64 \
-            04f38793f31b46633e0363249952c8fa425369b4c0f28643bee2bd8c19a090d7
+            https://github.com/naggie/dstask/releases/download/v0.23.1/dstask-linux-amd64 \
+            3e5a645b738682f276159ea1e198d5fae0a898011372b820df126d6b815b7642
     )"
     sudo cp "${EXE}" /usr/local/bin/dstask.new
     sudo chmod +x /usr/local/bin/dstask.new
@@ -15,8 +15,8 @@ function adhoc_dstask_linux_amd64 {
 function adhoc_dstask_macos_amd64 {
     EXE="$(
         obtain \
-            https://github.com/naggie/dstask/releases/download/v0.18/dstask-darwin-amd64 \
-            c26d543bf7b4b3fa41b5afdb784b7a8bccee8b7c5378ce999e1f8cea2094e67c
+            https://github.com/naggie/dstask/releases/download/v0.23.1/dstask-darwin-amd64 \
+            d8c907f239bc324fdc5ae43528f3afe91b05e7118da681ff8155532aefe8f255
     )"
     cp "${EXE}" /usr/local/bin/dstask.new
     chmod +x /usr/local/bin/dstask.new
