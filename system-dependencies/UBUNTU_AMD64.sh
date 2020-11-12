@@ -42,6 +42,7 @@ sudo -E apt-get -y install --install-recommends \
     tree \
     upx \
     vim \
+    vlc \
     wget \
     zsh \
 
