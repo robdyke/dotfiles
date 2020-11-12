@@ -23,6 +23,7 @@ sudo -E apt-get -y install --install-recommends \
     httrack \
     jq \
     language-pack-en \
+    libsox-fmt-mp3 \
     libssl-dev \
     ncdu \
     parallel \
