@@ -15,6 +15,7 @@ sudo -E apt-get -y install --install-recommends \
     dconf-cli \
     entr \
     ffmpeg \
+    gimp \
     git \
     git-crypt \
     gnupg2 \
