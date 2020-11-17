@@ -26,6 +26,7 @@ sudo -E apt-get -y install --install-recommends \
     language-pack-en \
     libsox-fmt-mp3 \
     libssl-dev \
+    most \
     ncdu \
     parallel \
     pass \

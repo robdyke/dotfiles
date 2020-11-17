@@ -6,6 +6,7 @@ sudo pkg install -y \
     git-crypt \
     gnupg \
     htop \
+    most \
     ncdu \
     ncdu \
     python3 \

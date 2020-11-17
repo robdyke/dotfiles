@@ -19,9 +19,9 @@ packages=(
     bash-completion@2
     brightness
     coreutils
+    entr
     ffmpeg
     fzf
-    entr
     git
     git-crypt
     gnupg2
@@ -32,6 +32,7 @@ packages=(
     hugo
     iproute2mac
     jq
+    most
     ncdu
     nvim
     openssh

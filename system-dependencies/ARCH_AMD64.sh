@@ -11,6 +11,7 @@ sudo pacman --noconfirm -Syu \
     httpie \
     httrack \
     jq \
+    most \
     ncdu \
     neovim \
     openssh \

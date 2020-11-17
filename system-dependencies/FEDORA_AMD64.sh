@@ -1,8 +1,8 @@
 sudo dnf upgrade -y
 sudo dnf install -y \
+    @development-tools \
     bash-completion \
     curl \
-    @development-tools \
     dnf \
     fzf \
     git \
@@ -14,6 +14,7 @@ sudo dnf install -y \
     httrack \
     hub \
     jq \
+    most \
     ncdu \
     neovim \
     opensc \

@@ -16,6 +16,7 @@ sudo -E apt-get -y install \
     htop \
     httpie \
     jq \
+    most \
     ncdu \
     pass \
     ssh \
