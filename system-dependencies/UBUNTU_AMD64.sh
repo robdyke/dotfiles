@@ -53,7 +53,7 @@ sudo -E apt-get -y remove command-not-found
 
 # new in 20.04, might not exist if older ubuntu is targeted
 sudo -E apt-get -y install zfsutils-linux || true
-sudo -E apt-get -y install wireguard || true
+sudo -E apt-get -y install wireguard wireguard-tools || true
 
 adhoc_dstask_linux_amd64
 adhoc_ripgrep_linux_amd64
