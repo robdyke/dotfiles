@@ -1,7 +1,91 @@
 CHANGELOG
 =========
 
-0.22.1
+0.24.3
+------
+- Added `--padding` option
+  ```sh
+  fzf --margin 5% --padding 5% --border --preview 'cat {}' \
+      --color bg:#222222,preview-bg:#333333
+  ```
+
+0.24.2
+------
+- Bug fixes and improvements
+
+0.24.1
+------
+- Fixed broken `--color=[bw|no]` option
+
+0.24.0
+------
+- Real-time rendering of preview window
+  ```sh
+  # fzf can render preview window before the command completes
+  fzf --preview 'sleep 1; for i in $(seq 100); do echo $i; sleep 0.01; done'
+
+  # Preview window can process ANSI escape sequence (CSI 2 J) for clearing the display
+  fzf --preview 'for i in $(seq 100000); do
+    (( i % 200 == 0 )) && printf "\033[2J"
+    echo "$i"
+    sleep 0.01
+  done'
+  ```
+- Updated `--color` option to support text styles
+  - `regular` / `bold` / `dim` / `underline` / `italic` / `reverse` / `blink`
+    ```sh
+    # * Set -1 to keep the original color
+    # * Multiple style attributes can be combined
+    # * Italic style may not be supported by some terminals
+    rg --line-number --no-heading --color=always "" |
+      fzf --ansi --prompt "Rg: " \
+          --color fg+:italic,hl:underline:-1,hl+:italic:underline:reverse:-1 \
+          --color pointer:reverse,prompt:reverse,input:159 \
+          --pointer '  '
+    ```
+- More `--border` options
+  - `vertical`, `top`, `bottom`, `left`, `right`
+  - Updated Vim plugin to use these new `--border` options
+    ```vim
+    " Floating popup window in the center of the screen
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+    " Popup with 100% width
+    let g:fzf_layout = { 'window': { 'width': 1.0, 'height': 0.5, 'border': 'horizontal' } }
+
+    " Popup with 100% height
+    let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 1.0, 'border': 'vertical' } }
+
+    " Similar to 'down' layout, but it uses a popup window and doesn't affect the window layout
+    let g:fzf_layout = { 'window': { 'width': 1.0, 'height': 0.5, 'yoffset': 1.0, 'border': 'top' } }
+
+    " Opens on the right;
+    "   'highlight' option is still supported but it will only take the foreground color of the group
+    let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 1.0, 'xoffset': 1.0, 'border': 'left', 'highlight': 'Comment' } }
+    ```
+- To indicate if `--multi` mode is enabled, fzf will print the number of
+  selected items even when no item is selected
+  ```sh
+  seq 100 | fzf
+    # 100/100
+  seq 100 | fzf --multi
+    # 100/100 (0)
+  seq 100 | fzf --multi 5
+    # 100/100 (0/5)
+  ```
+- Since 0.24.0, release binaries will be uploaded to https://github.com/junegunn/fzf/releases
+
+0.23.1
+------
+- Added `--preview-window` options for disabling flags
+    - `nocycle`
+    - `nohidden`
+    - `nowrap`
+    - `default`
+- Built with Go 1.14.9 due to performance regression
+    - https://github.com/golang/go/issues/40727
+
+0.23.0
 ------
 - Support preview scroll offset relative to window height
   ```sh
@@ -11,13 +95,19 @@ CHANGELOG
         --preview-window +{2}-/2
   ```
 - Added `--preview-window` option for sharp edges (`--preview-window sharp`)
+- Added `--preview-window` option for cyclic scrolling (`--preview-window cycle`)
 - Reduced vertical padding around the preview window when `--preview-window
   noborder` is used
+- Added actions for preview window
+    - `preview-half-page-up`
+    - `preview-half-page-down`
 - Vim
     - Popup width and height can be given in absolute integer values
     - Added `fzf#exec()` function for getting the path of fzf executable
         - It also downloads the latest binary if it's not available by running
           `./install --bin`
+- Built with Go 1.15.2
+    - We no longer provide 32-bit binaries
 
 0.22.0
 ------
