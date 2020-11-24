@@ -132,6 +132,8 @@ rules:
     filetype: perl
 - override: true
 - filetype: perl
+  shebang: true
+  fallback: true
 ---
 extensions: [pl]
 rules:
@@ -149,6 +151,8 @@ rules:
     filetype: perl
 - override: true
 - filetype: perl
+  shebang: true
+  fallback: true
 ---
 extensions: [t]
 rules:
@@ -166,6 +170,8 @@ rules:
   #   filetype: turing
 - override: true
 - filetype: perl
+  shebang: true
+  fallback: true
 ---
 extensions: [tt2]
 rules:
@@ -180,5 +186,11 @@ rules:
 - lines: 1
   pattern: '^(%|<[%&].*>)'
   filetype: mason
+- lines: 50
+  rules:
+  - pattern: '{%-?\s*(end.*|extends|block|macro|set|if|for|include|trans|load)\b|{#\s+'
+    filetype: htmldjango
+  - pattern: '\bDTD\s+XHTML\s'
+    filetype: xhtml
 - filetype: html
-
+  fallback: true

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'visual-basic') == -1
+if has_key(g:polyglot_is_disabled, 'visual-basic')
+  finish
+endif
 
 " Vim filetype plugin file
 " Language:	VisualBasic (ft=vb)
@@ -45,5 +47,3 @@ endif
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-endif

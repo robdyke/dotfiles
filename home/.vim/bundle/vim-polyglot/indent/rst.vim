@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rst') == -1
+if has_key(g:polyglot_is_disabled, 'rst')
+  finish
+endif
 
 " Vim indent file
 " Vim reST indent file
@@ -75,5 +77,3 @@ function GetRSTIndent()
 
   return ind
 endfunction
-
-endif

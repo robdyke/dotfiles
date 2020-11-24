@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'powershell') == -1
+if has_key(g:polyglot_is_disabled, 'powershell')
+  finish
+endif
 
 " Vim syntax file
 " Language:           Windows PowerShell
@@ -193,5 +195,3 @@ if version >= 508 || !exists("did_ps1_syn_inits")
 endif
 
 let b:current_syntax = "ps1"
-
-endif

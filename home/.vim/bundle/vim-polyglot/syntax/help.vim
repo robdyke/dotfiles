@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'help') == -1
+if has_key(g:polyglot_is_disabled, 'help')
+  finish
+endif
 
 " Vim syntax file
 " Language:	Vim help file
@@ -213,5 +215,3 @@ let b:current_syntax = "help"
 let &cpo = s:cpo_save
 unlet s:cpo_save
 " vim: ts=8 sw=2
-
-endif

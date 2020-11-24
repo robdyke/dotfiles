@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'aml') == -1
+if has_key(g:polyglot_is_disabled, 'aml')
+  finish
+endif
 
 " Vim syntax file
 " Language:	AML (ARC/INFO Arc Macro Language)
@@ -144,5 +146,3 @@ hi def link amlTab	amlArcCmd
 
 
 let b:current_syntax = "aml"
-
-endif

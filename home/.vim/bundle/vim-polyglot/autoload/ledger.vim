@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ledger') == -1
+if has_key(g:polyglot_is_disabled, 'ledger')
+  finish
+endif
 
 scriptencoding utf-8
 " vim:ts=2:sw=2:sts=2:foldmethod=marker
@@ -740,5 +742,3 @@ function! ledger#show_balance(file, ...) abort
   endif
 endf
 " }}}
-
-endif

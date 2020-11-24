@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'requirements') == -1
+if has_key(g:polyglot_is_disabled, 'requirements')
+  finish
+endif
 
 " the Requirements File Format syntax support for Vim
 " Version: 1.5.3
@@ -53,5 +55,3 @@ hi link requirementsEnvironmentMarkers Macro
 let b:current_syntax = "requirements"
 
 " vim: et sw=4 ts=4 sts=4:
-
-endif

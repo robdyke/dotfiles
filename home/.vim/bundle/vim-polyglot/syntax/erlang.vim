@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'erlang') == -1
+if has_key(g:polyglot_is_disabled, 'erlang')
+  finish
+endif
 
 " Vim syntax file
 " Language:     Erlang (http://www.erlang.org)
@@ -261,5 +263,3 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " vim: sw=2 et
-
-endif

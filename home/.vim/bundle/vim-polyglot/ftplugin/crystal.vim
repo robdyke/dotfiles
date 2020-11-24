@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'crystal') == -1
+if has_key(g:polyglot_is_disabled, 'crystal')
+  finish
+endif
 
 if exists('b:did_ftplugin')
   finish
@@ -83,5 +85,3 @@ if exists('g:AutoPairsLoaded')
 endif
 
 " vim: sw=2 sts=2 et:
-
-endif

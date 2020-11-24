@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'zig') == -1
+if has_key(g:polyglot_is_disabled, 'zig')
+  finish
+endif
 
 " indent/zig.vim
 
@@ -76,5 +78,3 @@ function! GetZigIndent(lnum)
 
     return cindent(a:lnum)
 endfunction
-
-endif

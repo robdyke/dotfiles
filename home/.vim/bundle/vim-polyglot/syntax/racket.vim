@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'racket') == -1
+if has_key(g:polyglot_is_disabled, 'racket')
+  finish
+endif
 
 " Vim syntax file
 " Language:     Racket
@@ -661,5 +663,3 @@ if version >= 508 || !exists("did_racket_syntax_inits")
 endif
 
 let b:current_syntax = "racket"
-
-endif

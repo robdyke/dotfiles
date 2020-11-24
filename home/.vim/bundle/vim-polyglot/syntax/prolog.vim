@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'prolog') == -1
+if has_key(g:polyglot_is_disabled, 'prolog')
+  finish
+endif
 
 " Vim syntax file
 " Language:    PROLOG
@@ -118,5 +120,3 @@ endif
 let b:current_syntax = "prolog"
 
 " vim: ts=8
-
-endif

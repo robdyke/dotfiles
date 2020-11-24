@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'basic') == -1
+if has_key(g:polyglot_is_disabled, 'basic')
+  finish
+endif
 
 " Vim syntax file
 " Language:	BASIC
@@ -166,5 +168,3 @@ let b:current_syntax = "basic"
 let &cpo = s:cpo_save
 unlet s:cpo_save
 " vim: ts=8
-
-endif

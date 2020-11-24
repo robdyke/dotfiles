@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'zig') == -1
+if has_key(g:polyglot_is_disabled, 'zig')
+  finish
+endif
 
 " Vim syntax file
 " Language: Zig
@@ -11,7 +13,7 @@ endif
 let b:current_syntax = "zig"
 
 syn keyword zigStorage const var extern packed export pub noalias inline noinline comptime callconv volatile allowzero align linksection threadlocal anytype
-syn keyword zigStructure struct enum union error
+syn keyword zigStructure struct enum union error opaque
 syn keyword zigStatement break return continue asm defer errdefer unreachable try catch async nosuspend await suspend resume
 syn keyword zigConditional if else switch and or orelse
 syn keyword zigRepeat while for
@@ -38,7 +40,7 @@ syn match zigBuiltinFn "\v\@(errorReturnTrace|fence|fieldParentPtr|field|unionIn
 syn match zigBuiltinFn "\v\@(frameAddress|import|newStackCall|asyncCall|intToPtr)>"
 syn match zigBuiltinFn "\v\@(memcpy|memset|mod|mulWithOverflow|splat|src)>"
 syn match zigBuiltinFn "\v\@(bitOffsetOf|byteOffsetOf|OpaqueType|panic|ptrCast)>"
-syn match zigBuiltinFn "\v\@(ptrToInt|rem|returnAddress|setCold|Type|shuffle)>"
+syn match zigBuiltinFn "\v\@(ptrToInt|rem|returnAddress|setCold|Type|shuffle|reduce)>"
 syn match zigBuiltinFn "\v\@(setRuntimeSafety|setEvalBranchQuota|setFloatMode)>"
 syn match zigBuiltinFn "\v\@(setGlobalLinkage|setGlobalSection|shlExact|This|hasDecl|hasField)>"
 syn match zigBuiltinFn "\v\@(shlWithOverflow|shrExact|sizeOf|bitSizeOf|sqrt|byteSwap|subWithOverflow|intCast|floatCast|intToFloat|floatToInt|boolToInt|errSetCast)>"
@@ -104,5 +106,3 @@ hi def link zigStructure Structure
 hi def link zigStatement Statement
 hi def link zigConditional Conditional
 hi def link zigRepeat Repeat
-
-endif

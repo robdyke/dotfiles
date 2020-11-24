@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'jq') == -1
+if has_key(g:polyglot_is_disabled, 'jq')
+  finish
+endif
 
 " Vim syntax file
 " Language:	jq
@@ -130,5 +132,3 @@ hi link jqConditional            Conditional
 "hi link jqInclude                Include
 "hi link jqDecorator              Define
 hi link jqNumber                 Number
-
-endif

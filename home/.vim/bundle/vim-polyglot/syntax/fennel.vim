@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'fennel') == -1
+if has_key(g:polyglot_is_disabled, 'fennel')
+  finish
+endif
 
 " Vim syntax file
 " Language: FENNEL
@@ -283,5 +285,3 @@ let b:current_syntax = "fennel"
 
 let &cpo = s:cpo_sav
 unlet! s:cpo_sav
-
-endif

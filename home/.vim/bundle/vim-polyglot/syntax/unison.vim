@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'unison') == -1
+if has_key(g:polyglot_is_disabled, 'unison')
+  finish
+endif
 
 " Vim syntax file, adapted from Haskell file by John Williams <jrw@pobox.com>
 "
@@ -97,6 +99,7 @@ endif
 syn match   uLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
 syn region  uBlockComment     start="{-"  end="-}" contains=uBlockComment
 syn region  uPragma	       start="{-#" end="#-}"
+syn region  uBelowFold	       start="^---" skip="." end="." contains=uBelowFold
 
 " Docs
 syn region  uDocBlock         start="\[:" end=":]" contains=uLink,uDocDirective
@@ -134,6 +137,7 @@ if version >= 508 || !exists("did_u_syntax_inits")
   HiLink uBlockComment		  uComment
   HiLink uLineComment			  uComment
   HiLink uComment			  Comment
+  HiLink uBelowFold			  Comment
   HiLink uDocBlock                String
   HiLink uLink                    uType
   HiLink uDocDirective            uImport
@@ -148,8 +152,7 @@ if version >= 508 || !exists("did_u_syntax_inits")
   delcommand HiLink
 endif
 
+
 let b:current_syntax = "unison"
 
 " Options for vi: ts=8 sw=2 sts=2 nowrap noexpandtab ft=vim
-
-endif

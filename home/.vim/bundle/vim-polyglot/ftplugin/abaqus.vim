@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'abaqus') == -1
+if has_key(g:polyglot_is_disabled, 'abaqus')
+  finish
+endif
 
 " Vim filetype plugin file
 " Language:     Abaqus finite element input file (www.abaqus.com)
@@ -97,5 +99,3 @@ let b:undo_ftplugin = "let s:cpo_save = &cpoptions|"
 " Restore saved compatibility options
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
-
-endif

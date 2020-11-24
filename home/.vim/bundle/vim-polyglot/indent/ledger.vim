@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ledger') == -1
+if has_key(g:polyglot_is_disabled, 'ledger')
+  finish
+endif
 
 " Vim filetype indent file
 " filetype: ledger
@@ -48,5 +50,3 @@ function GetLedgerIndent(...)
     return 0
   endif
 endf
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'typescript') == -1
+if has_key(g:polyglot_is_disabled, 'typescript')
+  finish
+endif
 
 syntax cluster afterIdentifier contains=
   \ typescriptDotNotation,
@@ -79,5 +81,3 @@ syntax region typescriptObjectDestructure matchgroup=typescriptBraces
   \ contains=typescriptDestructureString,@typescriptDestructureVariables,@typescriptComments
   \ nextgroup=typescriptTypeAnnotation,typescriptAssign
   \ transparent contained skipwhite skipempty fold
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'markdown') == -1
+if has_key(g:polyglot_is_disabled, 'markdown')
+  finish
+endif
 
 "TODO print messages when on visual mode. I only see VISUAL, not the messages.
 
@@ -877,5 +879,3 @@ augroup Mkd
     autocmd InsertEnter,InsertLeave <buffer> call s:MarkdownRefreshSyntax(0)
     autocmd CursorHold,CursorHoldI <buffer> call s:MarkdownRefreshSyntax(0)
 augroup END
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rst') == -1
+if has_key(g:polyglot_is_disabled, 'rst')
+  finish
+endif
 
 " Vim reST syntax file
 " Language: reStructuredText documentation format
@@ -300,5 +302,3 @@ let b:current_syntax = "rst"
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-endif

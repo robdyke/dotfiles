@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'gdscript') == -1
+if has_key(g:polyglot_is_disabled, 'gdscript')
+  finish
+endif
 
 " Syntax file for GDScript
 
@@ -97,5 +99,3 @@ hi def link gdTodo    Todo
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-
-endif

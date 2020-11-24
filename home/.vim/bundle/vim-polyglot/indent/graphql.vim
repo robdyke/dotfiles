@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'graphql') == -1
+if has_key(g:polyglot_is_disabled, 'graphql')
+  finish
+endif
 
 " Copyright (c) 2016-2020 Jon Parise <jon@indelible.org>
 "
@@ -62,6 +64,13 @@ function GetGraphQLIndent()
     return 0
   endif
 
+  " If the previous line isn't GraphQL, don't change this line's indentation.
+  " Assume we've been manually indented as part of a template string.
+  let l:stack = map(synstack(l:prevlnum, 1), "synIDattr(v:val, 'name')")
+  if get(l:stack, -1) !~# '^graphql'
+    return -1
+  endif
+
   let l:line = getline(v:lnum)
 
   " If this line contains just a closing bracket, find its matching opening
@@ -100,5 +109,3 @@ endfunction
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
-
-endif

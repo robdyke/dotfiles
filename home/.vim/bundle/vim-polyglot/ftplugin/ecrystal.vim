@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'crystal') == -1
+if has_key(g:polyglot_is_disabled, 'crystal')
+  finish
+endif
 
 " Filetype plugin for https://crystal-lang.org/api/0.35.1/ECR.html
 if exists('b:did_ftplugin')
@@ -97,5 +99,3 @@ let b:undo_ftplugin = 'setlocal comments< commentstring< shiftwidth<' .
       \ '| unlet! b:browsefilter b:match_words ' .
       \ '| unlet! b:AutoPairs ' .
       \ '| ' . s:undo_ftplugin
-
-endif

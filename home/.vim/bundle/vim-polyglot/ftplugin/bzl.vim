@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'bzl') == -1
+if has_key(g:polyglot_is_disabled, 'bzl')
+  finish
+endif
 
 " Vim filetype plugin file
 " Language:	Bazel (http://bazel.io)
@@ -94,5 +96,3 @@ endfunction
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-
-endif

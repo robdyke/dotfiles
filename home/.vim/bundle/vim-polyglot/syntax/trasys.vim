@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'trasys') == -1
+if has_key(g:polyglot_is_disabled, 'trasys')
+  finish
+endif
 
 " Vim syntax file
 " Language:     TRASYS input file
@@ -160,5 +162,3 @@ hi def link trasysTodo		Todo
 let b:current_syntax = "trasys"
 
 " vim: ts=8 sw=2
-
-endif

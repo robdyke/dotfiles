@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'typescript') == -1
+if has_key(g:polyglot_is_disabled, 'typescript')
+  finish
+endif
 
 "Syntax in the JavaScript code
 
@@ -41,5 +43,3 @@ syntax match typescriptNumber /\<0[oO][0-7][0-7_]*\>/       nextgroup=@typescrip
 syntax match typescriptNumber /\<0[xX][0-9a-fA-F][0-9a-fA-F_]*\>/ nextgroup=@typescriptSymbols skipwhite skipempty
 syntax match typescriptNumber /\<\%(\d[0-9_]*\%(\.\d[0-9_]*\)\=\|\.\d[0-9_]*\)\%([eE][+-]\=\d[0-9_]*\)\=\>/
   \ nextgroup=typescriptSymbols skipwhite skipempty
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ant') == -1
+if has_key(g:polyglot_is_disabled, 'ant')
+  finish
+endif
 
 " Vim Compiler File
 " Compiler:	ant
@@ -38,5 +40,3 @@ CompilerSet errorformat=\ %#[%.%#]\ %#%f:%l:%v:%*\\d:%*\\d:\ %t%[%^:]%#:%m,
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-endif

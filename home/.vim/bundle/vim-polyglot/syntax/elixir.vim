@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'elixir') == -1
+if has_key(g:polyglot_is_disabled, 'elixir')
+  finish
+endif
 
 if !exists("main_syntax")
   if exists("b:current_syntax")
@@ -19,10 +21,6 @@ syn match elixirComment '#.*' contains=elixirTodo,@Spell
 syn keyword elixirTodo FIXME NOTE TODO OPTIMIZE XXX HACK contained
 
 syn match elixirId '\<[_a-zA-Z]\w*[!?]\?\>' contains=elixirUnusedVariable
-
-syn match elixirFunctionCall '\<[a-z_]\w*[!?]\?\(\s*\.\?\s*(\|\s\+[a-zA-Z0-9@:\'\"\[]\)\@='
-syn match elixirFunctionCall '\(:\w\+\s*\.\s*\|[A-Z]\w*\s*\.\s*\)\@<=[a-z_]\w*[!?]\?'
-syn match elixirFunctionCall '\(>\s+\)\<[a-z_]\w*[!?]\?'
 
 syn match elixirKeyword '\(\.\)\@<!\<\(for\|case\|when\|with\|cond\|if\|unless\|try\|receive\|after\|raise\|rescue\|catch\|else\|quote\|unquote\|super\|unquote_splicing\)\>:\@!'
 
@@ -48,7 +46,7 @@ syn match   elixirOperator '\~>\|\~>>\|<\~\|<<\~\|<\~>'
 
 syn match   elixirAlias '\([a-z]\)\@<![A-Z]\w*\%(\.[A-Z]\w*\)*'
 
-syn match   elixirAtom '\(:\)\@<!:\%([a-zA-Z_]\w*\%([?!]\|=[>=]\@!\)\?\|<>\|===\?\|>=\?\|<=\?\)'
+syn match   elixirAtom '\(:\)\@<!:\%([a-zA-Z_*]\w*\%([?!]\|=[>=]\@!\)\?\|<>\|===\?\|>=\?\|<=\?\)'
 syn match   elixirAtom '\(:\)\@<!:\%(<=>\|&&\?\|%\(()\|\[\]\|{}\)\|++\?\|--\?\|||\?\|!\|//\|[%&`/|]\)'
 syn match   elixirAtom "\%([a-zA-Z_]\w*[?!]\?\):\(:\)\@!"
 
@@ -248,5 +246,3 @@ endif
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-endif

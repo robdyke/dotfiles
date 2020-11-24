@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ada') == -1
+if has_key(g:polyglot_is_disabled, 'ada')
+  finish
+endif
 
 "------------------------------------------------------------------------------
 "  Description: Perform Ada specific completion & tagging.
@@ -637,5 +639,3 @@ finish " 1}}}
 "------------------------------------------------------------------------------
 " vim: textwidth=78 wrap tabstop=8 shiftwidth=3 softtabstop=3 noexpandtab
 " vim: foldmethod=marker
-
-endif

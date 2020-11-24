@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'odin') == -1
+if has_key(g:polyglot_is_disabled, 'odin')
+  finish
+endif
 
 if exists("b:current_syntax")
   finish
@@ -25,10 +27,14 @@ syntax keyword odinCase case
 syntax keyword odinContinue continue
 syntax keyword odinBreak break
 syntax keyword odinSizeOf size_of
+syntax keyword odinOffsetOf offset_of
 syntax keyword odinTypeInfoOf type_info_of
 syntax keyword odinTypeIdOf typeid_of
 syntax keyword odinTypeOf type_of
 syntax keyword odinAlignOf align_of
+
+syntax keyword odinInline inline
+syntax keyword odinNoInline no_inline
 
 syntax match odinTodo "TODO"
 syntax match odinNote "NOTE"
@@ -37,7 +43,7 @@ syntax match odinFixMe "FIXME"
 syntax match odinNoCheckin "NOCHECKIN"
 syntax match odinHack "HACK"
 
-syntax keyword odinDataType string cstring bool b8 b16 b32 b64 rune any rawptr f32 f64 f32le f32be f64le f64be u8 u16 u32 u64 u128 u16le u32le u64le u128le u16be u32be u64be u128be uint i8 i16 i32 i64 i128 i16le i32le i64le i128le i16be i32be i64be i128be int
+syntax keyword odinDataType string cstring bool b8 b16 b32 b64 rune any rawptr f32 f64 f32le f32be f64le f64be u8 u16 u32 u64 u128 u16le u32le u64le u128le u16be u32be u64be u128be uint uintptr i8 i16 i32 i64 i128 i16le i32le i64le i128le i16be i32be i64be i128be int
 syntax keyword odinBool true false
 syntax keyword odinNull nil
 syntax keyword odinDynamic dynamic
@@ -99,11 +105,15 @@ highlight link odinNotIn Keyword
 highlight link odinContinue Keyword
 highlight link odinBreak Keyword
 highlight link odinSizeOf Keyword
+highlight link odinOffsetOf Keyword
 highlight link odinTypeOf Keyword
 highlight link odinTypeInfoOf Keyword
 highlight link odinTypeIdOf Keyword
 highlight link odinAlignOf Keyword
 highlight link odinPackage Keyword
+
+highlight link odinInline Keyword
+highlight link odinNoInline Keyword
 
 highlight link odinImport Keyword
 highlight link odinExport Keyword
@@ -168,5 +178,3 @@ highlight link odinFloat Float
 highlight link odinHex Number
 
 let b:current_syntax = "odin"
-
-endif

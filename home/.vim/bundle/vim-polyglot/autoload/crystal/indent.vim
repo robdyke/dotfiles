@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'crystal') == -1
+if has_key(g:polyglot_is_disabled, 'crystal')
+  finish
+endif
 
 " Variables {{{1
 " =========
@@ -1041,4 +1043,3 @@ endfunction
 " }}}1
 
 " vim:sw=2 sts=2 ts=8 fdm=marker et:
-endif

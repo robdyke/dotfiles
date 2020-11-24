@@ -1,9 +1,11 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'forth') == -1
+if has_key(g:polyglot_is_disabled, 'forth')
+  finish
+endif
 
 " Vim syntax file
 " Language:    FORTH
 " Current Maintainer:  Johan Kotlinski <kotlinski@gmail.com>
-" Previous Maintainer:  Christian V. J. Brüssow <cvjb@cvjb.de>
+" Previous Maintainer:  Christian V. J. BrÃ¼ssow <cvjb@cvjb.de>
 " Last Change: 2018-03-29
 " Filenames:   *.fs,*.ft
 " URL:	       https://github.com/jkotlinski/forth.vim
@@ -262,5 +264,3 @@ let b:current_syntax = "forth"
 let &cpo = s:cpo_save
 unlet s:cpo_save
 " vim:ts=8:sw=4:nocindent:smartindent:
-
-endif

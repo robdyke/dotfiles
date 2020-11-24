@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'mathematica') == -1
+if has_key(g:polyglot_is_disabled, 'mathematica')
+  finish
+endif
 
 "Vim syntax file
 " Language: Mathematica
@@ -1359,5 +1361,3 @@ let b:current_syntax = "mma"
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-endif

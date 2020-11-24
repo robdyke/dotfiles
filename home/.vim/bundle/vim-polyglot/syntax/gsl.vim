@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'gdscript') == -1
+if has_key(g:polyglot_is_disabled, 'gdscript')
+  finish
+endif
 
 " Syntax file for Godot Shading Language
 
@@ -59,5 +61,3 @@ hi def link gslTodo    Todo
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ocaml') == -1
+if has_key(g:polyglot_is_disabled, 'ocaml')
+  finish
+endif
 
 if exists("b:current_syntax")
     finish
@@ -36,5 +38,3 @@ syn match duneVar '\${\k\+\(:\k\+\)\?}' containedin=lispSymbol
 hi def link duneVar Identifier
 
 let b:current_syntax = "dune"
-
-endif

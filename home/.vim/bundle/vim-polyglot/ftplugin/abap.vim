@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'abap') == -1
+if has_key(g:polyglot_is_disabled, 'abap')
+  finish
+endif
 
 " Vim filetype plugin file
 " Language:	ABAP
@@ -29,5 +31,3 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " vim: set sw=4 sts=4 et tw=80 :
-
-endif

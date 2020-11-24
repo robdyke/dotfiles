@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'jsonnet') == -1
+if has_key(g:polyglot_is_disabled, 'jsonnet')
+  finish
+endif
 
 
 
@@ -9,5 +11,3 @@ command! -nargs=0 JsonnetFmt call jsonnet#Format()
 setlocal commentstring=//\ %s
 
 
-
-endif
