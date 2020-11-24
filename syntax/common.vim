@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'typescript') == -1
+if has_key(g:polyglot_is_disabled, 'typescript')
+  finish
+endif
 
 " Define the default highlighting.
 " For version 5.8 and later: only when an item doesn't have highlighting yet
@@ -71,6 +73,7 @@ if exists("did_typescript_hilink")
   HiLink typescriptString               String
   HiLink typescriptSpecial              Special
   HiLink typescriptStringLiteralType    String
+  HiLink typescriptTemplateLiteralType  String
   HiLink typescriptStringMember         String
   HiLink typescriptTemplate             String
   HiLink typescriptEventString          String
@@ -170,6 +173,4 @@ if exists("did_typescript_hilink")
 
   delcommand HiLink
   unlet did_typescript_hilink
-endif
-
 endif

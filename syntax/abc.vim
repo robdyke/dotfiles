@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'abc') == -1
+if has_key(g:polyglot_is_disabled, 'abc')
+  finish
+endif
 
 " Vim syntax file
 " Language:	abc music notation language
@@ -51,5 +53,3 @@ hi def link abcNote			Constant
 let b:current_syntax = "abc"
 
 " vim: ts=4
-
-endif

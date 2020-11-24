@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'vala') == -1
+if has_key(g:polyglot_is_disabled, 'vala')
+  finish
+endif
 
 if exists('b:did_ftplugin')
   finish
@@ -46,6 +48,4 @@ if (has("browsefilter")) && !exists("b:browsefilter")
   let b:browsefilter = "Vala Source Files (*.vala)\t*.vala\n" .
         \ "Vala Vapi Files (*.vapi)\t*.vapi\n" .
         \ "All Files (*.*)\t*.*\n"
-endif
-
 endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'terraform') == -1
+if has_key(g:polyglot_is_disabled, 'terraform')
+  finish
+endif
 
 let s:cpo_save = &cpoptions
 set cpoptions&vim
@@ -18,7 +20,7 @@ function! terraform#fmt() abort
   let tmpfile = tempname()
   let shellredir_save = &shellredir
   let &shellredir = '>%s 2>'.tmpfile
-  silent execute '%!terraform fmt -no-color -'
+  silent execute '%!'.g:terraform_binary_path.' fmt -no-color -'
   let &shellredir = shellredir_save
 
   " If there was an error, undo any changes and show stderr.
@@ -68,6 +70,7 @@ function! terraform#commands(ArgLead, CmdLine, CursorPos) abort
     \ 'version',
     \ 'workspace',
     \ '0.12upgrade',
+    \ '0.13upgrade',
     \ 'debug',
     \ 'force-unlock',
     \ 'push',
@@ -78,5 +81,3 @@ endfunction
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
-
-endif

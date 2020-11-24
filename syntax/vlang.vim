@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'v') == -1
+if has_key(g:polyglot_is_disabled, 'v')
+  finish
+endif
 
 " Vim syntax file
 " Language:	V
@@ -266,5 +268,3 @@ syn sync minlines=500
 let b:current_syntax = 'vlang'
 
 " vim: sw=2 sts=2 et
-
-endif

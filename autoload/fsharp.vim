@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'fsharp') == -1
+if has_key(g:polyglot_is_disabled, 'fsharp')
+  finish
+endif
 
 " Vim autoload functions
 
@@ -330,7 +332,7 @@ function! s:download(branch)
     let zip = s:script_root_dir . "fsac.zip"
     call system(
         \ 'curl -fLo ' . zip .  ' --create-dirs ' .
-        \ '"https://ci.appveyor.com/api/projects/fsautocomplete/fsautocomplete/artifacts/bin/pkgs/fsautocomplete.netcore.zip?branch=' . a:branch . '"'
+        \ '"https://github.com/fsharp/FsAutoComplete/releases/latest/download/fsautocomplete.netcore.zip"'
         \ )
     if v:shell_error == 0
         call system('unzip -o -d ' . s:script_root_dir . "/fsac " . zip)
@@ -465,10 +467,10 @@ function! fsharp#sendFsi(text)
     if fsharp#openFsi(!g:fsharp#fsi_focus_on_send) > 0
         " Neovim
         if has('nvim')
-            call chansend(s:fsi_job, a:text . ";;". "\n")
+            call chansend(s:fsi_job, a:text . "\n" . ";;". "\n")
         " Vim 8
         else
-            call term_sendkeys(s:fsi_buffer, a:text . ";;" . "\<cr>")
+            call term_sendkeys(s:fsi_buffer, a:text . "\<cr>" . ";;" . "\<cr>")
             call term_wait(s:fsi_buffer)
         endif
     endif
@@ -513,5 +515,3 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " vim: sw=4 et sts=4
-
-endif

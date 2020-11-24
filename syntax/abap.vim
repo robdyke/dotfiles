@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'abap') == -1
+if has_key(g:polyglot_is_disabled, 'abap')
+  finish
+endif
 
 " Vim ABAP syntax file
 "    Language: SAP - ABAP/R4
@@ -196,4 +198,3 @@ hi def link abapHex            Number
 let b:current_syntax = "abap"
 
 " vim: ts=8 sw=2
-endif

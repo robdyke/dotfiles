@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'crystal') == -1
+if has_key(g:polyglot_is_disabled, 'crystal')
+  finish
+endif
 
 " Setup {{{1
 " =====
@@ -476,5 +478,3 @@ endfunction
 " }}}
 
 " vim:fdm=marker
-
-endif

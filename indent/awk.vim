@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'awk') == -1
+if has_key(g:polyglot_is_disabled, 'awk')
+  finish
+endif
 
 "  vim: set sw=3 sts=3:
 
@@ -232,5 +234,3 @@ function! s:Safe_indent( base, wordlen, this_line )
    endif
    return indent + a:wordlen
 endfunction
-
-endif

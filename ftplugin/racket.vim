@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'racket') == -1
+if has_key(g:polyglot_is_disabled, 'racket')
+  finish
+endif
 
 " Language:     Racket
 " Maintainer:   Will Langstroth <will@langstroth.com>
@@ -76,5 +78,3 @@ let b:undo_ftplugin =
       \. "| setl makeprg< commentstring<"
       \. "| nunmap <buffer> K"
       \. "| vunmap <buffer> K"
-
-endif

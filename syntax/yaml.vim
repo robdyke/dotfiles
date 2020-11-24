@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'yaml') == -1
+if has_key(g:polyglot_is_disabled, 'yaml')
+  finish
+endif
 
 " Vim syntax file
 " Language:         YAML (YAML Ain't Markup Language) 1.2
@@ -243,5 +245,3 @@ delfunction s:SimplifyToAssumeAllPrintable
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-endif

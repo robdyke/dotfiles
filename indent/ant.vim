@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ant') == -1
+if has_key(g:polyglot_is_disabled, 'ant')
+  finish
+endif
 
 " Vim indent file
 " Language:    ANT files
@@ -12,5 +14,3 @@ endif
 
 " Use XML formatting rules
 runtime! indent/xml.vim
-
-endif

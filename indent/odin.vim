@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'odin') == -1
+if has_key(g:polyglot_is_disabled, 'odin')
+  finish
+endif
 
 if exists("b:did_indent")
   finish
@@ -37,5 +39,3 @@ function! GetOdinIndent(lnum)
 
   return ind
 endfunction
-
-endif

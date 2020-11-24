@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'aap') == -1
+if has_key(g:polyglot_is_disabled, 'aap')
+  finish
+endif
 
 " Vim filetype plugin file
 " Language:	Aap recipe
@@ -25,5 +27,3 @@ setlocal comments=s:#\ -,m:#\ \ ,e:#,n:#,fb:-
 
 " Expand tabs to spaces to avoid trouble.
 setlocal expandtab
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'autoit') == -1
+if has_key(g:polyglot_is_disabled, 'autoit')
+  finish
+endif
 
 " Vim syntax file
 "
@@ -1124,5 +1126,3 @@ syn sync minlines=50
 
 let &cpo = s:keepcpo
 unlet s:keepcpo
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ocaml') == -1
+if has_key(g:polyglot_is_disabled, 'ocaml')
+  finish
+endif
 
 " Language:    OCaml
 " Maintainer:  David Baelde        <firstname.name@ens-lyon.org>
@@ -524,7 +526,7 @@ endfunction
   "c. link this stuff with what the user wants
   " ie. get the expression selected/under the cursor
 
-    let s:ocaml_word_char = '\w|[À-ÿ]|'''
+    let s:ocaml_word_char = '\w|[\xc0-\xff]|'''
 
       "In:  the current mode (eg. "visual", "normal", etc.)
       "Out: the borders of the expression we are looking for the type
@@ -641,5 +643,3 @@ let &cpoptions=s:cposet
 unlet s:cposet
 
 " vim:sw=2 fdm=indent
-
-endif

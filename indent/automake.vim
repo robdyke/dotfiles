@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'automake') == -1
+if has_key(g:polyglot_is_disabled, 'automake')
+  finish
+endif
 
 " Vim indent file
 " Language:    	    automake
@@ -11,5 +13,3 @@ endif
 
 " same as makefile indenting for now.
 runtime! indent/make.vim
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'yaml') == -1
+if has_key(g:polyglot_is_disabled, 'yaml')
+  finish
+endif
 
 " Vim indent file
 " Language:         YAML
@@ -155,5 +157,3 @@ function GetYAMLIndent(lnum)
 endfunction
 
 let &cpo = s:save_cpo
-
-endif

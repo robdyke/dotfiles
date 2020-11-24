@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'groovy') == -1
+if has_key(g:polyglot_is_disabled, 'groovy')
+  finish
+endif
 
 " Vim filetype plugin file
 " Language:	groovy
@@ -19,5 +21,3 @@ setlocal commentstring=//%s
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
-
-endif

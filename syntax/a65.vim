@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'a65') == -1
+if has_key(g:polyglot_is_disabled, 'a65')
+  finish
+endif
 
 " Vim syntax file
 " Language:	xa 6502 cross assembler
@@ -153,5 +155,3 @@ hi def link a65HiLo	Number
 
 
 let b:current_syntax = "a65"
-
-endif

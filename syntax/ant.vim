@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ant') == -1
+if has_key(g:polyglot_is_disabled, 'ant')
+  finish
+endif
 
 " Vim syntax file
 " Language:	ANT build file (xml)
@@ -97,5 +99,3 @@ let &cpo = s:ant_cpo_save
 unlet s:ant_cpo_save
 
 " vim: ts=8
-
-endif

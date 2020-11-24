@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'aidl') == -1
+if has_key(g:polyglot_is_disabled, 'aidl')
+  finish
+endif
 
 " Vim syntax file
 " Language:	aidl (Android Interface Definition Language)
@@ -23,5 +25,3 @@ hi def link aidlParamDir StorageClass
 hi def link aidlKeyword Keyword
 
 let b:current_syntax = "aidl"
-
-endif

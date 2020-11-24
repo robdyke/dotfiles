@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'prolog') == -1
+if has_key(g:polyglot_is_disabled, 'prolog')
+  finish
+endif
 
 "  vim: set sw=4 sts=4:
 "  Maintainer	: Gergely Kontra <kgergely@mcl.hu>
@@ -67,5 +69,3 @@ function! GetPrologIndent()
     endif
     return ind
 endfunction
-
-endif

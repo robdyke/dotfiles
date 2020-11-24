@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'abel') == -1
+if has_key(g:polyglot_is_disabled, 'abel')
+  finish
+endif
 
 " Vim syntax file
 " Language:	ABEL
@@ -161,5 +163,3 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " vim:ts=8
-
-endif

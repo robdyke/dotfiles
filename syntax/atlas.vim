@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'atlas') == -1
+if has_key(g:polyglot_is_disabled, 'atlas')
+  finish
+endif
 
 " Vim syntax file
 " Language:	ATLAS
@@ -85,5 +87,3 @@ hi def link atlasSpecial		Special
 let b:current_syntax = "atlas"
 
 " vim: ts=8
-
-endif

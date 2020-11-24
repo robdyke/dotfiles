@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'graphql') == -1
+if has_key(g:polyglot_is_disabled, 'graphql')
+  finish
+endif
 
 " Copyright (c) 2016-2020 Jon Parise <jon@indelible.org>
 "
@@ -95,5 +97,3 @@ hi def link graphqlVariable         Identifier
 syn sync minlines=500
 
 let b:current_syntax = 'graphql'
-
-endif

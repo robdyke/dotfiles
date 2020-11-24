@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'go') == -1
+if has_key(g:polyglot_is_disabled, 'go')
+  finish
+endif
 
 " Copyright 2009 The Go Authors. All rights reserved.
 " Use of this source code is governed by a BSD-style
@@ -445,5 +447,3 @@ syn sync minlines=500
 let b:current_syntax = "go"
 
 " vim: sw=2 ts=2 et
-
-endif

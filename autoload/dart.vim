@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'dart') == -1
+if has_key(g:polyglot_is_disabled, 'dart')
+  finish
+endif
 
 
 function! s:error(text) abort
@@ -183,5 +185,3 @@ function! dart#setModifiable() abort
     setlocal nomodifiable
   endif
 endfunction
-
-endif

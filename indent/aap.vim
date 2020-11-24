@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'aap') == -1
+if has_key(g:polyglot_is_disabled, 'aap')
+  finish
+endif
 
 " Vim indent file
 " Language:	Aap recipe
@@ -12,5 +14,3 @@ endif
 
 " Works mostly like Python.
 runtime! indent/python.vim
-
-endif

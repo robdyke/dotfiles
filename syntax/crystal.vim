@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'crystal') == -1
+if has_key(g:polyglot_is_disabled, 'crystal')
+  finish
+endif
 
 " Language: Crystal
 " Maintainer:
@@ -141,7 +143,7 @@ syn match crystalFloat     "\<\d[[:digit:]_]*\%(\.\d[[:digit:]_]*\)\=\%([eE][-+]
 syn match crystalInvalidInteger "\%(\.\|[eE][+-]\)\@2<!\<0\d\+\>" contained containedin=crystalFloat,crystalInteger display
 
 " Identifiers
-syn match crystalLocalVariableOrMethod "\<[_[:lower:]][_[:alnum:]]*[?!=]\=" contains=NONE display transparent
+syn match crystalLocalVariableOrMethod "\<[_[:lower:]][_[:alnum:]]*[?!=]\=" contains=NONE display
 syn match crystalBlockArgument         "&[_[:lower:]][_[:alnum:]]"          contains=NONE display transparent
 
 syn match  crystalTypeName         "\%(\%([.@$]\@1<!\.\)\@1<!\<\|::\)\_s*\zs\u\w*\%(\>\|::\)\@=" contained
@@ -495,5 +497,3 @@ let b:current_syntax = 'crystal'
 delc SynFold
 
 " vim: sw=2 sts=2 et:
-
-endif

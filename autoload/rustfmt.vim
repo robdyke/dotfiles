@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rust') == -1
+if has_key(g:polyglot_is_disabled, 'rust')
+  finish
+endif
 
 " Author: Stephen Sugden <stephen@stephensugden.com>
 "
@@ -109,7 +111,7 @@ function! s:DeleteLines(start, end) abort
 endfunction
 
 function! s:RunRustfmt(command, tmpname, from_writepre)
-    mkview!
+    let l:view = winsaveview()
 
     let l:stderr_tmpname = tempname()
     call writefile([], l:stderr_tmpname)
@@ -215,7 +217,7 @@ function! s:RunRustfmt(command, tmpname, from_writepre)
         lwindow
     endif
 
-    silent! loadview
+    call winrestview(l:view)
 endfunction
 
 function! rustfmt#FormatRange(line1, line2)
@@ -260,5 +262,3 @@ endfunction
 
 
 " vim: set et sw=4 sts=4 ts=8:
-
-endif

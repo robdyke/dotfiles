@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'markdown') == -1
+if has_key(g:polyglot_is_disabled, 'markdown')
+  finish
+endif
 
 " Vim syntax file
 " Language:	Markdown
@@ -184,5 +186,3 @@ let b:current_syntax = "mkd"
 
 delcommand HtmlHiLink
 " vim: ts=8
-
-endif

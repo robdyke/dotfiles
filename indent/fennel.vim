@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'fennel') == -1
+if has_key(g:polyglot_is_disabled, 'fennel')
+  finish
+endif
 
 " Vim filetype plugin file
 " Language: FENNEL
@@ -326,5 +328,3 @@ endif
 
 let &cpo = s:save_cpo
 unlet! s:save_cpo
-
-endif

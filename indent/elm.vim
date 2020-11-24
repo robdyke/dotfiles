@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'elm') == -1
+if has_key(g:polyglot_is_disabled, 'elm')
+  finish
+endif
 
 " indentation for Elm (https://elm-lang.org/)
 
@@ -112,5 +114,3 @@ function! GetElmIndent()
 
 	return l:ind
 endfunc
-
-endif

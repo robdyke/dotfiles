@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'sh') == -1
+if has_key(g:polyglot_is_disabled, 'sh')
+  finish
+endif
 
 " Shebang
 syn match shShebang "^#!.*$" containedin=shComment
@@ -56,5 +58,3 @@ hi def link shSemicolon Delimiter
 hi def link shShebang PreProc
 hi def link zshDelim Delimiter
 hi def link zshFlag Special
-
-endif

@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'csv') == -1
+if has_key(g:polyglot_is_disabled, 'csv')
+  finish
+endif
 
 " Filetype plugin for editing CSV files. "{{{1
 " Author:  Christian Brabandt <cb@256bit.org>
@@ -75,9 +77,13 @@ fu! csv#Init(start, end, ...) "{{{3
     endif
 
     if empty(b:delimiter) && !exists("b:csv_fixed_width")
-        call csv#Warn("No delimiter found. See :h csv-delimiter to set it manually!")
-        " Use a sane default as delimiter:
-        let b:delimiter = ','
+        if !exists("g:csv_default_delim")
+          call csv#Warn("No delimiter found. See :h csv-delimiter to set it manually!")
+          " Use a sane default as delimiter:
+          let b:delimiter = ','
+        else
+          let b:delimiter = g:csv_default_delim
+        endif
     endif
 
     let s:del='\%(' . b:delimiter . '\|$\)'
@@ -3192,5 +3198,3 @@ endfun
 
 " Vim Modeline " {{{2
 " vim: set foldmethod=marker et sw=0 sts=-1 ts=4:
-
-endif

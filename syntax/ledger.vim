@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'ledger') == -1
+if has_key(g:polyglot_is_disabled, 'ledger')
+  finish
+endif
 
 " Vim syntax file
 " filetype: ledger
@@ -132,5 +134,3 @@ syn sync clear
 syn sync match ledgerSync grouphere ledgerTransaction "^[[:digit:]~=]"
  
 let b:current_syntax = b:is_hledger ? 'hledger' : 'ledger'
-
-endif

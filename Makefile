@@ -1,10 +1,10 @@
-.PHONY: all test dev
+.PHONY: build test dev
 
-all:
+build:
 	@ scripts/build
 
 test:
 	@ scripts/test
 
 dev:
-	@ echo "packages.yaml\nheuristics.yaml\nscripts/test\nscripts/build\nscripts/test_extensions.vim" | DEV=1 entr bash -c 'make && make test'
+	@ find scripts autoload/polyglot ftdetect tests . -type f -depth 1 | DEV=1 entr bash -c 'make && make test'

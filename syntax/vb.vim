@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'visual-basic') == -1
+if has_key(g:polyglot_is_disabled, 'visual-basic')
+  finish
+endif
 
 " Vim syntax file
 " Language:	Visual Basic
@@ -365,5 +367,3 @@ hi def link vbTypeSpecifier	Type
 let b:current_syntax = "vb"
 
 " vim: ts=8
-
-endif

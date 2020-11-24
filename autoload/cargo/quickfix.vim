@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'rust') == -1
+if has_key(g:polyglot_is_disabled, 'rust')
+  finish
+endif
 
 function! cargo#quickfix#CmdPre() abort
     if &filetype ==# 'rust' && get(b:, 'current_compiler', '') ==# 'cargo' &&
@@ -27,5 +29,3 @@ function! cargo#quickfix#CmdPost() abort
 endfunction
 
 " vim: set et sw=4 sts=4 ts=8:
-
-endif

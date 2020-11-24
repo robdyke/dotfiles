@@ -1,4 +1,6 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'git') == -1
+if has_key(g:polyglot_is_disabled, 'git')
+  finish
+endif
 
 " Vim syntax file
 " Language:	generic git output
@@ -80,5 +82,3 @@ hi def link gitDiffAdded         diffAdded
 hi def link gitDiffRemoved       diffRemoved
 
 let b:current_syntax = "git"
-
-endif
