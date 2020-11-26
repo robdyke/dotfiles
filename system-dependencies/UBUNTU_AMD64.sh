@@ -55,6 +55,19 @@ sudo -E apt-get -y remove command-not-found
 sudo -E apt-get -y install zfsutils-linux || true
 sudo -E apt-get -y install wireguard wireguard-tools || true
 
+# docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo -E apt-key -y add -
+
+sudo -E add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+sudo -E apt-get -y update
+sudo -E apt-get -y install docker-ce docker-ce-cli containerd.io
+
+
+# adhoc installs
 adhoc_dstask_linux_amd64
 adhoc_ripgrep_linux_amd64
 adhoc_fzf_linux_amd64
