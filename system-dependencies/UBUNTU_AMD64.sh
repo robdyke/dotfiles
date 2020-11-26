@@ -56,7 +56,7 @@ sudo -E apt-get -y install zfsutils-linux || true
 sudo -E apt-get -y install wireguard wireguard-tools || true
 
 # docker
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo -E apt-key -y add -
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo -E apt-key add -
 
 sudo -E add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -66,6 +66,11 @@ sudo -E add-apt-repository \
 sudo -E apt-get -y update
 sudo -E apt-get -y install docker-ce docker-ce-cli containerd.io
 
+# yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo -E apt-get -y update
+sudo -E apt-get -y install yarn
 
 # adhoc installs
 adhoc_dstask_linux_amd64
