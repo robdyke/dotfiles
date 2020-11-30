@@ -22,6 +22,7 @@ sudo -E apt-get -y install --install-recommends \
     htop \
     httpie \
     httrack \
+    ipython3 \
     jq \
     language-pack-en \
     libsox-fmt-mp3 \
