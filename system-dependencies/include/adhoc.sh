@@ -4,8 +4,8 @@
 function adhoc_dstask_linux_amd64 {
     EXE="$(
         obtain \
-            https://github.com/naggie/dstask/releases/download/v0.23.1/dstask-linux-amd64 \
-            3e5a645b738682f276159ea1e198d5fae0a898011372b820df126d6b815b7642
+            https://github.com/naggie/dstask/releases/download/v0.23.2/dstask-linux-amd64 \
+            b68fa95630c6e39ca7aa3648103ba61c5f780db0aed711f8c0b2fc749f0eb2d7
     )"
     sudo cp "${EXE}" /usr/local/bin/dstask.new
     sudo chmod +x /usr/local/bin/dstask.new
@@ -15,8 +15,8 @@ function adhoc_dstask_linux_amd64 {
 function adhoc_dstask_macos_amd64 {
     EXE="$(
         obtain \
-            https://github.com/naggie/dstask/releases/download/v0.23.1/dstask-darwin-amd64 \
-            d8c907f239bc324fdc5ae43528f3afe91b05e7118da681ff8155532aefe8f255
+            https://github.com/naggie/dstask/releases/download/v0.23.2/dstask-darwin-amd64 \
+            f4fccede8101524c84ad6ad840ecdba079785f279b9a21ed14191949d089830e
     )"
     cp "${EXE}" /usr/local/bin/dstask.new
     chmod +x /usr/local/bin/dstask.new
@@ -36,8 +36,8 @@ function adhoc_ripgrep_linux_amd64 {
 function adhoc_fzf_linux_amd64 {
     TARGZ="$(
         obtain \
-            https://github.com/junegunn/fzf/releases/download/0.24.4/fzf-0.24.4-linux_amd64.tar.gz \
-            4bba748783f1b94d1635b265f69af60670cf0d717247f5c85a5c03948102619c
+            https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz \
+            3020c7d4d43d524ff394df306337b6de873b9db0bd9cd9dc73cd80cbd6e0c2f8
     )"
     [ -f /usr/local/bin/fzf ] && sudo rm -f /usr/local/bin/fzf
     sudo tar -C /usr/local/bin -xzf "$TARGZ"
@@ -120,8 +120,8 @@ function adhoc_ripgrep_linux_armv5 {
 function adhoc_fzf_linux_armv5 {
     TARGZ="$(
         obtain \
-            https://github.com/junegunn/fzf/releases/download/0.24.4/fzf-0.24.4-linux_armv5.tar.gz \
-            a9b723556bb71b26c5a121b9bd1636a4380af958cb170cd3acbe41e91597ab51
+            https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_arm5.tgz \
+            aa5f46c21fb765a20494fdcb00b86b6bde3b29538f25d49398f3b423f8e1e394
     )"
     [ -f /usr/local/bin/fzf ] && sudo rm -f /usr/local/bin/fzf
     sudo tar -C /usr/local/bin/ -xzf "$TARGZ"
