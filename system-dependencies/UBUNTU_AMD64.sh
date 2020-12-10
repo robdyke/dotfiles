@@ -33,6 +33,7 @@ sudo -E apt-get -y install --install-recommends \
     pass \
     pcscd \
     picocom \
+    pwgen \
     python \
     python3 \
     python3-pip \
