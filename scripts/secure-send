@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if [ ! -f $1 ]; then
+    echo "Usage: $0: <file>"
+    exit 1
+fi
+
+PASS="$(pwgen --no-capitalize --num-passwords=3 -C | xargs | sed 's/ /-/g')"
+
+echo Password is $PASS -- send on separate channel.
+
+ffsend upload $1 --password $PASS --quiet --download-limit 1 --expiry-time 60m
+
