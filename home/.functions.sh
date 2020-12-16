@@ -185,3 +185,9 @@ function _tmux_window_name_read {
     read name
     tmux rename-window "$name"
 }
+
+
+function mkdircd {
+    mkdir -p -- "$1" && cd -P -- "$1"
+}
+
