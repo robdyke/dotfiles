@@ -54,7 +54,7 @@ if uname | grep -q Linux; then
         PLATFORM=$ELEMENTARYOS_AMD64
     elif sudo hostnamectl | grep -q "Fedora" && getconf LONG_BIT | grep -q 64; then
         PLATFORM=$FEDORA_AMD64
-    elif sudo hostnamectl | grep -q "Raspbian" && getconf LONG_BIT | grep -q 64; then
+    elif sudo hostnamectl | grep -q "Raspbian" && getconf LONG_BIT | grep -q 32; then
         PLATFORM=$RASPBIAN_ARMV5
     else
         >&2 echo "Unsupported OS"
