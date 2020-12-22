@@ -173,7 +173,7 @@ gpg --card-status &> /dev/null || true
 
 # opportunistically change shell
 if sudo -n echo 2>/dev/null && command -v zsh >/dev/null; then
-    sudo chsh -s $(command -v zsh) $USER
+    sudo chsh -s $(command -v zsh) $USER || true
 fi
 
 # just some checks

@@ -2,7 +2,7 @@
 ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
 
 # exceptional
-sudo chsh -s /usr/local/bin/bash $(whoami)
+sudo chsh -s /usr/local/bin/zsh $(whoami)
 
 # browserpass config
 sudo mkdir -p "/Library/Application Support/Mozilla/NativeMessagingHosts/"
